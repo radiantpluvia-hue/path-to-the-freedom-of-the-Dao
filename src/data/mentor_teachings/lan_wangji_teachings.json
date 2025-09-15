@@ -1,0 +1,16 @@
+[
+  {
+    "id": "lan_wangji_teaching_1",
+    "title": "Harmony Within",
+    "description": "Qing Xuan demonstrates perfect emotional control. 'Chaos in the heart creates chaos in cultivation. Find your center.'",
+    "prerequisites": { "mentorAffinity": { "qing_xuan": 15 }, "emotionalControl": 10 },
+    "challenge": {
+      "type": "emotional_mastery",
+      "difficulty": "extreme",
+      "requirements": "Maintain perfect emotional balance through 5 consecutive crisis events",
+      "restriction": "Cannot use anger, fear, or desperation responses"
+    },
+    "reward": { "calm": 1, "emotionalStability": true, "innerHarmony": 0.1 },
+    "failureConsequence": { "emotionalTurmoil": 10, "daoHeart": -5 }
+  }
+]

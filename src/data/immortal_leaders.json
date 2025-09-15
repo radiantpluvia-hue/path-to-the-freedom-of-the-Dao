@@ -1,0 +1,244 @@
+[
+  {
+    "id": "mentor_azureclan_lord",
+    "displayName": "Lord of the Azure Clan",
+    "title": "Azure Lord",
+    "act": 2,
+    "dao": "River-Bound Blade & Flow",
+    "philosophy": "Flow around obstacles; make the current serve your will.",
+    "teachingStyle": "Fluid swordwork and breath-synchronization",
+    "portrait": "azure_clan_lord",
+    "affinities": ["swordplay", "flow"],
+    "location": "Immortal Realm",
+    "status": "immortal",
+    "affiliation": "azure_clan",
+    "notable": "Famous for dueling during monsoon swells.",
+    "teachingProgression": {
+      "tiers": [
+  { "level": 1, "focus": ["breath_control","soft_movement"], "unlocks": ["mutra_gale_hand_sutra"] },
+  { "level": 2, "focus": ["internal_power","precise_cut"], "unlocks": ["sutra_golden_meridian"] }
+      ],
+      "preferred_stats": { "dex": 0.6, "int": 0.4 }
+    }
+  },
+  {
+    "id": "mentor_blackfrost_matriarch",
+    "displayName": "Matriarch of Blackfrost",
+    "title": "Cold Sovereign",
+    "act": 3,
+    "dao": "Stillness & Frostcraft",
+    "philosophy": "Harden the heart and melt the world in a single stroke.",
+    "teachingStyle": "Icy control and precise strikes",
+    "portrait": "blackfrost_matriarch",
+    "affinities": ["control","precision"],
+    "location": "Immortal Realm",
+    "status": "immortal",
+    "affiliation": "blackfrost_clan",
+    "notable": "Her gaze freezes dissent.",
+    "teachingProgression": {
+      "tiers": [
+  { "level": 1, "focus": ["stance_control","precision"], "unlocks": ["mutra_iron_palm_sutra"] },
+  { "level": 2, "focus": ["calm_composure","focus"], "unlocks": ["sutra_silverscribe_breath"] }
+      ],
+      "preferred_stats": { "int": 0.55, "dex": 0.45 }
+    }
+  },
+  {
+    "id": "mentor_skyforge_patriarch",
+    "displayName": "Patriarch of Skyforge",
+    "title": "Metalbound Elder",
+    "act": 1,
+    "dao": "Forge & Temper",
+    "philosophy": "Soul is tempered through craft and struggle.",
+    "teachingStyle": "Weapon tempering and heavy-form strikes",
+    "portrait": "skyforge_patriarch",
+    "affinities": ["forging","strength"],
+    "location": "Immortal Realm",
+    "status": "immortal",
+    "affiliation": "skyforge_clan",
+    "notable": "Rumored to have forged a blade that slices the stars.",
+    "teachingProgression": {
+      "tiers": [
+  { "level": 1, "focus": ["basic_forging","heavy_strikes"], "unlocks": ["mutra_stormfist_chant"] },
+  { "level": 2, "focus": ["soul_binding","weapon_mastery"], "unlocks": ["sutra_soulforge_psalm"] }
+      ],
+      "preferred_stats": { "str": 0.7, "con": 0.3 }
+    }
+  },
+  {
+    "id": "mentor_sunwing_general",
+    "displayName": "General of Sunwing",
+    "title": "Battlelord",
+    "act": 2,
+    "dao": "Warcraft & Formation",
+    "philosophy": "Victory is built on discipline and sacrifice.",
+    "teachingStyle": "Tactical formation drills and battlefield insight",
+    "portrait": "sunwing_general",
+    "affinities": ["tactics","leadership"],
+    "location": "Immortal Realm",
+    "status": "immortal",
+    "affiliation": "sunwing_clan",
+    "notable": "Commands phantom battalions in the immortal training fields.",
+    "teachingProgression": {
+      "tiers": [
+  { "level": 1, "focus": ["formation_basics","morale"], "unlocks": ["sutra_tidebinder_verse"] },
+  { "level": 2, "focus": ["mass_effects","tactical_commander"], "unlocks": ["mutra_flower_of_void"] }
+      ],
+      "preferred_stats": { "cha": 0.6, "str": 0.4 }
+    }
+  },
+  {
+    "id": "mentor_moonvale_sage",
+    "displayName": "Sage of Moonvale",
+    "title": "Lunar Scholar",
+    "act": 3,
+    "dao": "Sutra & Lunar Meditation",
+    "philosophy": "Quiet study and moonlit practice reveal subtle truths.",
+    "teachingStyle": "Meditative sutra recitation and qi mapping",
+    "portrait": "moonvale_sage",
+    "affinities": ["meditation","insight"],
+    "location": "Immortal Realm",
+    "status": "immortal",
+    "affiliation": "moonvale_clan",
+    "notable": "Leaves moon-tea for visiting disciples.",
+    "teachingProgression": {
+      "tiers": [
+  { "level": 1, "focus": ["qi_mapping","sutra_reading"], "unlocks": ["sutra_moonfall_chant"] },
+  { "level": 2, "focus": ["meditative_depth","astral_sense"], "unlocks": ["mutra_fate_unwind"] }
+      ],
+      "preferred_stats": { "int": 0.65, "dex": 0.35 }
+    }
+  },
+  {
+    "id": "mentor_ironvine_abbess",
+    "displayName": "Abbess of Ironvine",
+    "title": "Rootwarden",
+    "act": 1,
+    "dao": "Herbcraft & Earthbinding",
+    "philosophy": "The body and earth are interwoven; tend both with care.",
+    "teachingStyle": "Herbalism and defensive earth-forms",
+    "portrait": "ironvine_abbess",
+    "affinities": ["herbalism","defense"],
+    "location": "Immortal Realm",
+    "status": "immortal",
+    "affiliation": "ironvine_clan",
+    "notable": "Cultivates gardens that bloom with moonlight.",
+    "teachingProgression": {
+      "tiers": [
+  { "level": 1, "focus": ["herbal_basics","healing_forms"], "unlocks": ["sutra_whispered_vault"] },
+  { "level": 2, "focus": ["remedy_brewing","warding"], "unlocks": ["mutra_serpent_twine"] }
+      ],
+      "preferred_stats": { "con": 0.6, "int": 0.4 }
+    }
+  },
+  {
+    "id": "mentor_stormtide_captain",
+    "displayName": "Captain of Stormtide",
+    "title": "Tidebreaker",
+    "act": 2,
+    "dao": "Sea-Forged Combat & Momentum",
+    "philosophy": "Ride the storm; momentum is both weapon and shield.",
+    "teachingStyle": "Naval tactics and momentum strikes",
+    "portrait": "stormtide_captain",
+    "affinities": ["momentum","tactics"],
+    "location": "Immortal Realm",
+    "status": "immortal",
+    "affiliation": "stormtide_clan",
+    "notable": "Commands a phantom fleet of phantom ships.",
+    "teachingProgression": {
+      "tiers": [
+  { "level": 1, "focus": ["momentum_control","boarding"], "unlocks": ["mutra_windvein_sutra"] },
+  { "level": 2, "focus": ["wave_riding","fleet_coordination"], "unlocks": ["sutra_tidebinder_verse"] }
+      ],
+      "preferred_stats": { "dex": 0.55, "cha": 0.45 }
+    }
+  },
+  {
+    "id": "mentor_windshadow_duke",
+    "displayName": "Duke of Windshadow",
+    "title": "Gale Whisperer",
+    "act": 3,
+    "dao": "Windstep & Shadow",
+    "philosophy": "Move unseen; let nothing anchor your will.",
+    "teachingStyle": "Evasive movement and silent killing",
+    "portrait": "windshadow_duke",
+    "affinities": ["evasion","stealth"],
+    "location": "Immortal Realm",
+    "status": "immortal",
+    "affiliation": "windshadow_clan",
+    "notable": "Disappears into gusts at will.",
+    "teachingProgression": {
+      "tiers": [
+  { "level": 1, "focus": ["dodge_basics","silent_step"], "unlocks": ["mutra_phantom_step_sutra"] },
+  { "level": 2, "focus": ["shadow_merge","fatal_dash"], "unlocks": ["mutra_shadowbind_hymn"] }
+      ],
+      "preferred_stats": { "dex": 0.7, "cha": 0.3 }
+    }
+  },
+  {
+    "id": "mentor_riverstone_guard",
+    "displayName": "Riverstone Ward",
+    "title": "Torrent Shield",
+    "act": 1,
+    "dao": "Defense & Flow Resistance",
+    "philosophy": "Stand like stone; divert like river.",
+    "teachingStyle": "Shield forms and stamina management",
+    "portrait": "riverstone_guard",
+    "affinities": ["defense","endurance"],
+    "location": "Immortal Realm",
+    "status": "immortal",
+    "affiliation": "riverstone_clan",
+    "notable": "Once held back a flood with a single stance.",
+    "teachingProgression": {
+      "tiers": [
+  { "level": 1, "focus": ["stance_hold","endurance_drill"], "unlocks": ["mutra_hollow_palm_sutra"] },
+  { "level": 2, "focus": ["wall_form","iron_will"], "unlocks": ["mutra_iron_palm_sutra"] }
+      ],
+      "preferred_stats": { "con": 0.65, "str": 0.35 }
+    }
+  },
+  {
+    "id": "mentor_ashfall_prophet",
+    "displayName": "Prophet of Ashfall",
+    "title": "Ember-Seer",
+    "act": 2,
+    "dao": "Flame Augury",
+    "philosophy": "Burn away illusions; clarity is forged in ash.",
+    "teachingStyle": "Ritual flame-scrying and refinement",
+    "portrait": "ashfall_prophet",
+    "affinities": ["fire","augury"],
+    "location": "Immortal Realm",
+    "status": "immortal",
+    "affiliation": "ashfall_clan",
+    "notable": "Sees futures in soot.",
+    "teachingProgression": {
+      "tiers": [
+  { "level": 1, "focus": ["ember_reading","refinement"], "unlocks": ["mutra_cinder_moon"] },
+  { "level": 2, "focus": ["pyre_meditation","flame_mastery"], "unlocks": ["sutra_last_crescendo"] }
+      ],
+      "preferred_stats": { "int": 0.6, "str": 0.4 }
+    }
+  },
+  {
+    "id": "mentor_stonethorn_matron",
+    "displayName": "Matron of Stonethorn",
+    "title": "Thornwarden",
+    "act": 3,
+    "dao": "Roots & Thorns",
+    "philosophy": "Protect by pain; guard life with barbs.",
+    "teachingStyle": "Guerrilla traps and living armor",
+    "portrait": "stonethorn_matron",
+    "affinities": ["traps","defense"],
+    "location": "Immortal Realm",
+    "status": "immortal",
+    "affiliation": "stonethorn_clan",
+    "notable": "Her gardens are labyrinths of thorns.",
+    "teachingProgression": {
+      "tiers": [
+  { "level": 1, "focus": ["trap_setting","living_barrier"], "unlocks": ["mutra_echoing_braid"] },
+  { "level": 2, "focus": ["thorn_mastery","ambush"], "unlocks": ["sutra_ashen_seal"] }
+      ],
+      "preferred_stats": { "dex": 0.5, "con": 0.5 }
+    }
+  }
+]

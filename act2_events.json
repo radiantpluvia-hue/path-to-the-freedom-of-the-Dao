@@ -1,0 +1,1441 @@
+[
+  {
+    "id": "act2_first_challenge",
+    "act": 2,
+    "title": "First Challenge",
+    "description": "You face your first challenge as a disciple.",
+    "choices": [
+      {
+        "id": "accept",
+        "text": "Accept the challenge"
+      },
+      {
+        "id": "decline",
+        "text": "Decline the challenge"
+      }
+    ],
+    "executorId": "fn_act2_first_challenge",
+    "raceVariations": {
+      "Human": {
+        "description": "As a human, you rely on your determination to face the challenge.",
+        "choices": [
+          {
+            "id": "accept",
+            "text": "Face the challenge head-on"
+          },
+          {
+            "id": "decline",
+            "text": "Choose to observe"
+          }
+        ]
+      },
+      "Demon": {
+        "description": "Your demonic instincts urge you to embrace the challenge.",
+        "choices": [
+          {
+            "id": "accept",
+            "text": "Embrace the challenge"
+          },
+          {
+            "id": "decline",
+            "text": "Avoid the confrontation"
+          }
+        ]
+      },
+      "Spirit": {
+        "description": "You connect with the spirit world for guidance in this challenge.",
+        "choices": [
+          {
+            "id": "accept",
+            "text": "Seek guidance from spirits"
+          },
+          {
+            "id": "decline",
+            "text": "Choose to meditate instead"
+          }
+        ]
+      },
+      "Dragon": {
+        "description": "Your draconic bloodline empowers you to face the challenge.",
+        "choices": [
+          {
+            "id": "accept",
+            "text": "Unleash your dragon might"
+          },
+          {
+            "id": "decline",
+            "text": "Choose to strategize"
+          }
+        ]
+      },
+      "Phoenix": {
+        "description": "Phoenix flames ignite within you, ready to face the challenge.",
+        "choices": [
+          {
+            "id": "accept",
+            "text": "Embrace the flames"
+          },
+          {
+            "id": "decline",
+            "text": "Temper the flames first"
+          }
+        ]
+      },
+      "Celestial": {
+        "description": "Heavenly energy guides you as you face this challenge.",
+        "choices": [
+          {
+            "id": "accept",
+            "text": "Accept divine guidance"
+          },
+          {
+            "id": "decline",
+            "text": "Seek heavenly counsel"
+          }
+        ]
+      },
+      "Asura": {
+        "description": "Your battle instincts sharpen as you prepare for the challenge.",
+        "choices": [
+          {
+            "id": "accept",
+            "text": "Embrace the battle"
+          },
+          {
+            "id": "decline",
+            "text": "Choose to observe"
+          }
+        ]
+      },
+      "Void": {
+        "description": "Void energy flows through you, enhancing your abilities.",
+        "choices": [
+          {
+            "id": "accept",
+            "text": "Merge with the void"
+          },
+          {
+            "id": "decline",
+            "text": "Study the emptiness first"
+          }
+        ]
+      },
+      "Fox": {
+        "description": "Your cunning and charm are put to the test in this challenge.",
+        "choices": [
+          {
+            "id": "accept",
+            "text": "Use charm to win"
+          },
+          {
+            "id": "decline",
+            "text": "Avoid confrontation"
+          }
+        ]
+      },
+      "Monkey": {
+        "description": "Monkey agility and trickery are your greatest assets in this challenge.",
+        "choices": [
+          {
+            "id": "accept",
+            "text": "Use agility to win"
+          },
+          {
+            "id": "decline",
+            "text": "Observe and learn"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "act2_training_session",
+    "act": 2,
+    "title": "Training Session",
+    "description": "You participate in a training session with fellow disciples.",
+    "choices": [
+      {
+        "id": "train_hard",
+        "text": "Train hard"
+      },
+      {
+        "id": "take_break",
+        "text": "Take a break"
+      }
+    ],
+    "executorId": "fn_act2_training_session"
+  },
+  {
+    "id": "act2_first_mission",
+    "act": 2,
+    "title": "First Mission",
+    "description": "You are assigned your first mission to prove your worth.",
+    "choices": [
+      {
+        "id": "accept",
+        "text": "Accept the mission"
+      },
+      {
+        "id": "decline",
+        "text": "Decline the mission"
+      }
+    ],
+    "executorId": "fn_act2_first_mission"
+  },
+  {
+    "id": "act2_rival_appearance",
+    "act": 2,
+    "title": "Rival Appearance",
+    "description": "A rival appears, challenging your skills.",
+    "choices": [
+      {
+        "id": "accept_challenge",
+        "text": "Accept the challenge"
+      },
+      {
+        "id": "ignore",
+        "text": "Ignore the rival"
+      }
+    ],
+    "executorId": "fn_act2_rival_appearance"
+  },
+  {
+    "id": "act2_herbal_discovery",
+    "act": 2,
+    "title": "Herbal Discovery",
+    "description": "You discover rare herbs that can aid your cultivation.",
+    "choices": [
+      {
+        "id": "harvest",
+        "text": "Harvest the herbs"
+      },
+      {
+        "id": "report",
+        "text": "Report to the sect"
+      }
+    ],
+    "executorId": "fn_act2_herbal_discovery"
+  },
+  {
+    "id": "act2_spirit_beast_encounter",
+    "act": 2,
+    "title": "Spirit Beast Encounter",
+    "description": "You encounter a spirit beast that could be friend or foe.",
+    "choices": [
+      {
+        "id": "befriend",
+        "text": "Try to befriend it"
+      },
+      {
+        "id": "fight",
+        "text": "Prepare to fight"
+      }
+    ],
+    "executorId": "fn_act2_spirit_beast_encounter"
+  },
+  {
+    "id": "act2_martial_competition",
+    "act": 2,
+    "title": "Martial Competition",
+    "description": "The sect holds a martial competition for disciples.",
+    "choices": [
+      {
+        "id": "participate",
+        "text": "Participate in the competition"
+      },
+      {
+        "id": "watch",
+        "text": "Watch from the sidelines"
+      }
+    ],
+    "executorId": "fn_act2_martial_competition"
+  },
+  {
+    "id": "act2_mentor_guidance",
+    "act": 2,
+    "title": "Mentor's Guidance",
+    "description": "Your mentor offers guidance on your cultivation path.",
+    "choices": [
+      {
+        "id": "accept",
+        "text": "Accept their guidance"
+      },
+      {
+        "id": "decline",
+        "text": "Decline politely"
+      }
+    ],
+    "executorId": "fn_act2_mentor_guidance"
+  },
+  {
+    "id": "act2_first_alchemy",
+    "act": 2,
+    "title": "First Alchemy Attempt",
+    "description": "You attempt your first alchemical concoction.",
+    "choices": [
+      {
+        "id": "careful",
+        "text": "Proceed carefully"
+      },
+      {
+        "id": "bold",
+        "text": "Experiment boldly"
+      }
+    ],
+    "executorId": "fn_act2_first_alchemy"
+  },
+  {
+    "id": "act2_night_cultivation",
+    "act": 2,
+    "title": "Night Cultivation",
+    "description": "You practice cultivation under the moonlight for enhanced effects.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Cultivate all night"
+      },
+      {
+        "id": "rest",
+        "text": "Get some rest"
+      }
+    ],
+    "executorId": "fn_act2_night_cultivation"
+  },
+  {
+    "id": "act2_dao_insight",
+    "act": 2,
+    "title": "Dao Insight",
+    "description": "You experience a moment of profound insight into the Dao.",
+    "choices": [
+      {
+        "id": "meditate",
+        "text": "Meditate on it"
+      },
+      {
+        "id": "share",
+        "text": "Share with mentor"
+      }
+    ],
+    "executorId": "fn_act2_dao_insight"
+  },
+  {
+    "id": "act2_sect_crisis",
+    "act": 2,
+    "title": "Sect Crisis",
+    "description": "A crisis threatens the sect, testing disciples' loyalty.",
+    "choices": [
+      {
+        "id": "defend",
+        "text": "Defend the sect"
+      },
+      {
+        "id": "flee",
+        "text": "Consider fleeing"
+      }
+    ],
+    "executorId": "fn_act2_sect_crisis"
+  },
+  {
+    "id": "act2_final_test",
+    "act": 2,
+    "title": "Final Disciple Test",
+    "description": "The sect administers the final test to become a full disciple.",
+    "choices": [
+      {
+        "id": "confident",
+        "text": "Face confidently"
+      },
+      {
+        "id": "nervous",
+        "text": "Approach nervously"
+      }
+    ],
+    "executorId": "fn_act2_final_test"
+  },
+  {
+    "id": "act2_spirit_stone_mine",
+    "act": 2,
+    "title": "Spirit Stone Mine",
+    "description": "You discover a spirit stone mine that could aid your cultivation.",
+    "choices": [
+      {
+        "id": "mine",
+        "text": "Mine the stones"
+      },
+      {
+        "id": "report",
+        "text": "Report to the sect"
+      }
+    ],
+    "executorId": "fn_act2_spirit_stone_mine"
+  },
+  {
+    "id": "act2_herbal_garden",
+    "act": 2,
+    "title": "Herbal Garden Discovery",
+    "description": "You find a hidden herbal garden with rare medicinal plants.",
+    "choices": [
+      {
+        "id": "harvest",
+        "text": "Harvest the herbs"
+      },
+      {
+        "id": "protect",
+        "text": "Protect the garden"
+      }
+    ],
+    "executorId": "fn_act2_herbal_garden"
+  },
+  {
+    "id": "act2_martial_technique",
+    "act": 2,
+    "title": "Martial Technique Mastery",
+    "description": "You attempt to master a new martial technique.",
+    "choices": [
+      {
+        "id": "practice",
+        "text": "Practice diligently"
+      },
+      {
+        "id": "seek_help",
+        "text": "Seek help from a mentor"
+      }
+    ],
+    "executorId": "fn_act2_martial_technique"
+  },
+  {
+    "id": "act2_sect_alliance",
+    "act": 2,
+    "title": "Sect Alliance",
+    "description": "Your sect forms an alliance with another cultivation sect.",
+    "choices": [
+      {
+        "id": "support",
+        "text": "Support the alliance"
+      },
+      {
+        "id": "oppose",
+        "text": "Oppose the alliance"
+      }
+    ],
+    "executorId": "fn_act2_sect_alliance"
+  },
+  {
+    "id": "act2_demon_invasion",
+    "act": 2,
+    "title": "Demon Invasion",
+    "description": "Demons invade your sect, testing your combat skills.",
+    "choices": [
+      {
+        "id": "fight",
+        "text": "Fight the demons"
+      },
+      {
+        "id": "retreat",
+        "text": "Retreat to safety"
+      }
+    ],
+    "executorId": "fn_act2_demon_invasion"
+  },
+  {
+    "id": "act2_celestial_visitor",
+    "act": 2,
+    "title": "Celestial Visitor",
+    "description": "A celestial being visits your sect, offering guidance.",
+    "choices": [
+      {
+        "id": "listen",
+        "text": "Listen to their guidance"
+      },
+      {
+        "id": "ignore",
+        "text": "Ignore the visitor"
+      }
+    ],
+    "executorId": "fn_act2_celestial_visitor"
+  },
+  {
+    "id": "act2_void_rift",
+    "act": 2,
+    "title": "Void Rift",
+    "description": "A rift to the void appears, threatening the sect.",
+    "choices": [
+      {
+        "id": "close",
+        "text": "Attempt to close the rift"
+      },
+      {
+        "id": "flee",
+        "text": "Flee from the rift"
+      }
+    ],
+    "executorId": "fn_act2_void_rift"
+  },
+  {
+    "id": "act2_phoenix_rebirth",
+    "act": 2,
+    "title": "Phoenix Rebirth",
+    "description": "You experience a rebirth, enhancing your cultivation.",
+    "choices": [
+      {
+        "id": "embrace",
+        "text": "Embrace the rebirth"
+      },
+      {
+        "id": "resist",
+        "text": "Resist the change"
+      }
+    ],
+    "executorId": "fn_act2_phoenix_rebirth"
+  },
+  {
+    "id": "act2_dragon_awakening",
+    "act": 2,
+    "title": "Dragon Awakening",
+    "description": "Your draconic powers awaken, granting you new abilities.",
+    "choices": [
+      {
+        "id": "unleash",
+        "text": "Unleash your powers"
+      },
+      {
+        "id": "control",
+        "text": "Control your powers"
+      }
+    ],
+    "executorId": "fn_act2_dragon_awakening"
+  },
+  {
+    "id": "act2_fox_illusion",
+    "act": 2,
+    "title": "Fox Illusion",
+    "description": "You master the art of illusion, enhancing your abilities.",
+    "choices": [
+      {
+        "id": "practice",
+        "text": "Practice illusions"
+      },
+      {
+        "id": "avoid",
+        "text": "Avoid using illusions"
+      }
+    ],
+    "executorId": "fn_act2_fox_illusion"
+  },
+  {
+    "id": "act2_monkey_agility",
+    "act": 2,
+    "title": "Monkey Agility",
+    "description": "You develop incredible agility, improving your combat skills.",
+    "choices": [
+      {
+        "id": "train",
+        "text": "Train your agility"
+      },
+      {
+        "id": "ignore",
+        "text": "Ignore agility training"
+      }
+    ],
+    "executorId": "fn_act2_monkey_agility"
+  },
+  {
+    "id": "act2_spirit_connection",
+    "act": 2,
+    "title": "Spirit Connection",
+    "description": "You deepen your connection with the spiritual world.",
+    "choices": [
+      {
+        "id": "meditate",
+        "text": "Meditate on the connection"
+      },
+      {
+        "id": "break",
+        "text": "Break the connection"
+      }
+    ],
+    "executorId": "fn_act2_spirit_connection"
+  },
+  {
+    "id": "act2_asura_rage",
+    "act": 2,
+    "title": "Asura Rage",
+    "description": "Your asura rage intensifies, affecting your cultivation.",
+    "choices": [
+      {
+        "id": "embrace",
+        "text": "Embrace the rage"
+      },
+      {
+        "id": "control",
+        "text": "Control the rage"
+      }
+    ],
+    "executorId": "fn_act2_asura_rage"
+  },
+  {
+    "id": "act2_celestial_blessing",
+    "act": 2,
+    "title": "Celestial Blessing",
+    "description": "You receive a blessing from the heavens, enhancing your cultivation.",
+    "choices": [
+      {
+        "id": "accept",
+        "text": "Accept the blessing"
+      },
+      {
+        "id": "refuse",
+        "text": "Refuse the blessing"
+      }
+    ],
+    "executorId": "fn_act2_celestial_blessing"
+  },
+  {
+    "id": "act2_void_energy",
+    "act": 2,
+    "title": "Void Energy",
+    "description": "You harness void energy, unlocking new powers.",
+    "choices": [
+      {
+        "id": "absorb",
+        "text": "Absorb the energy"
+      },
+      {
+        "id": "reject",
+        "text": "Reject the energy"
+      }
+    ],
+    "executorId": "fn_act2_void_energy"
+  },
+  {
+    "id": "act2_human_potential",
+    "act": 2,
+    "title": "Human Potential",
+    "description": "You unlock your human potential, achieving new heights in cultivation.",
+    "choices": [
+      {
+        "id": "push",
+        "text": "Push your limits"
+      },
+      {
+        "id": "rest",
+        "text": "Rest and recover"
+      }
+    ],
+    "executorId": "fn_act2_human_potential"
+  },
+  {
+    "id": "act2_demon_corruption",
+    "act": 2,
+    "title": "Demon Corruption",
+    "description": "You face demonic corruption, testing your willpower.",
+    "choices": [
+      {
+        "id": "resist",
+        "text": "Resist the corruption"
+      },
+      {
+        "id": "embrace",
+        "text": "Embrace the corruption"
+      }
+    ],
+    "executorId": "fn_act2_demon_corruption"
+  },
+  {
+    "id": "act2_spirit_guardian",
+    "act": 2,
+    "title": "Spirit Guardian",
+    "description": "A spirit guardian offers to protect you on your journey.",
+    "choices": [
+      {
+        "id": "accept",
+        "text": "Accept the guardian"
+      },
+      {
+        "id": "decline",
+        "text": "Decline the offer"
+      }
+    ],
+    "executorId": "fn_act2_spirit_guardian"
+  },
+  {
+    "id": "act2_dragon_roar",
+    "act": 2,
+    "title": "Dragon Roar",
+    "description": "You unleash a powerful dragon roar, intimidating your enemies.",
+    "choices": [
+      {
+        "id": "roar",
+        "text": "Use the roar"
+      },
+      {
+        "id": "silence",
+        "text": "Remain silent"
+      }
+    ],
+    "executorId": "fn_act2_dragon_roar"
+  },
+  {
+    "id": "act2_phoenix_flame",
+    "act": 2,
+    "title": "Phoenix Flame",
+    "description": "You control phoenix flames, enhancing your attacks.",
+    "choices": [
+      {
+        "id": "ignite",
+        "text": "Ignite the flames"
+      },
+      {
+        "id": "extinguish",
+        "text": "Extinguish the flames"
+      }
+    ],
+    "executorId": "fn_act2_phoenix_flame"
+  },
+  {
+    "id": "act2_celestial_light",
+    "act": 2,
+    "title": "Celestial Light",
+    "description": "You harness celestial light, purifying your surroundings.",
+    "choices": [
+      {
+        "id": "shine",
+        "text": "Shine the light"
+      },
+      {
+        "id": "dim",
+        "text": "Dim the light"
+      }
+    ],
+    "executorId": "fn_act2_celestial_light"
+  },
+  {
+    "id": "act2_asura_strength",
+    "act": 2,
+    "title": "Asura Strength",
+    "description": "Your asura strength grows, making you a formidable warrior.",
+    "choices": [
+      {
+        "id": "train",
+        "text": "Train your strength"
+      },
+      {
+        "id": "rest",
+        "text": "Rest and recover"
+      }
+    ],
+    "executorId": "fn_act2_asura_strength"
+  },
+  {
+    "id": "act2_void_portal",
+    "act": 2,
+    "title": "Void Portal",
+    "description": "You open a portal to the void, exploring new dimensions.",
+    "choices": [
+      {
+        "id": "enter",
+        "text": "Enter the portal"
+      },
+      {
+        "id": "close",
+        "text": "Close the portal"
+      }
+    ],
+    "executorId": "fn_act2_void_portal"
+  },
+  {
+    "id": "act2_fox_charm",
+    "act": 2,
+    "title": "Fox Charm",
+    "description": "You use fox charm to influence others, gaining advantages.",
+    "choices": [
+      {
+        "id": "charm",
+        "text": "Use charm"
+      },
+      {
+        "id": "avoid",
+        "text": "Avoid using charm"
+      }
+    ],
+    "executorId": "fn_act2_fox_charm"
+  },
+  {
+    "id": "act2_monkey_trickery",
+    "act": 2,
+    "title": "Monkey Trickery",
+    "description": "You employ monkey trickery, outsmarting your opponents.",
+    "choices": [
+      {
+        "id": "trick",
+        "text": "Use trickery"
+      },
+      {
+        "id": "honest",
+        "text": "Be honest"
+      }
+    ],
+    "executorId": "fn_act2_monkey_trickery"
+  },
+  {
+    "id": "act2_final_breakthrough",
+    "act": 2,
+    "title": "Final Breakthrough",
+    "description": "You attempt your final breakthrough in Act 2, achieving new power.",
+    "choices": [
+      {
+        "id": "breakthrough",
+        "text": "Achieve breakthrough"
+      },
+      {
+        "id": "wait",
+        "text": "Wait for later"
+      }
+    ],
+    "executorId": "fn_act2_final_breakthrough"
+  },
+  {
+    "id": "act1_orphan_on_street",
+    "act": 2,
+    "title": "Orphan on the Street",
+    "description": "You find a crying orphan being bullied in the marketplace. Their sect token glimmers faintly on their clothes.",
+    "choices": [
+      {
+        "id": "help",
+        "text": "Stand up for them"
+      },
+      {
+        "id": "ignore",
+        "text": "Keep walking; better not get involved"
+      }
+    ],
+    "conditions": {
+      "level": 1
+    },
+    "executorId": "fn_act1_orphan_on_street"
+  },
+  {
+    "id": "act1_azure_recruiting_post",
+    "act": 2,
+    "title": "Recruiting Post from Azure Cloud Sect",
+    "description": "A loud speaker proclaims that Azure Cloud Sect seeks outer disciples. The banner promises food, shelter, and training (plus one goat).",
+    "choices": [
+      {
+        "id": "apply_now",
+        "text": "Join Azure Cloud Sect now"
+      },
+      {
+        "id": "compare_other_sects",
+        "text": "Wait to see what other sects offer"
+      }
+    ],
+    "conditions": {
+      "level": 1,
+      "realm": "Mortal Realm",
+      "flags": {
+        "joined_sect": false
+      }
+    },
+    "executorId": "fn_act1_azure_recruiting_post"
+  },
+  {
+    "id": "act1_sword_school_demo",
+    "act": 2,
+    "title": "Sword School Demo",
+    "description": "Huashan Sword School sends a junior disciple to your village to demonstrate sword-techniques. The show is impressive — though the demonstration ends with accidentally slicing a cart.",
+    "choices": [
+      {
+        "id": "ask_to_train",
+        "text": "Request to become a student"
+      },
+      {
+        "id": "laugh_then_leave",
+        "text": "Laugh at the mishap and leave"
+      }
+    ],
+    "conditions": {
+      "level": 2
+    },
+    "executorId": "fn_act1_sword_school_demo"
+  },
+  {
+    "id": "act1_ming_cult_shadow_mission",
+    "act": 2,
+    "title": "Shadow of the Ming Cult",
+    "description": "You overhear that the Ming Cult is planning a secret midnight gathering. The locals whisper of dark arts and stolen relics.",
+    "choices": [
+      {
+        "id": "sneak_in",
+        "text": "Sneak in to investigate"
+      },
+      {
+        "id": "report_to_sect",
+        "text": "Tell whatever sect you belong to"
+      }
+    ],
+    "conditions": {
+      "level": 2,
+      "sect": "any"
+    },
+    "executorId": "fn_act1_ming_cult_shadow_mission"
+  },
+  {
+    "id": "act1_shaolin_monk_request",
+    "act": 2,
+    "title": "A Monk’s Request",
+    "description": "A Shaolin monk comes by asking for help to deliver medicine to a remote hamlet plagued by ghosts/night creatures.",
+    "choices": [
+      {
+        "id": "help",
+        "text": "Escort the monk"
+      },
+      {
+        "id": "decline",
+        "text": "Too dangerous; stay in town"
+      }
+    ],
+    "conditions": {
+      "level": 1
+    },
+    "executorId": "fn_act1_shaolin_monk_request"
+  },
+  {
+    "id": "act1_serendipitous_mentor",
+    "act": 2,
+    "title": "Serendipitous Mentor",
+    "description": "You accidentally help an elderly cultivator carry wood. He reveals himself as an Emei Sect senior and offers to teach you.",
+    "choices": [
+      {
+        "id": "accept",
+        "text": "Take his offer"
+      },
+      {
+        "id": "decline",
+        "text": "Polite, but you wish to find your own path"
+      }
+    ],
+    "conditions": {
+      "level": 1,
+      "flags": {
+        "joined_sect": false
+      }
+    },
+    "executorId": "fn_act1_serendipitous_mentor"
+  },
+  {
+    "id": "act2_outer_sect_trial",
+    "act": 2,
+    "title": "Outer Sect Trial",
+    "description": "You’re summoned to a cliffside trial to test your mettle.",
+    "choices": [
+      {
+        "id": "attempt_now",
+        "text": "Attempt the trial now"
+      },
+      {
+        "id": "prepare_first",
+        "text": "Prepare for a day before trying"
+      }
+    ],
+    "conditions": {
+      "level": 5,
+      "realm": "Qi Gathering",
+      "sect": "any",
+      "flags": {
+        "joined_sect": true
+      },
+      "questCompleted": "first_cultivation"
+    },
+    "executorId": "fn_act2_outer_sect_trial"
+  },
+  {
+    "id": "act2_investigate_ancient_ruins",
+    "act": 2,
+    "title": "Investigate Ancient Ruins",
+    "description": "Old ruins rumored to hold a beginner artifact are discovered nearby. Some ruins are booby-trapped, some just dusty.",
+    "choices": [
+      {
+        "id": "enter_carefully",
+        "text": "Go in with caution"
+      },
+      {
+        "id": "rush_in",
+        "text": "Dash in greedily"
+      }
+    ],
+    "conditions": {
+      "level": 5,
+      "joined_sect": true
+    },
+    "executorId": "fn_act2_investigate_ancient_ruins"
+  },
+  {
+    "id": "act2_compete_in_sect_tournament",
+    "act": 2,
+    "title": "Compete in Sect Tournament",
+    "description": "Your sect holds a tournament for disciples in preparation for region-wide matches. You must decide how you approach it.",
+    "choices": [
+      {
+        "id": "train_hard",
+        "text": "Dedicate all spare time training"
+      },
+      {
+        "id": "focus_strategy",
+        "text": "Study opponent styles"
+      }
+    ],
+    "conditions": {
+      "level": 6,
+      "joined_sect": true,
+      "sect": "any"
+    },
+    "executorId": "fn_act2_compete_in_sect_tournament"
+  },
+  {
+    "id": "act2_branch_selection",
+    "act": 2,
+    "title": "Branch Selection Offer",
+    "description": "Immortal sects offer branch discipleship. You’re given options — prestige vs responsibility.",
+    "choices": [
+      {
+        "id": "prestige",
+        "text": "Pick prestige branch"
+      },
+      {
+        "id": "responsibility",
+        "text": "Pick more duties, but more learning"
+      }
+    ],
+    "conditions": {
+      "level": 6,
+      "sect": "any"
+    },
+    "executorId": "fn_act2_branch_selection"
+  },
+  {
+    "id": "act2_retrieve_spirit_stone",
+    "act": 2,
+    "title": "Retrieve Spirit Stone Cache",
+    "description": "You hear of a cache of spirit stones hidden in the nearby mountains, guarded by wild beasts and rival disciples.",
+    "choices": [
+      {
+        "id": "solo_mission",
+        "text": "Go alone"
+      },
+      {
+        "id": "invite_companions",
+        "text": "Form a party"
+      }
+    ],
+    "conditions": {
+      "level": 5,
+      "joined_sect": true
+    },
+    "executorId": "fn_act2_retrieve_spirit_stone"
+  },
+  {
+    "id": "act2_mentor_teaching_offer",
+    "act": 2,
+    "title": "Mentor Teaching Offer",
+    "description": "One of the elders offers to take you as a closer disciple, teaching a special technique.",
+    "choices": [
+      {
+        "id": "accept_closeness",
+        "text": "Become closer disciple"
+      },
+      {
+        "id": "remain_outer",
+        "text": "Decline politely, stay where you are"
+      }
+    ],
+    "conditions": {
+      "level": 5,
+      "joined_sect": true
+    },
+    "executorId": "fn_act2_mentor_teaching_offer"
+  },
+  {
+    "id": "act2_heavenly_merchant_encounter",
+    "act": 2,
+    "title": "Heavenly Merchant Guild Offer",
+    "description": "Travelers from the Heavenly Merchant Guild offer you rare potion which may help your breakthrough — for a price (or a favor).",
+    "choices": [
+      {
+        "id": "buy",
+        "text": "Pay up (or barter)"
+      },
+      {
+        "id": "refuse",
+        "text": "Never trust stranger deals"
+      }
+    ],
+    "conditions": {
+      "level": 5,
+      "joined_sect": true
+    },
+    "executorId": "fn_act2_heavenly_merchant_encounter"
+  },
+  {
+    "id": "act2_darkness_sect_strange_invitation",
+    "act": 2,
+    "title": "Strange Invitation from Darkness Sect",
+    "description": "A messenger from Darkness Sect offers you a secret meeting. The invitation smells of intrigue (and danger).",
+    "choices": [
+      {
+        "id": "attend",
+        "text": "Go even though wary"
+      },
+      {
+        "id": "decline",
+        "text": "Avoid entanglement"
+      }
+    ],
+    "conditions": {
+      "level": 6,
+      "joined_sect": true
+    },
+    "executorId": "fn_act2_darkness_sect_strange_invitation"
+  },
+  {
+    "id": "act2_rival_evolution",
+    "act": 2,
+    "title": "Rival Evolution Report",
+    "description": "Your rival disciple has improved greatly (maybe using shady means). Their reputation rises; you must respond somehow.",
+    "choices": [
+      {
+        "id": "challenge",
+        "text": "Confront them or compete"
+      },
+      {
+        "id": "ignore",
+        "text": "Focus on self"
+      }
+    ],
+    "conditions": {
+      "level": 5,
+      "joined_sect": true
+    },
+    "executorId": "fn_act2_rival_evolution"
+  },
+  {
+    "id": "act2_acquire_beginner_artifact",
+    "act": 2,
+    "title": "Acquire Beginner Artifact",
+    "description": "A minor artifact with mild qi boosting capability is available through auction or challenge.",
+    "choices": [
+      {
+        "id": "bid",
+        "text": "Bid for it"
+      },
+      {
+        "id": "win_by_trial",
+        "text": "Enter a challenge to win it"
+      }
+    ],
+    "conditions": {
+      "level": 6,
+      "joined_sect": true
+    },
+    "executorId": "fn_act2_acquire_beginner_artifact"
+  },
+  {
+    "id": "act2_spirit_beast_tracking",
+    "act": 2,
+    "title": "Spirit Beast Tracking",
+    "description": "Hunting a mid-tier spirit beast for its pelt, fangs or perhaps a companion. Dangerous yet rewarding.",
+    "choices": [
+      {
+        "id": "stealth_approach",
+        "text": "Track stealthily"
+      },
+      {
+        "id": "forceful_attack",
+        "text": "Charge in"
+      }
+    ],
+    "conditions": {
+      "level": 5,
+      "joined_sect": true
+    },
+    "executorId": "fn_act2_spirit_beast_tracking"
+  },
+  {
+    "id": "act2_countryside_corruption",
+    "act": 2,
+    "title": "Corruption Among Villagers",
+    "description": "A village near the sect is suffering from corrupted qi causing nightmares; locals suspect the sect is the cause.",
+    "choices": [
+      {
+        "id": "investigate",
+        "text": "Look into the source"
+      },
+      {
+        "id": "distance_and_repair",
+        "text": "Do something behind scenes"
+      }
+    ],
+    "conditions": {
+      "level": 5,
+      "joined_sect": true
+    },
+    "executorId": "fn_act2_countryside_corruption"
+  },
+  {
+    "id": "act2_healer_potion_disaster",
+    "act": 2,
+    "title": "Healer’s Potion Disaster",
+    "description": "A potion meant to aid cultivation instead causes strange magic side-effects among disciples who used it.",
+    "choices": [
+      {
+        "id": "find_remedy",
+        "text": "Search cure"
+      },
+      {
+        "id": "warn_others",
+        "text": "Stop more from using it"
+      }
+    ],
+    "conditions": {
+      "level": 6,
+      "joined_sect": true
+    },
+    "executorId": "fn_act2_healer_potion_disaster"
+  },
+  {
+    "id": "act2_auction_for_scrolls",
+    "act": 2,
+    "title": "Auction for Rare Scrolls",
+    "description": "A traveling auction offers rare scrolls. Competition is fierce; some scrolls may be forged.",
+    "choices": [
+      {
+        "id": "bid_high",
+        "text": "Bid generously"
+      },
+      {
+        "id": "inspect_for_fakes",
+        "text": "Inspect before bidding"
+      }
+    ],
+    "conditions": {
+      "level": 6,
+      "joined_sect": true
+    },
+    "executorId": "fn_act2_auction_for_scrolls"
+  },
+  {
+    "id": "act2_secret_mission_from_upper_north_sect",
+    "act": 2,
+    "title": "Secret Mission from Upper North Sect",
+    "description": "Upper North Sect secretly reaches out, asking for a favor: infiltrate a gathering of lesser sects and report on rumors of an impending demon invasion.",
+    "choices": [
+      {
+        "id": "accept",
+        "text": "Take the secret mission"
+      },
+      {
+        "id": "decline",
+        "text": "Refuse due to risk"
+      }
+    ],
+    "conditions": {
+      "level": 6,
+      "joined_sect": true
+    },
+    "executorId": "fn_act2_secret_mission_from_upper_north_sect"
+  },
+  {
+    "id": "act2_intersect_collaboration",
+    "act": 2,
+    "title": "Collaboration Between Sects",
+    "description": "Your sect and another sect (e.g. Starlight Sect or Ming Cult) must cooperate to stop a rampaging spirit beast threatening both territories.",
+    "choices": [
+      {
+        "id": "lead_team",
+        "text": "Take a leadership role"
+      },
+      {
+        "id": "support_role",
+        "text": "Follow orders"
+      }
+    ],
+    "conditions": {
+      "level": 6,
+      "joined_sect": true
+    },
+    "executorId": "fn_act2_intersect_collaboration"
+  },
+  {
+    "id": "act2_epic_rival_duel_prep",
+    "act": 2,
+    "title": "Epic Rival Duel Prep",
+    "description": "Your rival issues a formal duel challenge. You must decide how and where to prepare.",
+    "choices": [
+      {
+        "id": "train_fields",
+        "text": "Train in open fields (honorable)"
+      },
+      {
+        "id": "seek_secret_method",
+        "text": "Use forbidden technique"
+      }
+    ],
+    "conditions": {
+      "level": 6,
+      "joined_sect": true
+    },
+    "executorId": "fn_act2_epic_rival_duel_prep"
+  },
+  {
+    "id": "act2_breakthrough_training_sequence",
+    "act": 2,
+    "title": "Breakthrough Training Sequence",
+    "description": "You undergo guided training (meditation, spirit herbs, refinement) to attempt a breakthrough. Risk of qi backlash.",
+    "choices": [
+      {
+        "id": "push_limit",
+        "text": "Push beyond comfort"
+      },
+      {
+        "id": "steady_progress",
+        "text": "Go slower, safer"
+      }
+    ],
+    "conditions": {
+      "level": 5,
+      "joined_sect": true,
+      "realm": "Qi Gathering"
+    },
+    "executorId": "fn_act2_breakthrough_training_sequence"
+  },
+  {
+    "id": "act2_assist_heavenly_court_scribe",
+    "act": 2,
+    "title": "Assist a Heavenly Court Scribe",
+    "description": "A scribe from the Heavenly Court visits your sect seeking help translating ancient celestial runes. You are asked to assist.",
+    "choices": [
+      {
+        "id": "help",
+        "text": "Take part in translation"
+      },
+      {
+        "id": "decline",
+        "text": "Say you’re not ready"
+      }
+    ],
+    "conditions": {
+      "level": 5,
+      "joined_sect": true
+    },
+    "executorId": "fn_act2_assist_heavenly_court_scribe"
+  },
+  {
+    "id": "act2_darkness_sect_ambush",
+    "act": 2,
+    "title": "Darkness Sect Ambush",
+    "description": "Traveling to gather herbs, you are ambushed by disciples of Darkness Sect. They demand your artifacts.",
+    "choices": [
+      {
+        "id": "fight_back",
+        "text": "Defend what’s yours"
+      },
+      {
+        "id": "negotiate",
+        "text": "Offer trade"
+      }
+    ],
+    "conditions": {
+      "level": 6,
+      "joined_sect": true
+    },
+    "executorId": "fn_act2_darkness_sect_ambush"
+  },
+  {
+    "id": "act2_time_sensitive_breakthrough",
+    "act": 2,
+    "title": "Time-Sensitive Breakthrough",
+    "description": "Qi conditions align briefly; it’s an opportunity for breakthrough that may vanish soon.",
+    "choices": [
+      { "id": "use_window", "text": "Attempt breakthrough now" },
+      { "id": "wait_for_plan", "text": "Plan and gather support" }
+    ],
+    "conditions": { "level": 7, "joined_sect": true, "realm": "Qi Gathering" },
+    "executorId": "fn_act2_time_sensitive_breakthrough"
+  }
+  ,
+  {
+    "id": "act2_guarded_by_spirit_fox",
+    "act": 2,
+    "title": "Guarded by Spirit Fox",
+    "description": "A spirit fox appears, guarding a crossroads. It offers passage if you answer its riddles.",
+    "choices": [
+      { "id": "solve_riddle", "text": "Try answering" },
+      { "id": "bribe", "text": "Offer something to pass" }
+    ],
+    "conditions": { "level": 5, "joined_sect": true },
+    "executorId": "fn_act2_guarded_by_spirit_fox"
+  }
+  ,
+  {
+    "id": "act2_rumor_of_relic_heist",
+    "act": 2,
+    "title": "Rumor of Relic Heist",
+    "description": "A relic belonging to your sect may be stolen soon. You hear whispers of inside help or betrayal.",
+    "choices": [
+      { "id": "set_watch", "text": "Set watch and guard relics" },
+      { "id": "investigate_traits", "text": "Try to discover traitor" }
+    ],
+    "conditions": { "level": 6, "joined_sect": true },
+    "executorId": "fn_act2_rumor_of_relic_heist"
+  }
+  ,
+  {
+    "id": "act2_find_hidden_treasure_map",
+    "act": 2,
+    "title": "Find Hidden Treasure Map",
+    "description": "You discover a crude map in some old merchant’s box, pointing to a hidden sect treasure. Might be fake or dangerous.",
+    "choices": [
+      { "id": "follow_map", "text": "Go hunting" },
+      { "id": "verify_authenticity", "text": "Check its legitimacy first" }
+    ],
+    "conditions": { "level": 5, "joined_sect": true },
+    "executorId": "fn_act2_find_hidden_treasure_map"
+  }
+  ,
+  {
+    "id": "act2_shadow_assassin_request",
+    "act": 2,
+    "title": "Shadow Assassin Request",
+    "description": "A covert group asks you to do an assassination of a corrupt mortal official. Sect disapproves but stakes are high.",
+    "choices": [
+      { "id": "accept_shadow", "text": "Take the mission" },
+      { "id": "refuse", "text": "Honor sect rules" }
+    ],
+    "conditions": { "level": 7, "joined_sect": true },
+    "executorId": "fn_act2_shadow_assassin_request"
+  }
+  ,
+  {
+    "id": "act2_duel_with_immortal_disciple",
+    "act": 2,
+    "title": "Duel with Immortal Disciple",
+    "description": "A wandering immortal’s disciple challenges you to test your growth. It’s an honor—and dangerous.",
+    "choices": [
+      { "id": "accept", "text": "Accept the duel" },
+      { "id": "decline_humbly", "text": "Decline, citing insufficient skill" }
+    ],
+    "conditions": { "level": 7, "joined_sect": true },
+    "executorId": "fn_act2_duel_with_immortal_disciple"
+  },
+  {
+    "id": "act2_festival_of_moons_aligning",
+    "act": 2,
+    "title": "Festival of the Moons Aligning",
+    "description": "A rare celestial event occurs. Immortals from far-realms descend; sect duties clash with opportunity for glory.",
+    "choices": [
+      { "id": "present_offering", "text": "Make grand offering" },
+      { "id": "observe_from_shadow", "text": "Watch quietly" }
+    ],
+    "conditions": { "level": 7, "joined_sect": true },
+    "executorId": "fn_act2_festival_of_moons_aligning"
+  }
+]

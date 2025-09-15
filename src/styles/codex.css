@@ -1,0 +1,74 @@
+.codex-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 4% 16px;
+  z-index: 1000;
+}
+
+.codex-modal {
+  background: var(--surface, #fff);
+  width: 100%;
+  max-width: 760px;
+  border-radius: 10px;
+  box-shadow: 0 6px 26px rgba(0, 0, 0, 0.25);
+  padding: 20px 20px 24px 20px;
+  position: relative;
+}
+
+.codex-close {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.codex-title {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+}
+
+.codex-content {
+  max-height: 60vh;
+  overflow: auto;
+}
+
+/* Codex list styles */
+.codex-list {
+  width: 100%;
+}
+.codex-search-row {
+  margin-bottom: 8px;
+}
+.codex-search-input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.codex-grid {
+  display: grid;
+  gap: 10px;
+}
+.codex-entry {
+  background: transparent;
+}
+.codex-entry-summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.codex-entry-body {
+  padding: 8px 6px;
+}
+.codex-entry-paragraph {
+  margin: 6px 0;
+}
+.codex-entry-summary-text {
+  margin: 0 0 8px 0;
+}

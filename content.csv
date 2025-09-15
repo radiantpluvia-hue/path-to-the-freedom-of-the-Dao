@@ -1,0 +1,28 @@
+type,id,name,description,status,priority,notes
+act,act1,Act I - The Mortal Coil,Introductory act that establishes sect life and first breakthroughs,complete,Must,Has ~40 events in act1_events.json
+act,act2,Act II - Qi Condensation,Challenges escalate; spirit beasts and rivalries,complete,Must,Act2 mostly populated
+act,act3,Act III - Foundation Establishment,Foundation quests and artifacts,complete,Should,Act3 present
+act,act4,Act IV - Core Formation,High-stakes tournaments and world events,complete,Should,Act4 present
+act,act5,Act V - Nascent Soul,Nascent Soul mechanics and legacy,complete,Could,Act5 present
+act,act6,Act VI - Spirit Severing,Domain-building and relic mechanics,partial,Could,Act6 mixed formats
+act,act7,Act VII - Dao Seeking,Endgame tribulation & ascension,complete,Should,Act7 present
+event,act1_cultivation_awakening,Cultivation Awakening,Player's latent talent awakens,complete,Must,Good race variations present
+event,act1_first_meditation,First Meditation,First meditation with choice outcomes,complete,Must,
+enemy,spirit_wolf,Spirit Wolf,Low-tier spirit beast that tests qi control,todo,Must,Add art and rewards
+enemy,herbal_golem,Herbal Golem,A guardian animated from medicinal herbs,todo,Should,Can drop alchemy ingredients
+enemy,jade_spirit,Jade Spirit,Elemental spirit bound to a jade fragment,todo,Should,Rare spawn
+item,spirit_stone,Spirit Stone,Small stone that grants a boost to cultivation energy,complete,Must,Used by many events
+item,ancient_manual,Ancient Manual,Contains a short technique or passive buff,partial,Must,Some manuals referenced in acts
+ui,tutorial_first_run,Tutorial (first run),First 3-minute onboarding flow,partial,Must,Wire into act1 start
+misc,save_system,save_slot,Save/load system,partial,Must,Prioritize for playtests
+analytics,simple_logging,Session logging,Log start/end/crash,partial,Should,Send to local file
+item,spirit_stone,Spirit Stone,Resource for cultivation; variants per reincarnation,complete,Must,variantGroup=resource_stones;variantCount=6
+item,ancient_manual_basic,Basic Manual,Simple technique manuals; different each life,complete,Must,variantGroup=manuals;variantCount=12
+item,ancient_manual_advanced,Advanced Manual,Rare manuals with permanent bonuses,partial,Should,variantGroup=manuals;variantCount=24
+item,rebirth_petal,Rebirth Petal,Revival consumable; rare across reincarnations,partial,Must,variantGroup=rebirths;variantCount=3
+item,jade_fragment,Jade Fragment,Artifact shard used in many rituals,partial,Should,variantGroup=artifact_shards;variantCount=8
+item,phoenix_feather,Phoenix Feather,High-value ritual material,partial,Should,variantGroup=feathers;variantCount=3
+enemy,ancient_wisp,Ancient Wisp,Minor spirit that appears in many acts,todo,Should,variantGroup=wisps;variantCount=10
+enemy,ember_hare,Ember Hare,Quick fire spirit; good for testing evasion,todo,Should,variantGroup=fauna;variantCount=8
+enemy,river_spirit,River Spirit,Water elemental; can change each reincarnation,todo,Must,variantGroup=elementals;variantCount=8
+enemy,ancient_sentry,Ancient Sentry,Construct guardian protecting relics,todo,Must,variantGroup=sentinels;variantCount=3

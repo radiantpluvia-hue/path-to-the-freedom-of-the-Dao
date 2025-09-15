@@ -1,0 +1,245 @@
+[
+  {
+    "id": "mentor_fang_yuan",
+    "displayName": "Venerable Shadow Ledger",
+    "inspiredBy": "Fang Yuan",
+    "bio": "A bitter, cunning sage who prizes utility and secrecy. He favors subterfuge, moral traps, and forbidden fragments.",
+    "location": "Ashen Labyrinth (Netherworld fringe)",
+    "status": "Hidden; appears indirectly via notes, proxies, or sealed tests.",
+    "mentorshipStyle": "Cold pragmatist — puzzles, moral ledger tests, utility-first tasks. He rewards cunning and results, not righteousness.",
+    "uniquePerk": "Shadow Ledger — successful tasks grant a deterministic small-steal effect against rivals (seedable); high affinity unlocks a mentor-exclusive hidden manual.",
+    "recommendedExecutorIds": [
+      "mentor_hidden_manual_search",
+      "mentor_sabotage_investigation",
+      "mentor_path_declaration",
+      "mentor_private_teaching",
+      "mentor_final_choice"
+    ],
+    "stages": [
+      "mentor_fang_stage_01",
+      "mentor_fang_stage_02",
+      "mentor_fang_stage_03",
+      "mentor_fang_stage_04",
+      "mentor_fang_stage_05",
+      "mentor_fang_stage_06",
+      "mentor_fang_stage_07",
+      "mentor_fang_stage_08",
+      "mentor_fang_stage_09",
+      "mentor_fang_stage_10"
+    ],
+    "portrait": "fang_yuan",
+    "notes": "Spawn as global/secret events; outcomes impact long-term karma and faction reputation. Use deterministic seeding for repeatability."
+  },
+  {
+    "id": "mentor_han_jue",
+    "displayName": "Patriarch of Quiet Epochs",
+    "inspiredBy": "Han Jue",
+    "bio": "The patient architect of providence; he cultivates through concealment, time, and subtle bargains. Prefers slow, hidden growth.",
+    "location": "Archive of Quiet Epochs (buried mountain library)",
+    "status": "Reclusive; rarely meets apprentices in person; sows delayed tests across the years.",
+    "mentorshipStyle": "Long-term planning — time-locked tasks, delayed rewards and karmic concealment.",
+    "uniquePerk": "Providence Veil — while mentored, player gains a diminishing chance to avoid Karma-targeting events; very high affinity unlocks 'Hidden Longevity'.",
+    "recommendedExecutorIds": [
+      "mentor_meditation_training",
+      "mentor_hidden_manual_search",
+      "mentor_private_teaching",
+      "mentor_final_choice"
+    ],
+    "stages": [
+      "mentor_hj_stage_01",
+      "mentor_hj_stage_02",
+      "mentor_hj_stage_03",
+      "mentor_hj_stage_04",
+      "mentor_hj_stage_05",
+      "mentor_hj_stage_06",
+      "mentor_hj_stage_07",
+      "mentor_hj_stage_08",
+      "mentor_hj_stage_09",
+      "mentor_hj_stage_10"
+    ],
+    "portrait": "han_jue",
+    "notes": "Design stages that deliver rewards after a world-time offset. Good fit for delayed-unlock mechanics and time-locked RNG seeding."
+  },
+  {
+    "id": "mentor_xiao_yan",
+    "displayName": "Flame-Forged Sovereign",
+    "inspiredBy": "Xiao Yan",
+    "bio": "Flame Emperor and charismatic leader — direct, explosive teacher. Prefers hands-on combat, flame refinement, and pill-work.",
+    "location": "Crimson Aerie (volcanic sky-keep)",
+    "status": "Public and active; hosts open training seasons and pill-forges.",
+    "mentorshipStyle": "High-risk, high-reward combat and refinement sessions; visible and reputation-generating.",
+    "uniquePerk": "Flame Affinity — speeds learning for fire manuals, grants temporary flame-resonance buffs during tribulation.",
+    "recommendedExecutorIds": [
+      "mentor_body_refine",
+      "mentor_supervised_duel",
+      "mentor_private_teaching",
+      "mentor_tribulation_trial",
+      "mentor_final_choice"
+    ],
+    "stages": [
+      "mentor_xy_stage_01",
+      "mentor_xy_stage_02",
+      "mentor_xy_stage_03",
+      "mentor_xy_stage_04",
+      "mentor_xy_stage_05",
+      "mentor_xy_stage_06",
+      "mentor_xy_stage_07",
+      "mentor_xy_stage_08",
+      "mentor_xy_stage_09",
+      "mentor_xy_stage_10"
+    ],
+    "portrait": "xiao_yan",
+    "notes": "Public mentorships attract rival attention; design visible triggers and faction responses around his stages."
+  },
+  {
+    "id": "mentor_han_li",
+    "displayName": "Treasury of Quiet Accumulation",
+    "inspiredBy": "Han Li",
+    "bio": "The patient pillsmith and treasure conservator. His approach is accumulation: pillcraft, artifact appraisal, and steady survival.",
+    "location": "Hidden Pillery (secluded valley of apothecaries)",
+    "status": "Quietly active; sends students on long treasure hunts and appraisals.",
+    "mentorshipStyle": "Resource- and crafting-focused: appraisal challenges, long-brew timers, vault escorts.",
+    "uniquePerk": "Treasure Affinity — improved yields from appraisals/refinings and compound pill bonuses.",
+    "recommendedExecutorIds": [
+      "mentor_escort_relic",
+      "mentor_hidden_manual_search",
+      "merchant_appraisal",
+      "mentor_private_teaching"
+    ],
+    "stages": [
+      "mentor_hl_stage_01",
+      "mentor_hl_stage_02",
+      "mentor_hl_stage_03",
+      "mentor_hl_stage_04",
+      "mentor_hl_stage_05",
+      "mentor_hl_stage_06",
+      "mentor_hl_stage_07",
+      "mentor_hl_stage_08",
+      "mentor_hl_stage_09",
+      "mentor_hl_stage_10"
+    ],
+    "portrait": "han_li",
+    "notes": "Tie appraisals to merchant_appraisal executor; use long durations for brewing stages to reward patient players."
+  },
+  {
+    "id": "mentor_meng_hao",
+    "displayName": "Paradox-Touched Wayfarer",
+    "inspiredBy": "Meng Hao",
+    "bio": "Eccentric and cunning; manipulates minor laws and bargains with oddities. Rewards creative solutions and lateral thinking.",
+    "location": "Paradox Halls (wandering rifts and paradoxical venues)",
+    "status": "Nomadic; appears where paradoxes flare.",
+    "mentorshipStyle": "Unorthodox law-bending and paradox tests; favors improvisation.",
+    "uniquePerk": "Law-Flex — can temporarily alter a local rule during an event (deterministic when seeded); unlocks minor permanent lawcraft when affinity is high.",
+    "recommendedExecutorIds": [
+      "mentor_hidden_manual_search",
+      "mentor_tribulation_trial",
+      "mentor_private_teaching",
+      "mentor_path_declaration"
+    ],
+    "stages": [
+      "mentor_mh_stage_01",
+      "mentor_mh_stage_02",
+      "mentor_mh_stage_03",
+      "mentor_mh_stage_04",
+      "mentor_mh_stage_05",
+      "mentor_mh_stage_06",
+      "mentor_mh_stage_07",
+      "mentor_mh_stage_08",
+      "mentor_mh_stage_09",
+      "mentor_mh_stage_10"
+    ],
+    "portrait": "meng_hao",
+    "notes": "Executors for Meng Hao must accept nonstandard args; always use seeded RNG for reproducible outcomes."
+  },
+  {
+    "id": "mentor_fu_yao",
+    "displayName": "Sword-Maiden of Azure Intent",
+    "inspiredBy": "Fu Yao (sword-maiden archetype)",
+    "bio": "A fierce sword tutor blending grace and tenacity. She trains body, mind, and a refined sword-heart; her lessons emphasize precision and righteous fury.",
+    "location": "Azure Sword Pavilion (a riverside terrace of blade-etched stone)",
+    "status": "Active and visible; organizes seasonal sword conclaves.",
+    "mentorshipStyle": "Disciplined swordcraft: strict drills, formation practice, and technical duels emphasizing intent and form.",
+    "uniquePerk": "Blade Resonance — sword skills trained under Fu Yao gain a persistent 'intent echo' buff (secondary damage proc). High affinity can unlock a limited single-target 'realm-edge' echo.",
+    "recommendedExecutorIds": [
+      "mentor_supervised_duel",
+      "mentor_body_refine",
+      "mentor_tribulation_trial",
+      "mentor_private_teaching"
+    ],
+    "stages": [
+      "mentor_fy_stage_01",
+      "mentor_fy_stage_02",
+      "mentor_fy_stage_03",
+      "mentor_fy_stage_04",
+      "mentor_fy_stage_05",
+      "mentor_fy_stage_06",
+      "mentor_fy_stage_07",
+      "mentor_fy_stage_08",
+      "mentor_fy_stage_09",
+      "mentor_fy_stage_10"
+    ],
+    "portrait": "fu_yao",
+    "notes": "Replace previous Ji Ning stage hooks with Fu Yao equivalents; implement the 'intent echo' in the duel executor as an attachable buff with cooldown and deterministic proc logic."
+  },
+  {
+    "id": "mentor_su_ming",
+    "displayName": "Master of the Southern Crucible",
+    "inspiredBy": "Su Ming (forger/warrior archetype)",
+    "bio": "A master smith and battle tactician who forges weapons as cultivation. He combines battlefield resource hunts with deep tempering rituals.",
+    "location": "The Southern Crucible (a mountain forge built on a war-ley)",
+    "status": "Semi-retired; leads seasonal forging festivals and war-camps.",
+    "mentorshipStyle": "Craft+Combat hybrid: resource foraging, cave forays, forging puzzles, and heavy tempering duels.",
+    "uniquePerk": "Forge Resonance — improved weapon upgrade yield and a chance to soul-bond weapons crafted under Su Ming's tutelage.",
+    "recommendedExecutorIds": [
+      "mentor_body_refine",
+      "hidden_manual",
+      "cave_explore",
+      "mentor_private_teaching"
+    ],
+    "stages": [
+      "mentor_sm_stage_01",
+      "mentor_sm_stage_02",
+      "mentor_sm_stage_03",
+      "mentor_sm_stage_04",
+      "mentor_sm_stage_05",
+      "mentor_sm_stage_06",
+      "mentor_sm_stage_07",
+      "mentor_sm_stage_08",
+      "mentor_sm_stage_09",
+      "mentor_sm_stage_10"
+    ],
+    "portrait": "su_ming",
+    "notes": "Use cave_explore for resource hunts; link forging mini-games and 'soul-bond' roll into the forge executor (seedable RNG)."
+  },
+  {
+    "id": "mentor_lan_wangji",
+    "displayName": "Qin-Hearted Lawkeeper",
+    "inspiredBy": "Lan Wangji (stoic, righteous instructor archetype)",
+    "bio": "A stoic paragon of discipline and virtue. He teaches restraint, moral clarity, and the harmony between rule and will — training is strict but steady.",
+    "location": "Cloud-Reed Terrace (a cliffside hall of ancient rules and qin stones)",
+    "status": "Present and vigilant; accepts apprentices by invitation and via strict testing.",
+    "mentorshipStyle": "Rigid discipline with emphasis on moral integrity, musical meditation (qin), and silent endurance tests. Favors righteous acts and measured responses.",
+    "uniquePerk": "Honor Ward — while mentored, player gains slower reputation decay and higher favor with righteous/family sects; high affinity unlocks the 'Qin Harmony' passive that boosts mental resistances.",
+    "recommendedExecutorIds": [
+      "mentor_meditation_training",
+      "mentor_supervised_duel",
+      "mentor_sabotage_investigation",
+      "mentor_private_teaching",
+      "mentor_final_choice"
+    ],
+    "stages": [
+      "mentor_lw_stage_01",
+      "mentor_lw_stage_02",
+      "mentor_lw_stage_03",
+      "mentor_lw_stage_04",
+      "mentor_lw_stage_05",
+      "mentor_lw_stage_06",
+      "mentor_lw_stage_07",
+      "mentor_lw_stage_08",
+      "mentor_lw_stage_09",
+      "mentor_lw_stage_10"
+    ],
+    "portrait": "lan_wangji",
+    "notes": "Lan Wangji mentorships are ideal for players pursuing righteous/faction-friendly playstyles. Use moral-choice checks and qin-meditation executors that increase discipline and reduce insanity/temptation variables."
+  }
+]

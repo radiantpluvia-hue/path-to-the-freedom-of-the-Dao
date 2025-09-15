@@ -1,0 +1,102 @@
+[
+  {
+    "id": "act1_mentor_stage1",
+    "mentor": "Mo Wuji",
+    "stage": 1,
+    "title": "The First Lesson",
+    "description": "Mo Wuji appears as a shadow. 'Cultivation is not about righteousness—it's about results. Let me show you the first scheme.'",
+    "microgame": "meditation",
+    "reward": { "daoComprehension": 5, "skillPoints": 1, "specialFlag": "unlock_scheme_basics" },
+    "executor": "mentorStageExecutor"
+  },
+  {
+    "id": "act1_mentor_stage2", 
+    "mentor": "Mo Wuji",
+    "stage": 2,
+    "title": "Information Gathering",
+    "description": "Learn to observe without being observed. Every detail is a weapon in the right hands.",
+    "microgame": "meditation",
+    "reward": { "daoComprehension": 8, "skillPoints": 1, "specialFlag": "unlock_observation" },
+    "executor": "mentorStageExecutor"
+  },
+  {
+    "id": "act1_mentor_stage3",
+    "mentor": "Mo Wuji", 
+    "stage": 3,
+    "title": "Schemes within Schemes",
+    "description": "Mo Wuji forces you to calculate dozens of scenarios where allies betray you. The lesson: never trust appearances, only your own Dao-heart.",
+    "microgame": "meditation",
+    "reward": { "daoComprehension": 10, "skillPoints": 2, "specialFlag": "unlock_minor_scheme_passive" },
+    "executor": "mentorStageExecutor"
+  },
+  {
+    "id": "act1_mentor_stage4",
+    "mentor": "Mo Wuji",
+    "stage": 4, 
+    "title": "Resource Optimization",
+    "description": "Every Gu worm, every spirit stone has maximum utility. Learn to extract 120% value from 100% resources.",
+    "microgame": "forging",
+    "reward": { "daoComprehension": 12, "skillPoints": 2, "specialFlag": "unlock_efficiency_boost" },
+    "executor": "mentorStageExecutor"
+  },
+  {
+    "id": "act1_mentor_stage5",
+    "mentor": "Mo Wuji",
+    "stage": 5,
+    "title": "Emotional Detachment", 
+    "description": "Sentiment is weakness. Learn to cut away emotional attachments that cloud judgment.",
+    "microgame": "meditation",
+    "reward": { "daoComprehension": 15, "skillPoints": 3, "specialFlag": "unlock_cold_logic" },
+    "executor": "mentorStageExecutor"
+  },
+  {
+    "id": "act1_mentor_stage6",
+    "mentor": "Mo Wuji",
+    "stage": 6,
+    "title": "Manipulation Tactics",
+    "description": "People are tools. Learn to position them where they serve your cultivation best.",
+    "microgame": "duel",
+    "reward": { "daoComprehension": 18, "skillPoints": 3, "specialFlag": "unlock_social_manipulation" },
+    "executor": "mentorStageExecutor"
+  },
+  {
+    "id": "act1_mentor_stage7",
+    "mentor": "Mo Wuji", 
+    "stage": 7,
+    "title": "Long-term Planning",
+    "description": "Think in centuries, not years. Your current actions echo through future incarnations.",
+    "microgame": "meditation",
+    "reward": { "daoComprehension": 20, "skillPoints": 4, "specialFlag": "unlock_future_sight" },
+    "executor": "mentorStageExecutor"
+  },
+  {
+    "id": "act1_mentor_stage8",
+    "mentor": "Mo Wuji",
+    "stage": 8,
+    "title": "Gu Refinement Principles",
+    "description": "Learn the art of incremental improvement—each small optimization compounds exponentially.",
+    "microgame": "forging", 
+    "reward": { "daoComprehension": 25, "skillPoints": 4, "specialFlag": "unlock_gu_refinement" },
+    "executor": "mentorStageExecutor"
+  },
+  {
+    "id": "act1_mentor_stage9",
+    "mentor": "Mo Wuji",
+    "stage": 9,
+    "title": "The Final Scheme",
+    "description": "Mo Wuji presents his ultimate test: orchestrate a complex plan that benefits you while appearing to help others.",
+    "microgame": "duel",
+    "reward": { "daoComprehension": 30, "skillPoints": 5, "specialFlag": "unlock_master_schemer" },
+    "executor": "mentorStageExecutor"
+  },
+  {
+    "id": "act1_mentor_stage10",
+    "mentor": "Mo Wuji",
+    "stage": 10,
+    "title": "Graduation",
+    "description": "You have learned the Dao of Schemes. Mo Wuji nods coldly: 'Remember—eternal life requires eternal vigilance.'",
+    "microgame": "meditation",
+    "reward": { "daoComprehension": 50, "skillPoints": 10, "specialFlag": "mo_wuji_mastery" },
+    "executor": "mentorStageExecutor"
+  }
+]

@@ -1,0 +1,338 @@
+[
+  {
+    "id": "act5_mastery_test",
+    "act": 5,
+    "title": "Mastery Test",
+    "description": "You face a test to prove your mastery of cultivation techniques.",
+    "choices": [
+      {"id": "succeed", "text": "Succeed in the test"},
+      {"id": "fail", "text": "Fail the test"}
+    ],
+    "executorId": "fn_act5_mastery_test",
+    "raceVariations": {
+      "Human": {
+        "description": "As a human, you demonstrate your mastery of qi manipulation.",
+        "choices": [
+          {"id": "succeed", "text": "Succeed with determination"},
+          {"id": "fail", "text": "Learn from failure"}
+        ]
+      },
+      "Demon": {
+        "description": "Your demonic powers are put to the test in a fierce challenge.",
+        "choices": [
+          {"id": "succeed", "text": "Succeed with dark energy"},
+          {"id": "fail", "text": "Embrace the consequences"}
+        ]
+      },
+      "Spirit": {
+        "description": "You connect with the natural world to showcase your spiritual mastery.",
+        "choices": [
+          {"id": "succeed", "text": "Succeed with nature's help"},
+          {"id": "fail", "text": "Seek guidance from spirits"}
+        ]
+      },
+      "Dragon": {
+        "description": "Your draconic heritage shines as you prove your strength.",
+        "choices": [
+          {"id": "succeed", "text": "Succeed with dragon might"},
+          {"id": "fail", "text": "Learn from the experience"}
+        ]
+      },
+      "Phoenix": {
+        "description": "Phoenix flames ignite as you demonstrate your rebirth mastery.",
+        "choices": [
+          {"id": "succeed", "text": "Succeed with fiery passion"},
+          {"id": "fail", "text": "Rise from the ashes"}
+        ]
+      },
+      "Celestial": {
+        "description": "Heavenly energy guides you as you face the ultimate test.",
+        "choices": [
+          {"id": "succeed", "text": "Succeed with divine favor"},
+          {"id": "fail", "text": "Seek celestial guidance"}
+        ]
+      },
+      "Asura": {
+        "description": "Your battle prowess is tested in a fierce competition.",
+        "choices": [
+          {"id": "succeed", "text": "Succeed with ferocity"},
+          {"id": "fail", "text": "Learn from defeat"}
+        ]
+      },
+      "Void": {
+        "description": "Void energy flows through you as you face the ultimate challenge.",
+        "choices": [
+          {"id": "succeed", "text": "Succeed with void mastery"},
+          {"id": "fail", "text": "Reflect on the void"}
+        ]
+      },
+      "Fox": {
+        "description": "Your cunning and charm are tested in a unique challenge.",
+        "choices": [
+          {"id": "succeed", "text": "Succeed with charm"},
+          {"id": "fail", "text": "Learn from the experience"}
+        ]
+      },
+      "Monkey": {
+        "description": "Your agility and trickery are put to the test in a playful challenge.",
+        "choices": [
+          {"id": "succeed", "text": "Succeed with cleverness"},
+          {"id": "fail", "text": "Adapt and try again"}
+        ]
+      }
+    }
+  },
+  {
+    "id": "act5_legacy_building",
+    "act": 5,
+    "title": "Legacy Building",
+    "description": "You begin to build your legacy in the cultivation world.",
+    "choices": [
+      {"id": "build", "text": "Build your legacy"},
+      {"id": "abandon", "text": "Abandon legacy building"}
+    ],
+    "executorId": "fn_act5_legacy_building"
+  },
+  {
+    "id": "act5_final_confrontation",
+    "act": 5,
+    "title": "Final Confrontation",
+    "description": "You face a final confrontation with a powerful adversary.",
+    "choices": [
+      {"id": "fight", "text": "Fight with all your strength"},
+      {"id": "negotiate", "text": "Attempt to negotiate"}
+    ],
+    "executorId": "fn_act5_final_confrontation"
+  },
+  {
+    "id": "act5_ancient_secrets",
+    "act": 5,
+    "title": "Ancient Secrets Discovery",
+    "description": "You uncover ancient secrets that could change your fate.",
+    "choices": [
+      {"id": "explore", "text": "Explore the secrets"},
+      {"id": "report", "text": "Report to the sect"}
+    ],
+    "executorId": "fn_act5_ancient_secrets"
+  },
+  {
+    "id": "act5_spirit_alliance",
+    "act": 5,
+    "title": "Spirit Alliance",
+    "description": "You form an alliance with powerful spirit beings.",
+    "choices": [
+      {"id": "ally", "text": "Form the alliance"},
+      {"id": "decline", "text": "Decline the alliance"}
+    ],
+    "executorId": "fn_act5_spirit_alliance"
+  },
+  {
+    "id": "act5_celestial_trial",
+    "act": 5,
+    "title": "Celestial Trial",
+    "description": "You face a trial from the celestial realm to prove your worth.",
+    "choices": [
+      {"id": "accept", "text": "Accept the trial"},
+      {"id": "refuse", "text": "Refuse the trial"}
+    ],
+    "executorId": "fn_act5_celestial_trial"
+  },
+  {
+    "id": "act5_demon_invasion",
+    "act": 5,
+    "title": "Demon Invasion",
+    "description": "Demons invade your territory, testing your skills.",
+    "choices": [
+      {"id": "fight", "text": "Fight the demons"},
+      {"id": "retreat", "text": "Retreat to safety"}
+    ],
+    "executorId": "fn_act5_demon_invasion"
+  },
+  {
+    "id": "act5_celestial_blessing",
+    "act": 5,
+    "title": "Celestial Blessing",
+    "description": "You receive a powerful blessing from the heavens.",
+    "choices": [
+      {"id": "accept", "text": "Accept the blessing"},
+      {"id": "refuse", "text": "Refuse the blessing"}
+    ],
+    "executorId": "fn_act5_celestial_blessing"
+  },
+  {
+    "id": "act5_void_energy",
+    "act": 5,
+    "title": "Void Energy Mastery",
+    "description": "You master void energy, unlocking immense powers.",
+    "choices": [
+      {"id": "absorb", "text": "Absorb the energy"},
+      {"id": "reject", "text": "Reject the energy"}
+    ],
+    "executorId": "fn_act5_void_energy"
+  },
+  {
+    "id": "act5_human_potential",
+    "act": 5,
+    "title": "Human Potential Peak",
+    "description": "You unlock your full human potential, achieving supreme cultivation.",
+    "choices": [
+      {"id": "push", "text": "Push your limits"},
+      {"id": "rest", "text": "Rest and recover"}
+    ],
+    "executorId": "fn_act5_human_potential"
+  },
+  {
+    "id": "act5_demon_corruption",
+    "act": 5,
+    "title": "Demon Corruption Intensity",
+    "description": "You face intense demonic corruption, testing your willpower to the limit.",
+    "choices": [
+      {"id": "resist", "text": "Resist the corruption"},
+      {"id": "embrace", "text": "Embrace the corruption"}
+    ],
+    "executorId": "fn_act5_demon_corruption"
+  },
+  {
+    "id": "act5_spirit_guardian",
+    "act": 5,
+    "title": "Spirit Guardian Alliance",
+    "description": "A powerful spirit guardian offers to protect you on your journey.",
+    "choices": [
+      {"id": "accept", "text": "Accept the guardian"},
+      {"id": "decline", "text": "Decline the offer"}
+    ],
+    "executorId": "fn_act5_spirit_guardian"
+  },
+  {
+    "id": "act5_dragon_roar",
+    "act": 5,
+    "title": "Dragon Roar Mastery",
+    "description": "You master the dragon roar, intimidating your enemies powerfully.",
+    "choices": [
+      {"id": "roar", "text": "Use the roar"},
+      {"id": "silence", "text": "Remain silent"}
+    ],
+    "executorId": "fn_act5_dragon_roar"
+  },
+  {
+    "id": "act5_phoenix_flame",
+    "act": 5,
+    "title": "Phoenix Flame Mastery",
+    "description": "You master phoenix flames, enhancing your attacks immensely.",
+    "choices": [
+      {"id": "ignite", "text": "Ignite the flames"},
+      {"id": "extinguish", "text": "Extinguish the flames"}
+    ],
+    "executorId": "fn_act5_phoenix_flame"
+  },
+  {
+    "id": "act5_celestial_light",
+    "act": 5,
+    "title": "Celestial Light Mastery",
+    "description": "You master celestial light, purifying your surroundings completely.",
+    "choices": [
+      {"id": "shine", "text": "Shine the light"},
+      {"id": "dim", "text": "Dim the light"}
+    ],
+    "executorId": "fn_act5_celestial_light"
+  },
+  {
+    "id": "act5_asura_strength",
+    "act": 5,
+    "title": "Asura Strength Peak",
+    "description": "Your asura strength peaks, making you a supreme warrior.",
+    "choices": [
+      {"id": "train", "text": "Train your strength"},
+      {"id": "rest", "text": "Rest and recover"}
+    ],
+    "executorId": "fn_act5_asura_strength"
+  },
+  {
+    "id": "act5_void_portal",
+    "act": 5,
+    "title": "Void Portal Mastery",
+    "description": "You master void portals, exploring new dimensions freely.",
+    "choices": [
+      {"id": "enter", "text": "Enter the portal"},
+      {"id": "close", "text": "Close the portal"}
+    ],
+    "executorId": "fn_act5_void_portal"
+  },
+  {
+    "id": "act5_fox_charm",
+    "act": 5,
+    "title": "Fox Charm Mastery",
+    "description": "You master fox charm, influencing others with ease.",
+    "choices": [
+      {"id": "charm", "text": "Use charm"},
+      {"id": "avoid", "text": "Avoid using charm"}
+    ],
+    "executorId": "fn_act5_fox_charm"
+  },
+  {
+    "id": "act5_monkey_trickery",
+    "act": 5,
+    "title": "Monkey Trickery Mastery",
+    "description": "You master monkey trickery, outsmarting your opponents completely.",
+    "choices": [
+      {"id": "trick", "text": "Use trickery"},
+      {"id": "honest", "text": "Be honest"}
+    ],
+    "executorId": "fn_act5_monkey_trickery"
+  },
+  {
+    "id": "act5_final_breakthrough",
+    "act": 5,
+    "title": "Final Breakthrough",
+    "description": "You attempt your final breakthrough in Act 5, achieving supreme power.",
+    "choices": [
+      {"id": "breakthrough", "text": "Achieve breakthrough"},
+      {"id": "wait", "text": "Wait for later"}
+    ],
+    "executorId": "fn_act5_final_breakthrough"
+  },
+  {
+    "id": "act5_ultimate_trial",
+    "act": 5,
+    "title": "Ultimate Trial",
+    "description": "You face the ultimate trial of your cultivation journey.",
+    "choices": [
+      {"id": "face", "text": "Face the trial bravely"},
+      {"id": "flee", "text": "Flee from the trial"}
+    ],
+    "executorId": "fn_act5_ultimate_trial"
+  },
+  {
+    "id": "act5_cosmic_awareness",
+    "act": 5,
+    "title": "Cosmic Awareness",
+    "description": "You gain cosmic awareness, understanding the universe deeply.",
+    "choices": [
+      {"id": "embrace", "text": "Embrace cosmic knowledge"},
+      {"id": "reject", "text": "Reject the knowledge"}
+    ],
+    "executorId": "fn_act5_cosmic_awareness"
+  },
+  {
+    "id": "act5_divine_intervention",
+    "act": 5,
+    "title": "Divine Intervention",
+    "description": "Divine beings intervene in your journey, offering guidance.",
+    "choices": [
+      {"id": "accept", "text": "Accept divine help"},
+      {"id": "refuse", "text": "Refuse divine help"}
+    ],
+    "executorId": "fn_act5_divine_intervention"
+  },
+  {
+    "id": "act5_eternal_legacy",
+    "act": 5,
+    "title": "Eternal Legacy",
+    "description": "You begin to build your eternal legacy in the cultivation world.",
+    "choices": [
+      {"id": "build", "text": "Build your legacy"},
+      {"id": "abandon", "text": "Abandon legacy building"}
+    ],
+    "executorId": "fn_act5_eternal_legacy"
+  }
+]

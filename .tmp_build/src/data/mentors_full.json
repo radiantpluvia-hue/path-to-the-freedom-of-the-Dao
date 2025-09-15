@@ -1,0 +1,114 @@
+[
+    {
+        "id": "mentor_fang_yuan",
+        "displayName": "Venerable Shadow Ledger",
+        "act": 1,
+        "dao": "Dao of Schemes & Eternal Gu Immortality",
+        "philosophy": "Ruthless pragmatism, teaches how to manipulate destiny through schemes, planning, and Gu-like incremental optimizations.",
+        "teachingStyle": "Cold calculation, moral flexibility, long-term planning over short-term gains",
+        "portrait": "fang_yuan",
+        "teachingProgression": {
+            "tiers": [
+                { "level": 1, "unlocks": ["sect_generic_0"] }
+            ]
+        }
+    },
+    {
+        "id": "mentor_han_jue",
+        "displayName": "Patriarch of Quiet Epochs",
+        "act": 2,
+        "dao": "Dao of Hidden Cultivation & Destiny Control",
+        "philosophy": "Extreme caution, teaches hidden growth, karma weaving, never exposing all cards.",
+        "teachingStyle": "Patience, concealment, delayed gratification, risk mitigation",
+        "portrait": "han_jue",
+        "teachingProgression": {
+            "tiers": [
+                { "level": 1, "unlocks": ["sect_generic_0"] }
+            ]
+        }
+    },
+    {
+        "id": "mentor_xiao_yan",
+        "displayName": "Flame-Forged Sovereign",
+        "act": 3,
+        "dao": "Dao of Flames & Relentless Growth",
+        "philosophy": "Fiery persistence, burning setbacks into fuel, turning humiliation into growth.",
+        "teachingStyle": "Aggressive advancement, emotional fuel, never backing down",
+        "portrait": "xiao_yan",
+        "teachingProgression": {
+            "tiers": [
+                { "level": 1, "unlocks": ["sect_generic_0"] }
+            ]
+        }
+    },
+    {
+        "id": "mentor_su_ming",
+        "displayName": "Master of the Southern Crucible",
+        "act": 4,
+        "dao": "Dao of Sacrifice & Blood/Time Flow",
+        "philosophy": "Tragic sacrifice, teaches pain → transcendence, time/blood essence conversions.",
+        "teachingStyle": "Meaningful sacrifice, temporal manipulation, essence refinement",
+        "portrait": "su_ming",
+        "teachingProgression": {
+            "tiers": [
+                { "level": 1, "unlocks": ["sect_generic_0"] }
+            ]
+        }
+    },
+    {
+        "id": "mentor_fu_yao",
+        "displayName": "Sword-Maiden of Azure Intent",
+        "act": 5,
+        "dao": "Dao of Duality & Transcendence",
+        "philosophy": "Duality and contradiction, yin–yang balance, always transcending boundaries.",
+        "teachingStyle": "Balance extremes, embrace contradictions, transcend limitations",
+        "portrait": "fu_yao",
+        "teachingProgression": {
+            "tiers": [
+                { "level": 1, "unlocks": ["sect_generic_0"] }
+            ]
+        }
+    },
+    {
+        "id": "mentor_han_li",
+        "displayName": "Treasury of Quiet Accumulation",
+        "act": 6,
+        "dao": "Dao of Endurance & Steady Accumulation",
+        "philosophy": "Patience incarnate. The unyielding glacier outlasts the storm. Teaches that steady accumulation of resources and power is superior to risky bursts of progress.",
+        "teachingStyle": "Methodical progress, resource conservation, long-term thinking",
+        "portrait": "han_li",
+        "teachingProgression": {
+            "tiers": [
+                { "level": 1, "unlocks": ["sect_generic_0"] }
+            ]
+        }
+    },
+    {
+        "id": "mentor_lan_wangji",
+        "displayName": "Qin-Hearted Lawkeeper",
+        "act": 7,
+        "dao": "Dao of Serenity & Music-Law Resonance",
+        "philosophy": "Calm discipline and moral clarity. Teaches that harmony with the Dao is achieved through music, rules, and restraint, purifying the soul and overcoming worldly attachment.",
+        "teachingStyle": "Disciplined practice, musical meditation, moral clarity",
+        "portrait": "lan_wangji",
+        "teachingProgression": {
+            "tiers": [
+                { "level": 1, "unlocks": ["sect_generic_0"] }
+            ]
+        }
+    },
+    {
+        "id": "mentor_ji_ning",
+        "displayName": "Ji Ning",
+        "act": 8,
+        "dao": "Dao of Sword-Heart & Eternal Resolve",
+        "philosophy": "The sword in hand, the Dao in heart. A balanced spirit cuts the straightest path. Teaches that willpower and emotional clarity are the true edge of any blade.",
+        "teachingStyle": "Emotional refinement, unwavering determination, sword-intent focus",
+        "portrait": "ji_ning",
+        "teachingProgression": {
+            "tiers": [
+                { "level": 1, "unlocks": ["sect_generic_0"] }
+            ]
+        }
+    }
+]

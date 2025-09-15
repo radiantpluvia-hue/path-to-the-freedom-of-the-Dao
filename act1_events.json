@@ -1,0 +1,1105 @@
+[
+  {
+    "id": "act1_tutorial_welcome",
+    "act": 1,
+    "title": "Welcome, Young Disciple",
+    "description": "An elder steps forward to guide you through the basics: meditate to gather Qi, train to improve your techniques, and try a simple skirmish.",
+    "choices": [
+      {"id": "start_tutorial", "text": "Begin the tutorial"}
+    ],
+    "executorId": "fn_act1_tutorial_welcome"
+  },
+  {
+    "id": "act1_tutorial_meditation",
+    "act": 1,
+    "title": "First Meditation",
+    "description": "Sit and gather your Qi. This meditation guarantees a small cultivation gain and introduces the meditation action.",
+    "choices": [
+      {"id": "meditate_now", "text": "Meditate"}
+    ],
+    "executorId": "fn_act1_first_meditation"
+  },
+  {
+    "id": "act1_tutorial_skirmish",
+    "act": 1,
+    "title": "Target Practice",
+    "description": "Face a weak spirit wolf to learn basic combat controls. This encounter is scripted to be winnable and grants a small item reward.",
+    "choices": [
+      {"id": "fight", "text": "Fight"}
+    ],
+    "executorId": "fn_act1_combat_intro"
+  },
+  {
+    "id": "act1_cultivation_awakening",
+    "act": 1,
+    "title": "Cultivation Awakening",
+    "description": "Your innate talent for cultivation awakens, revealing your potential.",
+    "choices": [
+      {"id": "embrace", "text": "Embrace your cultivation path"},
+      {"id": "hesitate", "text": "Hesitate and observe first"}
+    ],
+    "executorId": "fn_act1_cultivation_awakening",
+    "raceVariations": {
+      "Human": {
+        "description": "As a human, your mortal body begins to resonate with spiritual energy, awakening your cultivation potential.",
+        "choices": [
+          {"id": "embrace", "text": "Embrace your human cultivation destiny"},
+          {"id": "hesitate", "text": "Seek guidance from elders first"}
+        ]
+      },
+      "Demon": {
+        "description": "Your demonic bloodline awakens, filling you with dark energy and cultivation potential.",
+        "choices": [
+          {"id": "embrace", "text": "Embrace your demonic heritage"},
+          {"id": "hesitate", "text": "Control the dark impulses first"}
+        ]
+      },
+      "Spirit": {
+        "description": "Your spiritual essence resonates with the natural world, awakening your innate cultivation abilities.",
+        "choices": [
+          {"id": "embrace", "text": "Merge with natural energy"},
+          {"id": "hesitate", "text": "Meditate on the connection"}
+        ]
+      },
+      "Dragon": {
+        "description": "Your draconic bloodline stirs, awakening immense cultivation power within you.",
+        "choices": [
+          {"id": "embrace", "text": "Unleash your dragon potential"},
+          {"id": "hesitate", "text": "Master control first"}
+        ]
+      },
+      "Phoenix": {
+        "description": "Phoenix flames ignite within you, awakening your rebirth cultivation cycle.",
+        "choices": [
+          {"id": "embrace", "text": "Rise from the ashes"},
+          {"id": "hesitate", "text": "Temper the flames"}
+        ]
+      },
+      "Celestial": {
+        "description": "Heavenly energy descends upon you, awakening your celestial cultivation path.",
+        "choices": [
+          {"id": "embrace", "text": "Accept divine mandate"},
+          {"id": "hesitate", "text": "Seek heavenly guidance"}
+        ]
+      },
+      "Asura": {
+        "description": "Battle energy surges through you, awakening your asura cultivation instincts.",
+        "choices": [
+          {"id": "embrace", "text": "Embrace the battle lust"},
+          {"id": "hesitate", "text": "Control the rage"}
+        ]
+      },
+      "Void": {
+        "description": "Void energy coalesces within you, awakening your connection to nothingness.",
+        "choices": [
+          {"id": "embrace", "text": "Merge with the void"},
+          {"id": "hesitate", "text": "Study the emptiness"}
+        ]
+      },
+      "Fox": {
+        "description": "Your nine-tailed heritage awakens, revealing fox spirit cultivation techniques.",
+        "choices": [
+          {"id": "embrace", "text": "Embrace fox magic"},
+          {"id": "hesitate", "text": "Practice illusions first"}
+        ]
+      },
+      "Monkey": {
+        "description": "Monkey king energy awakens within you, bringing agility and trickery to cultivation.",
+        "choices": [
+          {"id": "embrace", "text": "Leap into cultivation"},
+          {"id": "hesitate", "text": "Observe and learn"}
+        ]
+      }
+    }
+  },
+  {
+    "id": "act1_first_meditation",
+    "act": 1,
+    "title": "First Meditation",
+    "description": "You attempt your first meditation session to gather spiritual energy.",
+    "choices": [
+      {"id": "focus", "text": "Focus deeply"},
+      {"id": "distracted", "text": "Get distracted"}
+    ],
+    "executorId": "fn_act1_first_meditation",
+    "raceVariations": {
+      "Human": {
+        "description": "As a human, you sit in lotus position, trying to sense the spiritual energy around you.",
+        "choices": [
+          {"id": "focus", "text": "Concentrate on breathing"},
+          {"id": "distracted", "text": "Thoughts wander"}
+        ]
+      },
+      "Demon": {
+        "description": "You meditate in a dark chamber, drawing upon demonic energy from the underworld.",
+        "choices": [
+          {"id": "focus", "text": "Embrace dark energy"},
+          {"id": "distracted", "text": "Fight dark impulses"}
+        ]
+      },
+      "Spirit": {
+        "description": "You merge with natural surroundings, becoming one with the spiritual flow.",
+        "choices": [
+          {"id": "focus", "text": "Become nature itself"},
+          {"id": "distracted", "text": "Lose connection"}
+        ]
+      }
+    }
+  },
+  {
+    "id": "act1_sect_entrance",
+    "act": 1,
+    "title": "Sect Entrance",
+    "description": "You arrive at a cultivation sect seeking to join as a disciple.",
+    "choices": [
+      {"id": "impress", "text": "Try to impress elders"},
+      {"id": "humble", "text": "Approach humbly"}
+    ],
+    "executorId": "fn_act1_sect_entrance"
+  },
+  {
+    "id": "act1_spirit_stone",
+    "act": 1,
+    "title": "Spirit Stone Discovery",
+    "description": "You discover a spirit stone that can aid your cultivation.",
+    "choices": [
+      {"id": "absorb", "text": "Absorb its energy"},
+      {"id": "save", "text": "Save for later"}
+    ],
+    "executorId": "fn_act1_spirit_stone"
+  },
+  {
+    "id": "act1_martial_test",
+    "act": 1,
+    "title": "Martial Test",
+    "description": "The sect tests your martial abilities and combat potential.",
+    "choices": [
+      {"id": "aggressive", "text": "Fight aggressively"},
+      {"id": "defensive", "text": "Focus on defense"}
+    ],
+    "executorId": "fn_act1_martial_test"
+  },
+  {
+    "id": "act1_elder_attention",
+    "act": 1,
+    "title": "Elder's Attention",
+    "description": "A sect elder notices your potential and offers guidance.",
+    "choices": [
+      {"id": "accept", "text": "Accept guidance"},
+      {"id": "decline", "text": "Decline politely"}
+    ],
+    "executorId": "fn_act1_elder_attention"
+  },
+  {
+    "id": "act1_rival_appears",
+    "act": 1,
+    "title": "Rival Appears",
+    "description": "A fellow disciple becomes your rival, pushing you to improve.",
+    "choices": [
+      {"id": "challenge", "text": "Challenge them"},
+      {"id": "ignore", "text": "Ignore them"}
+    ],
+    "executorId": "fn_act1_rival_appears"
+  },
+  {
+    "id": "act1_first_mission",
+    "act": 1,
+    "title": "First Mission",
+    "description": "The sect assigns you your first mission to prove yourself.",
+    "choices": [
+      {"id": "brave", "text": "Charge ahead bravely"},
+      {"id": "cautious", "text": "Proceed cautiously"}
+    ],
+    "executorId": "fn_act1_first_mission"
+  },
+  {
+    "id": "act1_herbal_discovery",
+    "act": 1,
+    "title": "Herbal Discovery",
+    "description": "You find rare medicinal herbs that can enhance cultivation.",
+    "choices": [
+      {"id": "consume", "text": "Consume immediately"},
+      {"id": "alchemy", "text": "Save for alchemy"}
+    ],
+    "executorId": "fn_act1_herbal_discovery"
+  },
+  {
+    "id": "act1_breakthrough_attempt",
+    "act": 1,
+    "title": "Breakthrough Attempt",
+    "description": "You attempt to break through to the next cultivation realm.",
+    "choices": [
+      {"id": "force", "text": "Force breakthrough"},
+      {"id": "patient", "text": "Wait patiently"}
+    ],
+    "executorId": "fn_act1_breakthrough_attempt"
+  },
+  {
+    "id": "act1_sect_tournament",
+    "act": 1,
+    "title": "Sect Tournament",
+    "description": "The sect holds a tournament for disciples to showcase skills.",
+    "choices": [
+      {"id": "participate", "text": "Participate fully"},
+      {"id": "observe", "text": "Observe only"}
+    ],
+    "executorId": "fn_act1_sect_tournament"
+  },
+  {
+    "id": "act1_ancient_manual",
+    "act": 1,
+    "title": "Ancient Manual",
+    "description": "You discover an ancient cultivation manual with powerful techniques.",
+    "choices": [
+      {"id": "study", "text": "Study deeply"},
+      {"id": "share", "text": "Share with sect"}
+    ],
+    "executorId": "fn_act1_ancient_manual"
+  },
+  {
+    "id": "act1_spirit_beast",
+    "act": 1,
+    "title": "Spirit Beast Encounter",
+    "description": "You encounter a spirit beast that could be friend or foe.",
+    "choices": [
+      {"id": "befriend", "text": "Try to befriend"},
+      {"id": "fight", "text": "Prepare to fight"}
+    ],
+    "executorId": "fn_act1_spirit_beast"
+  },
+  {
+    "id": "act1_qi_control",
+    "act": 1,
+    "title": "Qi Control Practice",
+    "description": "You practice controlling your spiritual energy for the first time.",
+    "choices": [
+      {"id": "precise", "text": "Focus on precision"},
+      {"id": "power", "text": "Focus on power"}
+    ],
+    "executorId": "fn_act1_qi_control"
+  },
+  {
+    "id": "act1_sect_politics",
+    "act": 1,
+    "title": "Sect Politics",
+    "description": "You become aware of political tensions within the sect.",
+    "choices": [
+      {"id": "involve", "text": "Get involved"},
+      {"id": "avoid", "text": "Avoid politics"}
+    ],
+    "executorId": "fn_act1_sect_politics"
+  },
+  {
+    "id": "act1_first_alchemy",
+    "act": 1,
+    "title": "First Alchemy Attempt",
+    "description": "You attempt your first alchemical concoction.",
+    "choices": [
+      {"id": "careful", "text": "Proceed carefully"},
+      {"id": "bold", "text": "Experiment boldly"}
+    ],
+    "executorId": "fn_act1_first_alchemy"
+  },
+  {
+    "id": "act1_night_cultivation",
+    "act": 1,
+    "title": "Night Cultivation",
+    "description": "You practice cultivation under the moonlight for enhanced effects.",
+    "choices": [
+      {"id": "continue", "text": "Cultivate all night"},
+      {"id": "rest", "text": "Get some rest"}
+    ],
+    "executorId": "fn_act1_night_cultivation"
+  },
+  {
+    "id": "act1_mentor_choice",
+    "act": 1,
+    "title": "Mentor Choice",
+    "description": "You must choose a cultivation mentor from available elders.",
+    "choices": [
+      {"id": "strict", "text": "Choose strict mentor"},
+      {"id": "kind", "text": "Choose kind mentor"}
+    ],
+    "executorId": "fn_act1_mentor_choice"
+  },
+  {
+    "id": "act1_sect_favor",
+    "act": 1,
+    "title": "Sect Favor",
+    "description": "A senior disciple asks for your help with a personal matter.",
+    "choices": [
+      {"id": "help", "text": "Help them"},
+      {"id": "refuse", "text": "Politely refuse"}
+    ],
+    "executorId": "fn_act1_sect_favor"
+  },
+  {
+    "id": "act1_dream_revelation",
+    "act": 1,
+    "title": "Dream Revelation",
+    "description": "You have a prophetic dream about your cultivation future.",
+    "choices": [
+      {"id": "believe", "text": "Believe the dream"},
+      {"id": "dismiss", "text": "Dismiss as fantasy"}
+    ],
+    "executorId": "fn_act1_dream_revelation"
+  },
+  {
+    "id": "act1_body_tempering",
+    "act": 1,
+    "title": "Body Tempering",
+    "description": "You begin the painful process of tempering your physical body.",
+    "choices": [
+      {"id": "endure", "text": "Endure the pain"},
+      {"id": "stop", "text": "Stop and rest"}
+    ],
+    "executorId": "fn_act1_body_tempering"
+  },
+  {
+    "id": "act1_spiritual_sense",
+    "act": 1,
+    "title": "Spiritual Sense Awakening",
+    "description": "Your spiritual sense awakens, allowing you to perceive energy.",
+    "choices": [
+      {"id": "expand", "text": "Expand your sense"},
+      {"id": "focus", "text": "Focus narrowly"}
+    ],
+    "executorId": "fn_act1_spiritual_sense"
+  },
+  {
+    "id": "act1_sect_library",
+    "act": 1,
+    "title": "Sect Library Discovery",
+    "description": "You discover hidden knowledge in the sect's ancient library.",
+    "choices": [
+      {"id": "study", "text": "Study intensely"},
+      {"id": "report", "text": "Report to elders"}
+    ],
+    "executorId": "fn_act1_sect_library"
+  },
+  {
+    "id": "act1_first_artifact",
+    "act": 1,
+    "title": "First Artifact",
+    "description": "You acquire your first cultivation artifact or weapon.",
+    "choices": [
+      {"id": "bond", "text": "Bond with it"},
+      {"id": "study", "text": "Study it first"}
+    ],
+    "executorId": "fn_act1_first_artifact"
+  },
+  {
+    "id": "act1_weather_phenomenon",
+    "act": 1,
+    "title": "Weather Phenomenon",
+    "description": "A strange weather phenomenon affects cultivation energy in the area.",
+    "choices": [
+      {"id": "cultivate", "text": "Cultivate during it"},
+      {"id": "avoid", "text": "Avoid the anomaly"}
+    ],
+    "executorId": "fn_act1_weather_phenomenon"
+  },
+  {
+    "id": "act1_sect_elixir",
+    "act": 1,
+    "title": "Sect Elixir Distribution",
+    "description": "The sect distributes cultivation elixirs to promising disciples.",
+    "choices": [
+      {"id": "request", "text": "Request elixir"},
+      {"id": "modest", "text": "Be modest"}
+    ],
+    "executorId": "fn_act1_sect_elixir"
+  },
+  {
+    "id": "act1_mountain_training",
+    "act": 1,
+    "title": "Mountain Training",
+    "description": "You undertake rigorous training on a sacred mountain.",
+    "choices": [
+      {"id": "push", "text": "Push to limits"},
+      {"id": "steady", "text": "Train steadily"}
+    ],
+    "executorId": "fn_act1_mountain_training"
+  },
+  {
+    "id": "act1_spirit_spring",
+    "act": 1,
+    "title": "Spirit Spring Discovery",
+    "description": "You discover a spirit spring with enhanced cultivation energy.",
+    "choices": [
+      {"id": "bathe", "text": "Bathe in it"},
+      {"id": "protect", "text": "Protect the secret"}
+    ],
+    "executorId": "fn_act1_spirit_spring"
+  },
+  {
+    "id": "act1_dao_insight",
+    "act": 1,
+    "title": "Dao Insight",
+    "description": "You experience a moment of profound insight into the Dao.",
+    "choices": [
+      {"id": "meditate", "text": "Meditate on it"},
+      {"id": "share", "text": "Share with mentor"}
+    ],
+    "executorId": "fn_act1_dao_insight"
+  },
+  {
+    "id": "act1_sect_crisis",
+    "act": 1,
+    "title": "Sect Crisis",
+    "description": "A crisis threatens the sect, testing disciples' loyalty.",
+    "choices": [
+      {"id": "defend", "text": "Defend the sect"},
+      {"id": "flee", "text": "Consider fleeing"}
+    ],
+    "executorId": "fn_act1_sect_crisis"
+  },
+  {
+    "id": "act1_final_test",
+    "act": 1,
+    "title": "Final Disciple Test",
+    "description": "The sect administers the final test to become a full disciple.",
+    "choices": [
+      {"id": "confident", "text": "Face confidently"},
+      {"id": "nervous", "text": "Approach nervously"}
+    ],
+    "executorId": "fn_act1_final_test"
+  }
+,
+  {
+    "id": "act1_orphan_on_street",
+    "act": 1,
+    "title": "Orphan on the Street",
+    "description": "You find a crying orphan being bullied in the marketplace. Their sect token glimmers faintly on their clothes.",
+    "choices": [
+      { "id": "help", "text": "Stand up for them" },
+      { "id": "ignore", "text": "Keep walking; better not get involved" }
+    ],
+    "conditions": { "level": 1 },
+    "executorId": "fn_act1_orphan_on_street"
+  },
+  {
+    "id": "act1_azure_recruiting_post",
+    "act": 1,
+    "title": "Recruiting Post from Azure Cloud Sect",
+    "description": "A loud speaker proclaims that Azure Cloud Sect seeks outer disciples. The banner promises food, shelter, and training (plus one goat).",
+    "choices": [
+      { "id": "apply_now", "text": "Join Azure Cloud Sect now" },
+      { "id": "compare_other_sects", "text": "Wait to see what other sects offer" }
+    ],
+    "conditions": { "level": 1, "realm": "Mortal Realm", "flags": { "joined_sect": false } },
+    "executorId": "fn_act1_azure_recruiting_post"
+  },
+  {
+    "id": "act1_sword_school_demo",
+    "act": 1,
+    "title": "Sword School Demo",
+    "description": "Huashan Sword School sends a junior disciple to your village to demonstrate sword-techniques. The show is impressive — though the demonstration ends with accidentally slicing a cart.",
+    "choices": [
+      { "id": "ask_to_train", "text": "Request to become a student" },
+      { "id": "laugh_then_leave", "text": "Laugh at the mishap and leave" }
+    ],
+    "conditions": { "level": 2 },
+    "executorId": "fn_act1_sword_school_demo"
+  },
+  {
+    "id": "act1_ming_cult_shadow_mission",
+    "act": 1,
+    "title": "Shadow of the Ming Cult",
+    "description": "You overhear that the Ming Cult is planning a secret midnight gathering. The locals whisper of dark arts and stolen relics.",
+    "choices": [
+      { "id": "sneak_in", "text": "Sneak in to investigate" },
+      { "id": "report_to_sect", "text": "Tell whatever sect you belong to" }
+    ],
+    "conditions": { "level": 2, "sect": "any" },
+    "executorId": "fn_act1_ming_cult_shadow_mission"
+  },
+  {
+    "id": "act1_shaolin_monk_request",
+    "act": 1,
+    "title": "A Monk’s Request",
+    "description": "A Shaolin monk comes by asking for help to deliver medicine to a remote hamlet plagued by ghosts/night creatures.",
+    "choices": [
+      { "id": "help", "text": "Escort the monk" },
+      { "id": "decline", "text": "Too dangerous; stay in town" }
+    ],
+    "conditions": { "level": 1 },
+    "executorId": "fn_act1_shaolin_monk_request"
+  },
+  {
+    "id": "act1_serendipitous_mentor",
+    "act": 1,
+    "title": "Serendipitous Mentor",
+    "description": "You accidentally help an elderly cultivator carry wood. He reveals himself as an Emei Sect senior and offers to teach you.",
+    "choices": [
+      { "id": "accept", "text": "Take his offer" },
+      { "id": "decline", "text": "Polite, but you wish to find your own path" }
+    ],
+    "conditions": { "level": 1, "flags": { "joined_sect": false } },
+    "executorId": "fn_act1_serendipitous_mentor"
+  },
+  {
+    "id": "act1_monster_attack_tavern",
+    "act": 1,
+    "title": "Monster Attack at the Tavern",
+    "description": "A beast bursts through the shuttered window of the tavern where you're drinking tea. Patrons scream and duck.",
+    "choices": [
+      { "id": "fight", "text": "Draw your weapon and protect them" },
+      { "id": "hide", "text": "Slip out backdoor unseen" }
+    ],
+    "conditions": { "level": 2 },
+    "executorId": "fn_act1_monster_attack_tavern"
+  },
+  {
+    "id": "act1_training_with_canes",
+    "act": 1,
+    "title": "Training with Canes",
+    "description": "An old beggar shows you how to do staff work using a cane. It’s rusty, squeaky, and perhaps more comedic than useful—but there’s value in humility.",
+    "choices": [
+      { "id": "train_humbly", "text": "Follow his instruction" },
+      { "id": "mock_and_leave", "text": "Mock the old cane, move on" }
+    ],
+    "conditions": { "level": 1 },
+    "executorId": "fn_act1_training_with_canes"
+  },
+  {
+    "id": "act1_spirit_beast_egg",
+    "act": 1,
+    "title": "Spirit Beast Egg",
+    "description": "You find a strange egg glowing with qi under a tree. It hatches quickly, a tiny spirit beast, barely bigger than your palm, chirps at you.",
+    "choices": [
+      { "id": "keep_it", "text": "Try raising it" },
+      { "id": "sell_it", "text": "Take it to the market" }
+    ],
+    "conditions": { "level": 1, "realm": "Mortal Realm" },
+    "executorId": "fn_act1_spirit_beast_egg"
+  },
+  {
+    "id": "act1_old_scroll_snatchers",
+    "act": 1,
+    "title": "Old Scroll Snatchers",
+    "description": "Bandits try to steal an ancient cultivation scroll from a wandering scholar.",
+    "choices": [
+      { "id": "defend", "text": "Protect the scholar" },
+      { "id": "steal_for_gain", "text": "Side with bandits for reward" }
+    ],
+    "conditions": { "level": 2 },
+    "executorId": "fn_act1_old_scroll_snatchers"
+  },
+  {
+    "id": "act1_first_rival_encounter",
+    "act": 1,
+    "title": "First Rival Encounter",
+    "description": "You bump into another young aspirant practicing forms at dawn. They challenge you to a spar to test whose qigong is stronger.",
+    "choices": [
+      { "id": "accept", "text": "Spar with them" },
+      { "id": "avoid", "text": "Avoid conflict" }
+    ],
+    "conditions": { "level": 2, "sect": "any" },
+    "executorId": "fn_act1_first_rival_encounter"
+  },
+  {
+    "id": "act1_sect_test_visit",
+    "act": 1,
+    "title": "Sect Entry Test",
+    "description": "You’re invited to take the entry test of a sect. It involves a riddle and balancing qi while carrying water.",
+    "choices": [
+      { "id": "do_best", "text": "Focus fully" },
+      { "id": "trick_test", "text": "Attempt to cheat or sneak past difficulty" }
+    ],
+    "conditions": { "level": 2, "flags": { "joined_sect": false } },
+    "executorId": "fn_act1_sect_test_visit"
+  },
+  {
+    "id": "act1_wanshou_valley_guided_tour",
+    "act": 1,
+    "title": "Guided Tour of Wanshou Valley",
+    "description": "Disciples from Wanshou Valley offer a tour of their valley’s flora, fauna, and hidden cultivation springs. It ends with a comedic slip into a hot spring.",
+    "choices": [
+      { "id": "join_the_valley", "text": "Ask to join Wanshou Valley" },
+      { "id": "leave_amused", "text": "Leave, soaking wet but amused" }
+    ],
+    "conditions": { "level": 1, "joined_sect": false, "realm": "Mortal Realm" },
+    "executorId": "fn_act1_wanshou_valley_guided_tour"
+  },
+  {
+    "id": "act1_tavern_drinking_contest",
+    "act": 1,
+    "title": "Tavern Drinking Contest",
+    "description": "A local drunkard challenges you to a qi-powered drinking game: each cup of tea enhances qi flow… or gastrointestinal distress.",
+    "choices": [
+      { "id": "drink", "text": "Accept the contest" },
+      { "id": "politely_refuse", "text": "Decline with manners" }
+    ],
+    "conditions": { "level": 1 },
+    "executorId": "fn_act1_tavern_drinking_contest"
+  },
+  {
+    "id": "act1_secret_sword_blade",
+    "act": 1,
+    "title": "Secret Sword Blade",
+    "description": "You hear rumors of a hidden sword blade in a ruined temple once used by the Sword Sect of Mount Shu.",
+    "choices": [
+      { "id": "seek_blade", "text": "Go look for it" },
+      { "id": "ignore_rumor", "text": "Dismiss it as myth" }
+    ],
+    "conditions": { "level": 2 },
+    "executorId": "fn_act1_secret_sword_blade"
+  },
+  {
+    "id": "act1_mystic_herb_gathering",
+    "act": 1,
+    "title": "Mystic Herb Gathering",
+    "description": "Your sect (if you have one) asks you to gather rare herbs in nearby woods. Some beasts guard them; some herbs are surprisingly lewd in their form.",
+    "choices": [
+      { "id": "brave_through", "text": "Push through danger" },
+      { "id": "ask_for_help", "text": "Bring someone along" }
+    ],
+    "conditions": { "level": 2, "sect": "any", "flags": { "joined_sect": true } },
+    "executorId": "fn_act1_mystic_herb_gathering"
+  },
+  {
+    "id": "act1_unexpected_duel_challenge",
+    "act": 1,
+    "title": "Unexpected Duel Challenge",
+    "description": "During sect drills, another disciple insults your technique. They challenge you to duel at dawn.",
+    "choices": [
+      { "id": "accept_duel", "text": "Train and fight" },
+      { "id": "seek_mediation", "text": "Ask elders to intervene" }
+    ],
+    "conditions": { "level": 2, "sect": "any", "flags": { "joined_sect": true } },
+    "executorId": "fn_act1_unexpected_duel_challenge"
+  },
+  {
+    "id": "act1_tag_along_mission",
+    "act": 1,
+    "title": "Tag-Along Mission",
+    "description": "Your sect elder is going out to subdue a small demon beast and lets you accompany — mostly to fetch water, but you see everything.",
+    "choices": [
+      { "id": "observe", "text": "Stay back and observe closely" },
+      { "id": "help", "text": "Ask to help despite protests" }
+    ],
+    "conditions": { "level": 2, "sect": "any", "flags": { "joined_sect": true } },
+    "executorId": "fn_act1_tag_along_mission"
+  },
+  {
+    "id": "act1_mortal_world_festival",
+    "act": 1,
+    "title": "Mortal World Festival",
+    "description": "A lantern festival in town; folk tell tales of immortals and legendary beasts over food and firecrackers.",
+    "choices": [
+      { "id": "listen_to_stories", "text": "Sit and listen" },
+      { "id": "participate", "text": "Join in the games" }
+    ],
+    "conditions": { "level": 1, "realm": "Mortal Realm" },
+    "executorId": "fn_act1_mortal_world_festival"
+  },
+  {
+    "id": "act1_shady_talisman_vendor",
+    "act": 1,
+    "title": "Shady Talisman Vendor",
+    "description": "A wandering vendor claims a talisman can protect from curses — costlier than gold, guaranteed or your head back.",
+    "choices": [
+      { "id": "buy", "text": "Buy the talisman" },
+      { "id": "decline", "text": "Decline; seems fishy" }
+    ],
+    "conditions": { "level": 1 },
+    "executorId": "fn_act1_shady_talisman_vendor"
+  },
+  {
+    "id": "act1_breakfast_with_elder",
+    "act": 1,
+    "title": "Breakfast with Elder",
+    "description": "An elder in your sect invites you for breakfast — simple congee, pickles, and a rare teaching snippet about qi circulation.",
+    "choices": [
+      { "id": "ask_questions", "text": "Ask many questions" },
+      { "id": "eat_quietly", "text": "Respectfully eat and listen" }
+    ],
+    "conditions": { "level": 1, "sect": "any", "flags": { "joined_sect": true } },
+    "executorId": "fn_act1_breakfast_with_elder"
+  },
+  {
+    "id": "act1_mistaken_identity_novice",
+    "act": 1,
+    "title": "Mistaken Identity Novice",
+    "description": "Another outer disciple mistakes you for a famous cultivator’s son/daughter and demands deference.",
+    "choices": [
+      { "id": "go_along", "text": "Pretend to be them, enjoy the perks" },
+      { "id": "correct", "text": "Tell the truth" }
+    ],
+    "conditions": { "level": 1, "sect": "any", "joined_sect": true },
+    "executorId": "fn_act1_mistaken_identity_novice"
+  },
+  {
+    "id": "act1_cultivation_trial_sleep_deprived",
+    "act": 1,
+    "title": "Cultivation Trial: Sleep-Deprived",
+    "description": "Your sect imposes a night trial: you must maintain Qi focus through the night without rest. The elders sleep, you don’t.",
+    "choices": [
+      { "id": "push_on", "text": "Endure the trial" },
+      { "id": "collapse", "text": "Admit defeat and rest" }
+    ],
+    "conditions": { "level": 2, "sect": "any", "flags": { "joined_sect": true } },
+    "executorId": "fn_act1_cultivation_trial_sleep_deprived"
+  },
+  {
+    "id": "act1_mystic_dream_visit",
+    "act": 1,
+    "title": "Mystic Dream Visit",
+    "description": "In your sleep, a spirit appears and offers cryptic advice — possibly helpful, possibly misleading.",
+    "choices": [
+      { "id": "heed", "text": "Follow the advice" },
+      { "id": "dismiss", "text": "Ignore the dream" }
+    ],
+    "conditions": { "level": 1 },
+    "executorId": "fn_act1_mystic_dream_visit"
+  },
+  {
+    "id": "act1_sell_tea_for_training",
+    "act": 1,
+    "title": "Sell Tea for Training Funds",
+    "description": "You consider selling handmade tea to raise funds for better instruction tools or gear.",
+    "choices": [
+      { "id": "do_it", "text": "Try selling" },
+      { "id": "seek_alternative", "text": "Ask sect for help" }
+    ],
+    "conditions": { "level": 1, "joined_sect": false },
+    "executorId": "fn_act1_sell_tea_for_training"
+  },
+  {
+    "id": "act1_stowaway_on_merchant_caravan",
+    "act": 1,
+    "title": "Stowaway on a Merchant Caravan",
+    "description": "You sneak onto a caravan heading toward the mountains where many sects are located. Risky, but adventurous.",
+    "choices": [
+      { "id": "stay_hidden", "text": "Try to remain unnoticed" },
+      { "id": "reveal_self", "text": "Reveal yourself and ask for passage" }
+    ],
+    "conditions": { "level": 1, "joined_sect": false },
+    "executorId": "fn_act1_stowaway_on_merchant_caravan"
+  },
+  {
+    "id": "act1_acrobatic_wuxia_show",
+    "act": 1,
+    "title": "Acrobatic Wuxia Show",
+    "description": "Travelling performers from Sword Sect of Mount Shu display aerial sword forms. You are invited to join after a mistake in their act.",
+    "choices": [
+      { "id": "join_act", "text": "Join their act for fun" },
+      { "id": "decline_gracefully", "text": "Step back and watch" }
+    ],
+    "conditions": { "level": 1 },
+    "executorId": "fn_act1_acrobatic_wuxia_show"
+  },
+  {
+    "id": "act1_compete_for_inner_disciple_slot",
+    "act": 1,
+    "title": "Compete for Inner Disciple Slot",
+    "description": "Your sect announces an opening for inner disciple. You must demonstrate loyalty, talent, and stamina.",
+    "choices": [
+      { "id": "train_hard", "text": "Push your limits" },
+      { "id": "make_deals", "text": "Try to curry favor with seniors" }
+    ],
+    "conditions": { "level": 2, "sect": "any", "joined_sect": true },
+    "executorId": "fn_act1_compete_for_inner_disciple_slot"
+  },
+  {
+    "id": "act1_rival_prank_night",
+    "act": 1,
+    "title": "Rival Prank at Night",
+    "description": "A rival disciple sneaks into your quarters and replaces your meditation incense with foul smelling herbs.",
+    "choices": [
+      { "id": "prank_back", "text": "Get even" },
+      { "id": "report_to_elder", "text": "Inform elders" }
+    ],
+    "conditions": { "level": 1, "sect": "any", "joined_sect": true },
+    "executorId": "fn_act1_rival_prank_night"
+  },
+  {
+    "id": "act1_basic_artifact_discovery",
+    "act": 1,
+    "title": "Basic Artifact Discovery",
+    "description": "You uncover an old jade pendant with inscriptions hinting at minor qi‐amplification properties.",
+    "choices": [
+      { "id": "keep_and_study", "text": "Study its inscriptions" },
+      { "id": "sell_to_collector", "text": "Sell for money" }
+    ],
+    "conditions": { "level": 2 },
+    "executorId": "fn_act1_basic_artifact_discovery"
+  },
+  {
+    "id": "act1_food_poisoning_from_medicine",
+    "act": 1,
+    "title": "Food Poisoning from “Medicinal” Herbs",
+    "description": "A mishandled herb leads to stomach cramps. The healer must decide whether it's sect fault or a simple mistake.",
+    "choices": [
+      { "id": "blame_the_healer", "text": "Confront the healer" },
+      { "id": "forgive", "text": "Let it slide and learn" }
+    ],
+    "conditions": { "level": 1, "sect": "any", "joined_sect": true },
+    "executorId": "fn_act1_food_poisoning_from_medicine"
+  },
+  {
+    "id": "act1_midnight_guard_duty",
+    "act": 1,
+    "title": "Midnight Guard Duty",
+    "description": "Your sect assigns you to guard the outer gate at midnight. The wind howls; shadows dance.",
+    "choices": [
+      { "id": "stay_alert", "text": "Stay alert and attentive" },
+      { "id": "nap", "text": "Sneak in a nap" }
+    ],
+    "conditions": { "level": 2, "sect": "any", "joined_sect": true },
+    "executorId": "fn_act1_midnight_guard_duty"
+  },
+  {
+    "id": "act1_rumor_of_immortal_spot",
+    "act": 1,
+    "title": "Rumor of an Immortal’s Spot",
+    "description": "They say an immortal sometimes visits an abandoned shrine on a moonlit night, leaving behind potent qi residue.",
+    "choices": [
+      { "id": "stake_out_shrine", "text": "Wait for the immortal" },
+      { "id": "investigate_shrine", "text": "Go inside now" }
+    ],
+    "conditions": { "level": 2 },
+    "executorId": "fn_act1_rumor_of_immortal_spot"
+  },
+  {
+    "id": "act1_scroll_reading_quarrel",
+    "act": 1,
+    "title": "Scroll Reading Quarrel",
+    "description": "Another outer disciple steals your reading scroll and begins misinterpreting the techniques in public, causing you embarrassment.",
+    "choices": [
+      { "id": "correct_publicly", "text": "Correct them loudly" },
+      { "id": "wait_for_privacy", "text": "Sneak back the scroll quietly" }
+    ],
+    "conditions": { "level": 1, "sect": "any", "joined_sect": true },
+    "executorId": "fn_act1_scroll_reading_quarrel"
+  },
+  {
+    "id": "act1_initial_qi_breakthrough_attempt",
+    "act": 1,
+    "title": "Initial Qi Breakthrough Attempt",
+    "description": "You feel energy surging in your meridians. You can attempt your first breakthrough — success is unlikely without preparation.",
+    "choices": [
+      { "id": "attempt_now", "text": "Try the breakthrough" },
+      { "id": "prepare", "text": "Gather resources first" }
+    ],
+    "conditions": { "level": 2, "sect": "any", "flags": { "joined_sect": true } },
+    "executorId": "fn_act1_initial_qi_breakthrough_attempt"
+  },
+  {
+    "id": "act1_mortal_duel_showcase",
+    "act": 1,
+    "title": "Mortal Duel Showcase",
+    "description": "In your home province, a martial arts tournament is held. Sect disciples are encouraged to show their skills.",
+    "choices": [
+      { "id": "enter_tournament", "text": "Compete" },
+      { "id": "attend_as_spectator", "text": "Watch and learn" }
+    ],
+    "conditions": { "level": 2, "sect": "any", "joined_sect": true },
+    "executorId": "fn_act1_mortal_duel_showcase"
+  },
+  {
+    "id": "act1_gift_from_family",
+    "act": 1,
+    "title": "Gift from Family",
+    "description": "Your family sends a small jade talisman said to be from an ancient immortal’s stash.",
+    "choices": [
+      { "id": "treasure_it", "text": "Keep and treasure it" },
+      { "id": "give_to_master", "text": "Offer to your sect master" }
+    ],
+    "conditions": { "level": 1, "joined_sect": true },
+    "executorId": "fn_act1_gift_from_family"
+  },
+  {
+    "id": "act1_secret_friendship_with_rival",
+    "act": 1,
+    "title": "Secret Friendship with Rival",
+    "description": "The rival who sparred with you offers friendship; maybe to learn, maybe to spy.",
+    "choices": [
+      { "id": "accept_friendship", "text": "Accept and be cautious" },
+      { "id": "refuse", "text": "Keep distance" }
+    ],
+    "conditions": { "level": 2, "sect": "any", "joined_sect": true },
+    "executorId": "fn_act1_secret_friendship_with_rival"
+  },
+  {
+    "id": "act1_scroll_duplicate_find",
+    "act": 1,
+    "title": "Duplicate Scroll Find",
+    "description": "You find two identical scrolls in the sect library — rare. Someone claims one must be destroyed to avoid redundancy per sect rules.",
+    "choices": [
+      { "id": "keep_both_in_secret", "text": "Hide the extra" },
+      { "id": "follow_rules", "text": "Submit one" }
+    ],
+    "conditions": { "level": 1, "sect": "any", "joined_sect": true },
+    "executorId": "fn_act1_scroll_duplicate_find"
+  },
+  {
+    "id": "act1_midday_nap_spirits",
+    "act": 1,
+    "title": "Midday Nap Interrupted by Spirits",
+    "description": "While resting in the sect courtyard, you dream and are awakened by mischievous spirits messing with your qi aura.",
+    "choices": [
+      { "id": "chase_spirits", "text": "Catch and interrogate one" },
+      { "id": "ignore_and_rest", "text": "Let them play and rest" }
+    ],
+    "conditions": { "level": 1, "joined_sect": true },
+    "executorId": "fn_act1_midday_nap_spirits"
+  },
+  {
+    "id": "act1_wandering_poet_visit",
+    "act": 1,
+    "title": "Wandering Poet Visit",
+    "description": "A poet visits, praising immortals in verse and mocking sect rivalries. The sect leader seems amused.",
+    "choices": [
+      { "id": "join_poetry", "text": "Compose a verse" },
+      { "id": "remain_silent", "text": "Watch quietly" }
+    ],
+    "conditions": { "level": 1 },
+    "executorId": "fn_act1_wandering_poet_visit"
+  },
+  {
+    "id": "act1_next_sect_offer",
+    "act": 1,
+    "title": "Offer From Another Sect",
+    "description": "Another sect (e.g. Blood Moon Sect) sees potential in you and offers you a place. Tempting vs loyalty to current sect if any.",
+    "choices": [
+      { "id": "switch", "text": "Consider their offer" },
+      { "id": "stay", "text": "Remain loyal" }
+    ],
+    "conditions": { "level": 2, "joined_sect": true },
+    "executorId": "fn_act1_next_sect_offer"
+  },
+  {
+    "id": "act1_sect_master_vision",
+    "act": 1,
+    "title": "Sect Master’s Sudden Vision",
+    "description": "Your sect master has a vision of disaster. You are asked to find a proof or prevent it. Or maybe it’s just indigestion.",
+    "choices": [
+      { "id": "investigate", "text": "Take on the mission" },
+      { "id": "dismiss", "text": "Say it's superstition" }
+    ],
+    "conditions": { "level": 2, "joined_sect": true },
+    "executorId": "fn_act1_sect_master_vision"
+  },
+  {
+    "id": "act1_gift_exchange_event",
+    "act": 1,
+    "title": "Gift Exchange Among Disciples",
+    "description": "The sect organizes a gift-exchange. Many bring flowers, scrolls; someone brings a slipper. It’s awkward but heartfelt.",
+    "choices": [
+      { "id": "bring_something", "text": "Bring your own gift" },
+      { "id": "just_receive", "text": "Stay quiet and receive" }
+    ],
+    "conditions": { "level": 1, "joined_sect": true },
+    "executorId": "fn_act1_gift_exchange_event"
+  },
+  {
+    "id": "act1_endurance_hike",
+    "act": 1,
+    "title": "Endurance Hike to the Peak",
+    "description": "Sect elders take outer disciples on a hike up a nearby peak to test endurance and mindset (and love of complaining).",
+    "choices": [
+      { "id": "endure_silently", "text": "Endure without complaint" },
+      { "id": "complain_aloud", "text": "Voice your suffering" }
+    ],
+    "conditions": { "level": 1, "joined_sect": true },
+    "executorId": "fn_act1_endurance_hike"
+  },
+  {
+    "id": "act1_secret_lesson_from_rival",
+    "act": 1,
+    "title": "Secret Lesson from Rival",
+    "description": "Your rival offers to trade forbidden technique knowledge at night — risky and likely taboo.",
+    "choices": [
+      { "id": "accept_risk", "text": "Learn in secret" },
+      { "id": "refuse_taboo", "text": "Respect sect rules" }
+    ],
+    "conditions": { "level": 2, "joined_sect": true },
+    "executorId": "fn_act1_secret_lesson_from_rival"
+  },
+  {
+    "id": "act1_competitive_cooking_for_reward",
+    "act": 1,
+    "title": "Competitive Cooking for Reward",
+    "description": "Sect offers fine meal for outer disciples who cook something delicious; spices, herbs, qi-infused sauces get messy.",
+    "choices": [
+      { "id": "compete", "text": "Cook with flair" },
+      { "id": "play_safe", "text": "Make simple food" }
+    ],
+    "conditions": { "level": 1, "joined_sect": true },
+    "executorId": "fn_act1_competitive_cooking_for_reward"
+  },
+  {
+    "id": "act1_poacher_encounter",
+    "act": 1,
+    "title": "Poacher Encounter in Forest",
+    "description": "You catch poachers harvesting spirit beasts illegally. Maybe help beasts, maybe profit.",
+    "choices": [
+      { "id": "stop_poachers", "text": "Intervene" },
+      { "id": "barter", "text": "Negotiate with them" }
+    ],
+    "conditions": { "level": 2 },
+    "executorId": "fn_act1_poacher_encounter"
+  },
+  {
+    "id": "act1_small_demon_hunt",
+    "act": 1,
+    "title": "Small Demon Hunt",
+    "description": "Sect sends you to hunt small demons in nearby woods. First real mission if you joined sect.",
+    "choices": [
+      { "id": "go_alone", "text": "Venture alone" },
+      { "id": "take_team", "text": "Bring other disciples" }
+    ],
+    "conditions": { "level": 2, "joined_sect": true },
+    "executorId": "fn_act1_small_demon_hunt"
+  },
+  {
+    "id": "act1_strange_sound_in_library",
+    "act": 1,
+    "title": "Strange Sound in Library",
+    "description": "Late night in the sect library; a whispering sound comes from the forbidden scroll section.",
+    "choices": [
+      { "id": "investigate", "text": "Sneak in to see" },
+      { "id": "ignore_and_sleep", "text": "Ignore, get rest" }
+    ],
+    "conditions": { "level": 1, "joined_sect": true },
+    "executorId": "fn_act1_strange_sound_in_library"
+  },
+  {
+    "id": "act1_herbalist_competition",
+    "act": 1,
+    "title": "Herbalist Competition",
+    "description": "Disciples compete to mix herbal medicine; some pick bizarre combinations (rose petals + dragon scale + cheese?).",
+    "choices": [
+      { "id": "be_creative", "text": "Try weird mix" },
+      { "id": "be_conventional", "text": "Stick to known formulas" }
+    ],
+    "conditions": { "level": 1, "joined_sect": true },
+    "executorId": "fn_act1_herbalist_competition"
+  },
+  {
+    "id": "act1_wish_on_meteor_shower",
+    "act": 1,
+    "title": "Wish on Meteor Shower",
+    "description": "A meteor shower is said to carry “heavenly qi”. People make wishes; maybe it's superstition, maybe it matters.",
+    "choices": [
+      { "id": "wish_for_power", "text": "Wish to become strong" },
+      { "id": "wish_for_friend", "text": "Wish for companionship or guidance" }
+    ],
+    "conditions": { "level": 1 },
+    "executorId": "fn_act1_wish_on_meteor_shower"
+  },
+  {
+    "id": "act1_final_overlap_test",
+    "act": 1,
+    "title": "Final Overlap Test",
+    "description": "Outer disciples are tested to see who overlaps enough merit and talent to remain; some face expulsion if they lag behind.",
+    "choices": [
+      { "id": "push_to_keep", "text": "Push yourself to stay" },
+      { "id": "accept_fallback", "text": "Accept demotion or leave outer rank" }
+    ],
+    "conditions": { "level": 2, "joined_sect": true },
+    "executorId": "fn_act1_final_overlap_test"
+  }
+]

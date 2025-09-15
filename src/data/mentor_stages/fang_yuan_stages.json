@@ -1,0 +1,26 @@
+[
+  {
+    "id": "mentor_fang_stage_01",
+    "title": "The Bitter Introduction",
+    "description": "A cryptic note appears in your quarters: 'Utility above all. Meet me where shadows gather.' The handwriting is precise, cold.",
+    "executorId": "mentor_hidden_manual_search",
+    "requirements": { "karma": -10 },
+    "rewards": { "shadowLedger": 1, "karma": -5 }
+  },
+  {
+    "id": "mentor_fang_stage_02", 
+    "title": "The Moral Ledger",
+    "description": "Fang Yuan presents you with a ledger of debts and favors. 'Choose wisely—every action has a price.'",
+    "executorId": "mentor_sabotage_investigation",
+    "requirements": { "shadowLedger": 1 },
+    "rewards": { "shadowLedger": 2, "factionRep": { "rivals": -10 } }
+  },
+  {
+    "id": "mentor_fang_stage_03",
+    "title": "Path Declaration",
+    "description": "Fang Yuan tests your resolve: 'Will you choose the easy path of righteousness, or the difficult path of truth?'",
+    "executorId": "mentor_path_declaration",
+    "requirements": { "shadowLedger": 2 },
+    "rewards": { "shadowLedger": 3, "uniquePerk": "shadow_steal" }
+  }
+]

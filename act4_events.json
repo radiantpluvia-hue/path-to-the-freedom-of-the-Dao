@@ -1,0 +1,395 @@
+[{
+  "id": "act4_cross_realm_auction",
+  "act": 4,
+  "title": "Cross-Realm Auction",
+  "description": "An auction that spans multiple realms (mortal + immortal). Rare spirit beasts, artifacts, dao maps. Huge risk and exposure.",
+  "description_add": "Stalls glow with odd lights; a shiver runs through the crowd when an immortal-grade blade is displayed.",
+  "choices": [
+    { "id": "attend_and_bid", "text": "Bid for treasures" },
+    { "id": "spy_for_info", "text": "Use the event to gather intel" }
+  ],
+  "conditions": { "level": 15, "joined_sect": true },
+  "executorId": "fn_act4_cross_realm_auction"
+},
+{
+  "id": "act4_escort_diplomat_to_immortal_sect",
+  "act": 4,
+  "title": "Escort Diplomat to Immortal Sect",
+  "description": "You're tasked with escorting a mortal diplomat through dangerous territory to an immortal sect meeting. Monsters, rival spies, etc.",
+  "description_add": "Your caravan moves like a heartbeat; every shadow may hold a blade or a benefactor.",
+  "choices": [
+    { "id": "plan_carefully", "text": "Set ambush points, guards" },
+    { "id": "travel_fast", "text": "Hurry, risk exposure" }
+  ],
+  "conditions": { "level": 14, "joined_sect": true },
+  "executorId": "fn_act4_escort_diplomat_to_immortal_sect"
+},
+{
+  "id": "act4_trade_route_negotiation",
+  "act": 4,
+  "title": "Trade Route Negotiation",
+  "description": "Your sect negotiates with merchant guilds (mortal and immortal) for favorable trade routes. Reputation, profit, political leverage at stake.",
+  "description_add": "Merchants speak in numbers and omens; contracts are signed with ink and qi-binding seals.",
+  "choices": [
+    { "id": "offer_favor", "text": "Give a favor in return" },
+    { "id": "demand_terms", "text": "Push for best deal" }
+  ],
+  "conditions": { "level": 14, "joined_sect": true },
+  "executorId": "fn_act4_trade_route_negotiation"
+},
+{
+  "id": "act4_expedition_into_demon_realm",
+  "act": 4,
+  "title": "Expedition Into the Demon Realm",
+  "description": "A dangerous expedition is proposed into the demon realm for lost treasures, dao seeds, or forbidden techniques.",
+  "description_add": "The air tastes of brimstone and possibility; each step deeper risks more than just the body.",
+  "choices": [
+    { "id": "lead_expedition", "text": "Lead the team" },
+    { "id": "support_role", "text": "Take backing role" }
+  ],
+  "conditions": { "level": 15, "joined_sect": true },
+  "executorId": "fn_act4_expedition_into_demon_realm"
+},
+{
+  "id": "act4_market_of_heavenly_goods",
+  "act": 4,
+  "title": "Market of Heavenly Goods",
+  "description": "A celestial-market event where goods from immortal realms are sold. Quality high; tricksters abound.",
+  "description_add": "A vendor's laugh hides a trick; a true relic hums with memory when you touch it.",
+  "choices": [
+    { "id": "buy_authentic", "text": "Buy with inspection" },
+    { "id": "snatch_deal", "text": "Risk counterfeit for bargain" }
+  ],
+  "conditions": { "level": 14, "joined_sect": true },
+  "executorId": "fn_act4_market_of_heavenly_goods"
+},
+{
+  "id": "act4_dungeon_delving_with_sect_allies",
+  "act": 4,
+  "title": "Dungeon Delving With Sect Allies",
+  "description": "You join with disciples from other sects to delve into a dangerous dungeon (ancient ruin, spirit realm). Co-op, rivalry, traps, boss beasts.",
+  "description_add": "Torches gutter as the stone breathes; allies watch your back and your shadow.",
+  "choices": [
+    { "id": "go_together", "text": "Coordinate strategy" },
+    { "id": "compete_in_dungeon", "text": "Race to loot first" }
+  ],
+  "conditions": { "level": 15, "joined_sect": true },
+  "executorId": "fn_act4_dungeon_delving_with_sect_allies"
+},
+{
+  "id": "act4_intersect_council_call",
+  "act": 4,
+  "title": "Intersect Council Call",
+  "description": "Top sects, immortal branches, perhaps even the Heavenly Court convene to address rising threats. You may be called as representative.",
+  "description_add": "The hall smells of incense and strategy; you learn more from a pause than a speech.",
+  "choices": [
+    { "id": "speak_out", "text": "Speak your mind" },
+    { "id": "observe_silently", "text": "Listen and learn" }
+  ],
+  "conditions": { "level": 15, "joined_sect": true },
+  "executorId": "fn_act4_intersect_council_call"
+},
+{
+  "id": "act4_spirit_beast_coliseum",
+  "act": 4,
+  "title": "Spirit Beast Coliseum",
+  "description": "A coliseum-style event where spirit beasts are pitted in spectacle. Your role: sponsor, referee, or competitor (if you have a beast companion).",
+  "description_add": "Beasts scream like thunder; the crowd's delight is a currency as potent as spirit stones.",
+  "choices": [
+    { "id": "sponsor", "text": "Support a beast, earn favor" },
+    { "id": "compete_with_beast", "text": "Enter competition" }
+  ],
+  "conditions": { "level": 15, "joined_sect": true },
+  "executorId": "fn_act4_spirit_beast_coliseum"
+},
+{
+  "id": "act4_heavenly_merchant_guild_raid",
+  "act": 4,
+  "title": "Heavenly Merchant Guild Raid",
+  "description": "Bandits or rogue disciples raid a merchant caravan from the Heavenly Merchant Guild. Your sect asks you to recover or retaliate.",
+  "description_add": "Tracks vanish and scent-motes swirl; the trail favors those who read more than footprints.",
+  "choices": [
+    { "id": "track_and_recover", "text": "Pursue the caravan" },
+    { "id": "negotiate_compensation", "text": "Seek restitution" }
+  ],
+  "conditions": { "level": 14, "joined_sect": true },
+  "executorId": "fn_act4_heavenly_merchant_guild_raid"
+},
+{
+  "id": "act4_artifact_conclave_at_heavenly_palace",
+  "act": 4,
+  "title": "Artifact Conclave at Heavenly Palace",
+  "description": "The Heavenly Palace calls a conclave to display artifacts, test relics, judge authenticity. Many eyes (and spies) on you.",
+  "description_add": "A relic's hum betrays truth; every nod carries consequence in ways coin cannot measure.",
+  "choices": [
+    { "id": "show_hostile_artifact", "text": "Present your relic" },
+    { "id": "judge_others", "text": "Take critical role" }
+  ],
+  "conditions": { "level": 15, "joined_sect": true },
+  "executorId": "fn_act4_artifact_conclave_at_heavenly_palace"
+},
+{
+  "id": "act4_dual_path_to_breakthrough",
+  "act": 4,
+  "title": "Dual Path to Breakthrough",
+  "description": "You discover two possible paths for your breakthrough: one orthodox, one forbidden or untested. Each gives different risks/rewards.",
+  "choices": [
+    { "id": "follow_orthodox", "text": "Stick to safe path" },
+    { "id": "try_forbidden", "text": "Take the risky path" }
+  ],
+  "conditions": { "level": 15, "joined_sect": true, "realm": "Core Formation" },
+  "executorId": "fn_act4_dual_path_to_breakthrough"
+},
+{
+  "id": "act4_recover_lost_city_of_immortals",
+  "act": 4,
+  "title": "Recover Lost City of Immortals",
+  "description": "An immortal city lost in time is found beneath a veil. You lead expedition to recover or secure it before others do.",
+  "choices": [
+    { "id": "claim_city", "text": "Plant flag, establish sect presence" },
+    { "id": "seal_city", "text": "Guard it and prevent misuse" }
+  ],
+  "conditions": { "level": 16, "joined_sect": true },
+  "executorId": "fn_act4_recover_lost_city_of_immortals"
+},
+{
+  "id": "act4_spiritual_trade_agreement",
+  "act": 4,
+  "title": "Spiritual Trade Agreement",
+  "description": "Various sects and mortal realms negotiate trade of spiritual ingredients, spirit beasts, qi seeds. Laws, tariffs, and smuggling involved.",
+  "choices": [
+    { "id": "push_favorable_terms", "text": "Get advantage for your sect" },
+    { "id": "ensure_fair_trade", "text": "Promote fairness and long-term peace" }
+  ],
+  "conditions": { "level": 14, "joined_sect": true },
+  "executorId": "fn_act4_spiritual_trade_agreement"
+},
+{
+  "id": "act4_healing_disaster_in_immortal_branch",
+  "act": 4,
+  "title": "Healing Disaster in Immortal Branch",
+  "description": "An immortal branch has a healing hall that catastrophically fails: a tainted herb, wrong ritual, many disciples fall ill. Sect reputation on line.",
+  "choices": [
+    { "id": "investigate_root", "text": "Find cause of disaster" },
+    { "id": "help_victims", "text": "Provide relief openly" }
+  ],
+  "conditions": { "level": 15, "joined_sect": true },
+  "executorId": "fn_act4_healing_disaster_in_immortal_branch"
+},
+{
+  "id": "act4_nexus_of_realms_encounter",
+  "act": 4,
+  "title": "Nexus of Realms Encounter",
+  "description": "You discover a realm nexus—a point where mortal/immortal/demonic realms meet. Strange creatures, laws warp, vast potential rewards and dangers.",
+  "choices": [
+    { "id": "explore_fully", "text": "Push into the nexus" },
+    { "id": "map_edges", "text": "Study periphery carefully" }
+  ],
+  "conditions": { "level": 16, "joined_sect": true },
+  "executorId": "fn_act4_nexus_of_realms_encounter"
+},
+{
+  "id": "act4_rival_sect_sabotage_on_trade_route",
+  "act": 4,
+  "title": "Rival Sect Sabotage on Trade Route",
+  "description": "A trade route important to your sect is sabotaged by rival sect disciples or demonic agents. Loss of reputation, supplies, or face.",
+  "choices": [
+    { "id": "punish_saboteur", "text": "Find and retaliate" },
+    { "id": "repair_and_hide", "text": "Fix damage quietly" }
+  ],
+  "conditions": { "level": 14, "joined_sect": true },
+  "executorId": "fn_act4_rival_sect_sabotage_on_trade_route"
+},
+{
+  "id": "act4_heavenly_court_trial",
+  "act": 4,
+  "title": "Heavenly Court Trial",
+  "description": "The Heavenly Court summons you (or your sect) to answer allegations or participate in trial for transgressions. Stakes include loss of status, relics, maybe exile.",
+  "choices": [
+    { "id": "defend_strongly", "text": "Argue your case" },
+    { "id": "plead_mercy", "text": "Seek forgiveness or bargain" }
+  ],
+  "conditions": { "level": 15, "joined_sect": true },
+  "executorId": "fn_act4_heavenly_court_trial"
+},
+{
+  "id": "act4_domain_gateway_unlocked",
+  "act": 4,
+  "title": "Domain Gateway Unlocked",
+  "description": "A gateway to your sect domain opens—it grants passive realm-wide benefits if claimed, but also makes you visible to enemies.",
+  "choices": [
+    { "id": "claim_domain", "text": "Take control now" },
+    { "id": "wait_and_secure", "text": "Prepare before staking claim" }
+  ],
+  "conditions": { "level": 16, "joined_sect": true },
+  "executorId": "fn_act4_domain_gateway_unlocked"
+},
+{
+  "id": "act4_celestial_beast_offering",
+  "act": 4,
+  "title": "Celestial Beast Offering",
+  "description": "A celestial beast offers you or your sect a gift—boon, technique, or challenge. Accepting may bind you in unexpected ways.",
+  "choices": [
+    { "id": "accept_gift", "text": "Take the offering" },
+    { "id": "refuse", "text": "Politely decline" }
+  ],
+  "conditions": { "level": 15, "joined_sect": true },
+  "executorId": "fn_act4_celestial_beast_offering"
+},
+{
+  "id": "act4_treaty_with_darkness_sect",
+  "act": 4,
+  "title": "Treaty with Darkness Sect",
+  "description": "A treaty is proposed with Darkness Sect: forbid raids, share knowledge, mutual non-interference. But maybe one side will break it.",
+  "choices": [
+    { "id": "sign_treaty", "text": "Agree to the treaty" },
+    { "id": "insist_guarantees", "text": "Add strong clauses or oversight" }
+  ],
+  "conditions": { "level": 15, "joined_sect": true },
+  "executorId": "fn_act4_treaty_with_darkness_sect"
+},
+{
+  "id": "act4_spiritual_crisis_in_mortal_realm",
+  "act": 4,
+  "title": "Spiritual Crisis in Mortal Realm",
+  "description": "Mortal world is suffering from spiritual decay: rains fail, beasts mutate, people turn feral. Immortal sects pressured to intervene.",
+  "choices": [
+    { "id": "send_aid", "text": "Provide help and resources" },
+    { "id": "delegate", "text": "Let mortal sects or local government handle" }
+  ],
+  "conditions": { "level": 14, "joined_sect": true, "realm": "Mortal Realm" },
+  "executorId": "fn_act4_spiritual_crisis_in_mortal_realm"
+},
+{
+  "id": "act4_ruin_underneath_sect_halls",
+  "act": 4,
+  "title": "Ruin Underneath Sect Halls",
+  "description": "While building expansion for sect halls, you discover ancient ruins below with dangerous qi anomalies. To explore or seal away?",
+  "choices": [
+    { "id": "explore_ruins", "text": "Investigate below" },
+    { "id": "seal_off", "text": "Ignore/seal for safety" }
+  ],
+  "conditions": { "level": 15, "joined_sect": true },
+  "executorId": "fn_act4_ruin_underneath_sect_halls"
+},
+{
+  "id": "act4_unification_pressure",
+  "act": 4,
+  "title": "Unification Pressure from Immortal Factions",
+  "description": "Some immortal branches propose to unify sects under a larger banner—be it Heavenly Dao, Void Emperor, or others. Many see chance, many see threat to independence.",
+  "choices": [
+    { "id": "join_unification", "text": "Support forming union" },
+    { "id": "preserve_autonomy", "text": "Maintain sect’s independence" }
+  ],
+  "conditions": { "level": 16, "joined_sect": true },
+  "executorId": "fn_act4_unification_pressure"
+},
+{
+  "id": "act4_domain_tournament_between_realms",
+  "act": 4,
+  "title": "Domain & Realm Tournament",
+  "description": "A tournament that pits disciples from different realms against each other: mortal, immortal, demonic. The rules are loose; danger is high.",
+  "choices": [
+    { "id": "participate", "text": "Enter on behalf of sect" },
+    { "id": "watch_and_support", "text": "Send backup/team" }
+  ],
+  "conditions": { "level": 16, "joined_sect": true },
+  "executorId": "fn_act4_domain_tournament_between_realms"
+},
+{
+  "id": "act4_master_and_apprentice_reckoning",
+  "act": 4,
+  "title": "Master & Apprentice Reckoning",
+  "description": "Your master’s past is revealed: perhaps a betrayal, secret pact, or shame. You must choose whether to draw a line or defend their honor.",
+  "choices": [
+    { "id": "defend_master", "text": "Protect their reputation" },
+    { "id": "denounce", "text": "Confront past wrongs" }
+  ],
+  "conditions": { "level": 14, "joined_sect": true },
+  "executorId": "fn_act4_master_and_apprentice_reckoning"
+},
+{
+  "id": "act4_shattered_alliance_revenge",
+  "act": 4,
+  "title": "Shattered Alliance Revenge",
+  "description": "An ally sect betrays your sect in a major crisis. Losses, reputational damage. Do you retaliate or rebuild peace?",
+  "choices": [
+    { "id": "avenge", "text": "Strike back" },
+    { "id": "reconcile", "text": "Seek peace" }
+  ],
+  "conditions": { "level": 15, "joined_sect": true },
+  "executorId": "fn_act4_shattered_alliance_revenge"
+},
+{
+  "id": "act4_heavenly_emperor_attention",
+  "act": 4,
+  "title": "Heavenly Emperor’s Attention",
+  "description": "The Heavenly Emperor (or equivalent high immortal power) notices your deeds. Could be a boon, could be demand of service, or summons to trial.",
+  "choices": [
+    { "id": "venerate", "text": "Show humility" },
+    { "id": "demand_rights", "text": "Ask for recognition in return" }
+  ],
+  "conditions": { "level": 16, "joined_sect": true },
+  "executorId": "fn_act4_heavenly_emperor_attention"
+},
+{
+  "id": "act4_spirit_sea_navigation",
+  "act": 4,
+  "title": "Spirit Sea Navigation",
+  "description": "The spirit sea—a vast spiritual ocean realm—opens up for navigators. You must navigate storms of qi, pirate spirit ships, and rewards beyond imagining.",
+  "choices": [
+    { "id": "chart_course", "text": "Map route for future" },
+    { "id": "plunder", "text": "Seize opportunities" }
+  ],
+  "conditions": { "level": 15, "joined_sect": true },
+  "executorId": "fn_act4_spirit_sea_navigation"
+},
+{
+  "id": "act4_mortal_world_integration",
+  "act": 4,
+  "title": "Mortal World Integration",
+  "description": "Your sect is officially establishing a base in the mortal realm: trade, teaching, protection. Public reactions vary.",
+  "choices": [
+    { "id": "open_public_school", "text": "Share teachings openly" },
+    { "id": "keep_hidden", "text": "Operate in secrecy" }
+  ],
+  "conditions": { "level": 14, "joined_sect": true, "realm": "Mortal Realm" },
+  "executorId": "fn_act4_mortal_world_integration"
+},
+{
+  "id": "act4_demonstration_of_immortal_branch_power",
+  "act": 4,
+  "title": "Demonstration of Immortal Branch Power",
+  "description": "An immortal branch of your sect (or rival) opens a display of their high cultivation—floating palaces, spirit storms, etc. Spectacle and envy ensue.",
+  "choices": [
+    { "id": "attend_in_person", "text": "Witness personally" },
+    { "id": "stay_away", "text": "Avoid unwanted scrutiny" }
+  ],
+  "conditions": { "level": 15, "joined_sect": true },
+  "executorId": "fn_act4_demonstration_of_immortal_branch_power"
+},
+{
+  "id": "act4_guardians_of_ancient_tree",
+  "act": 4,
+  "title": "Guardians of the Ancient Tree",
+  "description": "An ancient tree spirit with world-shaping power is threatened by deforestation or ambition. Protect or exploit its power?",
+  "choices": [
+    { "id": "protect_tree", "text": "Defend the spirit" },
+    { "id": "harvest_power", "text": "Use power for sect" }
+  ],
+  "conditions": { "level": 14, "joined_sect": true },
+  "executorId": "fn_act4_guardians_of_ancient_tree"
+},
+{
+  "id": "act4_heir_of_sect_lineage_claim",
+  "act": 4,
+  "title": "Heir of Sect Lineage Claim",
+  "description": "Someone claims they are the rightful heir to a legendary sect patriarch. Claim or expose? Might shift power dynamics.",
+  "choices": [
+    { "id": "support_claim", "text": "Validate their claim" },
+    { "id": "investigate", "text": "Check legitimacy" }
+  ],
+  "conditions": { "level": 16, "joined_sect": true },
+  "executorId": "fn_act4_heir_of_sect_lineage_claim"
+}
+]

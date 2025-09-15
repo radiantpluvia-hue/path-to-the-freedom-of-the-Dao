@@ -1,0 +1,19 @@
+{
+  "totalMentorExecutors": 13,
+  "totalRegisteredExecutors": 232,
+  "missing": [
+    "mentor_hidden_manual_search",
+    "mentor_sabotage_investigation",
+    "mentor_path_declaration",
+    "mentor_private_teaching",
+    "mentor_final_choice",
+    "mentor_meditation_training",
+    "mentor_body_refine",
+    "mentor_supervised_duel",
+    "mentor_tribulation_trial",
+    "mentor_escort_relic",
+    "merchant_appraisal",
+    "hidden_manual",
+    "cave_explore"
+  ]
+}

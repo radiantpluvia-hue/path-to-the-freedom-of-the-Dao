@@ -1,0 +1,151 @@
+[
+    {
+        "id": "fang_yuan_teaching_1",
+        "title": "Mercy is Weakness",
+        "description": "Fang Yuan presents you with a captured rival. 'Mercy is a chain forged by the weak to bind the strong. It has no value. Benefits are tangible. Strike them down and seize their resources, or let them go and invite future trouble. The calculation is simple.'",
+        "prerequisites": { "karma": -20, "mentorAffinity": { "fang_yuan": 15 } },
+        "challenge": {
+            "type": "moral_choice",
+            "difficulty": "extreme",
+            "consequences": "Choosing mercy locks this teaching permanently",
+            "requirements": "Must sacrifice 50 Dao Heart to prove ruthlessness"
+        },
+        "reward": { "cunning": 1, "karma": -10, "special_flag": "mercy_is_weakness" },
+        "failureConsequence": { "mentorAffinity": { "fang_yuan": -20 }, "reputation": -15 }
+    },
+    {
+        "id": "fang_yuan_teaching_2",
+        "title": "Sentiment Clouds Judgment",
+        "description": "A close ally possesses an item you need. To them, it is a memento. To you, it is a stepping stone. Fang Yuan watches coldly. 'Sentiment is the most expensive luxury in the world. Can you afford it?'",
+        "prerequisites": { "cunning": 1, "relationshipMin": { "any_ally": 50 }, "requiredTeachings": ["fang_yuan_teaching_1"] },
+        "challenge": {
+            "type": "betrayal_quest",
+            "difficulty": "extreme",
+            "requirements": "Must have ally with 50+ relationship, sacrifice them for cultivation resources",
+            "timeLimit": "3 turns to decide"
+        },
+        "reward": { "deceptionMicrogame": true, "wisdom": 3, "cultivation_resources": 100 },
+        "failureConsequence": { "mentorAffinity": { "fang_yuan": -30 }, "daoHeart": -5 }
+    },
+    {
+        "id": "fang_yuan_teaching_3",
+        "title": "Calculate All Outcomes",
+        "description": "Orchestrate a 7-step scheme involving 3 different factions. Each step must benefit you while appearing to help others.",
+        "prerequisites": { "deceptionMicrogame": true, "wisdom": 10, "requiredTeachings": ["fang_yuan_teaching_2"] },
+        "challenge": {
+            "type": "complex_scheme",
+            "difficulty": "legendary",
+            "requirements": "Complete 7 consecutive scheme events without failure, manipulate 3 factions simultaneously",
+            "failureReset": "Any failure resets progress to step 1"
+        },
+        "reward": { "planning": 2, "factionRep": { "all": 10 }, "shadowLedger": 5 },
+        "failureConsequence": { "factionRep": { "all": -20 }, "karma": -15 }
+    },
+    {
+        "id": "fang_yuan_teaching_4",
+        "title": "Use Others' Strengths",
+        "description": "Turn your greatest enemy into an unwitting ally. Make them strengthen you while believing they're destroying you.",
+        "prerequisites": { "planning": 2, "rivalryMin": { "any_rival": 80 }, "requiredTeachings": ["fang_yuan_teaching_3"] },
+        "challenge": {
+            "type": "manipulation_mastery",
+            "difficulty": "legendary",
+            "requirements": "Convert rival with 80+ rivalry into providing you benefits for 5 consecutive turns",
+            "riskFactor": "If discovered, rival becomes permanent nemesis with doubled power"
+        },
+        "reward": { "borrowedForcePassive": true, "manipulation": 3, "qi": 200 },
+        "failureConsequence": { "rivalryMax": { "target": 100 }, "enemyPowerBoost": 2.0 }
+    },
+    {
+        "id": "fang_yuan_teaching_5",
+        "title": "Foresight is Weapon",
+        "description": "Predict and prevent 3 major sect disasters before they occur. Use foreknowledge to position yourself advantageously.",
+        "prerequisites": { "borrowedForcePassive": true, "divination": 15, "requiredTeachings": ["fang_yuan_teaching_4"] },
+        "challenge": {
+            "type": "prophecy_mastery",
+            "difficulty": "mythical",
+            "requirements": "Successfully predict and profit from 3 'random' disaster events within 10 turns",
+            "hiddenMechanic": "Events are actually deterministic based on player actions"
+        },
+        "reward": { "insight": 2, "futureSight": true, "eventPreview": 3 },
+        "failureConsequence": { "daoDeviation": true, "cultivation": -100 }
+    },
+    {
+        "id": "fang_yuan_teaching_6",
+        "title": "Trust Only in Self",
+        "description": "Survive 10 turns with zero allies, zero sect support, and active enemies. Prove self-reliance.",
+        "prerequisites": { "insight": 2, "futureSight": true, "requiredTeachings": ["fang_yuan_teaching_5"] },
+        "challenge": {
+            "type": "isolation_trial",
+            "difficulty": "mythical",
+            "requirements": "Maintain negative or zero relationships with all factions for 10 turns while advancing cultivation",
+            "restrictions": "No trading, no sect benefits, no ally assistance"
+        },
+        "reward": { "daoHeartResistance": 25, "selfReliance": true, "isolationBonus": 1.5 },
+        "failureConsequence": { "mentalBreakdown": true, "cultivation": -200 }
+    },
+    {
+        "id": "fang_yuan_teaching_7",
+        "title": "Weigh All Costs",
+        "description": "Complete 20 cultivation sessions using exactly the minimum Qi required for maximum benefit. Waste nothing.",
+        "prerequisites": { "selfReliance": true, "qiControl": 20, "requiredTeachings": ["fang_yuan_teaching_6"] },
+        "challenge": {
+            "type": "efficiency_mastery",
+            "difficulty": "extreme",
+            "requirements": "Achieve perfect Qi efficiency (100%) in 20 consecutive cultivation sessions",
+            "precision": "Even 1% waste fails the challenge"
+        },
+        "reward": { "qiEfficiency": 0.05, "resourceMastery": true, "wasteReduction": 0.1 },
+        "failureConsequence": { "qiWaste": 0.2, "cultivation": -50 }
+    },
+    {
+        "id": "fang_yuan_teaching_8",
+        "title": "Play Long Games",
+        "description": "Sacrifice immediate power for long-term advantage. Delay breakthrough for 15 turns while accumulating hidden benefits.",
+        "prerequisites": { "qiEfficiency": 0.05, "patience": 25, "requiredTeachings": ["fang_yuan_teaching_7"] },
+        "challenge": {
+            "type": "delayed_gratification",
+            "difficulty": "legendary",
+            "requirements": "Refuse breakthrough opportunities for 15 turns while rivals advance, then breakthrough with 50% bonus",
+            "temptation": "Rivals will gain significant power during this period"
+        },
+        "reward": { "contributionGain": 0.1, "longTermPlanning": true, "delayedPower": 1.5 },
+        "failureConsequence": { "rivalAdvantage": 2.0, "reputation": -30 }
+    },
+    {
+        "id": "fang_yuan_teaching_9",
+        "title": "Enemies are Resources",
+        "description": "Convert 5 different enemies into cultivation resources without killing them. Extract maximum value from opposition.",
+        "prerequisites": { "longTermPlanning": true, "manipulation": 10, "requiredTeachings": ["fang_yuan_teaching_8"] },
+        "challenge": {
+            "type": "enemy_harvesting",
+            "difficulty": "mythical",
+            "requirements": "Transform 5 enemies with 60+ rivalry into providing cultivation benefits while keeping them as enemies",
+            "complexity": "Must maintain their enmity while extracting resources"
+        },
+        "reward": { "manipulationSkill": true, "enemyHarvesting": true, "cultivation": 300 },
+        "failureConsequence": { "allEnemiesPowerBoost": 1.5, "karma": -25 }
+    },
+    {
+        "id": "fang_yuan_teaching_10",
+        "title": "No Permanent Allies, Only Benefits",
+        "description": "Fang Yuan's final test: Orchestrate the downfall of your most trusted ally for ultimate cultivation advancement.",
+        "prerequisites": { "manipulationSkill": true, "relationshipMax": { "any_ally": 90 }, "requiredTeachings": ["fang_yuan_teaching_9"] },
+        "challenge": {
+            "type": "ultimate_betrayal",
+            "difficulty": "transcendent",
+            "requirements": "Sacrifice ally with 90+ relationship for Dao breakthrough, must appear accidental",
+            "consequence": "This action cannot be undone and affects all future relationships"
+        },
+        "reward": {
+            "daoComprehension": 100,
+            "title": "Silent Gu",
+            "daoOfSchemes": true,
+            "permanentBenefit": "All future schemes have 25% higher success rate"
+        },
+        "failureConsequence": {
+            "mentorBanishment": "fang_yuan",
+            "allRelationships": -50,
+            "karmaLock": -100
+        }
+    }
+]

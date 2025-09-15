@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stat Increase Test</title>
+    <script src="https://unpkg.com/typescript@4.9.5/lib/typescript.js"></script>
+</head>
+<body>
+    <h1>Stat Increase Testing</h1>
+    <div id="output"></div>
+
+    <script type="module">
+        // Simple test for stat increases
+        const output = document.getElementById('output');
+
+        function log(message) {
+            output.innerHTML += '<pre>' + message + '</pre>';
+            console.log(message);
+        }
+
+        // Mock scaling functions for testing
+        function getRealmMultiplier(realm) {
+            const multipliers = {
+                'mortal': 1.0,
+                'qi_refinement': 1.2,
+                'foundation_establishment': 1.5,
+                'body_integration': 2.0,
+                'core_formation': 3.0,
+                'nascent_soul': 5.0,
+                'true_immortal': 8.0,
+                'quasi_saint': 12.0,
+                'chaos_saint': 18.0,
+                'supreme_dao_origin': 25.0,
+                'reality_weaver': 35.0
+            };
+            return multipliers[realm] || 1.0;
+        }
+
+        function getRarityMultiplier(rarity) {
+            const multipliers = {
+                'common': 1.0,
+                'uncommon': 1.2,
+                'rare': 1.5,
+                'epic': 2.0,
+                'legendary': 3.0,
+                'mythical': 5.0,
+                'transcendent': 8.0
+            };
+            return multipliers[rarity] || 1.0;
+        }
+
+        function scaleStats(baseStats, realm) {
+            const multiplier = getRealmMultiplier(realm);
+            const scaled = {};
+            for (const [key, value] of Object.entries(baseStats)) {
+                if (typeof value === 'number') {
+                    scaled[key] = Math.round(value * multiplier);
+                } else {
+                    scaled[key] = value;
+                }
+            }
+            return scaled;
+        }
+
+        // Test functions
+        function testRealmMultipliers() {
+            log('\\n=== Testing Realm Multipliers ===');
+
+            const realms = [
+                'mortal', 'qi_refinement', 'foundation_establishment', 'body_integration',
+                'core_formation', 'nascent_soul', 'true_immortal', 'quasi_saint',
+                'chaos_saint', 'supreme_dao_origin', 'reality_weaver'
+            ];
+
+            realms.forEach(realm => {
+                const multiplier = getRealmMultiplier(realm);
+                log(`${realm}: ${multiplier.toFixed(2)}x`);
+            });
+        }
+
+        function testRarityMultipliers() {
+            log('\\n=== Testing Rarity Multipliers ===');
+
+            const rarities = ['common', 'uncommon', 'rare', 'epic', 'legendary', 'mythical', 'transcendent'];
+
+            rarities.forEach(rarity => {
+                const multiplier = getRarityMultiplier(rarity);
+                log(`${rarity}: ${multiplier}x`);
+            });
+        }
+
+        function testScalingProgression() {
+            log('\\n=== Testing Scaling Progression ===');
+
+            const testRealms = ['mortal', 'foundation_establishment', 'core_formation', 'true_immortal', 'chaos_saint'];
+
+            // Simulate stat scaling for different base values
+            const baseStats = { qi: 100, atk: 50, def: 30 };
+
+            testRealms.forEach(realm => {
+                const multiplier = getRealmMultiplier(realm);
+                const scaledStats = scaleStats(baseStats, realm);
+
+                log(`\\n${realm} (${multiplier.toFixed(2)}x):`);
+                log(`  Base: QI=${baseStats.qi}, ATK=${baseStats.atk}, DEF=${baseStats.def}`);
+                log(`  Scaled: QI=${scaledStats.qi}, ATK=${scaledStats.atk}, DEF=${scaledStats.def}`);
+            });
+        }
+
+        function testStatIncreaseExamples() {
+            log('\\n=== Stat Increase Examples ===');
+
+            // Example bloodline stats
+            const bloodlineExamples = [
+                { name: 'Mortal Bloodline', rarity: 'common', baseStats: { qi: 50, atk: 20, def: 15 } },
+                { name: 'Heavenly Phoenix Bloodline', rarity: 'legendary', baseStats: { qi: 200, atk: 100, def: 80 } },
+                { name: 'Primordial Chaos Bloodline', rarity: 'transcendent', baseStats: { qi: 500, atk: 300, def: 250 } }
+            ];
+
+            bloodlineExamples.forEach(example => {
+                const rarityMultiplier = getRarityMultiplier(example.rarity);
+                log(`\\n${example.name} (${example.rarity}):`);
+                log(`  Rarity Multiplier: ${rarityMultiplier}x`);
+                log(`  Base Stats: ${JSON.stringify(example.baseStats)}`);
+
+                const testRealms = ['mortal', 'core_formation', 'chaos_saint'];
+                testRealms.forEach(realm => {
+                    const realmMultiplier = getRealmMultiplier(realm);
+                    const totalMultiplier = rarityMultiplier * realmMultiplier;
+                    const scaledStats = scaleStats(example.baseStats, realm);
+
+                    log(`  ${realm}: Total Multiplier=${totalMultiplier.toFixed(2)}x, Scaled QI=${scaledStats.qi}`);
+                });
+            });
+        }
+
+        // Run all tests
+        log('=== Stat Increase Testing Started ===\\n');
+
+        testRealmMultipliers();
+        testRarityMultipliers();
+        testScalingProgression();
+        testStatIncreaseExamples();
+
+        log('\\n=== Testing Complete ===');
+        log('Key observations:');
+        log('- Realm multipliers provide exponential growth');
+        log('- Rarity multipliers compound with realm scaling');
+        log('- Higher rarities get significant stat advantages');
+        log('- Chaos Saint realm provides massive stat increases');
+    </script>
+</body>
+</html>

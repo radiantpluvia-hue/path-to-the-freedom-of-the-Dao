@@ -1,0 +1,30 @@
+[
+    {
+        "id": "xiao_yan_teaching_1",
+        "title": "Flame of Determination",
+        "description": "Xiao Yan ignites your inner fire. 'A flame that burns brightest in darkness will never be extinguished.'",
+        "prerequisites": { "mentorAffinity": { "xiao_yan": 12 }, "determination": 18, "fireAffinity": 10 },
+        "challenge": {
+            "type": "flame_mastery",
+            "difficulty": "extreme",
+            "requirements": "Maintain perfect flame control while under extreme emotional pressure",
+            "restriction": "Cannot use external flame sources or cooling techniques"
+        },
+        "reward": { "flameHeart": true, "determination": 2, "fireResistance": 0.5 },
+        "failureConsequence": { "burnout": 15, "fireBacklash": 10, "confidence": -5 }
+    },
+    {
+        "id": "xiao_yan_teaching_2",
+        "title": "Transformation Through Fire",
+        "description": "Xiao Yan teaches rebirth through flames. 'Only by burning away the old can the new emerge.'",
+        "prerequisites": { "mentorAffinity": { "xiao_yan": 28 }, "flameHeart": true, "transformation": 15 },
+        "challenge": {
+            "type": "phoenix_transformation",
+            "difficulty": "mythical",
+            "requirements": "Undergo complete flame transformation without losing your essence",
+            "restriction": "Cannot resist the transformation process"
+        },
+        "reward": { "phoenixTransformation": true, "fireImmunity": true, "rebornFlame": 1 },
+        "failureConsequence": { "burnedEssence": true, "cultivation": -75, "firePhobia": 20 }
+    }
+]

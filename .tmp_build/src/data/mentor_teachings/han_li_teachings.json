@@ -1,0 +1,30 @@
+[
+    {
+        "id": "han_li_teaching_1",
+        "title": "Cautious Advancement",
+        "description": "Han Li demonstrates perfect patience. 'Haste leads to waste. Every step must be calculated.'",
+        "prerequisites": { "mentorAffinity": { "han_li": 15 }, "patience": 20, "caution": 15 },
+        "challenge": {
+            "type": "patience_trial",
+            "difficulty": "extreme",
+            "requirements": "Wait 100 turns without taking any risky actions while opportunities pass",
+            "restriction": "Cannot use time acceleration or shortcuts"
+        },
+        "reward": { "patience": 3, "strategicMind": true, "perfectTiming": 0.15 },
+        "failureConsequence": { "impatience": 10, "missedOpportunities": 5 }
+    },
+    {
+        "id": "han_li_teaching_2",
+        "title": "Accumulation Mastery",
+        "description": "Han Li shows the power of gradual accumulation. 'Small gains compound into overwhelming advantage.'",
+        "prerequisites": { "mentorAffinity": { "han_li": 30 }, "resourceManagement": 25 },
+        "challenge": {
+            "type": "accumulation_mastery",
+            "difficulty": "legendary",
+            "requirements": "Build power through 1000 small improvements without major breakthroughs",
+            "restriction": "Cannot use sudden power gains or lucky encounters"
+        },
+        "reward": { "compoundGrowth": true, "resourceEfficiency": 2, "steadyProgress": 0.3 },
+        "failureConsequence": { "stagnation": 20, "wastedResources": 50 }
+    }
+]

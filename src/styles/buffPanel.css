@@ -1,0 +1,160 @@
+/* Styles for BuffPanel */
+.buff-panel {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 340px;
+  max-height: 55vh;
+  overflow-y: auto;
+  background: linear-gradient(180deg, rgba(6,6,7,0.9), rgba(12,12,14,0.85));
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.6);
+  z-index: 1000;
+  color: var(--text-primary);
+}
+
+.buff-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.buff-card {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.buff-card:focus {
+  outline: 2px solid rgba(99,102,241,0.6);
+}
+
+.buff-card__icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
+
+.buff-card__meta {
+  flex: 1;
+}
+
+.buff-card__title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.buff-card__name {
+  font-weight: 700;
+}
+
+.buff-card__duration {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.buff-card__desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.buff-card__remove {
+  margin-left: 8px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--text-primary);
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.buff-tooltip {
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.buff-chart {
+  width: 120px;
+  height: 10px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+
+.buff-chart__bar {
+  height: 100%;
+  background: linear-gradient(90deg, #7ee787, #10b981);
+}
+
+/* Animated progress overlay */
+.buff-card {
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+.buff-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  background: rgba(255,255,255,0.03);
+}
+
+.buff-chart__bar.animated {
+  transition: width 1s linear;
+}
+
+.buff-card__countdown {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* Expiring animation */
+.buff-card.expiring {
+  animation: expire-pop 700ms ease forwards;
+}
+
+@keyframes expire-pop {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  70% { transform: translateY(-6px) scale(1.04); opacity: 1; }
+  100% { transform: translateY(-10px) scale(0.92); opacity: 0; }
+}
+
+/* Tooltip styles */
+.buff-tooltip {
+  position: absolute;
+  z-index: 1100;
+  background: rgba(0,0,0,0.88);
+  color: #fff;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  max-width: 260px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+/* Default tooltip on the left of the panel item (LTR) */
+.buff-card[dir="ltr"] .buff-tooltip { transform-origin: right center; left: -280px; }
+.buff-card[dir="rtl"] .buff-tooltip { transform-origin: left center; right: -280px; }
+
+/* show on focus within or hover */
+.buff-card:focus-within .buff-tooltip,
+.buff-card:hover .buff-tooltip {
+  display: block;
+}
+
+.buff-tooltip { display: none; }

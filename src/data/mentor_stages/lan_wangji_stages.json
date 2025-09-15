@@ -1,0 +1,26 @@
+[
+  {
+    "id": "mentor_lw_stage_01",
+    "title": "The Silent Invitation",
+    "description": "A qin melody drifts from Cloud-Reed Terrace. The notes speak of discipline, honor, and the weight of righteousness.",
+    "executorId": "mentor_meditation_training",
+    "requirements": { "karma": 20 },
+    "rewards": { "honorWard": 1, "factionRep": { "righteous_sects": 10 } }
+  },
+  {
+    "id": "mentor_lw_stage_02",
+    "title": "The First Lesson",
+    "description": "Lan Wangji sits in perfect stillness. 'Discipline begins with breath. Righteousness begins with choice.'",
+    "executorId": "mentor_supervised_duel",
+    "requirements": { "honorWard": 1 },
+    "rewards": { "honorWard": 2, "skill": { "qin_harmony": 1 } }
+  },
+  {
+    "id": "mentor_lw_stage_03",
+    "title": "Investigation of Truth",
+    "description": "A corruption spreads through the sect. Lan Wangji watches as you choose between easy lies and difficult truths.",
+    "executorId": "mentor_sabotage_investigation", 
+    "requirements": { "honorWard": 2 },
+    "rewards": { "honorWard": 3, "factionRep": { "righteous_sects": 20 } }
+  }
+]

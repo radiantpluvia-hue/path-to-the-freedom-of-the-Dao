@@ -1,0 +1,397 @@
+[
+  {
+    "id": "act3_intra_sect_faction_conflict",
+    "act": 3,
+    "title": "Intra-Sect Faction Conflict",
+    "description": "Within your sect, two factions (e.g. conservative elders vs progressive disciples) clash over adopting a new teaching. You are asked to take sides.",
+    "choices": [
+      { "id": "side_conservatives", "text": "Support the elders" },
+      { "id": "side_progressives", "text": "Back the new teaching" }
+    ],
+    "conditions": { "level": 10, "joined_sect": true },
+    "executorId": "fn_act3_intra_sect_faction_conflict"
+  },
+  {
+    "id": "act3_rival_turncoat_revelation",
+    "act": 3,
+    "title": "Rival's Turncoat Revelation",
+    "description": "A rival disciple is discovered to be passing sect secrets to another sect. The accusation may be true, or may be manipulation.",
+    "choices": [
+      { "id": "expose", "text": "Expose the rival publicly" },
+      { "id": "investigate_quietly", "text": "Investigate before acting" }
+    ],
+    "conditions": { "level": 10, "joined_sect": true },
+    "executorId": "fn_act3_rival_turncoat_revelation"
+  },
+  {
+    "id": "act3_regional_threat_rises",
+    "act": 3,
+    "title": "Regional Threat Rises",
+    "description": "A demon clan or corrupt official in the region begins abusing their power. Neighboring sects consider forming a coalition.",
+    "choices": [
+      { "id": "join_coalition", "text": "Unite with other sects" },
+      { "id": "handle_alone", "text": "Say sect can manage solo" }
+    ],
+    "conditions": { "level": 11, "joined_sect": true },
+    "executorId": "fn_act3_regional_threat_rises"
+  },
+  {
+    "id": "act3_sect_qualifier_tournament",
+    "act": 3,
+    "title": "Sect Qualifier Tournament",
+    "description": "Your sect is hosting or competing in a qualifier to select its representatives for a grand tournament between sects.",
+    "choices": [
+      { "id": "earn_slot", "text": "Compete for representative slot" },
+      { "id": "train_support_role", "text": "Assist others" }
+    ],
+    "conditions": { "level": 11, "joined_sect": true },
+    "executorId": "fn_act3_sect_qualifier_tournament"
+  },
+  {
+    "id": "act3_political_marriage_offer",
+    "act": 3,
+    "title": "Political Marriage Offer",
+    "description": "A famed sect suggests a marriage alliance between you (or your sect) and another powerful sect to cement peace—or mutual leverage.",
+    "choices": [
+      { "id": "accept_alliance", "text": "Agree to the alliance" },
+      { "id": "propose_conditions", "text": "Ask for favorable terms" }
+    ],
+    "conditions": { "level": 12, "joined_sect": true },
+    "executorId": "fn_act3_political_marriage_offer"
+  },
+  {
+    "id": "act3_ambush_on_rival_route",
+    "act": 3,
+    "title": "Ambush on Rival's Route",
+    "description": "You hear whispers that rival sect disciples plan to ambush your route to the mountain sect meeting. Danger or opportunity to counter-strike.",
+    "choices": [
+      { "id": "prepare_defense", "text": "Lay traps, guard route" },
+      { "id": "turn_ambush", "text": "Set counter-ambush" }
+    ],
+    "conditions": { "level": 11, "joined_sect": true },
+    "executorId": "fn_act3_ambush_on_rival_route"
+  },
+  {
+    "id": "act3_secret_society_infiltration",
+    "act": 3,
+    "title": "Secret Society Infiltration",
+    "description": "A clandestine group working against many sects invites you to join or spy. Risk of betrayal and moral compromise.",
+    "choices": [
+      { "id": "join_infiltration", "text": "Become insider" },
+      { "id": "refuse_and_report", "text": "Expose them to sect leadership" }
+    ],
+    "conditions": { "level": 11, "joined_sect": true },
+    "executorId": "fn_act3_secret_society_infiltration"
+  },
+  {
+    "id": "act3_grand_auction_of_rare_items",
+    "act": 3,
+    "title": "Grand Auction of Rare Items",
+    "description": "An auction is held among multiple sects to acquire extremely rare relics or scrolls. Price, face, and reputation all at stake.",
+    "choices": [
+      { "id": "bid_big", "text": "Bid high and risk debt" },
+      { "id": "spy_to_sabotage", "text": "Try to discredit others" }
+    ],
+    "conditions": { "level": 12, "joined_sect": true },
+    "executorId": "fn_act3_grand_auction_of_rare_items"
+  },
+  {
+    "id": "act3_tournament_between_sects",
+    "act": 3,
+    "title": "Tournament Between Sects",
+    "description": "A grand tournament invites disciples from many sects. Prestige, possible promotions, and rivalries sharpen.",
+    "choices": [
+      { "id": "compete_honestly", "text": "Submit yourself to fair battle" },
+      { "id": "win_by_any_means", "text": "Use tricks or forbidden techniques" }
+    ],
+    "conditions": { "level": 12, "joined_sect": true },
+    "executorId": "fn_act3_tournament_between_sects"
+  },
+  {
+    "id": "act3_sect_reform_bill_proposal",
+    "act": 3,
+    "title": "Sect Reform Bill Proposal",
+    "description": "Some elders propose reform: more meritocracy vs nepotism. It causes loud debate among senior vs noble born disciples.",
+    "choices": [
+      { "id": "support_reform", "text": "Push meritocracy" },
+      { "id": "preserve_tradition", "text": "Keep noble privileges" }
+    ],
+    "conditions": { "level": 11, "joined_sect": true },
+    "executorId": "fn_act3_sect_reform_bill_proposal"
+  },
+  {
+    "id": "act3_relic_dispute_between_sects",
+    "act": 3,
+    "title": "Relic Dispute Between Sects",
+    "description": "Two sects both claim ownership of a relic. Your sect looks to you for diplomatic or martial support.",
+    "choices": [
+      { "id": "fight_for_claim", "text": "Defend your sect's claim in battle" },
+      { "id": "negotiate_settlement", "text": "Try to broker peace" }
+    ],
+    "conditions": { "level": 12, "joined_sect": true },
+    "executorId": "fn_act3_relic_dispute_between_sects"
+  },
+  {
+    "id": "act3_heart_trial_request",
+    "act": 3,
+    "title": "Heart Trial Request",
+    "description": "An ancient temple is rumored to offer a heart trial: facing one's deepest fears to unlock part of one's dao. Only serious disciples apply.",
+    "choices": [
+      { "id": "enter", "text": "Take the trial" },
+      { "id": "postpone", "text": "Wait until stronger" }
+    ],
+    "conditions": { "level": 11, "joined_sect": true, "realm": "Foundation Establishment" },
+    "executorId": "fn_act3_heart_trial_request"
+  },
+  {
+    "id": "act3_mentor_crisis",
+    "act": 3,
+    "title": "Mentor Crisis",
+    "description": "Your mentor becomes ill (or is compromised) during a breakthrough. Sect is split: heal him/cure or replace with political prestige choice.",
+    "choices": [
+      { "id": "heal_mentor", "text": "Devote resources to restore" },
+      { "id": "seek_replacement", "text": "Support someone else rising" }
+    ],
+    "conditions": { "level": 12, "joined_sect": true },
+    "executorId": "fn_act3_mentor_crisis"
+  },
+  {
+    "id": "act3_corrupted_site_discovery",
+    "act": 3,
+    "title": "Corrupted Site Discovery",
+    "description": "An ancient cultivation site once pure is now corrupted by dark qi. The sect wants to cleanse it but fears backlash or cost.",
+    "choices": [
+      { "id": "lead_cleansing", "text": "Take charge of purification" },
+      { "id": "let_elder_handle", "text": "Stay in background" }
+    ],
+    "conditions": { "level": 11, "joined_sect": true },
+    "executorId": "fn_act3_corrupted_site_discovery"
+  },
+  {
+    "id": "act3_sect_diplomatic_envoy",
+    "act": 3,
+    "title": "Sect Diplomatic Envoy",
+    "description": "Your sect sends you as envoy to another sect to negotiate border, trade, or mutual protection pacts.",
+    "choices": [
+      { "id": "push_sect_interest", "text": "Speak boldly for your sect" },
+      { "id": "seek_compromise", "text": "Be diplomatic" }
+    ],
+    "conditions": { "level": 11, "joined_sect": true },
+    "executorId": "fn_act3_sect_diplomatic_envoy"
+  },
+  {
+    "id": "act3_inner_circle_offer",
+    "act": 3,
+    "title": "Inner Circle Offer",
+    "description": "An opportunity to join your sect's inner circle is offered, but with strings attached: more duty, political risk, and possible betrayal.",
+    "choices": [
+      { "id": "accept_inner", "text": "Join the inner circle" },
+      { "id": "decline_risk", "text": "Stay safer among outer ranks" }
+    ],
+    "conditions": { "level": 12, "joined_sect": true },
+    "executorId": "fn_act3_inner_circle_offer"
+  },
+  {
+    "id": "act3_duel_of_ideologies",
+    "act": 3,
+    "title": "Duel of Ideologies",
+    "description": "You and a rival debate the philosophical approach of cultivation (e.g. strict rule vs flexible path); duel afterward to settle honor.",
+    "choices": [
+      { "id": "fight", "text": "Prove strength" },
+      { "id": "win_argument", "text": "Win debate then fight or compromise" }
+    ],
+    "conditions": { "level": 11, "joined_sect": true },
+    "executorId": "fn_act3_duel_of_ideologies"
+  },
+  {
+    "id": "act3_spellbinders_gathering",
+    "act": 3,
+    "title": "Spellbinders Gathering",
+    "description": "Gathering of magic/wizardry sects and alchemy sects. New symbol techniques revealed; some are flashy and potentially destructive.",
+    "choices": [
+      { "id": "attend_and_learn", "text": "Gain the new technique" },
+      { "id": "criticize_publicly", "text": "Point out danger" }
+    ],
+    "conditions": { "level": 12, "joined_sect": true },
+    "executorId": "fn_act3_spellbinders_gathering"
+  },
+  {
+    "id": "act3_divine_tribulation_omen",
+    "act": 3,
+    "title": "Divine Tribulation Omen",
+    "description": "An omen signals a coming trial from the heavens. Energy in the air, celestial signs. Will sect prepare or ignore it?",
+    "choices": [
+      { "id": "prepare", "text": "Gather resources, purify grounds" },
+      { "id": "ignore", "text": "Dismiss as superstition" }
+    ],
+    "conditions": { "level": 12, "joined_sect": true, "realm": "Foundation Establishment" },
+    "executorId": "fn_act3_divine_tribulation_omen"
+  },
+  {
+    "id": "act3_training_camp_with_competitors",
+    "act": 3,
+    "title": "Training Camp with Competitors",
+    "description": "Multiple sects send disciples to a joint training camp—rivalry, alliances, pranks, and skill exchange abound.",
+    "choices": [
+      { "id": "focus_on_skill", "text": "Train hard" },
+      { "id": "social_strategy", "text": "Make allies" }
+    ],
+    "conditions": { "level": 11, "joined_sect": true },
+    "executorId": "fn_act3_training_camp_with_competitors"
+  },
+  {
+    "id": "act3_rebuild_old_sect_faction",
+    "act": 3,
+    "title": "Rebuild Old Sect Faction",
+    "description": "You learn of a fallen branch of your sect or an allied sect. Rebuilding it could give influence but costs resources and trust.",
+    "choices": [
+      { "id": "revive_branch", "text": "Invest in rebuilding" },
+      { "id": "let_rest", "text": "Let the past remain past" }
+    ],
+    "conditions": { "level": 11, "joined_sect": true },
+    "executorId": "fn_act3_rebuild_old_sect_faction"
+  },
+  {
+    "id": "act3_sect_border_dispute",
+    "act": 3,
+    "title": "Sect Border Dispute",
+    "description": "Border lands claimed by your sect and a rival sect overlap. Tensions simmer over territory and spirit resources.",
+    "choices": [
+      { "id": "claim_forcefully", "text": "Assert claim militarily" },
+      { "id": "mediate_border", "text": "Negotiate shared control" }
+    ],
+    "conditions": { "level": 11, "joined_sect": true },
+    "executorId": "fn_act3_sect_border_dispute"
+  },
+  {
+    "id": "act3_forbidden_library_leak",
+    "act": 3,
+    "title": "Forbidden Library Leak",
+    "description": "Some knowledge from your sect's forbidden library leaks out. Embarrassment, risk, potential for power shift.",
+    "choices": [
+      { "id": "capture_leaker", "text": "Find who leaked" },
+      { "id": "deny_and_cover", "text": "Deny and cover up" }
+    ],
+    "conditions": { "level": 12, "joined_sect": true },
+    "executorId": "fn_act3_forbidden_library_leak"
+  },
+  {
+    "id": "act3_strange_ally_from_other_sect",
+    "act": 3,
+    "title": "Strange Ally from Other Sect",
+    "description": "A disciple from another sect offers alliance/protection or strange trade. Motives unclear (help, betrayal, or satire).",
+    "choices": [
+      { "id": "trust", "text": "Accept the alliance" },
+      { "id": "probe_motives", "text": "Test their sincerity" }
+    ],
+    "conditions": { "level": 11, "joined_sect": true },
+    "executorId": "fn_act3_strange_ally_from_other_sect"
+  },
+  {
+    "id": "act3_seed_of_corruption_among_elder",
+    "act": 3,
+    "title": "Seed of Corruption Among Elder",
+    "description": "One of the senior elders is revealed to be hoarding forbidden qi or using demonic techniques for their own rise. Moral test for you.",
+    "choices": [
+      { "id": "expose_elder", "text": "Bring scandal to light" },
+      { "id": "blackmail_or_bargain", "text": "Leverage for your gain" }
+    ],
+    "conditions": { "level": 12, "joined_sect": true },
+    "executorId": "fn_act3_seed_of_corruption_among_elder"
+  },
+  {
+    "id": "act3_duel_for_sect_leadership",
+    "act": 3,
+    "title": "Duel for Sect Leadership",
+    "description": "After the current leader's health fails, disciples compete (politically and in single combat) to succeed them. You may be invited or have to pick side.",
+    "choices": [
+      { "id": "run_for_leadership", "text": "Enter competition" },
+      { "id": "support_candidate", "text": "Back someone else" }
+    ],
+    "conditions": { "level": 12, "joined_sect": true },
+    "executorId": "fn_act3_duel_for_sect_leadership"
+  },
+  {
+    "id": "act3_retribution_for_old_grudge",
+    "act": 3,
+    "title": "Retribution for Old Grudge",
+    "description": "An old grudge against your sect (or your family) resurfaces: previous insult or humiliation. Do you respond or let go?",
+    "choices": [
+      { "id": "avenge", "text": "Challenge the opposing sect" },
+      { "id": "forgive", "text": "Let sleeping dogs lie" }
+    ],
+    "conditions": { "level": 11, "joined_sect": true },
+    "executorId": "fn_act3_retribution_for_old_grudge"
+  },
+  {
+    "id": "act3_blade_stealing_sabotage",
+    "act": 3,
+    "title": "Blade-Stealing Sabotage",
+    "description": "Someone steals ceremonial blades/weapons from your sect or rivals. Investigation, suspicion, and blame fly.",
+    "choices": [
+      { "id": "find_thief", "text": "Track the thief" },
+      { "id": "frame_someone_else", "text": "Mislead blame" }
+    ],
+    "conditions": { "level": 11, "joined_sect": true },
+    "executorId": "fn_act3_blade_stealing_sabotage"
+  },
+  {
+    "id": "act3_alliance_breakdown",
+    "act": 3,
+    "title": "Alliance Breakdown",
+    "description": "A cooperating sect betrays terms of an alliance (trade, shared missions). You must decide how to react.",
+    "choices": [
+      { "id": "retaliate", "text": "Retaliation" },
+      { "id": "seek_remedy", "text": "Pursue reconciliation" }
+    ],
+    "conditions": { "level": 12, "joined_sect": true },
+    "executorId": "fn_act3_alliance_breakdown"
+  },
+  {
+    "id": "act3_heavenly_court_notice",
+    "act": 3,
+    "title": "Heavenly Court Notice",
+    "description": "The Heavenly Court issues a decree affecting sects: possibly restricting forbidden arts, calling cultivators for service, or taxing relics.",
+    "choices": [
+      { "id": "comply", "text": "Obey decree" },
+      { "id": "resist", "text": "Find loopholes or delay" }
+    ],
+    "conditions": { "level": 12, "joined_sect": true },
+    "executorId": "fn_act3_heavenly_court_notice"
+  },
+  {
+    "id": "act3_corrupted_river_spread",
+    "act": 3,
+    "title": "Corrupted River Spread",
+    "description": "A river flowing through sect lands becomes corrupted; crops dying, qi unstable. Could be a natural disaster or curse.",
+    "choices": [
+      { "id": "cleanse", "text": "Perform purification rituals" },
+      { "id": "investigate_source", "text": "Find root cause" }
+    ],
+    "conditions": { "level": 11, "joined_sect": true },
+    "executorId": "fn_act3_corrupted_river_spread"
+  },
+  {
+    "id": "act3_rival_assassination_attempt",
+    "act": 3,
+    "title": "Rival Assassination Attempt",
+    "description": "Someone attempts to kill your rival (or you are implicated). Spillover into sect politics and honor issues.",
+    "choices": [
+      { "id": "defend_rival", "text": "Save their life" },
+      { "id": "distance_from_rival", "text": "Let them handle their enemies" }
+    ],
+    "conditions": { "level": 12, "joined_sect": true },
+    "executorId": "fn_act3_rival_assassination_attempt"
+  },
+  {
+    "id": "act3_final_breakthrough",
+    "act": 3,
+    "title": "Final Breakthrough",
+    "description": "You attempt your final breakthrough in Act 3, achieving new power.",
+    "choices": [
+      { "id": "breakthrough", "text": "Achieve breakthrough" },
+      { "id": "wait", "text": "Wait for later" }
+    ],
+    "executorId": "fn_act3_final_breakthrough"
+  }
+]

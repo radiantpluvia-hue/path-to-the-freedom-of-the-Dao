@@ -1,0 +1,30 @@
+[
+  {
+    "id": "han_jue_teaching_1",
+    "title": "Hidden Depths",
+    "description": "Han Jue teaches the power of concealment. 'The deepest waters make no sound.'",
+    "prerequisites": { "mentorAffinity": { "han_jue": 25 }, "hiddenPower": 15, "secrecy": 20 },
+    "challenge": {
+      "type": "concealment_mastery",
+      "difficulty": "legendary",
+      "requirements": "Hide your true power level for 200 turns while being constantly tested",
+      "restriction": "Cannot reveal any hint of your actual capabilities"
+    },
+    "reward": { "perfectConcealment": true, "hiddenDepths": 2, "mysteriousAura": 0.3 },
+    "failureConsequence": { "exposure": true, "targetPainted": 10, "secrecy": -15 }
+  },
+  {
+    "id": "han_jue_teaching_2",
+    "title": "Seclusion Mastery",
+    "description": "Han Jue reveals the ultimate cultivation method. 'True power grows in solitude, away from the world's chaos.'",
+    "prerequisites": { "mentorAffinity": { "han_jue": 50 }, "solitude": 40, "selfSufficiency": 30, "requiredTeachings": ["han_jue_teaching_1"] },
+    "challenge": {
+      "type": "ultimate_seclusion",
+      "difficulty": "impossible",
+      "requirements": "Achieve breakthrough while completely isolated from all external influences",
+      "restriction": "Cannot interact with anyone or anything for the duration"
+    },
+    "reward": { "seclusionMaster": true, "cultivation": 200, "hiddenSaint": true },
+  "failureConsequence": { "isolation": 30, "socialSkills": -20, "seclusionCurse": true }
+  }
+]

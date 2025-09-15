@@ -1,0 +1,10 @@
+[
+  {
+    "id": "global_event_epochal_tournament",
+    "name": "Epochal Heavenly Assembly",
+    "description": "Once every ten thousand years, all realms convene for the Heavenly Assembly. Prodigies, paragons, and hidden monsters step into a sacred arena to define the era.",
+    "act": 0,
+    "type": "tournament",
+    "executorId": "global_epochal_tournament"
+  }
+]

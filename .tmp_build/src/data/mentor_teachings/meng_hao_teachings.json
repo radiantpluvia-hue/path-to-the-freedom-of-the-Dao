@@ -1,0 +1,30 @@
+[
+    {
+        "id": "meng_hao_teaching_1",
+        "title": "Mountain's Persistence",
+        "description": "Meng Hao shows unwavering resolve. 'A mountain does not move for wind, nor bend for storm.'",
+        "prerequisites": { "mentorAffinity": { "meng_hao": 18 }, "persistence": 20, "mountainAffinity": 8 },
+        "challenge": {
+            "type": "endurance_trial",
+            "difficulty": "extreme",
+            "requirements": "Endure 50 consecutive failures without giving up or changing approach",
+            "restriction": "Cannot modify strategy or seek alternative methods"
+        },
+        "reward": { "unbreakableWill": true, "persistence": 3, "mountainHeart": 0.2 },
+        "failureConsequence": { "despair": 15, "willpower": -10, "giveUp": 5 }
+    },
+    {
+        "id": "meng_hao_teaching_2",
+        "title": "Dao of I Am Me",
+        "description": "Meng Hao reveals the ultimate truth. 'I am me, regardless of what others think or do.'",
+        "prerequisites": { "mentorAffinity": { "meng_hao": 40 }, "selfKnowledge": 30, "independence": 25, "requiredTeachings": ["meng_hao_teaching_1"] },
+        "challenge": {
+            "type": "self_realization",
+            "difficulty": "transcendent",
+            "requirements": "Maintain perfect self-identity while reality itself tries to change you",
+            "restriction": "Cannot rely on external validation or support"
+        },
+        "reward": { "trueself": true, "daoHeart": 20, "unshakeableIdentity": true },
+        "failureConsequence": { "identityCrisis": true, "selfDoubt": 25, "lostSelf": 10 }
+    }
+]
