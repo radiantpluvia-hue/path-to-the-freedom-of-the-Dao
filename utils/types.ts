@@ -24,8 +24,7 @@ export type PlayerState = CanonPlayerState & {
 };
 
 export type InventoryItem = CanonInventoryItem & {
-  // some executors used `qty` instead of `quantity`
-  qty?: number;
+  // legacy compatibility: executors should use `quantity` on item objects.
 };
 
 export type Manual = CanonManual;

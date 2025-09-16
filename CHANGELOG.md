@@ -21,3 +21,10 @@ All notable changes to this project will be documented in this file.
 
 
 > For older changes see project history (git commits).
+
+## [Unreleased] - 2025-09-15
+### Changed
+- Migrated item inventory fields from legacy `qty` to canonical `quantity` across event executors and tests. A compatibility mirror (`item.qty = item.quantity`) was used during migration; the compatibility field has now been removed from `utils/types.ts` and code is canonicalized to `quantity`.
+
+### Notes
+- Migration validated by build, content verification, and Jest test suite (all passing). React test warnings about `act(...)` remain non-fatal and are tracked separately.
