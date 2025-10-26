@@ -1,6 +1,5 @@
 import { useGameStore } from '../../store/useGameStore';
 import { Card } from '../core/Card';
-import { Progress } from '../core/Progress';
 import { ChoiceModal } from '../../../ChoiceModal';
 import { CodexModal } from '../Codex';
 import { RivalInfoPanel } from '@/components/info/RivalInfoPanel';
@@ -9,9 +8,27 @@ import { FactionPanel } from '../../../FactionPanel';
 import { RivalsPanel } from '../../../RivalsPanel';
 import { ManualsPanel } from './ManualsPanel';
 
+import InventoryPanel from './InventoryPanel';
+import { useEffect, useRef, useState } from 'react';
 export function SocialInterface() {
-  // Button import removed (unused)
-  const { ui, setUIProperty, player } = useGameStore();
+  // Select only what we need to reduce render churn
+  const ui = useGameStore(s => s.ui);
+  const world = useGameStore(s => s.world);
+  const setUIProperty = useGameStore(s => s.setUIProperty);
+  const focusInventory = useGameStore(s => (s.ui as any).focusInventory ?? false);
+  const [announce, setAnnounce] = useState('');
+  const inventoryRef = useRef<HTMLDivElement | null>(null);
+  const [inventoryVisibleClass, setInventoryVisibleClass] = useState('');
+
+  useEffect(() => {
+    if (focusInventory) {
+      setAnnounce('Inventory opened and focused');
+      setInventoryVisibleClass('inventory-reveal');
+      // remove class after animation ends to keep DOM clean
+      const t = setTimeout(() => setInventoryVisibleClass(''), 700);
+      return () => clearTimeout(t);
+    }
+  }, [focusInventory]);
 
   return (
     <div style={{ minHeight: '100vh' }}>
@@ -54,6 +71,19 @@ export function SocialInterface() {
         >
           Social
         </button>
+        <button
+          onClick={() => setUIProperty('currentScreen', 'relationships')}
+          style={{
+            padding: '8px 12px',
+            borderRadius: 6,
+            border: '1px solid rgba(212,175,55,0.25)',
+            background: (ui.currentScreen as string) === 'relationships' ? 'rgba(212,175,55,0.15)' : 'transparent',
+            color: 'var(--primary)',
+            cursor: 'pointer'
+          }}
+        >
+          Relationships
+        </button>
       </div>
 
       <div style={{ padding: 20 }}>
@@ -88,10 +118,12 @@ export function SocialInterface() {
           }}
         >
           <div style={{ display: 'grid', gap: 20 }}>
-            <Card title="🏛️ Relations">
-              <FactionStandingPanel />
-            </Card>
-            <FactionPanel />
+            {(world.currentWorldType && world.currentWorldType !== 'mortal') && (
+              <Card title="🏛️ Relations">
+                <FactionStandingPanel />
+              </Card>
+            )}
+            {(world.currentWorldType && world.currentWorldType !== 'mortal') && <FactionPanel />}
           </div>
 
           <div style={{ display: 'grid', gap: 20 }}>
@@ -99,38 +131,43 @@ export function SocialInterface() {
               <RivalsPanel />
             </Card>
 
-            <Card title="📊 Skills">
-              <div style={{ display: 'grid', gap: '10px' }}>
-                {Object.entries(player.skills).map(([skillId, skill]) => (
-                  <div key={skillId}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
-                      <span style={{ textTransform: 'capitalize' }}>{skillId.replace(/([A-Z])/g, ' $1')}</span>
-                      <span style={{ color: 'var(--primary)' }}>Level {skill.level}</span>
-                    </div>
-                    <Progress value={skill.exp} max={skill.expToNext} />
-                  </div>
-                ))}
-              </div>
-            </Card>
+            {/* Legacy Skills card removed */}
 
-            <Card title="Inventory">
-              <div style={{ maxHeight: '260px', overflowY: 'auto' }}>
-                {player.inventory.length === 0 ? (
-                  <p style={{ color: 'var(--muted)', textAlign: 'center', padding: '20px' }}>Empty</p>
-                ) : (
-                  player.inventory.map((item, index) => (
-                    <div key={index} style={{ padding: '8px', borderBottom: '1px solid rgba(212, 175, 55, 0.2)' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <strong style={{ color: 'var(--primary)' }}>{item.name}</strong>
-                        {item.quantity && item.quantity > 1 && <span style={{ color: 'var(--accent)'}}>x{item.quantity}</span>}
-                      </div>
-                      <p style={{ color: 'var(--muted)', fontSize: '0.8rem', margin: '4px 0 0' }}>{item.description}</p>
-                    </div>
-                  ))
-                )}
-              </div>
-            </Card>
 
+
+            {/* Surface Inventory on Social page for unified navigation */}
+            <Card title="🎒 Inventory">
+              {/* ARIA live region for screen readers */}
+              <div aria-live="polite" style={{ position: 'absolute', left: -9999, top: 'auto', width: 1, height: 1, overflow: 'hidden' }}>{announce}</div>
+              <div
+                ref={(el) => {
+                  inventoryRef.current = el;
+                  // If the store indicated focus, scroll this card into view once
+                  if (el && focusInventory) {
+                    try {
+                      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                      // Try to focus the search input inside InventoryPanel for keyboard users
+                      try {
+                        const input = el.querySelector('input');
+                        if (input && (input as HTMLElement).focus) {
+                          // small timeout so that smooth scrolling won't clash with focusing in some browsers
+                          setTimeout(() => { try { (input as HTMLElement).focus(); } catch(e) { void e; } }, 120);
+                        }
+                      } catch (e) { /* ignore */ }
+                    } catch(e) { void e; }
+                    // clear the flag so we don't re-scroll on every render
+                    setUIProperty('focusInventory', false);
+                  }
+                }}
+                className={inventoryVisibleClass}
+                style={{ transition: 'transform 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.45s', transformOrigin: 'center top' }}
+              >
+                <InventoryPanel />
+              </div>
+              <style>{`
+                .inventory-reveal { transform: translateY(-6px) scale(1.02); opacity: 0.98; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+              `}</style>
+            </Card>
             <ManualsPanel />
           </div>
         </div>

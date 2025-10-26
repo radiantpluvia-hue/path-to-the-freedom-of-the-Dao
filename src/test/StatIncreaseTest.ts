@@ -12,11 +12,11 @@ function testBloodlineStatIncreases() {
 
   // Test a few representative bloodlines from different rarities
   const testBloodlines = [
-  ALL_BLOODLINES.find(b => b.rarity === 'common'),
-  ALL_BLOODLINES.find(b => b.rarity === 'rare'),
-  ALL_BLOODLINES.find(b => b.rarity === 'legendary'),
+  ALL_BLOODLINES.find(b => b.rarity === "H"),
+  ALL_BLOODLINES.find(b => b.rarity === "F"),
+  ALL_BLOODLINES.find(b => b.rarity === "D"),
   ALL_BLOODLINES.find(b => b.rarity === 'mythical'),
-  ALL_BLOODLINES.find(b => b.rarity === 'transcendent')
+  ALL_BLOODLINES.find(b => b.rarity === "B")
   ].filter(Boolean);
 
   testBloodlines.forEach(bloodline => {
@@ -53,11 +53,11 @@ function testPhysiqueStatIncreases() {
 
   // Test a few representative physiques from different rarities
   const testPhysiques = [
-    PHYSIQUES.find(p => p.rarity === 'common'),
-    PHYSIQUES.find(p => p.rarity === 'rare'),
-    PHYSIQUES.find(p => p.rarity === 'legendary'),
+    PHYSIQUES.find(p => p.rarity === "H"),
+    PHYSIQUES.find(p => p.rarity === "F"),
+    PHYSIQUES.find(p => p.rarity === "D"),
     PHYSIQUES.find(p => p.rarity === 'mythical'),
-    PHYSIQUES.find(p => p.rarity === 'transcendent')
+    PHYSIQUES.find(p => p.rarity === "B")
   ].filter(Boolean);
 
   testPhysiques.forEach(physique => {
@@ -96,11 +96,11 @@ function testManualEffectIncreases() {
 
   // Test a few representative manuals from different rarities
   const testManuals = [
-    MANUALS.find(m => m.rank === 'common'),
-    MANUALS.find(m => m.rank === 'rare'),
-    MANUALS.find(m => m.rank === 'legendary'),
+    MANUALS.find(m => m.rank === "H"),
+    MANUALS.find(m => m.rank === "F"),
+    MANUALS.find(m => m.rank === "D"),
     MANUALS.find(m => m.rank === 'mythical'),
-    MANUALS.find(m => m.rank === 'transcendent')
+    MANUALS.find(m => m.rank === "B")
   ].filter(Boolean);
 
   testManuals.forEach(manual => {
@@ -143,7 +143,7 @@ function testManualEffectIncreases() {
 function testRarityMultipliers() {
   console.log('\n=== Testing Rarity Multipliers ===');
 
-  const rarities = ['common', 'uncommon', 'rare', 'epic', 'legendary', 'mythical', 'transcendent'];
+  const rarities = ["H", "G", "F", "E", "D", 'mythical', "B"];
 
   rarities.forEach(rarity => {
     const multiplier = getRarityMultiplier(rarity);
@@ -152,8 +152,8 @@ function testRarityMultipliers() {
     // Verify multipliers are reasonable
     if (multiplier < 1.0) {
       console.log(`  ❌ ${rarity} multiplier too low: ${multiplier}`);
-    } else if (rarity === 'transcendent' && multiplier < 5.0) {
-      console.log(`  ❌ ${rarity} multiplier too low for transcendent rarity: ${multiplier}`);
+    } else if (rarity === "B" && multiplier < 5.0) {
+      console.log(`  ❌ ${rarity} multiplier too low for B rarity: ${multiplier}`);
     } else {
       console.log(`  ✅ ${rarity} multiplier reasonable`);
     }
@@ -190,7 +190,7 @@ function testRealmScalingProgression() {
 function testStatBalanceAcrossRarities() {
   console.log('\n=== Testing Stat Balance Across Rarities ===');
 
-  const rarities = ['common', 'uncommon', 'rare', 'epic', 'legendary', 'mythical', 'transcendent'];
+  const rarities = ["H", "G", "F", "E", "D", 'mythical', "B"];
 
   // Test bloodline balance
   console.log('\nBloodline Balance:');

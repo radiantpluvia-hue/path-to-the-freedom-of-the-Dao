@@ -6,9 +6,13 @@ const useGameStore_1 = require("@/store/useGameStore");
 const SectSystem_1 = require("@/systems/SectSystem");
 function FactionPanel() {
     const { player } = (0, useGameStore_1.useGameStore)();
-    const factionStandings = player.factionStandings || {};
-    return ((0, jsx_runtime_1.jsxs)("div", { style: { fontSize: '0.9rem' }, children: [(0, jsx_runtime_1.jsx)("h3", { style: { color: 'var(--primary)', marginBottom: '10px' }, children: "\uD83C\uDFDB\uFE0F Faction Relations" }), SectSystem_1.MAJOR_FACTIONS.map(faction => {
-                const standing = factionStandings[faction.id] || 0;
+    const factionStandings = player?.factionStandings || {};
+    const factions = Array.isArray(SectSystem_1.MAJOR_FACTIONS) ? SectSystem_1.MAJOR_FACTIONS : [];
+    if (factions.length === 0) {
+        return ((0, jsx_runtime_1.jsxs)("div", { style: { fontSize: '0.9rem', color: 'var(--muted)' }, children: [(0, jsx_runtime_1.jsx)("h3", { style: { color: 'var(--primary)', marginBottom: '10px' }, children: "\uD83C\uDFDB\uFE0F Faction Relations" }), (0, jsx_runtime_1.jsx)("div", { style: { padding: 12 }, children: "No factions are defined for this world." })] }));
+    }
+    return ((0, jsx_runtime_1.jsxs)("div", { style: { fontSize: '0.9rem' }, children: [(0, jsx_runtime_1.jsx)("h3", { style: { color: 'var(--primary)', marginBottom: '10px' }, children: "\uD83C\uDFDB\uFE0F Faction Relations" }), factions.map(faction => {
+                const standing = factionStandings?.[faction.id] || 0;
                 const standingColor = standing >= 50 ? 'var(--success)' :
                     standing >= 0 ? 'var(--accent)' :
                         standing >= -50 ? 'var(--warning)' : 'var(--danger)';
@@ -21,6 +25,6 @@ function FactionPanel() {
                                         color: standingColor,
                                         fontWeight: 'bold',
                                         fontSize: '0.9rem'
-                                    }, children: [standing > 0 ? '+' : '', standing] })] }), faction.conflicts.length > 0 && ((0, jsx_runtime_1.jsxs)("div", { style: { marginTop: '5px', fontSize: '0.8rem', color: 'var(--muted)' }, children: ["Conflicts: ", faction.conflicts.join(', ')] }))] }, faction.id));
+                                    }, children: [standing > 0 ? '+' : '', standing] })] }), Array.isArray(faction.conflicts) && faction.conflicts.length > 0 && ((0, jsx_runtime_1.jsxs)("div", { style: { marginTop: '5px', fontSize: '0.8rem', color: 'var(--muted)' }, children: ["Conflicts: ", faction.conflicts.join(', ')] }))] }, faction.id));
             }), Object.keys(factionStandings).length === 0 && ((0, jsx_runtime_1.jsx)("div", { style: { color: 'var(--muted)', textAlign: 'center', padding: '20px' }, children: "No faction relationships yet. Explore the world to encounter factions!" }))] }));
 }

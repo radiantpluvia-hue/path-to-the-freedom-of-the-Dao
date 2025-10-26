@@ -1,0 +1,23 @@
+[
+  {
+    "id": "immortal_cosmic_omen",
+    "title": "Cosmic Omen",
+    "description": "Constellations spiral briefly, acknowledging your ascended presence.",
+    "worldTypes": ["immortal"],
+    "minRealm": "true_immortal",
+    "choices": [
+      { "id": "contemplate", "text": "Contemplate the omen", "consequences": { "stats": { "daoInsight": 10 }, "flags": { "cosmic_omen_seen": true } } }
+    ]
+  },
+  {
+    "id": "immortal_law_fragment",
+    "title": "Fragment of Law",
+    "description": "A drifting shard of elemental law circles you, resonating with your Dao foundation.",
+    "worldTypes": ["immortal"],
+    "minRealm": "true_immortal",
+    "choices": [
+      { "id": "absorb", "text": "Absorb fragment", "consequences": { "stats": { "daoInsight": 25, "insight": 15 } } },
+      { "id": "study", "text": "Study carefully", "consequences": { "stats": { "insight": 25 }, "karma": 3 } }
+    ]
+  }
+]

@@ -1,5 +1,7 @@
 import { CombatSystem, type CombatParticipant, type CombatTechnique, type CombatContext } from '@/systems/CombatSystem';
 
+/* eslint @typescript-eslint/no-non-null-assertion: "off" */
+
 describe('CombatSystem crit/miss with seeded RNG', () => {
   const makeP = (id: string, name: string, extra?: Partial<CombatParticipant>): CombatParticipant => ({
     id,

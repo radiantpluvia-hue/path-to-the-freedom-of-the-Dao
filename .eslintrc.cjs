@@ -1,19 +1,18 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true },
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react-hooks/recommended',
-  ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  env: { browser: true, node: true, es2021: true },
+  ignorePatterns: ['src/demo/**', 'src/**/*.d.ts', 'dist', '.tmp_build', 'src/**/*.stories.*'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', '@typescript-eslint'],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: './tsconfig.json',
+  },
+  plugins: ['@typescript-eslint'],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+  // Keep local ignore patterns; story files are already ignored above.
   rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     // Discourage importing deprecated "_updated" files
@@ -53,21 +52,46 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['src/test/**', 'src/tests/**'],
+      // Tests (unit/integration) and test helpers
+      files: ['src/test/**', 'src/tests/**', 'src/**/__tests__/**', 'src/**/test/**'],
       rules: {
-        // Tests often import helpers or data purely for setup; allow unused vars in tests
         '@typescript-eslint/no-unused-vars': 'off',
-        // Allow tests to import internal systems/data for integration testing
         'no-restricted-imports': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/no-empty-function': 'off',
+        'no-empty': 'off',
+        'no-console': 'off',
+        // Tests often use non-null assertions to simplify fixtures; allow them in tests.
+        '@typescript-eslint/no-non-null-assertion': 'off',
       },
     },
-    // Note: broad import overrides removed; prefer introducing thin public
-    // entry-points for cross-folder imports instead of disabling the rule.
+    // Storybook was removed: story-specific overrides are intentionally omitted.
+    {
+      files: ['**/*.d.ts'],
+      rules: {
+        // Skip checks in declaration files
+        '@typescript-eslint/no-empty-interface': 'off',
+      },
+    },
     {
       files: ['src/systems/**'],
       rules: {
         // Allow systems to import other system internals freely; the barrel is the public API.
+        // Many system modules use synchronous `require()` for test determinism or to avoid
+        // circular import issues during initialization. Allow that pattern explicitly.
         'no-restricted-imports': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
+        'no-console': 'off',
+      },
+    },
+    // The centralized store contains some inner function declarations used for initialization
+    // and lazy helpers; allow that pattern to avoid risky mass refactors in a large file.
+    {
+      files: ['src/store/**'],
+      rules: {
+        'no-inner-declarations': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
+        'no-console': 'off',
       },
     },
     // Allow the data barrel to import _fixed/internal data sources
@@ -83,5 +107,17 @@ module.exports = {
         'no-restricted-imports': 'off',
       },
     },
+    // Tooling in src/tools/ is Node-only and uses runtime require() patterns. Allow those.
+    {
+      files: ['src/tools/**'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
+        'no-console': 'off',
+      },
+    },
+    // Temporary: silence noisy unused-var and console warnings in UI and store code
+    // so we can apply low-risk fixes and triage higher-risk non-null assertions later.
+    // Note: temporary broad suppressions removed. Prefer file-level or narrow disables.
+    // (Temporary broad suppressions were removed — prefer file-level disables for specific cases.)
   ],
 };

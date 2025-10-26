@@ -1,0 +1,85 @@
+[
+  {
+    "id": "cultivation_medicine_market",
+    "title": "Temporary Alchemy Market",
+    "description": "Traveling alchemists set up stalls selling rare refining herbs.",
+    "tags": ["tone:neutral"],
+    "worldTypes": ["cultivation"],
+    "minRealm": "qi_refinement",
+    "maxRealm": "core_formation",
+    "choices": [
+      { "id": "browse", "text": "Browse ingredients", "consequences": { "stats": { "insight": 3 }, "flags": { "saw_alchemy_market": true } } },
+      { "id": "haggle", "text": "Attempt to haggle", "consequences": { "stats": { "cunning": 2 }, "karma": -1 } }
+    ]
+  },
+  {
+    "id": "cultivation_spirit_spring",
+    "title": "Hidden Spirit Spring",
+    "description": "You discover a faint mist concealing a small spirit spring rich with gentle qi.",
+    "tags": ["tone:light"],
+    "worldTypes": ["cultivation"],
+    "minRealm": "foundation_establishment",
+    "choices": [
+      { "id": "meditate", "text": "Meditate at the spring", "consequences": { "stats": { "currentQi": 200, "insight": 5 } } },
+      { "id": "bottle", "text": "Collect some essence", "consequences": { "items": [{ "id": "bottled_spirit_essence", "quantity": 1 }] } }
+    ]
+  }
+  ,
+  {
+    "id": "philo_crossroad",
+    "title": "Crossroads of Thought",
+    "description": "A wandering monk sits at a crossroads and asks you about the nature of power.",
+    "worldTypes": ["cultivation"],
+    "minRealm": "qi_refinement",
+    "choices": [
+      {
+        "id": "compassion",
+        "text": "Choose compassion — help those in need.",
+        "consequences": { "karma": 3, "daoComprehension": 1, "stats": { "destinyAffinity": 1 }, "flags": { "destiny_thread": "compassion_path", "philo_started": true }, "eventTrigger": "philo_compassion_followup" }
+      },
+      {
+        "id": "pragmatism",
+        "text": "Choose pragmatism — power before ideals.",
+        "consequences": { "karma": -2, "insight": 5, "stats": { "destinyAffinity": -1 }, "flags": { "destiny_thread": "pragmatist_path", "philo_started": true }, "eventTrigger": "philo_pragmatist_followup" }
+      }
+    ]
+  },
+  {
+    "id": "philo_compassion_followup",
+    "title": "Seed of Mercy",
+    "description": "Your compassionate act ripples outward; an elder offers guidance.",
+    "worldTypes": ["cultivation"],
+    "conditions": { "flags": { "philo_started": true, "destiny_thread": "compassion_path" } },
+    "choices": [
+      {
+  "id": "accept_guidance",
+  "text": "Accept the elder's guidance",
+  "consequences": { "daoComprehension": 2, "stats": { "destinyAffinity": 1 }, "flags": { "philo_stage": "accepted_guidance" }, "questStart": "philo_compassion_quest" }
+      },
+      {
+        "id": "decline_guidance",
+        "text": "Politely decline and continue",
+        "consequences": { "karma": 1, "flags": { "philo_stage": "declined_guidance" } }
+      }
+    ]
+  },
+  {
+    "id": "philo_pragmatist_followup",
+    "title": "Hard Lessons",
+    "description": "Your pragmatic choice draws the attention of a hardened swordsman.",
+    "worldTypes": ["cultivation"],
+    "conditions": { "flags": { "philo_started": true, "destiny_thread": "pragmatist_path" } },
+    "choices": [
+      {
+  "id": "train",
+  "text": "Train under the swordsman",
+  "consequences": { "stats": { "combatSkills": 2, "destinyAffinity": -1 }, "flags": { "philo_stage": "trained_under_swordsman" }, "questStart": "philo_pragmatist_quest" }
+      },
+      {
+        "id": "refuse",
+        "text": "Refuse and leave",
+        "consequences": { "karma": -1, "flags": { "philo_stage": "refused_swordsman" } }
+      }
+    ]
+  }
+]

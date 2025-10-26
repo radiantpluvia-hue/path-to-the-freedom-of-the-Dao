@@ -1,3 +1,5 @@
+import { migrateTier } from '@/migrations/tierMigration';
+
 export const WEAPONS = [
   // Additional mortal-world clan leader weapons adapted as immortal mentors' favored arms
   { id: 'weapon_clanblade_ashen', name: 'Ashen Clanblade', tier: 'mortal', atk: 6, description: 'A well-tempered blade favored by ash-clan leaders.' },
@@ -15,8 +17,8 @@ export const WEAPONS = [
   { id: 'weapon_clanblade_triad', name: 'Triad Blade', tier: 'mortal', atk: 6, description: 'A paired blade used in synchronized teaching drills.' },
   { id: 'weapon_clanhammer_gale', name: 'Gale Hammer', tier: 'mortal', atk: 8, description: 'A heavy hammer used to instill raw power and timing.' },
   { id: 'weapon_clanscythe_dusk', name: 'Dusk Scythe', tier: 'mortal', atk: 6, description: 'A scythe adapted for formation-clearing techniques.' },
-  { id: 'weapon_sword_iron_broker', name: 'Iron Broker Sword', type: 'sword', tier: 1, atk: 4, speed: 1, tags: ['starter','melee'] },
-  { id: 'weapon_sword_veldra', name: 'Veldra Shortblade', type: 'sword', tier: 1, atk: 5, speed: 1.2, tags: ['melee','balanced'] },
+  { id: 'weapon_sword_iron_broker', name: 'Iron Broker Sword', type: 'sword', tier: 1, atk: 4, speed: 1, tags: ['starter','melee'], rarityCode: migrateTier('H') },
+  { id: 'weapon_sword_veldra', name: 'Veldra Shortblade', type: 'sword', tier: 1, atk: 5, speed: 1.2, tags: ['melee','balanced'], rarityCode: migrateTier('H') },
   { id: 'weapon_spear_river_pike', name: 'River Pike', type: 'spear', tier: 2, atk: 6, speed: 0.9, tags: ['reach','formation'] },
   { id: 'weapon_spear_mantle_reach', name: 'Mantle Reach', type: 'spear', tier: 3, atk: 9, speed: 0.95, tags: ['reach','control'] },
   { id: 'weapon_bow_windwhisper', name: 'Windwhisper Bow', type: 'bow', tier: 2, atk: 5, speed: 1.1, tags: ['ranged','precision'] },
@@ -31,8 +33,10 @@ export const WEAPONS = [
   { id: 'weapon_claw_razorwind', name: 'Razorwind Talons', type: 'claw', tier: 3, atk: 9, speed: 1.5, tags: ['crit','frenzy'] },
   { id: 'weapon_whip_silk_binder', name: 'Silk Binder Whip', type: 'whip', tier: 2, atk: 4, speed: 1.2, tags: ['disarm','control'] },
   { id: 'weapon_whip_iron_chain', name: 'Iron Chain Whip', type: 'whip', tier: 3, atk: 8, speed: 1.0, tags: ['control','reach'] },
-  { id: 'weapon_spiritblade_ghostedge', name: 'Ghostedge Spiritblade', type: 'spiritblade', tier: 5, atk: 18, speed: 1.1, tags: ['spirit','transcendent'] },
-  { id: 'weapon_fan_sorrowgale', name: 'Sorrowgale Fan', type: 'fan', tier: 2, atk: 4, speed: 1.3, tags: ['ranged','control'] },
+  { id: 'weapon_spiritblade_ghostedge', name: 'Ghostedge Spiritblade', type: 'spiritblade', tier: 5, atk: 18, speed: 1.1, tags: ['spirit'], rarityCode: migrateTier('B') },
+  { id: 'weapon_fan_sorrowgale', name: 'Sorrowgale Fan', type: 'fan', tier: 2, atk: 4, speed: 1.3, tags: ['ranged','control'], rarityCode: migrateTier('G') },
   { id: 'weapon_blade_kairos', name: 'Kairos Greatblade', type: 'greatsword', tier: 4, atk: 16, speed: 0.65, tags: ['heavy','cleave'] },
-  { id: 'weapon_glaive_astral', name: 'Astral Glaive', type: 'glaive', tier: 5, atk: 20, speed: 0.9, tags: ['reach','mythic'] }
+  { id: 'weapon_glaive_astral', name: 'Astral Glaive', type: 'glaive', tier: 5, atk: 20, speed: 0.9, tags: ['reach',"C"] }
 ];
+
+export default WEAPONS;

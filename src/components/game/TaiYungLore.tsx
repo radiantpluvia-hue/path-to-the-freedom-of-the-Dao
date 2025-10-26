@@ -88,14 +88,14 @@ export function TaiYungLore() {
           textShadow: '0 0 20px rgba(212, 175, 55, 0.3)',
           marginBottom: '10px'
         }}>
-          Tai Yung
+          Shíxiàng mén
         </h2>
         <p style={{
           fontSize: '1.2rem',
           color: 'var(--text-secondary)',
           fontStyle: 'italic'
         }}>
-          The Supreme Void
+          Welcome to the world of Shíxiàng mén
         </p>
       </div>
 
@@ -112,7 +112,6 @@ export function TaiYungLore() {
           borderRadius: 'var(--radius-lg)',
           padding: '40px',
           boxShadow: '0 0 40px rgba(212, 175, 55, 0.2)',
-          backdropFilter: 'blur(10px)',
           minHeight: '200px',
           display: 'flex',
           alignItems: 'center',

@@ -1,0 +1,10 @@
+[
+  { "id": "resolute_heart_b", "name": "Resolute Heart (B)", "effect": "+2 stability", "tags": ["stability"] },
+  { "id": "keen_eye_b", "name": "Keen Eye (B)", "effect": "+1 luck", "tags": ["luck"] },
+  { "id": "iron_will_b", "name": "Iron Will (B)", "effect": "reduce debuff duration", "tags": ["defense"] },
+  { "id": "quick_hands_b", "name": "Quick Hands (B)", "effect": "+1 to crafting speed", "tags": ["crafting"] },
+  { "id": "calm_mind_b", "name": "Calm Mind (B)", "effect": "+3 daoComprehension when meditating", "tags": ["meditation"] },
+  { "id": "steelskin_b", "name": "Steelskin (B)", "effect": "+3 DEF", "tags": ["defense"] },
+  { "id": "eagle_step_b", "name": "Eagle Step (B)", "effect": "+2 SPD", "tags": ["mobility"] },
+  { "id": "fate_whisper_b", "name": "Fate Whisper (B)", "effect": "small chance to reroll event rewards", "tags": ["luck","events"] }
+]

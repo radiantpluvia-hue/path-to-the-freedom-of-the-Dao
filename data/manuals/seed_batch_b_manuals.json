@@ -1,0 +1,10 @@
+[
+  { "id": "manual_basic_stance_b", "title": "Basic Stance (B)", "skillId": "stance_basic", "description": "A primer on maintaining a stable stance." },
+  { "id": "manual_breath_control_b", "title": "Breath Control (B)", "skillId": "breath_control", "description": "Exercises to improve Qi intake." },
+  { "id": "manual_iron_body_b", "title": "Iron Body (B)", "skillId": "iron_body_basic", "description": "A rudimentary body reinforcement technique." },
+  { "id": "manual_focus_technique_b", "title": "Focus Technique (B)", "skillId": "focus_basic", "description": "Short meditations to center the mind." },
+  { "id": "manual_blade_drawing_b", "title": "Blade Drawing (B)", "skillId": "blade_draw", "description": "Technique for swift blade draws." },
+  { "id": "manual_mind_barrier_b", "title": "Mind Barrier (B)", "skillId": "mind_barrier", "description": "A simple mental shield for focus." },
+  { "id": "manual_herbal_remedies_b", "title": "Herbal Remedies (B)", "skillId": "herbalism_basic", "description": "Common herbal recipes." },
+  { "id": "manual_lore_marks_b", "title": "Lore Marks (B)", "skillId": "lore_marks", "description": "Notes on reading old inscriptions." }
+]

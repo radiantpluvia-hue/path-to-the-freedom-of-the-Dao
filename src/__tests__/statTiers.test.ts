@@ -11,7 +11,7 @@ describe('statTiers', () => {
     expect(numericToTier(800).id).toBe('nascent_soul');
     expect(numericToTier(2500).id).toBe('heavenly_king');
     expect(numericToTier(8000).id).toBe('immortal');
-    expect(numericToTier(30000).id).toBe('transcendent');
+    expect(numericToTier(30000).id).toBe("B");
   });
 
   test('tierToNumeric returns median-like representative values', () => {

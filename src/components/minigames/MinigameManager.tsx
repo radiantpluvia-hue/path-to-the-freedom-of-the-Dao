@@ -14,7 +14,7 @@ import { RebellionMastery } from './RebellionMastery';
 interface MinigameManagerProps {
   challengeType: TeachingChallengeType;
   // allow the manager to accept either the narrower difficulty union used by some minigames or simple strings
-  difficulty: string | 'easy' | 'medium' | 'hard' | 'extreme' | 'legendary';
+  difficulty: string | 'easy' | 'medium' | 'hard' | 'extreme' | "D";
   timeLimit?: number;
   successThreshold: number;
   onComplete: (result: ChallengeResult) => void;

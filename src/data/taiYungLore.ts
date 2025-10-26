@@ -32,9 +32,10 @@ export const TAI_YUNG_COMBINED_LORE = [
 ];
 
 export const TAI_YUNG_OPENING_LORE = [
-  "In the beginning, there was Tai Yung - the Supreme Entity.",
-  "Your journey begins in the lowest realm, among mortals who know not the Dao.",
-  "Explore the Codex to uncover the secrets of the realms."
+  "The wheel turns. Your soul is reborn.",
+  "\nWill you heed the symphony of fate?\nOr compose a melody of your own design?",
+  "\nWill you walk a destined road?\nOr become the architect of a new reality?",
+  "\nSo let your spirit blaze—a beacon against the eternal dark.\nThe first breath of your new life is drawn.\nWrite your legend."
 ];
 
 export const TAI_YUNG_REALM_LORE = {

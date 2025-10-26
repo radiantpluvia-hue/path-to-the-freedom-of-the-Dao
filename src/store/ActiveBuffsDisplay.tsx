@@ -1,4 +1,5 @@
 import React from 'react';
+import RichTooltip from '@/components/ui/RichTooltip';
 import { useGameStore, Buff } from '@/store/useGameStore';
 
 const getBuffEffectText = (buff: Buff): string => {
@@ -43,30 +44,31 @@ export const ActiveBuffsDisplay = () => {
       gap: '8px',
       zIndex: 1000
     }}>
-      {player.activeBuffs.map(buff => (
-        <div 
-          key={buff.id} 
-          title={`${buff.name}: ${buff.description}`}
-          style={{
-            padding: '8px 12px',
-            background: 'rgba(34, 197, 94, 0.2)',
-            border: '1px solid var(--success)',
-            borderRadius: '6px',
-            color: 'var(--text-primary)',
-            fontSize: '0.85rem',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
-            cursor: 'help'
-          }}
-        >
-          <strong>{buff.name}</strong>
-          <div style={{ color: 'var(--success-dark)', fontWeight: 'bold' }}>
-            {getBuffEffectText(buff)}
-          </div>
-          <div style={{ color: 'var(--muted)', fontSize: '0.8rem', marginTop: '4px' }}>
-            {buff.durationType === 'ticks' ? `Time Left: ${buff.duration}` : `Uses Left: ${buff.duration}`}
-          </div>
-        </div>
-      ))}
+          {player.activeBuffs.map(buff => (
+            <RichTooltip key={buff.id} content={`${buff.name}: ${buff.description}`}>
+              <div 
+                key={buff.id}
+                style={{
+                  padding: '8px 12px',
+                  background: 'rgba(34, 197, 94, 0.2)',
+                  border: '1px solid var(--success)',
+                  borderRadius: '6px',
+                  color: 'var(--text-primary)',
+                  fontSize: '0.85rem',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+                  cursor: 'help'
+                }}
+              >
+                <strong>{buff.name}</strong>
+                <div style={{ color: 'var(--success-dark)', fontWeight: 'bold' }}>
+                  {getBuffEffectText(buff)}
+                </div>
+                <div style={{ color: 'var(--muted)', fontSize: '0.8rem', marginTop: '4px' }}>
+                  {buff.durationType === 'ticks' ? `Time Left: ${buff.duration}` : `Uses Left: ${buff.duration}`}
+                </div>
+              </div>
+            </RichTooltip>
+          ))}
     </div>
   );
 };

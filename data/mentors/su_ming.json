@@ -1,0 +1,27 @@
+{
+  "id": "mentor_su_ming",
+  "name": "Su Ming",
+  "title": "The Reversal Saint",
+  "realm": "beyond_perfected_sage",
+  "dao": "dao_reversal",
+  "description": "A legendary cultivator who defied Heaven's current. Appears as a remnant echo.",
+  "personality": {
+    "tone": "poetic",
+    "virtue": "compassion through detachment",
+    "flaw": "nihilistic fatalism",
+    "speech_style": "cryptic, elliptical, calm"
+  },
+  "teaching_methods": ["Dao Contemplation", "Heart Demon Confrontation", "Insight Training"],
+  "trust_thresholds": {
+    "50": "Unlocks minor insights and dialogue events",
+    "80": "Unlocks Reverse Pulse Sutra (Full)"
+  },
+  "relationships": {
+    "Tai Yung": "Rival in Dao philosophy",
+    "Yue Lan": "Lost disciple and love",
+    "Player": "Potential successor or challenger"
+  },
+  "appearance_triggers": ["ActIII_FirstMeditation_EchoFound"],
+  "codex_unlock": "mentor_su_ming",
+  "notes": "This file provides content only; game logic hookups should reference the dao id 'dao_reversal' and events under events/mentor_su_ming/."
+}

@@ -1,7 +1,8 @@
+/* eslint @typescript-eslint/no-non-null-assertion: "off" */
 import React from 'react';
 
 interface ProgressProps {
-  value: number; // 0-100
+  value?: number | null; // 0-100, null/undefined -> indeterminate
   max?: number;
   className?: string;
   style?: React.CSSProperties;
@@ -12,7 +13,7 @@ interface ProgressProps {
 }
 
 export const Progress: React.FC<ProgressProps> = ({
-  value,
+  value = null,
   max = 100,
   className = '',
   style = {},
@@ -21,10 +22,15 @@ export const Progress: React.FC<ProgressProps> = ({
   backgroundColor = 'rgba(255, 255, 255, 0.1)',
   height = '8px'
 }) => {
-  const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
+  const isIndeterminate = value === null || typeof value === 'undefined';
+  const percentage = isIndeterminate ? 0 : Math.min(Math.max((value! / max) * 100, 0), 100);
 
   return (
     <div
+      role="progressbar"
+      aria-valuemin={0}
+      aria-valuemax={max}
+      aria-valuenow={isIndeterminate ? undefined : Math.round(percentage)}
       className={className}
       style={{
         width: '100%',
@@ -38,14 +44,15 @@ export const Progress: React.FC<ProgressProps> = ({
     >
       <div
         style={{
-          width: `${percentage}%`,
+          width: isIndeterminate ? '30%' : `${percentage}%`,
           height: '100%',
           backgroundColor: color,
-          transition: 'width 0.3s ease',
-          borderRadius: '4px'
+          transition: isIndeterminate ? 'none' : 'width 0.3s ease',
+          borderRadius: '4px',
+          animation: isIndeterminate ? 'progress-indeterminate 1s linear infinite' : undefined
         }}
       />
-      {showText && (
+      {showText && !isIndeterminate && (
         <div
           style={{
             position: 'absolute',
@@ -62,6 +69,13 @@ export const Progress: React.FC<ProgressProps> = ({
           {Math.round(percentage)}%
         </div>
       )}
+
+      <style>{`
+        @keyframes progress-indeterminate {
+          0% { transform: translateX(-200%); }
+          100% { transform: translateX(200%); }
+        }
+      `}</style>
     </div>
   );
 };

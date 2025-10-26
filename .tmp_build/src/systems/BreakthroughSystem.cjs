@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BreakthroughSystem = void 0;
 const cultivationRealms_1 = require("../data/cultivationRealms");
+const rng_1 = require("../utils/rng");
 class BreakthroughSystem {
     constructor() {
         this.challenges = new Map();
@@ -141,7 +142,8 @@ class BreakthroughSystem {
         }
         const difficulty = Math.floor(realmData.breakthroughDifficulty * (currentStage / realmData.minorStages));
         const successChance = this.calculateMinorBreakthroughChance(difficulty, playerStats, playerSkills);
-        const success = Math.random() < successChance;
+        const rng = (0, rng_1.getRng)();
+        const success = rng() < successChance;
         if (success) {
             const newStage = currentStage + 1;
             const insights = this.generateMinorBreakthroughInsights(realm, newStage);
@@ -196,7 +198,8 @@ class BreakthroughSystem {
             return { success: false, message: 'Requirements not met for this challenge' };
         }
         const successChance = this.calculateRealmBreakthroughChance(challenge, playerStats, playerSkills);
-        const success = Math.random() < successChance;
+        const rng = (0, rng_1.getRng)();
+        const success = rng() < successChance;
         const realmData = cultivationRealms_1.CULTIVATION_REALMS[currentRealm];
         const nextRealm = realmData?.nextRealm;
         if (success && nextRealm) {
@@ -213,7 +216,7 @@ class BreakthroughSystem {
             return {
                 success: false,
                 penalties,
-                message: `Breakthrough failed. ${challenge.risks[Math.floor(Math.random() * challenge.risks.length)]}`
+                message: `Breakthrough failed. ${challenge.risks[(0, rng_1.randInt)(challenge.risks.length, { rng })]}`
             };
         }
     }

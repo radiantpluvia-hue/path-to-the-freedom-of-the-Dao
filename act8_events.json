@@ -1,0 +1,39 @@
+{
+  "id": "act8",
+  "title": "Echoes of the Dao",
+  "description": "Late-game opportunities and tests that explore transcendence and legacy.",
+  "mainQuests": [],
+  "sideQuests": [],
+  "events": [
+    {
+      "id": "act8_e01",
+      "title": "The Whispering Ridge",
+      "description": "You find a ridge where the Dao seems to hum. An old inscription promises insight at a price.",
+      "choices": [
+        { "id": "c_yes", "text": "Study the inscription", "consequences": { "insight": 5, "karma": -1, "eventTrigger": "act8_e01_followup" } },
+        { "id": "c_no", "text": "Leave it be", "consequences": { "karma": 1 } }
+      ],
+      "executorId": "exec_act8_e01"
+    },
+    {
+      "id": "act8_e01_followup",
+      "title": "Hidden Mnemonic",
+      "description": "The inscription opens a mnemonic that grants comprehension but tests your resolve.",
+      "choices": [
+        { "id": "c_endure", "text": "Endure the trial", "consequences": { "daoComprehension": 2, "insight": 10 } },
+        { "id": "c_flee", "text": "Flee", "consequences": { "karma": -2 } }
+      ],
+      "executorId": "exec_act8_e01_followup"
+    },
+    {
+      "id": "act8_e02",
+      "title": "Traveler's Gift",
+      "description": "A wandering immortal offers a relic in exchange for a favor: teach a child the basics of cultivation.",
+      "choices": [
+        { "id": "c_accept", "text": "Accept", "consequences": { "spiritStones": { "low": 2 }, "reputation": { "world": 5 } } },
+        { "id": "c_decline", "text": "Politely decline", "consequences": { "karma": 1 } }
+      ],
+      "executorId": "exec_act8_e02"
+    }
+  ]
+}

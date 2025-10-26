@@ -1,0 +1,43 @@
+{
+  "id": "narrative_threads",
+  "title": "Narrative Threads",
+  "description": "Lightweight narrative vignettes that weave across acts and worlds.",
+  "mainQuests": [],
+  "sideQuests": [],
+  "events": [
+    {
+      "id": "thread_whispering_pine",
+      "title": "Whispering Pine",
+      "description": "A lone pine tree whispers of forgotten names when the wind passes through its needles.",
+      "tags": ["tone:neutral"],
+      "worldTypes": ["murim", "cultivation"],
+      "choices": [
+        { "id": "listen", "text": "Listen to the whispers", "consequences": { "flags": { "heard_pine": true }, "stats": { "insight": 2 } } },
+        { "id": "meditate", "text": "Meditate beneath the pine", "consequences": { "stats": { "currentQi": 50 } } }
+      ]
+    },
+    {
+      "id": "thread_ink_river_poem",
+      "title": "Ink on the River",
+      "description": "A drifting poem written on rice paper floats by, refusing to sink.",
+      "tags": ["tone:light"],
+      "worldTypes": ["murim", "cultivation", "immortal"],
+      "choices": [
+        { "id": "recite", "text": "Recite the poem", "consequences": { "flags": { "ink_poem_recited": true }, "karma": 1 } },
+        { "id": "study", "text": "Study the calligraphy", "consequences": { "stats": { "insight": 3 } } }
+      ]
+    },
+    {
+      "id": "thread_starlight_path",
+      "title": "Path of Starlight",
+      "description": "At night, a faint starlight path appears leading into the foothills.",
+      "tags": ["tone:light"],
+      "worldTypes": ["cultivation", "immortal"],
+      "minRealm": "foundation_establishment",
+      "choices": [
+        { "id": "follow", "text": "Follow the path", "consequences": { "flags": { "starlight_path_followed": true }, "stats": { "daoInsight": 5 } } },
+        { "id": "map", "text": "Mark it on your map", "consequences": { "items": [{ "id": "starlight_map_mark", "quantity": 1 }] } }
+      ]
+    }
+  ]
+}

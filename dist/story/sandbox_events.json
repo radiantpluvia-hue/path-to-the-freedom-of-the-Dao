@@ -1,0 +1,5 @@
+[
+  {"id":"sandbox_start","title":"A Quiet Beginning","description":"You wake in a small village with nothing but your wits and a faint resonance of spiritual energy.","choices":[{"id":"explore","text":"Explore the village","next":"sandbox_market"},{"id":"meditate","text":"Meditate at the shrine","next":"sandbox_shrine"}]},
+  {"id":"sandbox_market","title":"Market Discovery","description":"The market bustles. A mysterious peddler eyes you.","choices":[{"id":"buy","text":"Buy a cheap trinket","next":"sandbox_trinket"},{"id":"scout","text":"Scout for useful contacts","next":"sandbox_contact"}]},
+  {"id":"sandbox_shrine","title":"Old Shrine","description":"An old shrine hums with leftover spiritual energy.","choices":[{"id":"pray","text":"Pray and absorb Qi","next":"sandbox_inner_awaken"},{"id":"leave","text":"Leave quietly","next":"sandbox_market"}]}
+]

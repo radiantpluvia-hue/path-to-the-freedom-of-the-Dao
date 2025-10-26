@@ -1,4 +1,40 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsx_runtime_1 = require("react/jsx-runtime");
 /* eslint-disable no-restricted-imports -- component needs to reference CombatSystem for runtime behavior */
@@ -8,19 +44,21 @@ const Button_1 = require("./core/Button");
 const Progress_1 = require("./core/Progress");
 // Use centralized combat power helper when available to keep metrics consistent
 let computeCombatPower = null;
-try {
-    // require used to avoid static circular deps in some build setups
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    computeCombatPower = require('../systems/combatConfig').computeCombatPower;
-}
-catch (e) {
-    computeCombatPower = null;
-}
+// Prefer static import; keep a runtime-gated fallback to avoid circular-init issues in some test setups
+const combatConfig_1 = require("../systems/combatConfig");
+computeCombatPower = combatConfig_1.computeCombatPower || null;
+const TravelEncounterSystem_1 = require("@/systems/TravelEncounterSystem");
+const rng_1 = require("../utils/rng");
+const safeImport_1 = require("@/utils/safeImport");
+const CombatTutorial_1 = __importDefault(require("./ui/CombatTutorial"));
+const RichTooltip_1 = __importDefault(require("./ui/RichTooltip"));
+const SmallChip_1 = __importDefault(require("./ui/SmallChip"));
 const CombatUI = () => {
     const { combatSystem, setUIProperty, addEventLog, gainSkillExp, adjustRivalRelationship, markRivalDefeated, getFactionStanding, getSectReputation, adjustFactionStanding, adjustSectReputation, getVisibleStats } = (0, useGameStore_1.useGameStore)();
     const [combatState, setCombatState] = (0, react_1.useState)(null);
     const [combatOutcomeProcessed, setCombatOutcomeProcessed] = (0, react_1.useState)(false);
     const [reputationDelta, setReputationDelta] = (0, react_1.useState)({});
+    const [showTutorial, setShowTutorial] = (0, react_1.useState)(false);
     const handleCombatOutcome = (0, react_1.useCallback)((outcome) => {
         if (!combatSystem)
             return;
@@ -122,9 +160,72 @@ const CombatUI = () => {
                 addEventLog(`Victory! Defeated ${enemyParam.name} and gained combat experience.`);
             }
             applyReputationOutcome('victory', enemyParam);
-            if (Math.random() < 0.3) {
-                gainSkillExp('resourcefulness', 10);
-                addEventLog('Found some resources while searching the defeated opponent.');
+            // If this was an encounter, attempt to grant loot from template registry
+            try {
+                const sr = ctx?.specialRules || [];
+                const encRule = (sr || []).find((s) => typeof s === 'string' && s.startsWith('encounter:'));
+                if (encRule) {
+                    const _encId = encRule.split(':')[1];
+                    void _encId;
+                    (async () => {
+                        try {
+                            const mod = await (0, safeImport_1.safeImport)(() => Promise.resolve().then(() => __importStar(require('../data/encounterTemplates'))));
+                            const tmpl = mod ? mod.getEncounterTemplate(_encId) : null;
+                            if (tmpl && tmpl.loot) {
+                                for (const item of tmpl.loot) {
+                                    if (item.type === 'yuan') {
+                                        setTimeout(() => { try {
+                                            useGameStore_1.useGameStore.getState().setPlayerProperty?.('yuan', (useGameStore_1.useGameStore.getState().player.yuan || 0) + item.amount);
+                                        }
+                                        catch (e) {
+                                            void e;
+                                        } }, 0);
+                                    }
+                                    else if (item.type === 'spirit_stone') {
+                                        setTimeout(() => { try {
+                                            useGameStore_1.useGameStore.getState().setPlayerProperty?.('spiritStones', Object.assign({}, useGameStore_1.useGameStore.getState().player.spiritStones, { low: (useGameStore_1.useGameStore.getState().player.spiritStones?.low || 0) + (item.amount || 0) }));
+                                        }
+                                        catch (e) {
+                                            void e;
+                                        } }, 0);
+                                    }
+                                    else if (item.type === 'resource') {
+                                        // add to inventory as simple item object
+                                        setTimeout(() => { try {
+                                            useGameStore_1.useGameStore.getState().addToInventory?.({ id: item.id || 'res', qty: item.qty || 1 });
+                                        }
+                                        catch (e) {
+                                            void e;
+                                        } }, 0);
+                                    }
+                                }
+                            }
+                        }
+                        catch (e) {
+                            // ignore missing template
+                        }
+                    })();
+                }
+            }
+            catch (e) {
+                void e;
+            }
+            try {
+                const ctx = combatSystem.getContext ? combatSystem.getContext() : null;
+                const ctxRng = (ctx && typeof ctx.rng === 'function') ? ctx.rng : (0, rng_1.getRng)();
+                const r = (typeof ctxRng === 'function') ? ctxRng() : (0, rng_1.getRng)()();
+                if (r < 0.3) {
+                    gainSkillExp('resourcefulness', 10);
+                    addEventLog('Found some resources while searching the defeated opponent.');
+                }
+            }
+            catch (e) {
+                const f = (0, rng_1.getRng)();
+                const r = f();
+                if (r < 0.3) {
+                    gainSkillExp('resourcefulness', 10);
+                    addEventLog('Found some resources while searching the defeated opponent.');
+                }
             }
         };
         const handleDefeat = () => {
@@ -156,6 +257,24 @@ const CombatUI = () => {
                 handleFleeOutcome();
                 break;
         }
+        // If this combat was started as an encounter (specialRules marker), notify encounter resolver
+        try {
+            const ctx = combatSystem.getContext ? combatSystem.getContext() : null;
+            const sr = ctx?.specialRules || [];
+            const encRule = (sr || []).find((s) => typeof s === 'string' && s.startsWith('encounter:'));
+            if (encRule) {
+                const _encId = encRule.split(':')[1];
+                void _encId;
+                // on victory -> resume travel, on defeat/fled -> do not resume
+                if (combatSystem.getState().status === 'victory')
+                    (0, TravelEncounterSystem_1.resolveActiveEncounterOutcome)({ success: true, resumeTravel: true });
+                else
+                    (0, TravelEncounterSystem_1.resolveActiveEncounterOutcome)({ success: false, resumeTravel: false });
+            }
+        }
+        catch (e) {
+            // ignore
+        }
     }, [combatSystem, gainSkillExp, adjustRivalRelationship, markRivalDefeated, addEventLog, adjustFactionStanding, adjustSectReputation, setReputationDelta]);
     (0, react_1.useEffect)(() => {
         if (!combatSystem) {
@@ -181,6 +300,16 @@ const CombatUI = () => {
         }, 100);
         return () => clearInterval(interval);
     }, [combatSystem, combatOutcomeProcessed, handleCombatOutcome, setUIProperty]);
+    // Show tutorial on first combat unless the player has hidden it forever
+    (0, react_1.useEffect)(() => {
+        try {
+            const player = useGameStore_1.useGameStore.getState().player;
+            const hidden = player?.settings?.combatTutorialHidden;
+            if (!hidden)
+                setShowTutorial(true);
+        }
+        catch (e) { /* ignore */ }
+    }, [combatSystem]);
     if (!combatSystem || !combatState)
         return null;
     const player = combatState.participants.find(p => p.id === 'player');
@@ -225,7 +354,7 @@ const CombatUI = () => {
     };
     const HeaderContextBadges = () => {
         const rival = contextType === 'rival' && contextRivalId ? useGameStore_1.useGameStore.getState().getRivalById(contextRivalId) : null;
-        return ((0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', justifyContent: 'center', gap: 12, marginTop: 6, flexWrap: 'wrap' }, children: [rival && ((0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }, children: [(0, jsx_runtime_1.jsxs)("span", { style: { background: 'rgba(220,38,38,0.15)', color: '#ef4444', padding: '4px 8px', borderRadius: 6, border: '1px solid #ef4444', position: 'relative' }, children: ["Rival: ", rival.name] }), (0, jsx_runtime_1.jsxs)("div", { style: { fontSize: '12px', color: '#666', display: 'flex', gap: '8px', textAlign: 'center' }, children: [(0, jsx_runtime_1.jsxs)("span", { children: ["Relationship: ", getRelationshipDescription(useGameStore_1.useGameStore.getState().getRivalRelationship(rival.id))] }), (0, jsx_runtime_1.jsx)("span", { children: "\u2022" }), (0, jsx_runtime_1.jsx)("span", { children: rival.personality.charAt(0).toUpperCase() + rival.personality.slice(1) })] })] })), contextFaction && ((0, jsx_runtime_1.jsxs)("span", { style: { background: 'rgba(59,130,246,0.15)', color: standingColor(factionStanding), padding: '4px 8px', borderRadius: 6, border: '1px solid rgba(59,130,246,0.6)', position: 'relative' }, children: ["Faction: ", contextFaction.replace('_', ' ').toUpperCase(), " (", formatStanding(factionStanding), ")", typeof reputationDelta.faction === 'number' && reputationDelta.faction !== 0 && ((0, jsx_runtime_1.jsxs)("span", { style: { position: 'absolute', top: -10, right: -10, fontSize: 12, fontWeight: 700, color: reputationDelta.faction > 0 ? '#16a34a' : '#dc2626' }, children: [reputationDelta.faction > 0 ? '+' : '', reputationDelta.faction] }))] })), contextSect && ((0, jsx_runtime_1.jsxs)("span", { style: { background: 'rgba(34,197,94,0.15)', color: standingColor(sectReputation), padding: '4px 8px', borderRadius: 6, border: '1px solid rgba(34,197,94,0.6)', position: 'relative' }, children: ["Sect: ", contextSect.replace('_', ' ').toUpperCase(), " (", formatStanding(sectReputation), ")", typeof reputationDelta.sect === 'number' && reputationDelta.sect !== 0 && ((0, jsx_runtime_1.jsxs)("span", { style: { position: 'absolute', top: -10, right: -10, fontSize: 12, fontWeight: 700, color: reputationDelta.sect > 0 ? '#16a34a' : '#dc2626' }, children: [reputationDelta.sect > 0 ? '+' : '', reputationDelta.sect] }))] }))] }));
+        return ((0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', justifyContent: 'center', gap: 12, marginTop: 6, flexWrap: 'wrap' }, children: [rival && ((0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }, children: [(0, jsx_runtime_1.jsxs)(SmallChip_1.default, { variant: "danger", style: { position: 'relative' }, title: rival.name, children: ["Rival: ", rival.name] }), (0, jsx_runtime_1.jsxs)("div", { style: { fontSize: '12px', color: '#666', display: 'flex', gap: '8px', textAlign: 'center' }, children: [(0, jsx_runtime_1.jsxs)("span", { children: ["Relationship: ", getRelationshipDescription(useGameStore_1.useGameStore.getState().getRivalRelationship(rival.id))] }), (0, jsx_runtime_1.jsx)("span", { children: "\u2022" }), (0, jsx_runtime_1.jsx)("span", { children: rival.personality.charAt(0).toUpperCase() + rival.personality.slice(1) })] })] })), contextFaction && ((0, jsx_runtime_1.jsxs)("div", { style: { position: 'relative' }, children: [(0, jsx_runtime_1.jsxs)(SmallChip_1.default, { style: { color: standingColor(factionStanding), border: '1px solid rgba(59,130,246,0.6)' }, children: ["Faction: ", contextFaction.replace('_', ' ').toUpperCase(), " (", formatStanding(factionStanding), ")"] }), typeof reputationDelta.faction === 'number' && reputationDelta.faction !== 0 && ((0, jsx_runtime_1.jsxs)("span", { style: { position: 'absolute', top: -10, right: -10, fontSize: 12, fontWeight: 700, color: reputationDelta.faction > 0 ? '#16a34a' : '#dc2626' }, children: [reputationDelta.faction > 0 ? '+' : '', reputationDelta.faction] }))] })), contextSect && ((0, jsx_runtime_1.jsxs)("div", { style: { position: 'relative' }, children: [(0, jsx_runtime_1.jsxs)(SmallChip_1.default, { style: { color: standingColor(sectReputation), border: '1px solid rgba(34,197,94,0.6)' }, children: ["Sect: ", contextSect.replace('_', ' ').toUpperCase(), " (", formatStanding(sectReputation), ")"] }), typeof reputationDelta.sect === 'number' && reputationDelta.sect !== 0 && ((0, jsx_runtime_1.jsxs)("span", { style: { position: 'absolute', top: -10, right: -10, fontSize: 12, fontWeight: 700, color: reputationDelta.sect > 0 ? '#16a34a' : '#dc2626' }, children: [reputationDelta.sect > 0 ? '+' : '', reputationDelta.sect] }))] }))] }));
     };
     const handleAction = (actionId) => {
         combatSystem.useTechnique('player', actionId, enemy.id);
@@ -237,7 +366,15 @@ const CombatUI = () => {
         setCombatState(combatSystem.getState());
     };
     const availableTechniques = combatSystem.getAvailableTechniques('player');
-    return ((0, jsx_runtime_1.jsxs)("div", { style: { padding: '20px', maxWidth: '800px', margin: '0 auto' }, children: [(0, jsx_runtime_1.jsxs)("h2", { style: { color: 'var(--primary)', textAlign: 'center', marginBottom: '6px' }, children: ["\u2694\uFE0F Combat - Round ", combatState.round] }), (0, jsx_runtime_1.jsx)(HeaderContextBadges, {}), (contextFaction || contextSect) && ((0, jsx_runtime_1.jsxs)("div", { style: {
+    return ((0, jsx_runtime_1.jsxs)("div", { style: { padding: '20px', maxWidth: '800px', margin: '0 auto' }, children: [showTutorial && ((0, jsx_runtime_1.jsx)(CombatTutorial_1.default, { onClose: () => setShowTutorial(false), onHideForever: () => {
+                    try {
+                        useGameStore_1.useGameStore.getState().setPlayerProperty?.('settings', { ...(useGameStore_1.useGameStore.getState().player.settings || {}), combatTutorialHidden: true });
+                    }
+                    catch (e) {
+                        void e;
+                    }
+                    setShowTutorial(false);
+                } })), (0, jsx_runtime_1.jsxs)("h2", { style: { color: 'var(--primary)', textAlign: 'center', marginBottom: '6px' }, children: ["\u2694\uFE0F Combat - Round ", combatState.round] }), (0, jsx_runtime_1.jsx)(HeaderContextBadges, {}), (contextFaction || contextSect) && ((0, jsx_runtime_1.jsxs)("div", { style: {
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr',
                     gap: 12,
@@ -252,12 +389,12 @@ const CombatUI = () => {
                             padding: '15px',
                             borderRadius: '8px',
                             border: '2px solid var(--primary)'
-                        }, children: [(0, jsx_runtime_1.jsxs)("h3", { style: { color: 'var(--primary)', marginBottom: '10px' }, children: ["\uD83D\uDC64 ", player.name] }), (0, jsx_runtime_1.jsxs)("div", { style: { marginBottom: '10px' }, children: [(0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }, children: [(0, jsx_runtime_1.jsx)("span", { children: "HP:" }), (0, jsx_runtime_1.jsxs)("span", { children: [player.hp, "/", player.maxHp] })] }), (0, jsx_runtime_1.jsx)(Progress_1.Progress, { value: (player.hp / player.maxHp) * 100, max: 100 })] }), (0, jsx_runtime_1.jsxs)("div", { style: { marginBottom: '10px' }, children: [(0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }, children: [(0, jsx_runtime_1.jsx)("span", { children: "Qi:" }), (0, jsx_runtime_1.jsxs)("span", { children: [player.qi, "/", player.maxQi, ' ', (0, jsx_runtime_1.jsxs)("small", { style: { color: '#9ca3af', marginLeft: 8 }, children: ["(", getVisibleStats().qi, ")"] })] })] }), (0, jsx_runtime_1.jsx)(Progress_1.Progress, { value: (player.qi / player.maxQi) * 100, max: 100 })] }), (0, jsx_runtime_1.jsx)("div", { style: { marginBottom: '5px' }, children: (0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', justifyContent: 'space-between' }, children: [(0, jsx_runtime_1.jsx)("span", { children: "AP:" }), (0, jsx_runtime_1.jsxs)("span", { children: [player.ap, "/", player.maxAp] })] }) }), (player.buffs?.length || player.debuffs?.length) && ((0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8 }, children: [player.buffs?.map((b, idx) => ((0, jsx_runtime_1.jsxs)("span", { title: b.description, style: { background: 'rgba(34,197,94,0.12)', color: '#22c55e', padding: '2px 6px', borderRadius: 6, border: '1px solid rgba(34,197,94,0.5)', fontSize: 12 }, children: ["\uD83D\uDFE2 ", b.name, " (", b.duration, ")"] }, `pb-${idx}`))), player.debuffs?.map((d, idx) => ((0, jsx_runtime_1.jsxs)("span", { title: d.description, style: { background: 'rgba(239,68,68,0.12)', color: '#ef4444', padding: '2px 6px', borderRadius: 6, border: '1px solid rgba(239,68,68,0.5)', fontSize: 12 }, children: ["\uD83D\uDD34 ", d.name, " (", d.duration, ")"] }, `pd-${idx}`)))] }))] }), (0, jsx_runtime_1.jsxs)("div", { style: {
+                        }, children: [(0, jsx_runtime_1.jsxs)("h3", { style: { color: 'var(--primary)', marginBottom: '10px' }, children: ["\uD83D\uDC64 ", player.name] }), (0, jsx_runtime_1.jsxs)("div", { style: { marginBottom: '10px' }, children: [(0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }, children: [(0, jsx_runtime_1.jsx)("span", { children: "HP:" }), (0, jsx_runtime_1.jsxs)("span", { children: [player.hp, "/", player.maxHp] })] }), (0, jsx_runtime_1.jsx)(Progress_1.Progress, { value: (player.hp / player.maxHp) * 100, max: 100 })] }), (0, jsx_runtime_1.jsxs)("div", { style: { marginBottom: '10px' }, children: [(0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }, children: [(0, jsx_runtime_1.jsx)("span", { children: "Qi:" }), (0, jsx_runtime_1.jsxs)("span", { children: [player.qi, "/", player.maxQi, ' ', (0, jsx_runtime_1.jsxs)("small", { style: { color: '#9ca3af', marginLeft: 8 }, children: ["(", getVisibleStats().qi, ")"] })] })] }), (0, jsx_runtime_1.jsx)(Progress_1.Progress, { value: (player.qi / player.maxQi) * 100, max: 100 })] }), (0, jsx_runtime_1.jsx)("div", { style: { marginBottom: '5px' }, children: (0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', justifyContent: 'space-between' }, children: [(0, jsx_runtime_1.jsx)("span", { children: "AP:" }), (0, jsx_runtime_1.jsxs)("span", { children: [player.ap, "/", player.maxAp] })] }) }), (player.buffs?.length || player.debuffs?.length) && ((0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8 }, children: [player.buffs?.map((b, idx) => ((0, jsx_runtime_1.jsx)(RichTooltip_1.default, { content: b.description, children: (0, jsx_runtime_1.jsxs)(SmallChip_1.default, { variant: "success", children: ["\uD83D\uDFE2 ", b.name, " (", b.duration, ")"] }) }, `pb-${idx}`))), player.debuffs?.map((d, idx) => ((0, jsx_runtime_1.jsx)(RichTooltip_1.default, { content: d.description, children: (0, jsx_runtime_1.jsxs)(SmallChip_1.default, { variant: "danger", children: ["\uD83D\uDD34 ", d.name, " (", d.duration, ")"] }) }, `pd-${idx}`)))] }))] }), (0, jsx_runtime_1.jsxs)("div", { style: {
                             backgroundColor: 'var(--dark)',
                             padding: '15px',
                             borderRadius: '8px',
                             border: '2px solid var(--danger)'
-                        }, children: [(0, jsx_runtime_1.jsxs)("h3", { style: { color: 'var(--danger)', marginBottom: '10px' }, children: ["\uD83D\uDC79 ", enemy.name] }), enemyIntent && ((0, jsx_runtime_1.jsx)("div", { style: { marginBottom: '8px' }, children: (0, jsx_runtime_1.jsxs)("span", { style: { background: 'rgba(239,68,68,0.12)', color: '#f87171', padding: '3px 8px', borderRadius: 6, border: '1px solid rgba(239,68,68,0.5)' }, children: ["Intent: ", enemyIntent.intent.toUpperCase(), " ", enemyIntentTechniqueName ? `(${enemyIntentTechniqueName})` : ''] }) })), (0, jsx_runtime_1.jsxs)("div", { style: { marginBottom: '10px' }, children: [(0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }, children: [(0, jsx_runtime_1.jsx)("span", { children: "HP:" }), (0, jsx_runtime_1.jsxs)("span", { children: [enemy.hp, "/", enemy.maxHp] })] }), (0, jsx_runtime_1.jsx)(Progress_1.Progress, { value: (enemy.hp / enemy.maxHp) * 100, max: 100 })] }), (0, jsx_runtime_1.jsxs)("div", { style: { marginBottom: '10px' }, children: [(0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }, children: [(0, jsx_runtime_1.jsx)("span", { children: "Qi:" }), (0, jsx_runtime_1.jsxs)("span", { children: [enemy.qi, "/", enemy.maxQi] })] }), (0, jsx_runtime_1.jsx)(Progress_1.Progress, { value: (enemy.qi / enemy.maxQi) * 100, max: 100 })] }), (0, jsx_runtime_1.jsx)("div", { style: { marginBottom: '5px' }, children: (0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', justifyContent: 'space-between' }, children: [(0, jsx_runtime_1.jsx)("span", { children: "AP:" }), (0, jsx_runtime_1.jsxs)("span", { children: [enemy.ap, "/", enemy.maxAp] })] }) })] }), (enemy.buffs?.length || enemy.debuffs?.length) && ((0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8 }, children: [enemy.buffs?.map((b, idx) => ((0, jsx_runtime_1.jsxs)("span", { title: b.description, style: { background: 'rgba(34,197,94,0.12)', color: '#22c55e', padding: '2px 6px', borderRadius: 6, border: '1px solid rgba(34,197,94,0.5)', fontSize: 12 }, children: ["\uD83D\uDFE2 ", b.name, " (", b.duration, ")"] }, `eb-${idx}`))), enemy.debuffs?.map((d, idx) => ((0, jsx_runtime_1.jsxs)("span", { title: d.description, style: { background: 'rgba(239,68,68,0.12)', color: '#ef4444', padding: '2px 6px', borderRadius: 6, border: '1px solid rgba(239,68,68,0.5)', fontSize: 12 }, children: ["\uD83D\uDD34 ", d.name, " (", d.duration, ")"] }, `ed-${idx}`)))] }))] }), combatState.isPlayerTurn && combatState.status === 'ongoing' && ((0, jsx_runtime_1.jsxs)("div", { style: { marginBottom: '20px' }, children: [(0, jsx_runtime_1.jsx)("h3", { style: { color: 'var(--accent)', marginBottom: '10px' }, children: "Actions" }), (0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', flexWrap: 'wrap', gap: '10px' }, children: [availableTechniques.map(technique => ((0, jsx_runtime_1.jsx)("div", { style: { minWidth: '120px' }, children: (0, jsx_runtime_1.jsx)(Button_1.Button, { onClick: () => handleAction(technique.id), disabled: technique.apCost > player.ap || technique.qiCost > player.qi, children: (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("div", { style: { fontWeight: 'bold' }, children: technique.name }), (0, jsx_runtime_1.jsxs)("div", { style: { fontSize: '0.8rem', opacity: 0.8 }, children: ["AP: ", technique.apCost, " | Qi: ", technique.qiCost] })] }) }) }, technique.id))), (0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsx)(Button_1.Button, { onClick: handleFlee, variant: "secondary", children: "\uD83C\uDFC3 Flee" }) })] })] })), (0, jsx_runtime_1.jsxs)("div", { style: {
+                        }, children: [(0, jsx_runtime_1.jsxs)("h3", { style: { color: 'var(--danger)', marginBottom: '10px' }, children: ["\uD83D\uDC79 ", enemy.name] }), enemyIntent && ((0, jsx_runtime_1.jsx)("div", { style: { marginBottom: '8px' }, children: (0, jsx_runtime_1.jsxs)(SmallChip_1.default, { variant: "danger", children: ["Intent: ", enemyIntent.intent.toUpperCase(), " ", enemyIntentTechniqueName ? `(${enemyIntentTechniqueName})` : ''] }) })), (0, jsx_runtime_1.jsxs)("div", { style: { marginBottom: '10px' }, children: [(0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }, children: [(0, jsx_runtime_1.jsx)("span", { children: "HP:" }), (0, jsx_runtime_1.jsxs)("span", { children: [enemy.hp, "/", enemy.maxHp] })] }), (0, jsx_runtime_1.jsx)(Progress_1.Progress, { value: (enemy.hp / enemy.maxHp) * 100, max: 100 })] }), (0, jsx_runtime_1.jsxs)("div", { style: { marginBottom: '10px' }, children: [(0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }, children: [(0, jsx_runtime_1.jsx)("span", { children: "Qi:" }), (0, jsx_runtime_1.jsxs)("span", { children: [enemy.qi, "/", enemy.maxQi] })] }), (0, jsx_runtime_1.jsx)(Progress_1.Progress, { value: (enemy.qi / enemy.maxQi) * 100, max: 100 })] }), (0, jsx_runtime_1.jsx)("div", { style: { marginBottom: '5px' }, children: (0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', justifyContent: 'space-between' }, children: [(0, jsx_runtime_1.jsx)("span", { children: "AP:" }), (0, jsx_runtime_1.jsxs)("span", { children: [enemy.ap, "/", enemy.maxAp] })] }) })] }), (enemy.buffs?.length || enemy.debuffs?.length) && ((0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8 }, children: [enemy.buffs?.map((b, idx) => ((0, jsx_runtime_1.jsx)(RichTooltip_1.default, { content: b.description, children: (0, jsx_runtime_1.jsxs)(SmallChip_1.default, { variant: "success", children: ["\uD83D\uDFE2 ", b.name, " (", b.duration, ")"] }) }, `eb-${idx}`))), enemy.debuffs?.map((d, idx) => ((0, jsx_runtime_1.jsx)(RichTooltip_1.default, { content: d.description, children: (0, jsx_runtime_1.jsxs)(SmallChip_1.default, { variant: "danger", children: ["\uD83D\uDD34 ", d.name, " (", d.duration, ")"] }) }, `ed-${idx}`)))] }))] }), combatState.isPlayerTurn && combatState.status === 'ongoing' && ((0, jsx_runtime_1.jsxs)("div", { style: { marginBottom: '20px' }, children: [(0, jsx_runtime_1.jsx)("h3", { style: { color: 'var(--accent)', marginBottom: '10px' }, children: "Actions" }), (0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', flexWrap: 'wrap', gap: '10px' }, children: [availableTechniques.map(technique => ((0, jsx_runtime_1.jsx)("div", { style: { minWidth: '120px' }, children: (0, jsx_runtime_1.jsx)(Button_1.Button, { onClick: () => handleAction(technique.id), disabled: technique.apCost > player.ap || technique.qiCost > player.qi, children: (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("div", { style: { fontWeight: 'bold' }, children: technique.name }), (0, jsx_runtime_1.jsxs)("div", { style: { fontSize: '0.8rem', opacity: 0.8 }, children: ["AP: ", technique.apCost, " | Qi: ", technique.qiCost] })] }) }) }, technique.id))), (0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsx)(Button_1.Button, { onClick: handleFlee, variant: "secondary", children: "\uD83C\uDFC3 Flee" }) })] })] })), (0, jsx_runtime_1.jsxs)("div", { style: {
                     backgroundColor: 'var(--dark)',
                     padding: '15px',
                     borderRadius: '8px',

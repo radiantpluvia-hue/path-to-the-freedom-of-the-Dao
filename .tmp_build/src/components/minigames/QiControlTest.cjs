@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.QiControlTest = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const react_1 = require("react");
+const rng_1 = require("../../utils/rng");
+const seededRng_1 = require("../../utils/seededRng");
 const QiControlTest = ({ difficulty, timeLimit = 300, successThreshold, onComplete }) => {
     const [timeLeft, setTimeLeft] = (0, react_1.useState)(timeLimit);
     const [score, setScore] = (0, react_1.useState)(0);
@@ -65,9 +67,19 @@ const QiControlTest = ({ difficulty, timeLimit = 300, successThreshold, onComple
     const spawnNewTarget = () => {
         if (!isActive)
             return;
+        const resolveRng = () => {
+            const maybe = (0, rng_1.getRng)();
+            if (typeof maybe === 'function')
+                return maybe;
+            const rt = (0, seededRng_1.runtimeRng)();
+            if (typeof rt === 'function')
+                return rt;
+            return Math.random;
+        };
+        const rng = resolveRng();
         const newTarget = {
-            x: Math.random() * 80 + 10, // 10-90%
-            y: Math.random() * 80 + 10,
+            x: rng() * 80 + 10, // 10-90%
+            y: rng() * 80 + 10,
             size: settings.targetSize
         };
         setCurrentTarget(newTarget);

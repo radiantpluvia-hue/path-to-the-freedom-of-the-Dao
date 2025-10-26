@@ -67,7 +67,7 @@ export interface MentorTeaching {
   prerequisites?: Prerequisites;
 }
 
-export type TeachingDifficulty = 'easy' | 'medium' | 'hard' | 'extreme' | 'legendary' | 'mythical' | 'transcendent' | 'impossible';
+export type TeachingDifficulty = 'easy' | 'medium' | 'hard' | 'extreme' | "D" | 'mythical' | "B" | 'impossible';
 
 export interface TeachingChallenge {
   type: TeachingChallengeType;

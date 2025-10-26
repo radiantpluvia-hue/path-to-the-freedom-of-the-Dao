@@ -1,4 +1,7 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MainQuestPanel = MainQuestPanel;
 exports.SectQuestsPanel = SectQuestsPanel;
@@ -6,6 +9,7 @@ exports.BetrayalMissionsPanel = BetrayalMissionsPanel;
 exports.RandomMissionsPanel = RandomMissionsPanel;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const useGameStore_1 = require("@/store/useGameStore");
+const SmallChip_1 = __importDefault(require("@/components/ui/SmallChip"));
 const Button_1 = require("@/components/core/Button");
 const Card_1 = require("@/components/core/Card");
 const storyData_1 = require("@/events/storyData");
@@ -29,9 +33,8 @@ function MainQuestPanel() {
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
-                                opacity: obj.isCompleted ? 0.5 : 1,
-                                padding: '4px 0'
-                            }, children: [(0, jsx_runtime_1.jsxs)("span", { children: ["- ", obj.description] }), obj.isCompleted && ((0, jsx_runtime_1.jsx)("span", { style: { color: 'var(--success)' }, children: "\u2713" }))] }, index)))] }), (0, jsx_runtime_1.jsxs)("div", { style: { marginTop: '12px', fontSize: '0.8rem', color: 'var(--muted)' }, children: ["Status: ", (0, jsx_runtime_1.jsx)("span", { style: { color: quest.status === 'completed' ? 'var(--success)' : 'var(--primary)' }, children: quest.status.charAt(0).toUpperCase() + quest.status.slice(1) })] })] }, quest.id))) }));
+                                opacity: obj.isCompleted ? 0.5 : 1
+                            }, children: [(0, jsx_runtime_1.jsxs)("span", { children: ["- ", obj.description] }), obj.isCompleted && ((0, jsx_runtime_1.jsx)(SmallChip_1.default, { style: { color: 'var(--success)', marginLeft: 8 }, children: "\u2713" }))] }, index)))] }), (0, jsx_runtime_1.jsxs)("div", { style: { marginTop: '12px', fontSize: '0.8rem', color: 'var(--muted)' }, children: ["Status: ", (0, jsx_runtime_1.jsx)("span", { style: { color: quest.status === 'completed' ? 'var(--success)' : 'var(--primary)' }, children: quest.status.charAt(0).toUpperCase() + quest.status.slice(1) })] })] }, quest.id))) }));
 }
 function SectQuestsPanel() {
     const { story, player, addEventLog } = (0, useGameStore_1.useGameStore)(state => ({
@@ -50,7 +53,7 @@ function SectQuestsPanel() {
             const quest = getQuestData(questId);
             if (!quest)
                 return null;
-            return ((0, jsx_runtime_1.jsxs)(Card_1.Card, { title: `🛕 ${quest.title}`, children: [(0, jsx_runtime_1.jsx)("p", { style: { color: 'var(--muted)', marginBottom: '15px', fontSize: '0.9rem', lineHeight: 1.4 }, children: quest.description }), (0, jsx_runtime_1.jsxs)("div", { style: { display: 'grid', gap: '8px', fontSize: '0.9rem' }, children: [(0, jsx_runtime_1.jsx)("strong", { children: "Objectives:" }), quest.objectives.map((obj, index) => ((0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', opacity: obj.isCompleted(useGameStore_1.useGameStore.getState()) ? 0.5 : 1 }, children: [(0, jsx_runtime_1.jsxs)("span", { children: ["- ", obj.description] }), obj.type === 'trigger_event' && !obj.isCompleted(useGameStore_1.useGameStore.getState()) && ((0, jsx_runtime_1.jsx)(Button_1.Button, { onClick: () => addEventLog(`Trigger event: ${String(obj.target)}`), size: "small", children: "Begin" })), obj.isCompleted(useGameStore_1.useGameStore.getState()) && ((0, jsx_runtime_1.jsx)("span", { style: { color: 'var(--success)' }, children: "\u2713" }))] }, index)))] })] }, quest.id));
+            return ((0, jsx_runtime_1.jsxs)(Card_1.Card, { title: `🛕 ${quest.title}`, children: [(0, jsx_runtime_1.jsx)("p", { style: { color: 'var(--muted)', marginBottom: '15px', fontSize: '0.9rem', lineHeight: 1.4 }, children: quest.description }), (0, jsx_runtime_1.jsxs)("div", { style: { display: 'grid', gap: '8px', fontSize: '0.9rem' }, children: [(0, jsx_runtime_1.jsx)("strong", { children: "Objectives:" }), quest.objectives.map((obj, index) => ((0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', opacity: obj.isCompleted(useGameStore_1.useGameStore.getState()) ? 0.5 : 1 }, children: [(0, jsx_runtime_1.jsxs)("span", { children: ["- ", obj.description] }), obj.type === 'trigger_event' && !obj.isCompleted(useGameStore_1.useGameStore.getState()) && ((0, jsx_runtime_1.jsx)(Button_1.Button, { onClick: () => addEventLog(`Trigger event: ${String(obj.target)}`), size: "small", children: (0, jsx_runtime_1.jsx)(SmallChip_1.default, { children: "Begin" }) })), obj.isCompleted(useGameStore_1.useGameStore.getState()) && ((0, jsx_runtime_1.jsx)("span", { style: { color: 'var(--success)' }, children: "\u2713" }))] }, index)))] })] }, quest.id));
         }) }));
 }
 function BetrayalMissionsPanel() {
@@ -61,7 +64,7 @@ function BetrayalMissionsPanel() {
     if (!story.activeBetrayalMissions || story.activeBetrayalMissions.length === 0) {
         return null;
     }
-    return ((0, jsx_runtime_1.jsx)(Card_1.Card, { title: "\uD83E\uDD2B Secret Missions", children: (0, jsx_runtime_1.jsx)("div", { style: { display: 'grid', gap: '15px' }, children: story.activeBetrayalMissions.map(mission => ((0, jsx_runtime_1.jsxs)("div", { style: { border: '1px solid var(--danger)', padding: '10px', borderRadius: '4px', backgroundColor: 'rgba(255, 0, 0, 0.05)' }, children: [(0, jsx_runtime_1.jsx)("strong", { style: { color: 'var(--danger)' }, children: mission.title }), (0, jsx_runtime_1.jsx)("p", { style: { color: 'var(--muted)', fontSize: '0.85rem', margin: '5px 0' }, children: mission.description }), (0, jsx_runtime_1.jsx)(Button_1.Button, { onClick: () => addEventLog(`Complete betrayal mission: ${mission.id}`), size: "small", variant: "danger", children: "Complete Task" })] }, mission.id))) }) }));
+    return ((0, jsx_runtime_1.jsx)(Card_1.Card, { title: "\uD83E\uDD2B Secret Missions", children: (0, jsx_runtime_1.jsx)("div", { style: { display: 'grid', gap: '15px' }, children: story.activeBetrayalMissions.map(mission => ((0, jsx_runtime_1.jsxs)("div", { style: { border: '1px solid var(--danger)', padding: '10px', borderRadius: '4px', backgroundColor: 'rgba(255, 0, 0, 0.05)' }, children: [(0, jsx_runtime_1.jsx)("strong", { style: { color: 'var(--danger)' }, children: mission.title }), (0, jsx_runtime_1.jsx)("p", { style: { color: 'var(--muted)', fontSize: '0.85rem', margin: '5px 0' }, children: mission.description }), (0, jsx_runtime_1.jsx)(Button_1.Button, { onClick: () => addEventLog(`Complete betrayal mission: ${mission.id}`), size: "small", variant: "danger", children: (0, jsx_runtime_1.jsx)(SmallChip_1.default, { variant: "danger", children: "Complete Task" }) })] }, mission.id))) }) }));
 }
 function RandomMissionsPanel() {
     const { story, player, attemptMission } = (0, useGameStore_1.useGameStore)(state => ({

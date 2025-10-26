@@ -1,0 +1,4388 @@
+[
+  {
+    "id": "mentor_shaolin_abbot.quest01",
+    "type": "mentor_encounter",
+    "title": "Broken Bell",
+    "description": "A bell with a cracked tongue stands in the training hall. The abbot asks you to learn why small details matter by tending to it.",
+    "choices": [
+      {
+        "id": "tend",
+        "text": "Carefully adjust the bell and test its tone.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.broken_bell"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest01.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "ignore",
+        "text": "Leave it cracked; it's still a bell.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest01.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest02",
+    "type": "mentor_encounter",
+    "title": "Morning Kettle",
+    "description": "The abbot asks you to keep the morning kettle at a steady simmer — a test of attention and rhythm.",
+    "choices": [
+      {
+        "id": "tend",
+        "text": "Tend the kettle carefully until it's just right.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.morning_kettle"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest02.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "neglect",
+        "text": "Leave it; it's only tea.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest02.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest03",
+    "type": "mentor_encounter",
+    "title": "Row of Bowls",
+    "description": "A neat row of bowls needs arranging by size and cleanliness. The abbot uses this to teach order.",
+    "choices": [
+      {
+        "id": "arrange",
+        "text": "Arrange and polish each bowl carefully.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.row_of_bowls"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest03.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "slapdash",
+        "text": "Throw them in order of convenience.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest03.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest04",
+    "type": "mentor_encounter",
+    "title": "Bamboo Sweeps",
+    "description": "The abbot demonstrates a sweeping motion; he asks you to copy it until the movement is calm and precise.",
+    "choices": [
+      {
+        "id": "copy",
+        "text": "Practice the sweep slowly.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.bamboo_sweeps"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest04.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "half",
+        "text": "Do it hastily; it's fine.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest04.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_shaolin_abbot.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_shaolin_abbot",
+    "id": "mentor_shaolin_abbot.quest05",
+    "title": "Whistling Bamboo",
+    "description": "The Abbot gestures to a grove of bamboo and demonstrates a breathing drill that makes the stalks hum — an exercise in focus and timing.",
+    "choices": [
+      {
+        "id": "accept",
+        "label": "Practice the bamboo breathing",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_shaolin_abbot",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "shaolin_training_note_05"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_shaolin_abbot.quest05.completed"
+              ]
+            }
+          }
+        ],
+        "text": "accept"
+      },
+      {
+        "id": "decline",
+        "label": "Politely decline",
+        "effects": [
+          {
+            "add_event_log": "You bow and decline the Abbot's offer, keeping to your own path for now."
+          }
+        ],
+        "text": "decline"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest05",
+    "type": "mentor_encounter",
+    "title": "Whistling Bamboo (Recap)",
+    "description": "The abbot asks you to recall the whistling bamboo exercise and apply it to a new row of poles.",
+    "choices": [
+      {
+        "id": "apply",
+        "text": "Apply the whistling rhythm to each pole.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.whistling_bamboo_recap"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest05.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "ignore",
+        "text": "Skip the exercise.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest05.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_shaolin_abbot.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_shaolin_abbot",
+    "id": "mentor_shaolin_abbot.quest06",
+    "title": "Iron Palm Drill",
+    "description": "The Abbot demonstrates an iron palm conditioning drill. He offers you a guided set of strikes to build resilience.",
+    "choices": [
+      {
+        "id": "train",
+        "label": "Endure the patience of the drill",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_shaolin_abbot",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "shaolin_training_note_06"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_shaolin_abbot.quest06.completed"
+              ]
+            }
+          }
+        ],
+        "text": "train"
+      },
+      {
+        "id": "rest",
+        "label": "Ask to rest instead",
+        "effects": [
+          {
+            "add_event_log": "You ask for a brief rest; the Abbot nods and lets you breathe."
+          }
+        ],
+        "text": "rest"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest06",
+    "type": "mentor_encounter",
+    "title": "Iron Palm Drill (Recap)",
+    "description": "The abbot sets you on a slow iron-palm drill to feel the edge of control and restraint.",
+    "choices": [
+      {
+        "id": "drill",
+        "text": "Perform the drill with steady force.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.iron_palm_drill_recap"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest06.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sloppy",
+        "text": "Strike quickly without focus.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest06.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_shaolin_abbot.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_shaolin_abbot",
+    "id": "mentor_shaolin_abbot.quest07",
+    "title": "Morning Kneeling",
+    "description": "Before dawn the Abbot leads a simple kneeling ritual to sharpen humility and endurance. He invites you to join.",
+    "choices": [
+      {
+        "id": "join",
+        "label": "Join the kneeling ritual",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_shaolin_abbot",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "shaolin_training_note_07"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_shaolin_abbot.quest07.completed"
+              ]
+            }
+          }
+        ],
+        "text": "join"
+      },
+      {
+        "id": "observe",
+        "label": "Watch quietly",
+        "effects": [
+          {
+            "add_event_log": "You watch the ritual, feeling a slow calm settle over you."
+          }
+        ],
+        "text": "observe"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest07",
+    "type": "mentor_encounter",
+    "title": "Morning Kneeling (Recap)",
+    "description": "Kneel with the monks and learn to steady your back and breath; the abbot watches your humility.",
+    "choices": [
+      {
+        "id": "kneel",
+        "text": "Kneel and focus on breath and posture.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.morning_kneeling_recap"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest07.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "half_kneel",
+        "text": "Half-hearted kneel; finish quickly.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest07.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_shaolin_abbot.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_shaolin_abbot",
+    "id": "mentor_shaolin_abbot.quest08",
+    "title": "Moonlit Forms",
+    "description": "Under the moon the Abbot guides you through fluid forms designed to align breath and motion. It feels like learning to move as one organism.",
+    "choices": [
+      {
+        "id": "practice",
+        "label": "Practice the moonlit form",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_shaolin_abbot",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "shaolin_training_note_08"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_shaolin_abbot.quest08.completed"
+              ]
+            }
+          }
+        ],
+        "text": "practice"
+      },
+      {
+        "id": "retire",
+        "label": "Take your leave",
+        "effects": [
+          {
+            "add_event_log": "You take your leave, storing the memory of the Abbot's form for quiet practice."
+          }
+        ],
+        "text": "retire"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest08",
+    "type": "mentor_encounter",
+    "title": "Moonlit Forms (Recap)",
+    "description": "Under moonlight the abbot asks you to practice forms slowly and with purpose.",
+    "choices": [
+      {
+        "id": "practice",
+        "text": "Move through the forms deliberately.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.moonlit_forms_recap"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest08.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "brisk",
+        "text": "Speed through without feeling.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest08.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest09",
+    "type": "mentor_encounter",
+    "title": "Silent Observation",
+    "description": "The abbot asks you to sit and observe without acting — a test of presence and restraint.",
+    "choices": [
+      {
+        "id": "observe",
+        "text": "Sit and observe patiently.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.silent_observation"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest09.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "fidget",
+        "text": "Fidget and glance around; it's boring.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest09.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest10",
+    "type": "mentor_encounter",
+    "title": "Sweeping Endurance",
+    "description": "Sweep the courtyard until your arms tire — the abbot gauges your willingness to sustain small, repeated acts.",
+    "choices": [
+      {
+        "id": "sweep",
+        "text": "Sweep steadily until the courtyard is clean.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.sweeping_endurance"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest10.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "half_sweep",
+        "text": "Do a quick pass and stop.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest10.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest11",
+    "type": "mentor_encounter",
+    "title": "Kettledrum Patience",
+    "description": "The abbot asks you to keep a slow, steady rhythm on a kettledrum for an hour — a test of patience and focus.",
+    "choices": [
+      {
+        "id": "keep_rhythm",
+        "text": "Keep the rhythm steadily, matching the abbot's breathing.",
+        "effects": [
+          {
+            "grant_trust": 3
+          },
+          {
+            "lore_collect": "shaolin.kettledrum_patience"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest11.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "drift",
+        "text": "Let your mind wander and play when it feels natural.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest11.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest12",
+    "type": "mentor_encounter",
+    "title": "Morning Kata Alignment",
+    "description": "The abbot requests you to repeat a simple set of forms while focusing on alignment over power.",
+    "choices": [
+      {
+        "id": "focus_alignment",
+        "text": "Move slowly and emphasize posture and balance.",
+        "effects": [
+          {
+            "grant_trust": 4
+          },
+          {
+            "lore_collect": "shaolin.morning_kata_alignment"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest12.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "rush",
+        "text": "Rush through the motions to finish quickly.",
+        "effects": [
+          {
+            "grant_trust": 1
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest12.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest13",
+    "type": "mentor_encounter",
+    "title": "Silent Kettling",
+    "description": "A small iron kettle must be warmed and poured without a sound. The abbot watches for care and humility.",
+    "choices": [
+      {
+        "id": "careful",
+        "text": "Perform the task with care and total silence.",
+        "effects": [
+          {
+            "grant_trust": 3
+          },
+          {
+            "lore_collect": "shaolin.silent_kettling"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest13.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "hasty",
+        "text": "Hurry and get it done before it cools.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest13.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest14",
+    "type": "mentor_encounter",
+    "title": "Sweeping Reflection",
+    "description": "At dusk you are asked to sweep the outer courtyard while reflecting on a teaching the abbot whispers.",
+    "choices": [
+      {
+        "id": "reflect",
+        "text": "Sweep slowly and reflect on the abbot's instruction.",
+        "effects": [
+          {
+            "grant_trust": 5
+          },
+          {
+            "lore_collect": "shaolin.sweeping_reflection"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest14.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "finish_fast",
+        "text": "Finish quickly and be done with it.",
+        "effects": [
+          {
+            "grant_trust": 1
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest14.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_shaolin_abbot.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest01",
+    "title": "Morning Sun Circulation",
+    "description": "The Grandmaster asks you to practice a gentle circulation at dawn to awaken the limbs without force.",
+    "choices": [
+      {
+        "id": "practice",
+        "label": "Practice the circulation carefully",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "wudang.circulation_note_01"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest01.completed"
+              ]
+            }
+          }
+        ],
+        "text": "practice"
+      },
+      {
+        "id": "skip",
+        "label": "Save energy and skip",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest01.completed"
+              ]
+            }
+          }
+        ],
+        "text": "skip"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest02",
+    "title": "Balanced Step",
+    "description": "You are instructed to walk a measured line on the stone path, keeping balance as the Grandmaster watches.",
+    "choices": [
+      {
+        "id": "steady",
+        "label": "Take steady, mindful steps",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 3
+            }
+          },
+          {
+            "lore_collect": "wudang.balance_note_02"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest02.completed"
+              ]
+            }
+          }
+        ],
+        "text": "steady"
+      },
+      {
+        "id": "rush",
+        "label": "Hurry through the path",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest02.completed"
+              ]
+            }
+          }
+        ],
+        "text": "rush"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest03",
+    "title": "Water Breathing",
+    "description": "A basin of cold water is set before you; the Grandmaster asks you to breathe in time with its ripples.",
+    "choices": [
+      {
+        "id": "match",
+        "label": "Match your breathing to the water",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "wudang.breathing_note_03"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest03.completed"
+              ]
+            }
+          }
+        ],
+        "text": "match"
+      },
+      {
+        "id": "distract",
+        "label": "Let thoughts wander",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest03.completed"
+              ]
+            }
+          }
+        ],
+        "text": "distract"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest04",
+    "title": "Silk Thread Focus",
+    "description": "A length of silk is suspended; the Grandmaster asks you to hold it steady as a test of fine control.",
+    "choices": [
+      {
+        "id": "steady_hold",
+        "label": "Hold the silk steady",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 3
+            }
+          },
+          {
+            "lore_collect": "wudang.silk_note_04"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest04.completed"
+              ]
+            }
+          }
+        ],
+        "text": "steady_hold"
+      },
+      {
+        "id": "let_go",
+        "label": "Let the silk move naturally",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest04.completed"
+              ]
+            }
+          }
+        ],
+        "text": "let_go"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest05",
+    "title": "Breathing Ripple",
+    "description": "The Grandmaster instructs a subtle breathing ripple to carry power through the limbs — a lesson in inner flow.",
+    "choices": [
+      {
+        "id": "attempt",
+        "label": "Attempt the ripple",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "wudang_training_note_05"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest05.completed"
+              ]
+            }
+          }
+        ],
+        "text": "attempt"
+      },
+      {
+        "id": "wait",
+        "label": "Ask for a simpler demonstration",
+        "effects": [
+          {
+            "add_event_log": "The Grandmaster smiles and demonstrates a simpler circulation instead."
+          }
+        ],
+        "text": "wait"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest06",
+    "title": "Silk-Thread Saber",
+    "description": "A practiced cut so light it feels like pulling a thread — the Master teases the mechanics of economy and precision.",
+    "choices": [
+      {
+        "id": "practice",
+        "label": "Mimic the movement",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "wudang_training_note_06"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest06.completed"
+              ]
+            }
+          }
+        ],
+        "text": "practice"
+      },
+      {
+        "id": "refine",
+        "label": "Ask for refinement advice",
+        "effects": [
+          {
+            "add_event_log": "The Master offers a tiny correction that changes the geometry of your cut."
+          }
+        ],
+        "text": "refine"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest07",
+    "title": "Hidden Water Step",
+    "description": "The Master demonstrates a footwork that flows like water, shifting weight invisibly — practice in evasive balance.",
+    "choices": [
+      {
+        "id": "learn",
+        "label": "Learn the water step",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "wudang_training_note_07"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest07.completed"
+              ]
+            }
+          }
+        ],
+        "text": "learn"
+      },
+      {
+        "id": "skip",
+        "label": "Skip the lesson",
+        "effects": [
+          {
+            "add_event_log": "You skip the lesson, noting the Master's quiet smile."
+          }
+        ],
+        "text": "skip"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest08",
+    "title": "Meditative Feint",
+    "description": "In a controlled exercise the Grandmaster shows how a clear mind can hide intent — a feint that begins with an empty breath.",
+    "choices": [
+      {
+        "id": "attempt",
+        "label": "Try the feint",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "wudang_training_note_08"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest08.completed"
+              ]
+            }
+          }
+        ],
+        "text": "attempt"
+      },
+      {
+        "id": "watch",
+        "label": "Watch and learn",
+        "effects": [
+          {
+            "add_event_log": "You watch the Grandmaster and file away the pattern for later practice."
+          }
+        ],
+        "text": "watch"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest09",
+    "title": "Bristle Stance Test",
+    "description": "The master asks you to hold a low stance while shifting weight like bristles in wind.",
+    "choices": [
+      {
+        "id": "hold",
+        "label": "Hold the stance despite the ache",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "wudang.stance_note_09"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest09.completed"
+              ]
+            }
+          }
+        ],
+        "text": "hold"
+      },
+      {
+        "id": "rest",
+        "label": "Take a breather and rest",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest09.completed"
+              ]
+            }
+          }
+        ],
+        "text": "rest"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest10",
+    "title": "Sparring: Slow Motion",
+    "description": "You spar slowly with a senior disciple to learn control over momentum rather than speed.",
+    "choices": [
+      {
+        "id": "control",
+        "label": "Focus on control and timing",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "wudang.sparring_note_10"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest10.completed"
+              ]
+            }
+          }
+        ],
+        "text": "control"
+      },
+      {
+        "id": "win_quick",
+        "label": "Try to win by force",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest10.completed"
+              ]
+            }
+          }
+        ],
+        "text": "win_quick"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest11",
+    "title": "Threaded Water Form",
+    "description": "Practice a flowing form that guides force like a thread through water.",
+    "choices": [
+      {
+        "id": "flow",
+        "label": "Move fluidly and accept guidance",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "wudang.form_note_11"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest11.completed"
+              ]
+            }
+          }
+        ],
+        "text": "flow"
+      },
+      {
+        "id": "stiff",
+        "label": "Hold rigid and correct posture later",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest11.completed"
+              ]
+            }
+          }
+        ],
+        "text": "stiff"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest12",
+    "title": "Moon Tide Alignment",
+    "description": "At night you perform a sequence to align breathing with the moon's calm rhythm.",
+    "choices": [
+      {
+        "id": "align",
+        "label": "Align breath and movement",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "wudang.moon_note_12"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest12.completed"
+              ]
+            }
+          }
+        ],
+        "text": "align"
+      },
+      {
+        "id": "ignore",
+        "label": "Rest instead",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest12.completed"
+              ]
+            }
+          }
+        ],
+        "text": "ignore"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest13",
+    "title": "Hidden Path Breath",
+    "description": "You are led along a narrow mountain path and instructed to breathe calmly to maintain footing.",
+    "choices": [
+      {
+        "id": "calm",
+        "label": "Breathe calmly and proceed",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 3
+            }
+          },
+          {
+            "lore_collect": "wudang.path_note_13"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest13.completed"
+              ]
+            }
+          }
+        ],
+        "text": "calm"
+      },
+      {
+        "id": "rush",
+        "label": "Hurry and get through it",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest13.completed"
+              ]
+            }
+          }
+        ],
+        "text": "rush"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest14",
+    "title": "Final Water Gesture",
+    "description": "A culminating exercise: a small, precise water gesture to demonstrate everything learned.",
+    "choices": [
+      {
+        "id": "perform",
+        "label": "Perform the gesture with confidence",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "wudang.final_gesture_14"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest14.completed"
+              ]
+            }
+          }
+        ],
+        "text": "perform"
+      },
+      {
+        "id": "half",
+        "label": "Do a partial attempt",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 2
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest14.completed"
+              ]
+            }
+          }
+        ],
+        "text": "half"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest01",
+    "title": "Dawn Boil of Tears",
+    "description": "The Matron asks you to collect dew at dawn and use it to brew a mild restorative tea — a lesson in gentle attention.",
+    "choices": [
+      {
+        "id": "collect",
+        "label": "Collect dew carefully and brew the tea",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 3
+            }
+          },
+          {
+            "lore_collect": "emei.dew_tea_01"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest01.completed"
+              ]
+            }
+          }
+        ],
+        "text": "collect"
+      },
+      {
+        "id": "ignore",
+        "label": "Leave the dew for the plants",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest01.completed"
+              ]
+            }
+          }
+        ],
+        "text": "ignore"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest02",
+    "title": "Silk Bandage Practice",
+    "description": "You are taught to apply silk bandages with even tension — small hands, steady care.",
+    "choices": [
+      {
+        "id": "apply",
+        "label": "Apply bandages with care",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "emei.bandage_note_02"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest02.completed"
+              ]
+            }
+          }
+        ],
+        "text": "apply"
+      },
+      {
+        "id": "rush",
+        "label": "Wrap quickly to finish",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest02.completed"
+              ]
+            }
+          }
+        ],
+        "text": "rush"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest03",
+    "title": "Bell and Salve",
+    "description": "The Matron strikes a small bell and asks you to prepare a salve while listening to its resonance — patience and skill combined.",
+    "choices": [
+      {
+        "id": "prepare",
+        "label": "Prepare the salve attentively",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 3
+            }
+          },
+          {
+            "lore_collect": "emei.salve_note_03"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest03.completed"
+              ]
+            }
+          }
+        ],
+        "text": "prepare"
+      },
+      {
+        "id": "clumsy",
+        "label": "Hurry and mix roughly",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest03.completed"
+              ]
+            }
+          }
+        ],
+        "text": "clumsy"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest04",
+    "title": "Lotus Breathing",
+    "description": "You practice a slow breathing technique while holding a lotus petal; the Matron emphasizes gentleness.",
+    "choices": [
+      {
+        "id": "breathe",
+        "label": "Follow the breathing rhythm carefully",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "emei.lotus_breath_04"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest04.completed"
+              ]
+            }
+          }
+        ],
+        "text": "breathe"
+      },
+      {
+        "id": "fidget",
+        "label": "Find it boring and fidget",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest04.completed"
+              ]
+            }
+          }
+        ],
+        "text": "fidget"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest05",
+    "title": "Purifying Sutra",
+    "description": "The Matron hums an old sutra while demonstrating a healing pass — a small lesson in channeling restorative qi.",
+    "choices": [
+      {
+        "id": "accept",
+        "label": "Receive healing instruction",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "emei_healing_note_05"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest05.completed"
+              ]
+            }
+          }
+        ],
+        "text": "accept"
+      },
+      {
+        "id": "decline",
+        "label": "Decline politely",
+        "effects": [
+          {
+            "add_event_log": "You bow and decline the Matron's tutoring for now."
+          }
+        ],
+        "text": "decline"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest06",
+    "title": "Tenacious Guard",
+    "description": "She shows a bracing stance that supports others; the Matron insists you hold the pose until your limbs tremble.",
+    "choices": [
+      {
+        "id": "hold",
+        "label": "Hold the stance",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "emei_healing_note_06"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest06.completed"
+              ]
+            }
+          }
+        ],
+        "text": "hold"
+      },
+      {
+        "id": "soften",
+        "label": "Ask for easier variation",
+        "effects": [
+          {
+            "add_event_log": "She nods and guides you into a gentler variation, instructing patience over pride."
+          }
+        ],
+        "text": "soften"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest07",
+    "title": "Restorative Forms",
+    "description": "The Matron demonstrates a flowing set designed to open wounds and mend chi — gentle, precise, and restorative.",
+    "choices": [
+      {
+        "id": "practice",
+        "label": "Practice the restorative form",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "emei_healing_note_07"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest07.completed"
+              ]
+            }
+          }
+        ],
+        "text": "practice"
+      },
+      {
+        "id": "observe",
+        "label": "Observe quietly",
+        "effects": [
+          {
+            "add_event_log": "You observe the Matron's hands; the motion feels like sewing wind into skin."
+          }
+        ],
+        "text": "observe"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest08",
+    "title": "Soul Mending",
+    "description": "In a quiet alcove the Matron speaks of wounds the eyes cannot see and guides you through a meditative mending.",
+    "choices": [
+      {
+        "id": "engage",
+        "label": "Engage in the mending",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "emei_healing_note_08"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest08.completed"
+              ]
+            }
+          }
+        ],
+        "text": "engage"
+      },
+      {
+        "id": "step_back",
+        "label": "Step back for now",
+        "effects": [
+          {
+            "add_event_log": "You step back, keeping the Matron's words for later."
+          }
+        ],
+        "text": "step_back"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest09",
+    "title": "Silent Heal Test",
+    "description": "A simulated wound is presented; you must tend it in silence to show focus and empathy.",
+    "choices": [
+      {
+        "id": "tend",
+        "label": "Tend it in silence with steady hands",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "emei.silent_heal_09"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest09.completed"
+              ]
+            }
+          }
+        ],
+        "text": "tend"
+      },
+      {
+        "id": "talk",
+        "label": "Talk through the process",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest09.completed"
+              ]
+            }
+          }
+        ],
+        "text": "talk"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest10",
+    "title": "Sacred Band",
+    "description": "You are given a worn band to mend; the Matron watches how you sew patience into it.",
+    "choices": [
+      {
+        "id": "mend",
+        "label": "Sew carefully until it's whole",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "emei.sacred_band_10"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest10.completed"
+              ]
+            }
+          }
+        ],
+        "text": "mend"
+      },
+      {
+        "id": "patch",
+        "label": "Quick patch to make it usable",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest10.completed"
+              ]
+            }
+          }
+        ],
+        "text": "patch"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest11",
+    "title": "Mending Song",
+    "description": "The Matron hums as you stitch; she judges not speed but the care woven into each stitch.",
+    "choices": [
+      {
+        "id": "attend",
+        "label": "Stitch carefully in time with the song",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "emei.mending_song_11"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest11.completed"
+              ]
+            }
+          }
+        ],
+        "text": "attend"
+      },
+      {
+        "id": "hurry",
+        "label": "Finish quickly without attention to rhythm",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest11.completed"
+              ]
+            }
+          }
+        ],
+        "text": "hurry"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest12",
+    "title": "Calm Wind Gesture",
+    "description": "A small hand gesture calms an incense flame; the Matron asks you to replicate it precisely.",
+    "choices": [
+      {
+        "id": "replicate",
+        "label": "Replicate the gesture precisely",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "emei.gesture_note_12"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest12.completed"
+              ]
+            }
+          }
+        ],
+        "text": "replicate"
+      },
+      {
+        "id": "approx",
+        "label": "Approximate it and call it close enough",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest12.completed"
+              ]
+            }
+          }
+        ],
+        "text": "approx"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest13",
+    "title": "Moonlit Salve",
+    "description": "At night you prepare a salve by moonlight; the Matron watches how you preserve its potency.",
+    "choices": [
+      {
+        "id": "preserve",
+        "label": "Keep the salve's potency with careful methods",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "emei.moon_salve_13"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest13.completed"
+              ]
+            }
+          }
+        ],
+        "text": "preserve"
+      },
+      {
+        "id": "cut_corners",
+        "label": "Cut corners to finish sooner",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest13.completed"
+              ]
+            }
+          }
+        ],
+        "text": "cut_corners"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest14",
+    "title": "Parting Bless",
+    "description": "Before you leave the Matron offers a small blessing and asks you to reflect on compassion in practice.",
+    "choices": [
+      {
+        "id": "accept",
+        "label": "Accept the blessing and reflect",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "emei.parting_bless_14"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest14.completed"
+              ]
+            }
+          }
+        ],
+        "text": "accept"
+      },
+      {
+        "id": "keep_moving",
+        "label": "Decline politely and continue your path",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest14.completed"
+              ]
+            }
+          }
+        ],
+        "text": "keep_moving"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest01",
+    "title": "Mountain Breath",
+    "description": "The Eldest asks you to breathe deeply and feel the mountain's rhythm — a primer in grounding.",
+    "choices": [
+      {
+        "id": "breathe",
+        "label": "Breathe with attention",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "kunlun.breath_note_01"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest01.completed"
+              ]
+            }
+          }
+        ],
+        "text": "breathe"
+      },
+      {
+        "id": "shrug",
+        "label": "Shrug it off",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest01.completed"
+              ]
+            }
+          }
+        ],
+        "text": "shrug"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest02",
+    "title": "Stone Posture",
+    "description": "Hold a rooted posture while the Eldest adjusts your stance — strength through stillness.",
+    "choices": [
+      {
+        "id": "hold",
+        "label": "Hold the posture steadily",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "kunlun.posture_note_02"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest02.completed"
+              ]
+            }
+          }
+        ],
+        "text": "hold"
+      },
+      {
+        "id": "break",
+        "label": "Release early",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest02.completed"
+              ]
+            }
+          }
+        ],
+        "text": "break"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest03",
+    "title": "Rock Lineage",
+    "description": "The Eldest tells a short lineage tale and asks you to reflect on what steadiness means in practice.",
+    "choices": [
+      {
+        "id": "reflect",
+        "label": "Reflect on the tale",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 3
+            }
+          },
+          {
+            "lore_collect": "kunlun.lineage_note_03"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest03.completed"
+              ]
+            }
+          }
+        ],
+        "text": "reflect"
+      },
+      {
+        "id": "dismiss",
+        "label": "Dismiss and move on",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest03.completed"
+              ]
+            }
+          }
+        ],
+        "text": "dismiss"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest04",
+    "title": "Tremor: Listen",
+    "description": "Stand barefoot and sense faint tremors; the Eldest trains you to read subtle shifts.",
+    "choices": [
+      {
+        "id": "listen",
+        "label": "Listen and report the shifts",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "kunlun.tremor_note_04"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest04.completed"
+              ]
+            }
+          }
+        ],
+        "text": "listen"
+      },
+      {
+        "id": "fail",
+        "label": "Admit you couldn't feel anything",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest04.completed"
+              ]
+            }
+          }
+        ],
+        "text": "fail"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest05",
+    "title": "Earth Sense",
+    "description": "The Eldest teaches a grounding drill to feel the mountain beneath your feet — a lesson in stability and patience.",
+    "choices": [
+      {
+        "id": "ground",
+        "label": "Practice the grounding drill",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "kunlun_formation_note_05"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest05.completed"
+              ]
+            }
+          }
+        ],
+        "text": "ground"
+      },
+      {
+        "id": "observe",
+        "label": "Observe the Eldest",
+        "effects": [
+          {
+            "add_event_log": "You watch the Eldest and sense the slow patience of the mountain."
+          }
+        ],
+        "text": "observe"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest06",
+    "title": "Formation Basics",
+    "description": "He sketches a simple formation on the ground and explains how bodies and qi interlock to make a mountain move.",
+    "choices": [
+      {
+        "id": "step_in",
+        "label": "Step into the formation",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "kunlun_formation_note_06"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest06.completed"
+              ]
+            }
+          }
+        ],
+        "text": "step_in"
+      },
+      {
+        "id": "watch",
+        "label": "Watch and learn",
+        "effects": [
+          {
+            "add_event_log": "You watch the lines of the formation and feel a new sense of placement."
+          }
+        ],
+        "text": "watch"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest07",
+    "title": "Element Tuning",
+    "description": "The Eldest shows how to tune yourself to a patch of earth and listen for its subtle shifts — a primer on elemental attunement.",
+    "choices": [
+      {
+        "id": "attune",
+        "label": "Attempt to attune",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "kunlun_formation_note_07"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest07.completed"
+              ]
+            }
+          }
+        ],
+        "text": "attune"
+      },
+      {
+        "id": "step_back",
+        "label": "Step back and listen",
+        "effects": [
+          {
+            "add_event_log": "You step back and let the mountain's silence teach you."
+          }
+        ],
+        "text": "step_back"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest08",
+    "title": "Terrain Mastery",
+    "description": "A short field test across rocky slopes challenges your footing; the Eldest coaches you through adjusting to each step.",
+    "choices": [
+      {
+        "id": "attempt",
+        "label": "Try the test",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "kunlun_formation_note_08"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest08.completed"
+              ]
+            }
+          }
+        ],
+        "text": "attempt"
+      },
+      {
+        "id": "delay",
+        "label": "Delay the test",
+        "effects": [
+          {
+            "add_event_log": "You delay the test, promising to return when you are steadier."
+          }
+        ],
+        "text": "delay"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest09",
+    "title": "Gate Formation",
+    "description": "Form a small rock gate with fellow disciples to test coordination under the Eldest's watch.",
+    "choices": [
+      {
+        "id": "build",
+        "label": "Coordinate and build the gate",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "kunlun.formation_note_09"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest09.completed"
+              ]
+            }
+          }
+        ],
+        "text": "build"
+      },
+      {
+        "id": "me_first",
+        "label": "Prioritize your own placement",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest09.completed"
+              ]
+            }
+          }
+        ],
+        "text": "me_first"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest10",
+    "title": "Ridge Endurance",
+    "description": "A short endurance trial along a ridge tests steady breath and footwork.",
+    "choices": [
+      {
+        "id": "endure",
+        "label": "Push through steadily",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "kunlun.endurance_note_10"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest10.completed"
+              ]
+            }
+          }
+        ],
+        "text": "endure"
+      },
+      {
+        "id": "stop",
+        "label": "Stop and rest when needed",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest10.completed"
+              ]
+            }
+          }
+        ],
+        "text": "stop"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest11",
+    "title": "Pillar Shift",
+    "description": "Move a small pillar precisely to align a formation; the Eldest watches for deliberate movement.",
+    "choices": [
+      {
+        "id": "align",
+        "label": "Align the pillar deliberately",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "kunlun.pillar_note_11"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest11.completed"
+              ]
+            }
+          }
+        ],
+        "text": "align"
+      },
+      {
+        "id": "slap",
+        "label": "Force it into place",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest11.completed"
+              ]
+            }
+          }
+        ],
+        "text": "slap"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest12",
+    "title": "Vale Listen",
+    "description": "Sit at the valley's edge and listen for the echo of the land; the Eldest tests your awareness.",
+    "choices": [
+      {
+        "id": "listen",
+        "label": "Sit quietly and listen",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 3
+            }
+          },
+          {
+            "lore_collect": "kunlun.vale_note_12"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest12.completed"
+              ]
+            }
+          }
+        ],
+        "text": "listen"
+      },
+      {
+        "id": "talk",
+        "label": "Talk and disturb the echo",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest12.completed"
+              ]
+            }
+          }
+        ],
+        "text": "talk"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest13",
+    "title": "Summit Footing",
+    "description": "A short climb to a summit requires careful footwork; the Eldest values steady feet.",
+    "choices": [
+      {
+        "id": "careful",
+        "label": "Move with steady footing",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "kunlun.summit_note_13"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest13.completed"
+              ]
+            }
+          }
+        ],
+        "text": "careful"
+      },
+      {
+        "id": "dash",
+        "label": "Dash and risk slipping",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest13.completed"
+              ]
+            }
+          }
+        ],
+        "text": "dash"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest14",
+    "title": "Last Stone Bow",
+    "description": "Before you leave, the Eldest asks for a respectful bow at the last standing stone — a sign of humility.",
+    "choices": [
+      {
+        "id": "bow",
+        "label": "Bow respectfully",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "kunlun.parting_note_14"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest14.completed"
+              ]
+            }
+          }
+        ],
+        "text": "bow"
+      },
+      {
+        "id": "nod",
+        "label": "Nod and move on",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest14.completed"
+              ]
+            }
+          }
+        ],
+        "text": "nod"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_kunlun_eldest.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest01",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Steep Ridge Lesson",
+    "description": "The master gestures to a sheer ridge and asks you to find your footing. It's a test of balance and focus.",
+    "choices": [
+      {
+        "id": "accept",
+        "text": "Accept the lesson and climb the ridge.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 8
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest01.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "decline",
+        "text": "Politely decline and step back.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest01.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest02",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Willow Stance",
+    "description": "You are shown a soft, yielding stance that bends without breaking. The master watches for stubbornness.",
+    "choices": [
+      {
+        "id": "practice",
+        "text": "Practice the willow stance.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 6
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest02.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "ignore",
+        "text": "Ignore the lesson.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest02.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest03",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Hidden Edge Footwork",
+    "description": "A footwork drill on narrow paths sharpens your awareness. The master times your steps.",
+    "choices": [
+      {
+        "id": "try",
+        "text": "Attempt the drill carefully.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 7
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest03.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "decline",
+        "text": "Step away from the risky edge.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest03.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest04",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Mirror of Blades",
+    "description": "The master sets two blades in parallel and asks you to move between them in rhythm.",
+    "choices": [
+      {
+        "id": "perform",
+        "text": "Move with the blades.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 9
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest04.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "watch",
+        "text": "Watch and learn without moving.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest04.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest05",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Dawn Duel Exercise",
+    "description": "At first light the master invites you to a sparring drill meant to temper your reflexes.",
+    "choices": [
+      {
+        "id": "spar",
+        "text": "Take part in the sparring.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 10
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest05.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "sit_out",
+        "text": "Sit out and observe.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest05.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_huashan_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_huashan_master",
+    "id": "mentor_huashan_master.quest05",
+    "title": "Edge Control",
+    "description": "The Swordmaster demonstrates subtle edge angles that make a cut decisive. He asks you to practice a simple parry and return.",
+    "choices": [
+      {
+        "id": "practice",
+        "label": "Practice the parry",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_huashan_master",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "huashan_blade_note_05"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_huashan_master.quest05.completed"
+              ]
+            }
+          }
+        ],
+        "text": "practice"
+      },
+      {
+        "id": "watch",
+        "label": "Watch closely",
+        "effects": [
+          {
+            "add_event_log": "You watch the Swordmaster's motion and see how small shifts change outcome."
+          }
+        ],
+        "text": "watch"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest06",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Lantern Balance",
+    "description": "Balancing a lit lantern while moving tests calm hands; the master times your steadiness.",
+    "choices": [
+      {
+        "id": "try",
+        "text": "Attempt the balance.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 5
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest06.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "decline",
+        "text": "Decline and return the lantern.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest06.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_huashan_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_huashan_master",
+    "id": "mentor_huashan_master.quest06",
+    "title": "Timing",
+    "description": "He times a strike and asks you to meet it; timing here is the blade's true companion.",
+    "choices": [
+      {
+        "id": "meet",
+        "label": "Meet the strike",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_huashan_master",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "huashan_blade_note_06"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_huashan_master.quest06.completed"
+              ]
+            }
+          }
+        ],
+        "text": "meet"
+      },
+      {
+        "id": "hesitate",
+        "label": "Hesitate and observe",
+        "effects": [
+          {
+            "add_event_log": "You hesitate and the Swordmaster nods; timing must come from within."
+          }
+        ],
+        "text": "hesitate"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest07",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Bamboo Ring Drill",
+    "description": "A flowing drill with bamboo rings teaches timing and coordination.",
+    "choices": [
+      {
+        "id": "engage",
+        "text": "Engage in the drill.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 6
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest07.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "observe",
+        "text": "Observe others perform.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest07.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_huashan_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_huashan_master",
+    "id": "mentor_huashan_master.quest07",
+    "title": "Counterstrike",
+    "description": "An exercise in reading the opponent's intent; the Swordmaster guides a simple counter that punishes overreach.",
+    "choices": [
+      {
+        "id": "attempt",
+        "label": "Attempt the counter",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_huashan_master",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "huashan_blade_note_07"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_huashan_master.quest07.completed"
+              ]
+            }
+          }
+        ],
+        "text": "attempt"
+      },
+      {
+        "id": "decline",
+        "label": "Decline for now",
+        "effects": [
+          {
+            "add_event_log": "You decline, promising to return after more practice."
+          }
+        ],
+        "text": "decline"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_huashan_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_huashan_master",
+    "id": "mentor_huashan_master.quest08",
+    "title": "Instant Finish",
+    "description": "A short drill that emphasizes ending a fight cleanly; the Swordmaster's lesson is brief and exact.",
+    "choices": [
+      {
+        "id": "finish",
+        "label": "Practice the finish",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_huashan_master",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "huashan_blade_note_08"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_huashan_master.quest08.completed"
+              ]
+            }
+          }
+        ],
+        "text": "finish"
+      },
+      {
+        "id": "hold_back",
+        "label": "Hold back for safety",
+        "effects": [
+          {
+            "add_event_log": "You hold back, noting the Swordmaster's calm approval."
+          }
+        ],
+        "text": "hold_back"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest08",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Swallow Step Timing",
+    "description": "A lesson on timing: move like a swallow and land light as a feather.",
+    "choices": [
+      {
+        "id": "practice",
+        "text": "Practice the swallow step.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 7
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest08.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "rest",
+        "text": "Rest and watch the demonstration.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest08.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest09",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Peak Breathing",
+    "description": "High on the peak the air is thin; the master guides a breathing exercise to ground you.",
+    "choices": [
+      {
+        "id": "breathe",
+        "text": "Follow the breathing instructions.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 5
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest09.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "skip",
+        "text": "Skip the breathing exercise.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest09.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest10",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Last Shadow Turn",
+    "description": "A closing exercise where you must mirror a shadow's last motion perfectly.",
+    "choices": [
+      {
+        "id": "mirror",
+        "text": "Mirror the motion.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 8
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest10.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "bow_out",
+        "text": "Bow out gracefully.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest10.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest11",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Wind Slice Skill",
+    "description": "The master demonstrates a quick slicing motion that catches the wind; you practice the form.",
+    "choices": [
+      {
+        "id": "attempt",
+        "text": "Attempt the wind slice.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 9
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest11.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "watch",
+        "text": "Watch the master perform.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest11.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest12",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Stone Return Block",
+    "description": "A defensive drill taught to return an incoming strike into the ground; the master corrects your posture.",
+    "choices": [
+      {
+        "id": "practice",
+        "text": "Practice the block.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 7
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest12.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "decline",
+        "text": "Decline and take notes.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest12.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest13",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Moonlit Step and Pause",
+    "description": "Under the moon the master teaches a step-and-pause technique to find openings.",
+    "choices": [
+      {
+        "id": "train",
+        "text": "Train the step-and-pause.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 6
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest13.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "observe",
+        "text": "Observe and copy later.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest13.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest14",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Blessing of the Peak",
+    "description": "The master offers a quiet blessing and a final corrective to your form; a closing of lessons.",
+    "choices": [
+      {
+        "id": "accept",
+        "text": "Accept the blessing graciously.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 12
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest14.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "bow",
+        "text": "Bow and thank the master.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest14.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest01",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Broken Cup Story",
+    "description": "The chief tells a small tale about a broken cup that taught him thrift and wit.",
+    "choices": [
+      {
+        "id": "listen",
+        "text": "Listen and nod along.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 6
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest01.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "leave",
+        "text": "Thank him and leave.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest01.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest02",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Shared Stew",
+    "description": "You help ladle stew for the group; the chief watches how you share.",
+    "choices": [
+      {
+        "id": "help",
+        "text": "Help serve the stew.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 8
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest02.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "refuse",
+        "text": "Politely refuse.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest02.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest03",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Finger Trick",
+    "description": "The chief shows a sleight-of-hand trick and offers to teach a simple misdirection.",
+    "choices": [
+      {
+        "id": "learn",
+        "text": "Learn the trick.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 7
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest03.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "decline",
+        "text": "Decline politely.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest03.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest04",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Patchwork Shawl",
+    "description": "An old shawl needs mending; the chief invites you to stitch and hear his advice.",
+    "choices": [
+      {
+        "id": "stitch",
+        "text": "Help mend the shawl.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 5
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest04.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "watch",
+        "text": "Watch and listen.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest04.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_beggars_chief.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_beggars_chief",
+    "id": "mentor_beggars_chief.quest05",
+    "title": "Nomad Trap",
+    "description": "The Chief demonstrates a simple trap and the network of scouts who use it — a lesson in preparation and community tactics.",
+    "choices": [
+      {
+        "id": "learn",
+        "label": "Learn to set the trap",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_beggars_chief",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "beggars_trick_note_05"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_beggars_chief.quest05.completed"
+              ]
+            }
+          }
+        ],
+        "text": "learn"
+      },
+      {
+        "id": "decline",
+        "label": "Decline politely",
+        "effects": [
+          {
+            "add_event_log": "You decline and the Chief shrugs, already moving to the next story."
+          }
+        ],
+        "text": "decline"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest05",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Sneak Path Practice",
+    "description": "A short stealth exercise to move quietly between tents.",
+    "choices": [
+      {
+        "id": "practice",
+        "text": "Practice moving quietly.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 8
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest05.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "opt_out",
+        "text": "Opt out of the exercise.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest05.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest06",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Map of Hidden Routes",
+    "description": "He unfurls a crude map and offers to show you unseen routes; knowledge for those who care.",
+    "choices": [
+      {
+        "id": "follow",
+        "text": "Follow him and study the routes.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 9
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest06.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "decline",
+        "text": "Decline politely.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest06.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_beggars_chief.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_beggars_chief",
+    "id": "mentor_beggars_chief.quest06",
+    "title": "Network Building",
+    "description": "He outlines how favors, food, and stories bind people; you practice a small act of service to learn the lesson.",
+    "choices": [
+      {
+        "id": "help",
+        "label": "Perform the service",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_beggars_chief",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "beggars_trick_note_06"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_beggars_chief.quest06.completed"
+              ]
+            }
+          }
+        ],
+        "text": "help"
+      },
+      {
+        "id": "watch",
+        "label": "Watch",
+        "effects": [
+          {
+            "add_event_log": "You watch as the Chief weaves favors into obligations and back into protection."
+          }
+        ],
+        "text": "watch"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_beggars_chief.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_beggars_chief",
+    "id": "mentor_beggars_chief.quest07",
+    "title": "Ambush Basics",
+    "description": "A compact lesson in silent positioning and timing; the Chief teaches how to make noise somewhere else while the real work happens.",
+    "choices": [
+      {
+        "id": "participate",
+        "label": "Participate in the drill",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_beggars_chief",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "beggars_trick_note_07"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_beggars_chief.quest07.completed"
+              ]
+            }
+          }
+        ],
+        "text": "participate"
+      },
+      {
+        "id": "sit_out",
+        "label": "Sit it out",
+        "effects": [
+          {
+            "add_event_log": "You sit out the ambush drill, taking in the Chief's sly grin."
+          }
+        ],
+        "text": "sit_out"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest07",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Ring Story Challenge",
+    "description": "He sets a small challenge — tell a concise true story to earn a ring as token.",
+    "choices": [
+      {
+        "id": "tell",
+        "text": "Tell a true story.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 7
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest07.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "refuse",
+        "text": "Refuse the challenge.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest07.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_beggars_chief.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_beggars_chief",
+    "id": "mentor_beggars_chief.quest08",
+    "title": "Improvised Arsenal",
+    "description": "The Chief shows how a simple stick and string can become a weapon — ingenuity more than steel matters here.",
+    "choices": [
+      {
+        "id": "craft",
+        "label": "Craft an improvised tool",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_beggars_chief",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "beggars_trick_note_08"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_beggars_chief.quest08.completed"
+              ]
+            }
+          }
+        ],
+        "text": "craft"
+      },
+      {
+        "id": "refuse",
+        "label": "Refuse the tool",
+        "effects": [
+          {
+            "add_event_log": "You refuse the improvised tool, preferring cleaner weapons, and the Chief laughs."
+          }
+        ],
+        "text": "refuse"
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest08",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Sharpen Thoughts",
+    "description": "A casual riddle and the chief observes how you think under pressure.",
+    "choices": [
+      {
+        "id": "solve",
+        "text": "Try to solve the riddle.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 6
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest08.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "pass",
+        "text": "Pass on the riddle.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest08.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest09",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Night Watch",
+    "description": "Take a turn on watch and show your reliability to the chief.",
+    "choices": [
+      {
+        "id": "take_watch",
+        "text": "Take the watch.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 8
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest09.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "skip",
+        "text": "Skip the watch.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest09.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest10",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Last Cookie Trade",
+    "description": "A small barter for a treat — the chief tests your fairness in trade.",
+    "choices": [
+      {
+        "id": "fair",
+        "text": "Trade fairly.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 9
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest10.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "cheat",
+        "text": "Try to cheat the trade.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest10.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest11",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Shared Spoon Oath",
+    "description": "The chief asks you to share a single spoon between two bowls as a small test of trust and patience.",
+    "choices": [
+      {
+        "id": "share",
+        "text": "Share the spoon without complaint.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 8
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest11.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "insist",
+        "text": "Insist on your own bowl.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest11.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest12",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Streetwise Lesson",
+    "description": "He gives a short lesson on reading faces and crowds — small skills for staying safe and finding opportunity.",
+    "choices": [
+      {
+        "id": "learn",
+        "text": "Listen and practice the lesson.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 9
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest12.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "dismiss",
+        "text": "Dismiss it as trivial.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest12.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest13",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Traveling Story Trade",
+    "description": "He offers a small trinket in exchange for a travel tip — a brief test of generosity and knowledge.",
+    "choices": [
+      {
+        "id": "trade",
+        "text": "Share a helpful travel tip and accept the trinket.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 10
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest13.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "refuse",
+        "text": "Refuse the trade.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest13.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest14",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Parting Smoke and Luck",
+    "description": "Before you leave the camp the chief offers a pinch of ceremonial smoke and a short word of luck.",
+    "choices": [
+      {
+        "id": "accept",
+        "text": "Accept the smoke and bow.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 12
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest14.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "decline",
+        "text": "Decline and thank him.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest14.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_mentor_beggars_chief.disciple"
+  }
+]

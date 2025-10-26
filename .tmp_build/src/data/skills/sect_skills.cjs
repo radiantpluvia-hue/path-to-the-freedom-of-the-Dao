@@ -37,7 +37,7 @@ for (let i = 0; i < 10; i++) {
         apCost: 0,
         qiCost: 6 + (i % 8),
         effects: [{ type: 'generic', target: 'self', value: 25 + (i % 10) }],
-        description: `A common sect technique used by mid-tier disciples.`
+        description: `A H sect technique used by mid-tier disciples.`
     });
 }
 exports.default = exports.SECT_SKILLS;

@@ -1,10 +1,72 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.epochalTournamentExecutor = void 0;
+exports.global_alignment_unlocks_combined = exports.global_check_alignment_unlocks = exports.epochalTournamentExecutor = exports.forcedAscensionExecutor = void 0;
 exports.shouldRunEpochTournament = shouldRunEpochTournament;
-const systems_1 = require("@/systems");
+const logger_1 = require("../../utils/logger");
+// To keep the global executor chunk small we avoid importing the entire
+// systems index here. Instead provide a tiny local helper that builds a
+// simple heavens list from candidates using the same weighting inputs.
+function buildHeavensListLocal(participants, opts) {
+    const { combatWeight = 1, karmaWeight = 0, fameWeight = 0, maxEntries = 100 } = opts || {};
+    const scored = participants.map(p => ({
+        p,
+        score: (p.combatPower || 0) * combatWeight + (p.karma || 0) * karmaWeight + (p.fame || 0) * fameWeight,
+    }));
+    scored.sort((a, b) => b.score - a.score);
+    return scored.slice(0, maxEntries).map(s => s.p);
+}
+function setHeavensListLocal(state, list) {
+    try {
+        state.world.flags = state.world.flags || {};
+        // Keep heavensList available both as a dedicated world property and
+        // mirrored in world.flags for older code paths that expect it there.
+        try {
+            state.world.heavensList = list;
+        }
+        catch (e) { /* ignore */ }
+        state.world.flags['heavensList'] = list;
+    }
+    catch (e) {
+        // swallow
+    }
+}
+// Phase 2: Ascension executor – forces transition to immortal world when triggered.
+// This is invoked by the special ascension event injected at the moment the player reaches true_immortal.
+const forcedAscensionExecutor = (state, _args) => {
+    try {
+        if (!state.world.ascended) {
+            state.world.currentWorldType = 'immortal';
+            state.world.ascended = true;
+            // Mark a story flag so other systems (e.g., content packs or diagnostics) can react.
+            if (!state.story.storyFlags)
+                state.story.storyFlags = {};
+            state.story.storyFlags['ascended_true_immortal'] = true;
+            // Light stat / karma nudge to emphasize breakthrough (kept modest; can tune later)
+            state.player.karma = (state.player.karma || 0) + 25;
+            state.player.combatPower = Math.round((state.player.combatPower || 0) * 1.05 + 10);
+        }
+    }
+    catch (e) {
+        logger_1.logger.warn('forcedAscensionExecutor failed (non-fatal):', e);
+    }
+    return state;
+};
+exports.forcedAscensionExecutor = forcedAscensionExecutor;
+const rng_1 = require("../../utils/rng");
 function rng(state, min, max) {
-    return state.rng ? state.rng(min, max) : (Math.random() * (max - min) + min);
+    try {
+        if (typeof state.rng === 'function')
+            return state.rng(min, max);
+        // Resolve RNG at call-time to allow deterministic injection
+        const rfn = (0, rng_1.getRng)(state);
+        const sample = (typeof rfn === 'function') ? rfn() : Math.random();
+        return sample * (max - min) + min;
+    }
+    catch (e) {
+        const f = (0, rng_1.getRng)(state);
+        const s = (typeof f === 'function') ? f() : Math.random();
+        return s * (max - min) + min;
+    }
 }
 function pickCandidates(state) {
     const player = {
@@ -20,8 +82,8 @@ function pickCandidates(state) {
     return [player, ...npcs];
 }
 function simulateFight(a, b, state) {
-    const aRoll = a.combatPower + rng(state, -0.05, 0.05) * a.combatPower + (a.karma * 0.01);
-    const bRoll = b.combatPower + rng(state, -0.05, 0.05) * b.combatPower + (b.karma * 0.01);
+    const aRoll = a.combatPower + rng(state, -0.05 * a.combatPower, 0.05 * a.combatPower) + (a.karma * 0.01);
+    const bRoll = b.combatPower + rng(state, -0.05 * b.combatPower, 0.05 * b.combatPower) + (b.karma * 0.01);
     return aRoll >= bRoll ? a : b;
 }
 function buildBracket(participants) {
@@ -61,8 +123,8 @@ function runBracket(bracket, state) {
 const epochalTournamentExecutor = (state, args) => {
     const RANK_COUNT = args?.rankCount ?? 100;
     const candidates = pickCandidates(state);
-    const heavens = (0, systems_1.buildHeavensList)(candidates, { combatWeight: 0.8, karmaWeight: 0.2, fameWeight: 0.02, maxEntries: RANK_COUNT });
-    (0, systems_1.setHeavensList)(state, heavens);
+    const heavens = buildHeavensListLocal(candidates, { combatWeight: 0.8, karmaWeight: 0.2, fameWeight: 0.02, maxEntries: RANK_COUNT });
+    setHeavensListLocal(state, heavens);
     const entrants = heavens.slice(0, Math.min(16, heavens.length));
     if (entrants.length < 2) {
         state.world.flags["epochalTournament"] = "insufficient_participants";
@@ -88,8 +150,8 @@ const epochalTournamentExecutor = (state, args) => {
     }
     // Refresh Heavens List post-tournament
     const updatedCandidates = pickCandidates(state);
-    const updated = (0, systems_1.buildHeavensList)(updatedCandidates);
-    (0, systems_1.setHeavensList)(state, updated);
+    const updated = buildHeavensListLocal(updatedCandidates);
+    setHeavensListLocal(state, updated);
     return state;
 };
 exports.epochalTournamentExecutor = epochalTournamentExecutor;
@@ -97,3 +159,56 @@ function shouldRunEpochTournament(state) {
     const last = state.world.lastEpochTournamentYear ?? 0;
     return (state.world.day - last) >= 10000;
 }
+// Executor: check player alignment and unlock hidden backgrounds when thresholds met
+const global_check_alignment_unlocks = (state) => {
+    try {
+        const player = state.player;
+        // Ensure alignment exists
+        const alignment = (player.alignment && player.alignment.id) ? player.alignment.id : null;
+        // If player is explicitly demonic, unlock the demonic cultivator background
+        if (alignment === 'demonic') {
+            // Only set if not already set
+            if (!player.background || player.background.id !== 'demon_demonic_cultivator') {
+                player.background = { id: 'demon_demonic_cultivator', name: 'Demonic Cultivator' };
+                state.story.storyFlags = state.story.storyFlags || {};
+                state.story.storyFlags['unlocked_demonic_cultivator'] = true;
+            }
+            return state;
+        }
+        // If player has axes and high ruthlessness, also unlock as a fallback
+        const axes = (player.alignment && player.alignment.axes) ? player.alignment.axes : null;
+        if (axes && (axes.ruthlessness || 0) >= 60) {
+            if (!player.background || player.background.id !== 'demon_demonic_cultivator') {
+                player.background = { id: 'demon_demonic_cultivator', name: 'Demonic Cultivator' };
+                state.story.storyFlags = state.story.storyFlags || {};
+                state.story.storyFlags['unlocked_demonic_cultivator'] = true;
+            }
+        }
+    }
+    catch (e) {
+        // ignore errors, non-critical
+    }
+    return state;
+};
+exports.global_check_alignment_unlocks = global_check_alignment_unlocks;
+// Combined unlock executor using alignmentUnlocks mapping
+const alignmentUnlocks_1 = require("../../systems/alignmentUnlocks");
+const global_alignment_unlocks_combined = (state) => {
+    try {
+        state.story = state.story || {};
+        state.story.storyFlags = state.story.storyFlags || {};
+        const player = state.player;
+        const unlocked = (0, alignmentUnlocks_1.checkAndApplyAlignmentUnlocks)(player, state.story.storyFlags);
+        if (unlocked && unlocked.length > 0) {
+            // optional: add to world flags for analytics
+            state.world = state.world || {};
+            state.world.flags = state.world.flags || {};
+            state.world.flags['alignmentUnlocks.last'] = unlocked.slice();
+        }
+    }
+    catch (e) {
+        // ignore
+    }
+    return state;
+};
+exports.global_alignment_unlocks_combined = global_alignment_unlocks_combined;

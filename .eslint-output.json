@@ -1,0 +1,60 @@
+﻿
+C:\Users\xbo4k.ZLOVE.000\Downloads\xianxia game\src\App.tsx
+  78:13  warning  Unexpected console statement  no-console
+
+C:\Users\xbo4k.ZLOVE.000\Downloads\xianxia game\src\components\game\MinigamePlayground.tsx
+  2:1  warning  '@/systems/MiniGameSystem' import is restricted from being used by a pattern  no-restricted-imports
+
+C:\Users\xbo4k.ZLOVE.000\Downloads\xianxia game\src\components\game\SectJoiningPanel.tsx
+  3:1  warning  '../../systems/SectSystem' import is restricted from being used by a pattern  no-restricted-imports
+
+C:\Users\xbo4k.ZLOVE.000\Downloads\xianxia game\src\config\balance.ts
+  9:10  warning  'safeImport' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\xbo4k.ZLOVE.000\Downloads\xianxia game\src\data\dialogues.ts
+  1:25  warning  'DialogueLine' is defined but never used    @typescript-eslint/no-unused-vars
+  1:39  warning  'DialogueChoice' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\xbo4k.ZLOVE.000\Downloads\xianxia game\src\data\enemyRegistry.ts
+  2:18  warning  'getRng' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\xbo4k.ZLOVE.000\Downloads\xianxia game\src\events\eventExecutors_act7.ts
+  3:1  warning  '../systems/combatConfig' import is restricted from being used by a pattern  no-restricted-imports
+
+C:\Users\xbo4k.ZLOVE.000\Downloads\xianxia game\src\main.tsx
+  48:21  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+
+C:\Users\xbo4k.ZLOVE.000\Downloads\xianxia game\src\store\useGameStore.ts
+   4:1  warning  '../systems/MiniGameSystem' import is restricted from being used by a pattern        no-restricted-imports
+  10:1  warning  '../systems/CombatSystem' import is restricted from being used by a pattern          no-restricted-imports
+  11:1  warning  '../systems/SaveLoadSystem' import is restricted from being used by a pattern        no-restricted-imports
+  12:1  warning  '../systems/RivalSystem' import is restricted from being used by a pattern           no-restricted-imports
+  13:1  warning  '../systems/SectSystem' import is restricted from being used by a pattern            no-restricted-imports
+  14:1  warning  '../systems/MarketSystem' import is restricted from being used by a pattern          no-restricted-imports
+  19:1  warning  '../systems/MissionSystem' import is restricted from being used by a pattern         no-restricted-imports
+  20:1  warning  '../systems/StorySystem' import is restricted from being used by a pattern           no-restricted-imports
+  22:1  warning  '../systems/BreakthroughSystem' import is restricted from being used by a pattern    no-restricted-imports
+  23:1  warning  '../systems/EnhancedQuestSystem' import is restricted from being used by a pattern   no-restricted-imports
+  24:1  warning  '../systems/CraftingSystem' import is restricted from being used by a pattern        no-restricted-imports
+  25:1  warning  '../systems/BuffSystem' import is restricted from being used by a pattern            no-restricted-imports
+  26:1  warning  '../systems/MentorTeachingSystem' import is restricted from being used by a pattern  no-restricted-imports
+  35:1  warning  '../systems/SectMissionSystem' import is restricted from being used by a pattern     no-restricted-imports
+
+C:\Users\xbo4k.ZLOVE.000\Downloads\xianxia game\src\storyData.ts
+  1:1  warning  './systems/StorySystem' import is restricted from being used by a pattern  no-restricted-imports
+
+C:\Users\xbo4k.ZLOVE.000\Downloads\xianxia game\src\tools\ReplayPlayer.ts
+  137:9  warning  'rng' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\xbo4k.ZLOVE.000\Downloads\xianxia game\src\utils\eventPathTree.ts
+  30:17  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+
+C:\Users\xbo4k.ZLOVE.000\Downloads\xianxia game\src\utils\i18n.ts
+  3:21  warning  'code' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\xbo4k.ZLOVE.000\Downloads\xianxia game\src\utils\proficiency.ts
+  2:10  warning  'REALM_ORDER' is defined but never used  @typescript-eslint/no-unused-vars
+
+Γ£û 28 problems (0 errors, 28 warnings)
+
+ESLint: 0 errors, 28 warnings

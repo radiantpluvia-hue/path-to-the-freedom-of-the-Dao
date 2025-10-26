@@ -25,9 +25,9 @@ describe('Cultivation realms data and helpers', () => {
     expect(CULTIVATION_REALMS.mortal.qiRequirement).toBe(100);
     expect(CULTIVATION_REALMS.mahayana.qiRequirement).toBe(30000);
     expect(CULTIVATION_REALMS.true_immortal.qiRequirement).toBe(256000000);
-    // minor stages sampling
-    expect(CULTIVATION_REALMS.core_formation.minorStages).toBe(5);
-    expect(CULTIVATION_REALMS.soul_transformation.minorStages).toBe(7);
+  // minor stages sampling (updated to match configured overrides)
+  expect(CULTIVATION_REALMS.core_formation.minorStages).toBe(5);
+  expect(CULTIVATION_REALMS.soul_transformation.minorStages).toBe(3);
   });
 
   test('scalingSystem: major tier and multiplier behavior', () => {

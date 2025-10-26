@@ -3,7 +3,30 @@
 export type PlaytestSource = 'event' | 'quest' | 'minigame' | 'faction_battle';
 
 class PlaytestScalingHelper {
-  private enabled = true;
+  // By default enable playtest scaling in normal dev runs, but disable it while
+  // running automated tests (Jest) so unit tests observe unscaled, deterministic
+  // numerical consequences. Tests can still opt-in by calling setEnabled(true).
+  private enabled = (() => {
+    try {
+      // Allow global overrides (used by tests) or explicit env var to force behavior.
+      // Priority: globalThis.__PLAYTEST_SCALING__ -> process.env.PLAYTEST_SCALING -> test detection
+      try {
+        const g: any = (globalThis as any).__PLAYTEST_SCALING__;
+        if (g !== undefined) return String(g) === 'true' || g === true;
+      } catch (e) {
+        // ignore
+      }
+      if (typeof process !== 'undefined' && (process as any).env) {
+        const env = (process as any).env;
+        if (env.PLAYTEST_SCALING !== undefined) return String(env.PLAYTEST_SCALING) === 'true';
+        // Default disable in Jest environment for determinism
+        if (env.JEST_WORKER_ID || env.NODE_ENV === 'test') return false;
+      }
+    } catch (e) {
+      // ignore
+    }
+    return true;
+  })();
 
   // Per-source minimal scale factors (50%)
   private FACTORS: Record<PlaytestSource, number> = {
@@ -14,7 +37,7 @@ class PlaytestScalingHelper {
   };
 
   // Optional global combat power multiplier used for playtesting
-  private combatPowerMultiplier: number = 1;
+  private combatPowerMultiplier = 1;
 
   setCombatPowerMultiplier(n: number) {
     if (isFinite(n) && n > 0) this.combatPowerMultiplier = n;

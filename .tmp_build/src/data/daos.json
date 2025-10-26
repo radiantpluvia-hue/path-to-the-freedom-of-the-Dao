@@ -1,0 +1,34 @@
+{
+    "basic": {
+        "name": "Basic Dao",
+        "description": "A template Dao used for tests and scaffolding.",
+        "effects": {}
+    },
+    "dao_reversal": {
+        "name": "Dao of Reversal",
+        "description": "A Heaven-defying Dao that conceives cause and effect as reversible flows. Techniques focus on rewinding small windows of time, reversing injury, and unlearning fixed truths.",
+        "techniques": {
+            "reverse_pulse_sutra": {
+                "name": "Reverse Pulse Sutra",
+                "type": "Qi",
+                "effect": "+30% healing efficiency, risk of backlash (20% HP loss on failure)."
+            },
+            "temporal_echo": {
+                "name": "Temporal Echo",
+                "type": "Dao Art",
+                "effect": "Undo one recent mistake or failed roll at 50% Dao Heart cost."
+            },
+            "still_flow_meditation": {
+                "name": "Still Flow Meditation",
+                "type": "Meditation",
+                "effect": "+25% Dao comprehension, -30% emotional recovery."
+            }
+        },
+        "passives": {
+            "reversal_resonance": {
+                "name": "Reversal Resonance",
+                "effect": "+12% efficiency for techniques with 'Flow', 'Cycle', or 'Return' keywords"
+            }
+        }
+    }
+}

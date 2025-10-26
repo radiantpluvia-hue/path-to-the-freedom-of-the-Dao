@@ -1,0 +1,161 @@
+{
+  "backgrounds": [
+    {
+      "id": "human_noble",
+      "race": "Human",
+      "issues": []
+    },
+    {
+      "id": "human_scholar",
+      "race": "Human",
+      "issues": []
+    },
+    {
+      "id": "human_commoner",
+      "race": "Human",
+      "issues": []
+    },
+    {
+      "id": "human_sectborn",
+      "race": "Human",
+      "issues": []
+    },
+    {
+      "id": "demon_noble",
+      "race": "Demon",
+      "issues": []
+    },
+    {
+      "id": "demon_outcast",
+      "race": "Demon",
+      "issues": []
+    },
+    {
+      "id": "spirit_woodland",
+      "race": "Spirit",
+      "issues": []
+    },
+    {
+      "id": "spirit_wandering",
+      "race": "Spirit",
+      "issues": []
+    },
+    {
+      "id": "dragon_blood",
+      "race": "Dragon",
+      "issues": []
+    },
+    {
+      "id": "dragon_scholarly",
+      "race": "Dragon",
+      "issues": []
+    },
+    {
+      "id": "phoenix_reborn",
+      "race": "Phoenix",
+      "issues": []
+    },
+    {
+      "id": "phoenix_flame",
+      "race": "Phoenix",
+      "issues": []
+    },
+    {
+      "id": "celestial_bureau",
+      "race": "Celestial",
+      "issues": []
+    },
+    {
+      "id": "celestial_fallen",
+      "race": "Celestial",
+      "issues": []
+    },
+    {
+      "id": "asura_warborn",
+      "race": "Asura",
+      "issues": []
+    },
+    {
+      "id": "asura_rage",
+      "race": "Asura",
+      "issues": []
+    },
+    {
+      "id": "asura_tactician",
+      "race": "Asura",
+      "issues": []
+    },
+    {
+      "id": "monkey_kingline",
+      "race": "Monkey",
+      "issues": []
+    },
+    {
+      "id": "monkey_mountain",
+      "race": "Monkey",
+      "issues": []
+    },
+    {
+      "id": "monkey_trickster",
+      "race": "Monkey",
+      "issues": []
+    },
+    {
+      "id": "monkey_mystic",
+      "race": "Monkey",
+      "issues": []
+    },
+    {
+      "id": "monkey_artisan",
+      "race": "Monkey",
+      "issues": []
+    },
+    {
+      "id": "fox_nine_tailed",
+      "race": "Fox",
+      "issues": []
+    },
+    {
+      "id": "fox_city",
+      "race": "Fox",
+      "issues": []
+    },
+    {
+      "id": "qilin_auspice",
+      "race": "Qilin",
+      "issues": []
+    },
+    {
+      "id": "qilin_guardian",
+      "race": "Qilin",
+      "issues": []
+    },
+    {
+      "id": "qilin_blessed",
+      "race": "Qilin",
+      "issues": []
+    }
+  ],
+  "summary": {
+    "total": 27,
+    "perRace": {
+      "Human": 4,
+      "Demon": 2,
+      "Spirit": 2,
+      "Dragon": 2,
+      "Phoenix": 2,
+      "Celestial": 2,
+      "Asura": 3,
+      "Monkey": 5,
+      "Fox": 2,
+      "Qilin": 3
+    },
+    "rarityCounts": {
+      "rare": 10,
+      "uncommon": 7,
+      "common": 4,
+      "legendary": 6
+    }
+  },
+  "issues": []
+}

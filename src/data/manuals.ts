@@ -1,5 +1,6 @@
 import { Manual, Rarity } from '@/types';
 import { getRarityMultiplier, scaleManualEffects } from './scalingSystem';
+import { migrateTier } from '@/migrations/tierMigration';
 
 // Helper function to generate manual IDs from names
 function generateManualId(name: string): string {
@@ -9,13 +10,16 @@ function generateManualId(name: string): string {
 }
 
 // Base effects for different rarity tiers (xianxia style)
+// Provide canonical single-letter tier keys and keep legacy-word aliases
 const BASE_EFFECTS = {
-  common: { cultivationSpeed: 1.8, qiGathering: 60, bodyRefinement: 3, hp: 45, soulWill: 3, daoHeart: 30, martialMastery: 3, atk: 15 },
-  uncommon: { cultivationSpeed: 2.25, qiGathering: 90, bodyRefinement: 6, hp: 75, soulWill: 6, daoHeart: 45, martialMastery: 6, atk: 30 },
-  rare: { cultivationSpeed: 3.6, qiGathering: 200, bodyRefinement: 12, hp: 140, soulWill: 12, daoHeart: 80, martialMastery: 12, atk: 60 },
-  epic: { cultivationSpeed: 4.4, qiGathering: 280, bodyRefinement: 16, hp: 200, soulWill: 16, daoHeart: 100, martialMastery: 16, atk: 80 },
-  legendary: { cultivationSpeed: 6.25, qiGathering: 500, bodyRefinement: 25, hp: 375, soulWill: 25, daoHeart: 150, martialMastery: 25, atk: 125 },
+  H: { cultivationSpeed: 1.8, qiGathering: 60, bodyRefinement: 3, hp: 45, soulWill: 3, daoHeart: 30, martialMastery: 3, atk: 15 },
+  G: { cultivationSpeed: 2.25, qiGathering: 90, bodyRefinement: 6, hp: 75, soulWill: 6, daoHeart: 45, martialMastery: 6, atk: 30 },
+  F: { cultivationSpeed: 3.6, qiGathering: 200, bodyRefinement: 12, hp: 140, soulWill: 12, daoHeart: 80, martialMastery: 12, atk: 60 },
+  E: { cultivationSpeed: 4.4, qiGathering: 280, bodyRefinement: 16, hp: 200, soulWill: 16, daoHeart: 100, martialMastery: 16, atk: 80 },
+  D: { cultivationSpeed: 6.25, qiGathering: 500, bodyRefinement: 25, hp: 375, soulWill: 25, daoHeart: 150, martialMastery: 25, atk: 125 },
   mythical: { cultivationSpeed: 9, qiGathering: 900, bodyRefinement: 36, hp: 600, soulWill: 36, daoHeart: 210, martialMastery: 36, atk: 180 },
+  B: { cultivationSpeed: 10.5, qiGathering: 1200, bodyRefinement: 42, hp: 900, soulWill: 42, daoHeart: 240, martialMastery: 42, atk: 210 },
+  // legacy-word aliases
   transcendent: { cultivationSpeed: 10.5, qiGathering: 1200, bodyRefinement: 42, hp: 900, soulWill: 42, daoHeart: 240, martialMastery: 42, atk: 210 }
 };
 
@@ -43,15 +47,24 @@ const MANUAL_THEMES = {
   dream: ['dream_manipulation', 'psychic_projection', 'subconscious_access']
 };
 
-const MAX_EFFECTS_BY_RARITY: Record<Rarity, number> = {
-  common: 1,
-  uncommon: 1,
-  rare: 2,
-  epic: 2,
-  legendary: 3,
+const MAX_EFFECTS_BY_RARITY: Partial<Record<Rarity, number>> = {
+  H: 1,
+  G: 1,
+  F: 2,
+  E: 2,
+  D: 3,
   mythical: 4,
-  transcendent: 5
+  B: 5
 };
+
+// Add word-form aliases so code that indexes by 'common'/'uncommon' etc. will find values
+/* istanbul ignore next - runtime aliases for legacy word-form rarities */
+(MAX_EFFECTS_BY_RARITY as any)['common'] = MAX_EFFECTS_BY_RARITY.H;
+(MAX_EFFECTS_BY_RARITY as any)['uncommon'] = MAX_EFFECTS_BY_RARITY.G;
+(MAX_EFFECTS_BY_RARITY as any)['rare'] = MAX_EFFECTS_BY_RARITY.F;
+(MAX_EFFECTS_BY_RARITY as any)['epic'] = MAX_EFFECTS_BY_RARITY.E;
+(MAX_EFFECTS_BY_RARITY as any)['legendary'] = MAX_EFFECTS_BY_RARITY.D;
+(MAX_EFFECTS_BY_RARITY as any)['transcendent'] = MAX_EFFECTS_BY_RARITY.B;
 
 // Function to get appropriate special effects based on manual name
 function getSpecialEffects(name: string, rarity: Rarity): string[] {
@@ -65,16 +78,17 @@ function getSpecialEffects(name: string, rarity: Rarity): string[] {
     }
   }
 
-  // Limit effects based on rarity
-  return effects.slice(0, MAX_EFFECTS_BY_RARITY[rarity]);
+  // Limit effects based on rarity (use a safe default if rarity key missing)
+  const max = (MAX_EFFECTS_BY_RARITY as Partial<Record<string, number>>)[String(rarity)] ?? 0;
+  return effects.slice(0, max);
 }
 
 const RARITY_THRESHOLDS: { rarity: Rarity, threshold: number }[] = [
-  { rarity: 'common', threshold: 40 },
-  { rarity: 'uncommon', threshold: 60 },
-  { rarity: 'rare', threshold: 75 },
-  { rarity: 'epic', threshold: 85 },
-  { rarity: 'legendary', threshold: 92 },
+  { rarity: "H", threshold: 40 },
+  { rarity: "G", threshold: 60 },
+  { rarity: "F", threshold: 75 },
+  { rarity: "E", threshold: 85 },
+  { rarity: "D", threshold: 92 },
   { rarity: 'mythical', threshold: 97 }
 ];
 
@@ -86,14 +100,28 @@ function determineRarity(index: number, total: number): Rarity {
       return rarity;
     }
   }
-  return 'transcendent';
+  return "B";
 }
 
 // Function to create manual from name
 function createManual(name: string, index: number, total: number): Manual {
   const rarity = determineRarity(index, total);
   const rarityMultiplier = getRarityMultiplier(rarity);
-  const baseEffects = BASE_EFFECTS[rarity];
+  const LEGACY_TO_LETTER: Record<string, keyof typeof BASE_EFFECTS> = {
+    common: 'H',
+    uncommon: 'G',
+    rare: 'F',
+    epic: 'E',
+    legendary: 'D',
+    transcendent: 'B',
+    mythical: 'mythical'
+  };
+
+  const effectsKey = (BASE_EFFECTS as any)[rarity]
+    ? (rarity as keyof typeof BASE_EFFECTS)
+    : (LEGACY_TO_LETTER[(rarity || '').toString().toLowerCase()] || (rarity as keyof typeof BASE_EFFECTS));
+
+  const baseEffects = BASE_EFFECTS[effectsKey as keyof typeof BASE_EFFECTS];
   
   // Apply rarity multiplier to effects
   const effects = Object.fromEntries(
@@ -107,6 +135,7 @@ function createManual(name: string, index: number, total: number): Manual {
     name: name,
   description: `The ${name}, an ancient xianxia manual containing profound arts and forbidden secrets.`,
     rank: rarity,
+    rarityCode: migrateTier(rarity),
     effects: {
       ...effects,
       special: specialEffects
@@ -306,7 +335,7 @@ const ORIGINAL_MAIN_CHARACTER_MANUALS: Manual[] = [
     id: 'basic_qi_gathering',
     name: 'Basic Qi Gathering Manual',
     description: 'Fundamental arts for sensing and gathering spiritual qi.',
-    rank: 'common',
+    rank: "H",
     effects: {
       cultivationSpeed: 1.1,
       qiGathering: 20
@@ -316,7 +345,7 @@ const ORIGINAL_MAIN_CHARACTER_MANUALS: Manual[] = [
     id: 'body_refinement_basics',
     name: 'Body Refinement Basics',
     description: 'Basic xianxia exercises to temper the flesh and bones.',
-    rank: 'common',
+    rank: "H",
     effects: {
       bodyRefinement: 1,
       hp: 15
@@ -326,7 +355,7 @@ const ORIGINAL_MAIN_CHARACTER_MANUALS: Manual[] = [
     id: 'meditation_fundamentals',
     name: 'Meditation Fundamentals',
     description: 'Basic meditation arts to calm the soul and focus spiritual energy.',
-    rank: 'common',
+    rank: "H",
     effects: {
       soulWill: 1,
       daoHeart: 10
@@ -336,7 +365,7 @@ const ORIGINAL_MAIN_CHARACTER_MANUALS: Manual[] = [
     id: 'martial_foundations',
     name: 'Martial Foundations Manual',
     description: 'Fundamental martial arts and stances for the path of cultivation.',
-    rank: 'common',
+    rank: "H",
     effects: {
       martialMastery: 1,
       atk: 5
@@ -350,6 +379,24 @@ export const ALL_MANUALS: Manual[] = [
   ...ORIGINAL_MAIN_CHARACTER_MANUALS,
   ...MANUALS
 ];
+
+// Merge in developer-provided seed manuals when present (non-blocking at runtime)
+try {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const seedManuals = require('../../data/manuals/seed_manuals.json');
+  if (Array.isArray(seedManuals) && seedManuals.length > 0) {
+    // Map the simple seed shape to Manual objects compatible with ALL_MANUALS
+    const mapped = seedManuals.map((m: any) => ({
+      id: m.id || generateManualId(m.title || m.name || 'seed_manual'),
+      name: m.title || m.name || m.id,
+      description: m.description || '',
+      rank: (m.rarity || 'H') as any,
+      effects: m.effects || {}
+    } as Manual));
+    // Append (do not replace) so original list remains intact
+    (ALL_MANUALS as Manual[]).push(...mapped);
+  }
+} catch (e) { /* ignore missing seed manuals */ }
 
 // Export for use in character creation and other systems
 export { getRealmMultiplier, scaleManualEffects } from './scalingSystem';

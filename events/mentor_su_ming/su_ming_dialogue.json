@@ -1,0 +1,28 @@
+{
+  "id": "su_ming_dialogue",
+  "lines": [
+    { "tag": "intro", "text": "The heavens flow forward. I walk backward. Tell me: which of us is lost?" },
+
+    { "tag": "musing_1", "text": "You cling to a single thread of cause. Unwind it, and see the pattern you stitched yourself.", "trust": 0 },
+    { "tag": "musing_2", "text": "Compassion binds the heart to the current. Detach the knot, and the current will reveal its seams.", "trust": 0 },
+    { "tag": "musing_3", "text": "Memory is a riverbank. Step on the other side and watch how the shore rearranges itself.", "trust": 0 },
+
+    { "tag": "teaching_small_1", "text": "Still Flow Meditation will still your heart so you may read time from the reverse. Start small: unlearn a single certainty.", "trust": 10 },
+    { "tag": "teaching_small_2", "text": "Insight Training under Reversal helps you retrace a lost step — sometimes to retrieve, sometimes to erase.", "trust": 20 },
+    { "tag": "teaching_small_3", "text": "Practice: imagine a regret and trace it backwards until its first tremor. That tremor hides the true choice.", "trust": 25 },
+
+    { "tag": "challenge_1", "text": "To pass my trial is not to conquer fate but to understand the choice you feared to make. Are you ready to look back?", "trust": 35 },
+    { "tag": "challenge_2", "text": "You will be shown the ghost of a path you did not take. To succeed is to live with the consequence you choose in the rewind.", "trust": 40 },
+
+    { "tag": "trust_update", "text": "You have begun to move against the stream. Keep steady and the echoes will teach you more.", "trust": 50 },
+    { "tag": "trust_tip", "text": "When you retrace a failure, do not seek victory — seek understanding. The Sutra rewards wisdom, not wins.", "trust": 55 },
+
+    { "tag": "teaching_major", "text": "You hold the Reverse Pulse Fragment. I will not give you answers, only the Sutra — it undoes wounds, but it asks a price. Are you willing?", "trust": 80 },
+    { "tag": "major_warning", "text": "The Reverse Pulse heals by borrowing from what you might have been. Use it twice and your next breath may belong to a different memory.", "trust": 85 },
+
+    { "tag": "reveal_transcendence", "text": "Comprehend the paradox: accept the flow, then choose which self to rewind. Mastery mends the heart and severs the looping regret.", "trust": 95 },
+    { "tag": "reveal_reward", "text": "Those who complete the trial hear the river's original song. A new rhythm becomes part of you — one that can unwind a demon or lace back a lost hope.", "trust": 99 },
+
+    { "tag": "farewell", "text": "Go upstream. If you change the self that was, the river will be different tomorrow." }
+  ]
+}

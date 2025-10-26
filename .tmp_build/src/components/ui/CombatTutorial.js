@@ -1,0 +1,8 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const jsx_runtime_1 = require("react/jsx-runtime");
+const Button_1 = require("../core/Button");
+const CombatTutorial = ({ onClose, onHideForever }) => {
+    return ((0, jsx_runtime_1.jsx)("div", { style: { position: 'fixed', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2200 }, children: (0, jsx_runtime_1.jsxs)("div", { style: { width: 720, background: 'var(--bg)', border: '1px solid rgba(255,255,255,0.06)', padding: 20, borderRadius: 8, boxShadow: '0 8px 24px rgba(0,0,0,0.6)' }, children: [(0, jsx_runtime_1.jsx)("h2", { style: { marginTop: 0 }, children: "Combat Tutorial" }), (0, jsx_runtime_1.jsx)("p", { children: "Combat uses AP (action points) and Qi. Each technique consumes AP and/or Qi \u2014 pick intelligently. Enemies telegraph intent; use defensive techniques to mitigate powerful attacks." }), (0, jsx_runtime_1.jsxs)("ul", { children: [(0, jsx_runtime_1.jsx)("li", { children: "AP determines how many techniques you can use each turn." }), (0, jsx_runtime_1.jsx)("li", { children: "Qi is a consumable resource for powerful techniques." }), (0, jsx_runtime_1.jsx)("li", { children: "Enemy intent shows their planned action; respond with defense or interrupt if possible." })] }), (0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', gap: 8, justifyContent: 'flex-end', marginTop: 12 }, children: [(0, jsx_runtime_1.jsx)(Button_1.Button, { onClick: onClose, children: "Got it" }), (0, jsx_runtime_1.jsx)(Button_1.Button, { onClick: onHideForever, variant: "secondary", children: "Don't show again" })] })] }) }));
+};
+exports.default = CombatTutorial;

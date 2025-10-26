@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MissionSystem = void 0;
+exports.reportMissionObjectiveProgress = reportMissionObjectiveProgress;
+const missionTemplateRegistry_1 = require("./missionTemplateRegistry");
 class MissionSystem {
     constructor() {
         this.missionTemplates = [
@@ -83,6 +85,31 @@ class MissionSystem {
             reward: scaledReward,
             isCompleted: false
         };
+    }
+    // Generate a mission from a registered template id. Returns null if template not found.
+    generateMissionFromTemplateId(templateId, gameState) {
+        try {
+            const tpl = (0, missionTemplateRegistry_1.getRegisteredMissionTemplate)(templateId);
+            if (!tpl)
+                return null;
+            const { player } = gameState;
+            // simple scaling similar to generateRandomMission
+            const rewardMultiplier = this.getRewardMultiplier(player.level || 1, tpl.difficulty || 'easy');
+            const scaledReward = this.scaleReward(tpl.baseReward || {}, rewardMultiplier);
+            return {
+                id: `mission_${templateId}_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
+                title: tpl.title,
+                description: tpl.description || '',
+                type: tpl.type || 'gather',
+                target: tpl.target || '',
+                location: tpl.location || '',
+                reward: scaledReward,
+                isCompleted: false
+            };
+        }
+        catch (e) {
+            return null;
+        }
     }
     attemptMission(missionId, gameState) {
         const { player, story } = gameState;
@@ -250,3 +277,42 @@ class MissionSystem {
     }
 }
 exports.MissionSystem = MissionSystem;
+// Helper: allow external callers (systems/tests) to report progress on a mission objective
+function reportMissionObjectiveProgress(missionId, objectiveIndex, delta = 1) {
+    try {
+        // Resolve the store module at call-time so tests that re-mock the module per-test
+        // are correctly observed. Prefer the exported `useGameStore` (Zustand hook) and
+        // obtain state via getState() when available.
+        let store = null;
+        try {
+            // Prefer the project path alias so tests that mock '@/store/useGameStore' are respected.
+            let mod = null;
+            try {
+                mod = require('@/store/useGameStore');
+            }
+            catch (e) { /* ignore */ }
+            if (!mod) {
+                try {
+                    mod = require('../store/useGameStore');
+                }
+                catch (e) { /* ignore */ }
+            }
+            const useFn = mod && mod.useGameStore ? mod.useGameStore : mod;
+            store = useFn && typeof useFn.getState === 'function' ? useFn.getState() : (typeof useFn === 'function' ? useFn() : null);
+        }
+        catch (e) { /* ignore */ }
+        if (store && typeof store.updateMissionObjectiveProgress === 'function') {
+            return store.updateMissionObjectiveProgress(missionId, objectiveIndex, delta);
+        }
+        // fallback: some tests expose the mocked store on globalThis.gameStore
+        try {
+            const gs = globalThis.gameStore;
+            if (gs && typeof gs.updateMissionObjectiveProgress === 'function') {
+                return gs.updateMissionObjectiveProgress(missionId, objectiveIndex, delta);
+            }
+        }
+        catch (e) { /* ignore */ }
+    }
+    catch (e) { /* ignore */ }
+    return false;
+}

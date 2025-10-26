@@ -1,0 +1,89 @@
+[
+  {
+    "id": "sandbox_mysterious_letter",
+    "title": "A Mysterious Letter",
+    "description": "A sealed letter arrives at your doorstep bearing a strange sigil. The note hints at a hidden sect meeting in the nearby hills.",
+    "choices": [
+      { "id": "open_now", "text": "Open it immediately" },
+      { "id": "investigate", "text": "Investigate the sender first" },
+      { "id": "ignore", "text": "Ignore the letter" }
+    ],
+    "executorId": "fn_extra_mysterious_letter"
+  },
+  {
+    "id": "sandbox_lost_child",
+    "title": "Lost Child",
+    "description": "A frightened child approaches you asking for help finding their family. Helping may win local favor, but it could be a trap.",
+    "choices": [
+      { "id": "help_search", "text": "Help search the village" },
+      { "id": "ask_questions", "text": "Question the child for details" },
+      { "id": "walk_away", "text": "Walk away cautiously" }
+    ],
+    "executorId": "fn_extra_lost_child"
+  },
+  {
+    "id": "sandbox_old_tale",
+    "title": "An Old Tale Retold",
+    "description": "An elder recounts a long-forgotten tale of a local shrine said to contain a fragment of a spirit stone. Listening may reveal a lead.",
+    "choices": [
+      { "id": "listen", "text": "Listen intently" },
+      { "id": "dismiss", "text": "Dismiss it as a folktale" }
+    ],
+    "executorId": "fn_extra_old_tale"
+  },
+  {
+    "id": "sandbox_midnight_chant",
+    "title": "Midnight Chant",
+    "description": "You overhear a midnight chant at the edge of the village. The words are unfamiliar but resonate with your Qi. Investigate or avoid?",
+    "choices": [
+      { "id": "sneak_in", "text": "Sneak closer to observe" },
+      { "id": "confront", "text": "Confront the chanters" },
+      { "id": "retreat", "text": "Retreat and record the location" }
+    ],
+    "executorId": "fn_extra_midnight_chant"
+  },
+  {
+    "id": "sandbox_strange_merchant",
+    "title": "Strange Merchant",
+    "description": "A wandering merchant offers a small jade amulet that hums softly. It is cheap, but something about it feels off.",
+    "choices": [
+      { "id": "buy", "text": "Buy the amulet" },
+      { "id": "bargain", "text": "Bargain for a lower price" },
+      { "id": "decline", "text": "Pass on the item" }
+    ],
+    "executorId": "fn_extra_strange_merchant"
+  },
+  {
+    "id": "sandbox_river_whisper",
+    "title": "River Whispers",
+    "description": "At dawn the river seems to whisper your name. Collecting its water is said to ease cultivation. Do you indulge?",
+    "choices": [
+      { "id": "collect", "text": "Collect the river water" },
+      { "id": "meditate", "text": "Meditate by the bank instead" },
+      { "id": "ignore", "text": "Ignore the superstition" }
+    ],
+    "executorId": "fn_extra_river_whisper"
+  },
+  {
+    "id": "sandbox_bandit_hint",
+    "title": "A Bandit's Hint",
+    "description": "You find a crude map tucked under a stone showing a likely bandit camp nearby. The map could lead to treasure or trouble.",
+    "choices": [
+      { "id": "follow_map", "text": "Follow the map discretely" },
+      { "id": "turn_in", "text": "Turn it in to the local guard" },
+      { "id": "use_it", "text": "Use it to set an ambush" }
+    ],
+    "executorId": "fn_extra_bandit_hint"
+  },
+  {
+    "id": "sandbox_starlit_omen",
+    "title": "Starlit Omen",
+    "description": "A meteor streaks overhead and lands beyond the hills. The locals say meteor shards carry strange power. Do you set out to retrieve one?",
+    "choices": [
+      { "id": "retrieve", "text": "Set out to retrieve a shard" },
+      { "id": "wait", "text": "Wait for more information" },
+      { "id": "avoid", "text": "Avoid potential danger" }
+    ],
+    "executorId": "fn_extra_starlit_omen"
+  }
+]

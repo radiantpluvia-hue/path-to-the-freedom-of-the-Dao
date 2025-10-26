@@ -1,5 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useGameStore } from '@/store/useGameStore';
+import RichTooltip from '@/components/ui/RichTooltip';
+import SmallChip from '@/components/ui/SmallChip';
 import { type Recipe } from '@/systems';
 import { stationsById } from '@/data/craftingStations';
 
@@ -86,19 +88,16 @@ export const CraftingScreen = () => {
         <h2 style={{ color: 'var(--primary)', fontFamily: 'var(--font-decorative)' }}>Crafting Pavilion</h2>
         <Button onClick={() => setUIProperty('currentScreen', 'game')} variant="secondary">Back to Game</Button>
       </div>
-
       {station && (
         <div style={{ padding: '10px', background: 'rgba(212, 175, 55, 0.1)', border: '1px solid var(--primary)', borderRadius: '4px', marginBottom: '20px', textAlign: 'center' }}>
           ✨ Active Station: <strong>{station.name}</strong> (+{station.bonuses.successChance ? (station.bonuses.successChance * 100) : 0}% success, +{station.bonuses.qualityChance ? (station.bonuses.qualityChance * 100) : 0}% quality)
         </div>
       )}
-
       <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', borderBottom: '1px solid var(--border)' }}>
         <button onClick={() => setActiveTab('alchemy')} style={{ padding: '10px', border: 'none', background: activeTab === 'alchemy' ? 'var(--primary)' : 'transparent', color: activeTab === 'alchemy' ? 'var(--dark)' : 'var(--primary)', cursor: 'pointer' }}>Alchemy</button>
         <button onClick={() => setActiveTab('forging')} style={{ padding: '10px', border: 'none', background: activeTab === 'forging' ? 'var(--primary)' : 'transparent', color: activeTab === 'forging' ? 'var(--dark)' : 'var(--primary)', cursor: 'pointer' }}>Forging</button>
         <button onClick={() => setActiveTab('experiment')} style={{ padding: '10px', border: 'none', background: activeTab === 'experiment' ? 'var(--primary)' : 'transparent', color: activeTab === 'experiment' ? 'var(--dark)' : 'var(--primary)', cursor: 'pointer' }}>Experiment</button>
       </div>
-
       {activeTab !== 'experiment' ? (
         <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: '20px' }}>
         {/* Recipe List */}
@@ -107,7 +106,11 @@ export const CraftingScreen = () => {
             <div key={recipe.id} onClick={() => setSelectedRecipe(recipe)} style={{ padding: '10px', border: `1px solid ${selectedRecipe?.id === recipe.id ? 'var(--primary)' : 'var(--border)'}`, borderRadius: '4px', cursor: 'pointer', marginBottom: '10px', background: 'rgba(0,0,0,0.2)' }}>
               <strong>
                 {recipe.name}
-                {recipe.isSecret && <span title="Secret Recipe"> 📜</span>}
+                {recipe.isSecret && (
+                  <RichTooltip content="Secret Recipe">
+                    <span aria-hidden> 📜</span>
+                  </RichTooltip>
+                )}
               </strong>
               <div style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>Lvl {recipe.requiredLevel} {recipe.skill}</div>
             </div>
@@ -128,7 +131,7 @@ export const CraftingScreen = () => {
                   const need = ing.quantity;
                   return (
                     <li key={ing.itemId} style={{ color: have >= need ? 'var(--success)' : 'var(--danger)', marginBottom: '5px' }}>
-                      {ing.itemId.replace(/_/g, ' ')}: {have} / {need}
+                      {ing.itemId.replace(/_/g, ' ')}: {have}/ {need}
                     </li>
                   );
                 })}
@@ -151,7 +154,7 @@ export const CraftingScreen = () => {
       </div>
       ) : (
         // Experimentation UI
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '20px' }}>
+        (<div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '20px' }}>
           <div>
             <h4 style={{ marginTop: 0 }}>Your Materials</h4>
             <div style={{ maxHeight: '50vh', overflowY: 'auto', paddingRight: '10px' }}>
@@ -167,9 +170,9 @@ export const CraftingScreen = () => {
             <h4>Experimentation Slots (Max 5)</h4>
             <div style={{ minHeight: '150px', border: '2px dashed var(--border)', borderRadius: '4px', padding: '10px', display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '20px' }}>
               {experimentSlots.map((item, index) => (
-                <div key={index} onClick={() => removeFromExperimentSlot(index)} style={{ padding: '8px 12px', background: 'var(--primary)', color: 'var(--dark)', borderRadius: '16px', cursor: 'pointer', fontWeight: 'bold' }}>
-                  {item.name} &times;
-                </div>
+                <button key={index} onClick={() => removeFromExperimentSlot(index)} style={{ padding: 0, border: 'none', background: 'transparent', cursor: 'pointer' }} aria-label={`Remove ${item.name}`}>
+                  <SmallChip style={{ background: 'var(--primary)', color: 'var(--dark)', borderRadius: 16, fontWeight: 'bold' }}>{item.name} &times;</SmallChip>
+                </button>
               ))}
               {experimentSlots.length === 0 && <p style={{ color: 'var(--muted)', alignSelf: 'center', width: '100%', textAlign: 'center' }}>Click materials from your inventory to add them here.</p>}
             </div>
@@ -177,7 +180,7 @@ export const CraftingScreen = () => {
               Begin Experiment
             </Button>
           </div>
-        </div>
+        </div>)
       )}
     </div>
   );

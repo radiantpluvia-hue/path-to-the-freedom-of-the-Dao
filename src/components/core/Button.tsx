@@ -1,22 +1,28 @@
 import React from 'react';
 
-interface ButtonProps {
+export interface ButtonProps {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   variant?: 'primary' | 'secondary' | 'danger';
   size?: 'small' | 'medium' | 'large';
   disabled?: boolean;
   style?: React.CSSProperties;
+  className?: string;
+  type?: 'button' | 'submit' | 'reset';
+  ariaLabel?: string;
 }
 
-export function Button({ 
-  children, 
-  onClick, 
-  variant = 'primary', 
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function Button({
+  children,
+  onClick,
+  variant = 'primary',
   size = 'medium',
   disabled = false,
-  style
-}: ButtonProps) {
+  style,
+  className,
+  type = 'button',
+  ariaLabel
+}: ButtonProps, ref) {
   const baseStyles = {
     border: 'none',
     borderRadius: '8px',
@@ -30,13 +36,15 @@ export function Button({
   const variants = {
     primary: {
       background: 'linear-gradient(135deg, var(--primary), var(--accent))',
-      color: 'var(--dark)',
-      border: '2px solid var(--primary)'
+      color: 'white',
+      border: '1px solid rgba(0,0,0,0.08)',
+      boxShadow: '0 6px 18px rgba(2,6,23,0.12)'
     },
     secondary: {
       background: 'transparent',
-      color: 'var(--primary)',
-      border: '2px solid var(--primary)'
+      color: 'white',
+      border: '1px solid rgba(255,255,255,0.06)',
+      // removed backdropFilter to avoid blurry rendering on some displays
     },
     danger: {
       background: 'var(--danger)',
@@ -53,7 +61,12 @@ export function Button({
 
   return (
     <button
+      ref={ref}
+      type={type}
+      aria-label={ariaLabel}
+      disabled={disabled}
       onClick={disabled ? undefined : onClick}
+      className={className}
       style={{
         ...baseStyles,
         ...variants[variant],
@@ -64,4 +77,6 @@ export function Button({
       {children}
     </button>
   );
-}
+});
+
+export default Button;

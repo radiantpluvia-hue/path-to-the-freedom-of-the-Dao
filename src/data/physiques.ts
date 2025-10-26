@@ -1,5 +1,6 @@
 import { Physique } from '@/types';
 import { getRarityMultiplier } from './scalingSystem';
+import { migrateTier } from '@/migrations/tierMigration';
 
 // Helper function to generate physique IDs from names
 function generatePhysiqueId(name: string): string {
@@ -8,25 +9,39 @@ function generatePhysiqueId(name: string): string {
     .replace(/(^_+|_+$)/g, '');
 }
 
-// Base stats for different rarity tiers (xianxia style)
+// Base stats for different rarity tiers (canonical letter codes used where possible)
 const BASE_STATS = {
+  H: { qi: 15, atk: 3, def: 6 },
+  G: { qi: 150, atk: 30, def: 60 },
+  F: { qi: 2000, atk: 512, def: 916 },
+  E: { qi: 20000, atk: 10520, def: 18400 },
+  D: { qi: 125000, atk: 20000, def: 30000 },
+  mythical: { qi: 300000, atk: 75000, def: 216000 },
+  B: { qi: 3000000, atk: 2400000, def: 2760000 },
+  // legacy aliases
   common: { qi: 15, atk: 3, def: 6 },
   uncommon: { qi: 150, atk: 30, def: 60 },
   rare: { qi: 2000, atk: 512, def: 916 },
   epic: { qi: 20000, atk: 10520, def: 18400 },
   legendary: { qi: 125000, atk: 20000, def: 30000 },
-  mythical: { qi: 300000, atk: 75000, def: 216000 },
   transcendent: { qi: 3000000, atk: 2400000, def: 2760000 }
 }; // Qi, Attack, Defense are classic xianxia stats
 
 // Base cultivation speed for different rarity tiers (xianxia style)
 const BASE_CULTIVATION_SPEED = {
+  H: 1.65,
+  G: 3,
+  F: 16,
+  E: 32,
+  D: 160,
+  mythical: 774,
+  B: 2400,
+  // legacy aliases
   common: 1.65,
   uncommon: 3,
   rare: 16,
   epic: 32,
   legendary: 160,
-  mythical: 774,
   transcendent: 2400
 }; // Cultivation speed is a core xianxia stat
 
@@ -135,12 +150,19 @@ function getSpecialEffects(name: string, rarity: string): string[] {
   
   // Limit effects based on rarity
   const maxEffects = {
+    H: 1,
+    G: 1,
+    F: 2,
+    E: 2,
+    D: 3,
+    mythical: 4,
+    B: 5,
+    // legacy aliases
     common: 1,
     uncommon: 1,
     rare: 2,
     epic: 2,
     legendary: 3,
-    mythical: 4,
     transcendent: 5
   };
   
@@ -150,21 +172,37 @@ function getSpecialEffects(name: string, rarity: string): string[] {
 // Function to determine rarity based on name and index
 function determineRarity(index: number, total: number): string {
   const percent = (index / total) * 100;
-  if (percent < 40) return 'common';
-  if (percent < 60) return 'uncommon';
-  if (percent < 75) return 'rare';
-  if (percent < 85) return 'epic';
-  if (percent < 92) return 'legendary';
+  if (percent < 40) return "H";
+  if (percent < 60) return "G";
+  if (percent < 75) return "F";
+  if (percent < 85) return "E";
+  if (percent < 92) return "D";
   if (percent < 97) return 'mythical';
-  return 'transcendent';
+  return "B";
 }
 
 // Function to create physique from name
 function createPhysique(name: string, index: number, total: number): Physique {
   const rarity = determineRarity(index, total);
   const rarityMultiplier = getRarityMultiplier(rarity);
-  const baseStats = BASE_STATS[rarity as keyof typeof BASE_STATS];
-  const baseCultivationSpeed = BASE_CULTIVATION_SPEED[rarity as keyof typeof BASE_CULTIVATION_SPEED];
+  // Accept either legacy words (common, rare, epic...) or single-letter tier codes (H,G,F...)
+  // Map legacy-word rarities to canonical single-letter tiers where possible
+  const LEGACY_TO_LETTER: Record<string, keyof typeof BASE_STATS> = {
+    common: 'H',
+    uncommon: 'G',
+    rare: 'F',
+    epic: 'E',
+    legendary: 'D',
+    transcendent: 'B',
+    mythical: 'mythical'
+  };
+
+  const rarityKey = (BASE_STATS as any)[rarity]
+    ? (rarity as keyof typeof BASE_STATS)
+    : (LEGACY_TO_LETTER[(rarity || '').toString().toLowerCase()] || (rarity as keyof typeof BASE_STATS));
+
+  const baseStats = BASE_STATS[rarityKey as keyof typeof BASE_STATS];
+  const baseCultivationSpeed = BASE_CULTIVATION_SPEED[rarityKey as keyof typeof BASE_CULTIVATION_SPEED];
   
   // Apply rarity multiplier to stats
   const stats = Object.fromEntries(
@@ -179,8 +217,9 @@ function createPhysique(name: string, index: number, total: number): Physique {
   return {
     id: generatePhysiqueId(name),
     name: name,
-    description: `The legendary ${name} physique, a xianxia body refinement granting profound power and spiritual might.`,
+    description: `The D ${name} physique, a xianxia body refinement granting profound power and spiritual might.`,
     rarity: rarity as any,
+    rarityCode: migrateTier(rarity),
     effects: {
       stats,
       cultivation_speed: cultivationSpeed,
@@ -309,7 +348,7 @@ const ORIGINAL_MAIN_CHARACTER_PHYSIQUES: Physique[] = [
     id: 'su_ming_physique',
     name: 'Su Ming Physique',
     description: 'The legendary physique of Su Ming, capable of unparalleled cultivation speed.',
-    rarity: 'legendary',
+    rarity: "D",
     effects: {
       stats: { qi: 200, atk: 50, def: 50 },
       cultivation_speed: 3.0,
@@ -320,7 +359,7 @@ const ORIGINAL_MAIN_CHARACTER_PHYSIQUES: Physique[] = [
     id: 'meng_hao_physique',
     name: 'Meng Hao Physique',
     description: 'The physique of Meng Hao, known for strategic thinking and cultivation mastery.',
-    rarity: 'legendary',
+    rarity: "D",
     effects: {
       stats: { qi: 180, atk: 45, def: 45 },
       cultivation_speed: 2.8,
@@ -331,7 +370,7 @@ const ORIGINAL_MAIN_CHARACTER_PHYSIQUES: Physique[] = [
     id: 'han_li_physique',
     name: 'Han Li Physique',
     description: 'The physique of Han Li, enhanced for alchemical pursuits and cultivation.',
-    rarity: 'legendary',
+    rarity: "D",
     effects: {
       stats: { qi: 190, atk: 40, def: 40 },
       cultivation_speed: 2.7,
@@ -342,7 +381,7 @@ const ORIGINAL_MAIN_CHARACTER_PHYSIQUES: Physique[] = [
     id: 'han_jue_physique',
     name: 'Han Jue Physique',
     description: 'The physique of Han Jue, attuned to the Dao and fate manipulation.',
-    rarity: 'legendary',
+    rarity: "D",
     effects: {
       stats: { qi: 210, atk: 55, def: 55 },
       cultivation_speed: 3.2,
@@ -353,7 +392,7 @@ const ORIGINAL_MAIN_CHARACTER_PHYSIQUES: Physique[] = [
     id: 'ji_ning_physique',
     name: 'Ji Ning Physique',
     description: 'The physique of Ji Ning, perfected for sword mastery and spatial techniques.',
-    rarity: 'legendary',
+    rarity: "D",
     effects: {
       stats: { qi: 220, atk: 60, def: 60 },
       cultivation_speed: 3.1,
@@ -364,7 +403,7 @@ const ORIGINAL_MAIN_CHARACTER_PHYSIQUES: Physique[] = [
     id: 'linley_physique',
     name: 'Linley Physique',
     description: 'The physique of Linley, embodying noble spirit and defensive mastery.',
-    rarity: 'legendary',
+    rarity: "D",
     effects: {
       stats: { qi: 200, atk: 50, def: 50 },
       cultivation_speed: 2.9,
@@ -375,7 +414,7 @@ const ORIGINAL_MAIN_CHARACTER_PHYSIQUES: Physique[] = [
     id: 'bai_xiaochun_physique',
     name: 'Bai Xiaochun Physique',
     description: 'The physique of Bai Xiaochun, enhanced for charm and spiritual connection.',
-    rarity: 'legendary',
+    rarity: "D",
     effects: {
       stats: { qi: 190, atk: 45, def: 45 },
       cultivation_speed: 2.6,
@@ -386,7 +425,7 @@ const ORIGINAL_MAIN_CHARACTER_PHYSIQUES: Physique[] = [
     id: 'xue_ying_physique',
     name: 'Xue Ying Physique',
     description: 'The physique of Xue Ying, attuned to ice mastery and frost techniques.',
-    rarity: 'legendary',
+    rarity: "D",
     effects: {
       stats: { qi: 200, atk: 50, def: 50 },
       cultivation_speed: 2.8,
@@ -397,7 +436,7 @@ const ORIGINAL_MAIN_CHARACTER_PHYSIQUES: Physique[] = [
     id: 'wang_lin_physique',
     name: 'Wang Lin Physique',
     description: 'The physique of Wang Lin, known for resilience and spiritual strength.',
-    rarity: 'legendary',
+    rarity: "D",
     effects: {
       stats: { qi: 210, atk: 55, def: 55 },
       cultivation_speed: 3.0,

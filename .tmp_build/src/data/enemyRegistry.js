@@ -7,6 +7,7 @@ exports.getEnemyById = getEnemyById;
 exports.getRandomEnemyForAct = getRandomEnemyForAct;
 exports.listAllEnemies = listAllEnemies;
 const enemies_json_1 = __importDefault(require("../../data/enemies.json"));
+const rng_1 = require("../utils/rng");
 const ENEMIES = enemies_json_1.default;
 function getEnemyById(id) {
     return ENEMIES.find(e => e.id === id);
@@ -23,7 +24,7 @@ function getRandomEnemyForAct(act) {
         return true;
     });
     if (pool.length === 0)
-        return ENEMIES[Math.floor(Math.random() * ENEMIES.length)];
-    return pool[Math.floor(Math.random() * pool.length)];
+        return (0, rng_1.choice)(ENEMIES);
+    return (0, rng_1.choice)(pool);
 }
 function listAllEnemies() { return [...ENEMIES]; }

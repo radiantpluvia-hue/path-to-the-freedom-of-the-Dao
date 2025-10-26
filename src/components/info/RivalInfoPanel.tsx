@@ -1,5 +1,6 @@
 import React from 'react';
 import { useGameStore } from '@/store/useGameStore';
+import ModalCloseButton from '@/components/ui/ModalCloseButton';
 import { tierLabelFor } from '../../data/statTiers';
 // Removed unused import
 
@@ -26,7 +27,7 @@ export const RivalInfoPanel: React.FC<RivalInfoPanelProps> = ({
       <div className="rival-info-panel">
         <div className="panel-header">
           <h3>Rival Not Found</h3>
-          <button onClick={onClose} className="close-button">×</button>
+          <ModalCloseButton onClick={onClose} ariaLabel="Close rival panel" title="Close" />
         </div>
         <p>This rival could not be found.</p>
       </div>
@@ -51,12 +52,7 @@ export const RivalInfoPanel: React.FC<RivalInfoPanelProps> = ({
     <div className="rival-info-panel bg-gray-800 text-white p-6 rounded-lg max-w-2xl mx-auto">
       <div className="panel-header flex justify-between items-center mb-4">
         <h3 className="text-xl font-bold">{rival.name}</h3>
-        <button
-          onClick={onClose}
-          className="close-button text-gray-400 hover:text-white text-2xl"
-        >
-          ×
-        </button>
+        <ModalCloseButton onClick={onClose} ariaLabel="Close rival panel" title="Close" />
       </div>
 
       <div className="rival-details grid grid-cols-1 md:grid-cols-2 gap-4">

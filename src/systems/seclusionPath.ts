@@ -37,6 +37,8 @@ export const SECLUSION_CONFIG = {
 
 export class SeclusionPath {
   private state: SeclusionState;
+  // optional runtime instrumentation flag (can be toggled in tests)
+  public static instrumentationEnabled = false;
 
   constructor(initial?: Partial<SeclusionState>) {
     this.state = { ...DEFAULT_SECLUSION_STATE, ...(initial || {}) };
@@ -61,6 +63,9 @@ export class SeclusionPath {
 
   // Perform one seclusion tick. Returns an object with effects to apply to the main game state.
   tick(gameState: GameState) {
+    if (SeclusionPath.instrumentationEnabled) {
+      try { console.debug('[Seclusion] tick start', { state: this.state, player: { name: gameState.player?.name, skills: gameState.player?.skills } }); } catch (e) { /* ignore */ }
+    }
     const effects: any = { qiGain: 0, cpGain: 0, foundItems: [], events: [] };
 
     // If not secluded, nothing seclusion-specific happens
@@ -110,11 +115,15 @@ export class SeclusionPath {
       this.state.accumulatedComprehension = Math.floor(this.state.accumulatedComprehension * 0.4);
     }
 
+    if (SeclusionPath.instrumentationEnabled) {
+      try { console.debug('[Seclusion] tick end', { state: this.state, effects }); } catch (e) { /* ignore */ }
+    }
+
     return effects;
   }
 
   // Quick helper to perform a study action with diminishing returns to XP and rare find chance
-  performStudy(gameState: GameState, intensity: number = 1) {
+  performStudy(gameState: GameState, intensity = 1) {
     const baseExp = Math.max(1, Math.floor(10 * intensity));
     // Apply diminishing returns if many studies in a row
     const decay = Math.pow(SECLUSION_CONFIG.rareSourceDiminishFactor, Math.min(10, Math.floor(this.state.ticksSinceSeclusionStart / 4)));

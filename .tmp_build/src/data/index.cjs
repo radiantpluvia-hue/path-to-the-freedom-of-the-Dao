@@ -31,3 +31,56 @@ var cultivationRealms_1 = require("./cultivationRealms");
 Object.defineProperty(exports, "CULTIVATION_REALMS", { enumerable: true, get: function () { return cultivationRealms_1.CULTIVATION_REALMS; } });
 var craftingRecipes_1 = require("./craftingRecipes");
 Object.defineProperty(exports, "allRecipes", { enumerable: true, get: function () { return craftingRecipes_1.allRecipes; } });
+// Dev/editor seeds: if present, merge for editor tooling and data indexes. These are optional
+// and wrapped in try/catch so CI/builds without the seeds do not fail.
+try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const seedEvents = require('../../data/events/seed_events.json');
+    // attach to default export so simple editors can discover seed payloads
+    module.exports.SEED_EVENTS = seedEvents;
+}
+catch (e) {
+    // ignore missing dev seed pack
+}
+try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const seedBatchBEvents = require('../../data/events/seed_batch_b_events.json');
+    module.exports.SEED_BATCH_B_EVENTS = seedBatchBEvents;
+}
+catch (e) { /* ignore missing dev seed pack */ }
+try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const seedItems = require('../../data/items/seed_items.json');
+    module.exports.SEED_ITEMS = seedItems;
+}
+catch (e) { /* ignore missing dev seed pack */ }
+try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const seedBatchBItems = require('../../data/items/seed_batch_b_items.json');
+    module.exports.SEED_BATCH_B_ITEMS = seedBatchBItems;
+}
+catch (e) { /* ignore missing dev seed pack */ }
+try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const seedManuals = require('../../data/manuals/seed_manuals.json');
+    module.exports.SEED_MANUALS = seedManuals;
+}
+catch (e) { /* ignore missing dev seed pack */ }
+try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const seedBatchBManuals = require('../../data/manuals/seed_batch_b_manuals.json');
+    module.exports.SEED_BATCH_B_MANUALS = seedBatchBManuals;
+}
+catch (e) { /* ignore missing dev seed pack */ }
+try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const seedPassives = require('../../data/passives/seed_passives.json');
+    module.exports.SEED_PASSIVES = seedPassives;
+}
+catch (e) { /* ignore missing dev seed pack */ }
+try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const seedBatchBPassives = require('../../data/passives/seed_batch_b_passives.json');
+    module.exports.SEED_BATCH_B_PASSIVES = seedBatchBPassives;
+}
+catch (e) { /* ignore missing dev seed pack */ }

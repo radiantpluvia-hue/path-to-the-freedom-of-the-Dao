@@ -1,5 +1,6 @@
 import { Rival } from '@/types';
 import { CombatParticipant } from './CombatSystem';
+import { logger } from '../utils/logger';
 
 export interface CombatOutcomeRecord {
   rivalId: string;
@@ -51,6 +52,8 @@ export interface CombatDecision {
 }
 
 export class RivalAISystem {
+  // Debug flag controls internal console logging
+  public debug = false;
   makeCombatDecision(rival: Rival, _player: CombatParticipant, _situation: CombatSituation): CombatDecision {
     const rivalHealthPercent = _situation.rivalHp / rival.stats.hp;
     const playerHealthPercent = _situation.playerHp / (_player.stats as any).hp;
@@ -138,7 +141,7 @@ export class RivalAISystem {
   private maxHistorySize = 50; // Keep last 50 combat records
 
   // Allow external systems to inform the AI about combat results so it can learn or adjust state.
-  public recordCombatOutcome(rivalId: string, outcome: 'victory' | 'defeat' | 'flee', rounds: number = 0, playerStats?: any, rivalStats?: any, playerTechniquesUsed?: string[], rivalTechniquesUsed?: string[]): void {
+  public recordCombatOutcome(rivalId: string, outcome: 'victory' | 'defeat' | 'flee', rounds = 0, playerStats?: any, rivalStats?: any, playerTechniquesUsed?: string[], rivalTechniquesUsed?: string[]): void {
     try {
       // Create combat record
       const record: CombatOutcomeRecord = {
@@ -163,8 +166,10 @@ export class RivalAISystem {
       // Update learning data
       this.updateLearningData(record);
 
-      // Log for debugging (can be removed in production)
-      console.log(`AI Learning: Recorded ${outcome} for ${rivalId} in ${rounds} rounds`);
+      // Log for debugging (only when enabled)
+      if (this.debug) {
+        logger.debug(`AI Learning: Recorded ${outcome} for ${rivalId} in ${rounds} rounds`);
+      }
     } catch (e) {
       // Swallow errors to avoid cascading failures from optional AI logic
       return;
@@ -295,7 +300,7 @@ export class RivalAISystem {
   }
 
   // Get most effective techniques for a rival
-  getEffectiveTechniques(rivalId: string, limit: number = 3): string[] {
+  getEffectiveTechniques(rivalId: string, limit = 3): string[] {
     const data = this.learningData.get(rivalId);
     if (!data) return [];
 
@@ -320,7 +325,7 @@ export class RivalAISystem {
   }
 
   // Get combat history for analysis
-  getCombatHistory(rivalId?: string, limit: number = 10): CombatOutcomeRecord[] {
+  getCombatHistory(rivalId?: string, limit = 10): CombatOutcomeRecord[] {
     let history = this.combatHistory;
     if (rivalId) {
       history = history.filter(record => record.rivalId === rivalId);

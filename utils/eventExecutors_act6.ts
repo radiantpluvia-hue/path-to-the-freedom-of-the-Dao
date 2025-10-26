@@ -33,7 +33,7 @@ const fn_act6_domain_rationing: EventExecutor = (gs: GameState) => {
 const fn_act6_tutelage_circle: EventExecutor = (gs: GameState) => {
   // Simplified tutelage circle implementation
   gs.player.manuals = gs.player.manuals || [];
-  gs.player.manuals.push({ id: 'manual_fragment', name: 'Manual Fragment', type: 'dao', rarity: 'common', qty: 1 });
+  gs.player.manuals.push({ id: 'manual_fragment', name: 'Manual Fragment', type: 'dao', rarity: 'common', qty: 1, description: 'A torn fragment of a larger manual; useful for study or combining into a whole.', effects: { cultivationSpeed: 1.02 } });
   return { ...gs };
 };
 

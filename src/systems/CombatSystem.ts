@@ -1,3 +1,5 @@
+import { getPlayerRealmId } from '../utils/playerHelpers';
+
 export interface CombatParticipant {
   id: string;
   name: string;
@@ -15,8 +17,11 @@ export interface CombatParticipant {
   techniques: CombatTechnique[];
   buffs: CombatBuff[];
   debuffs: CombatDebuff[];
-  // Simple stance system
-  stance?: 'neutral' | 'offensive' | 'defensive' | 'movement';
+  // Enhanced stance system with tactical options
+  stance?: 'neutral' | 'offensive' | 'defensive' | 'movement' | 'evasive' | 'counter' | 'balanced' | 'aggressive';
+  stanceMomentum?: number; // Tracks how long player has been in current stance (turns)
+  // Weapon mastery system
+  weaponMastery?: Record<string, WeaponMastery>;
 }
 
 export interface CombatTechnique {
@@ -40,6 +45,10 @@ export interface CombatTechnique {
   critMultiplier?: number; // default 1.5x
   // If true, the player's `intensity` slider will scale this technique's AP/Qi costs as well as effect values.
   scalesWithIntensity?: boolean;
+  // Custom mechanics metadata (e.g., multiHit, chain, conditional) used by technique implementations
+  mechanics?: any[];
+  // Weapon mastery system
+  weaponType?: string; // e.g., 'sword', 'fist', 'spear', etc.
 }
 
 export interface CombatEffect {
@@ -48,7 +57,11 @@ export interface CombatEffect {
   value?: number;
   duration?: number;
   stat?: string;
+  // Optional multiplier for multiplier-style debuffs (e.g., multiplier: 0.666 means reduce stat to 66.6%)
+  multiplier?: number;
 }
+
+import { logger } from '../utils/logger';
 
 export interface CombatBuff {
   id: string;
@@ -78,6 +91,8 @@ export interface CombatState {
   status: 'ongoing' | 'victory' | 'defeat' | 'fled';
   enemyIntent?: { actorId: string; intent: 'attack' | 'defend' | 'taunt' | 'retreat' | 'regather'; techniqueId?: string };
 }
+
+import { runtimeRng } from '../utils/seededRng';
 
 export interface CombatContext {
   type: 'normal' | 'rival' | 'faction_battle' | 'sect_war';
@@ -109,6 +124,16 @@ export interface RivalAIProfile {
 }
 
 import { getFormationById } from '../data/registry';
+import { WeaponMastery } from '../types';
+import NodeMapSystem, { MapNode } from './NodeMapSystem';
+// Use ESM imports instead of runtime require to be browser-friendly
+import * as domainShim from '../utils/domainSystem';
+import { getRng } from '../utils/rng';
+import { computeOffensiveProwess, TERRAIN_MULTIPLIERS, WEATHER_MULTIPLIERS } from './combatConfig';
+import { reportMissionObjectiveProgress } from './MissionSystem';
+import { getCultivationMultiplier, getDiminishingReturnFactor, adjustDamageForRealmGap } from './cultivationUtils';
+import { toSafeNumber, clamp as clampNum } from '../utils/numberUtils';
+import getPowerScale from '../utils/powerScale';
 
 export class CombatSystem {
   // Tunable: maximum fraction of AP cost reducible by cultivation (e.g., 0.3 => up to 30% AP reduction)
@@ -118,9 +143,13 @@ export class CombatSystem {
   private gameStore: any;
   private rivalSystem: any;
   private baseStats: Record<string, { atk: number; def: number; speed: number }> = {};
-  
+
   // Formation state (applied multipliers) for this combat instance
   private formationEffects?: { atkMult: number; defMult: number; speedMult: number; target: 'player_team' | 'enemy_team' | 'both' };
+
+  // Node-based formation system
+  private nodeMapSystem: NodeMapSystem;
+  private formationLayouts: Map<string, any> = new Map(); // Maps team/unit IDs to formation layouts
 
   constructor(player: CombatParticipant, enemies: CombatParticipant[], gameStore: any, rivalSystem: any, context: CombatContext = { type: 'normal' }) {
     this.state = {
@@ -136,6 +165,9 @@ export class CombatSystem {
     this.context = context;
     this.gameStore = gameStore;
     this.rivalSystem = rivalSystem;
+
+    // Initialize NodeMapSystem
+    this.nodeMapSystem = NodeMapSystem.getInstance();
 
     // Ensure stance shift techniques available for player
     const playerRef = this.state.participants.find(p => p.id === 'player');
@@ -167,6 +199,12 @@ export class CombatSystem {
     // Ensure every participant has at least one usable basic attack for tests/demo
     this.state.participants.forEach(p => this.addDefaultAttackTechnique(p));
 
+    // Set weapon mastery for player if available
+    const playerParticipant = this.state.participants.find(p => p.id === 'player');
+    if (playerParticipant && this.gameStore?.player?.weaponMastery) {
+      playerParticipant.weaponMastery = { ...this.gameStore.player.weaponMastery };
+    }
+
     this.initializeCombat();
 
     // Add context-specific log messages
@@ -179,18 +217,44 @@ export class CombatSystem {
     }
   }
 
-  // RNG accessor: prefer injected RNG from context for deterministic tests
+  /**
+   * Notify the system that an enemy was defeated. This is a simple hook used by
+   * game systems to update mission objectives that target enemy types.
+   */
+  public notifyEnemyDefeated(enemyId: string, enemyType?: string) {
+    try {
+      // Attempt to update any active missions whose objectives target this enemyType or enemyId
+      const store = this.gameStore;
+      if (!store || !store.story || !Array.isArray(store.story.activeRandomMissions)) return;
+      for (const m of store.story.activeRandomMissions) {
+        if (!m.objectives) continue;
+        for (let i = 0; i < m.objectives.length; i++) {
+          const obj = m.objectives[i];
+          // Accept matching by target id or by type string
+          if (obj.target && (obj.target === enemyType || obj.target === enemyId || String(obj.target) === String(enemyType))) {
+            // call the MissionSystem helper (resilient in both runtime and tests)
+            reportMissionObjectiveProgress(m.id, i, 1);
+          }
+        }
+      }
+    } catch (e) { /* ignore */ }
+  }
+
+  // RNG accessor: prefer injected RNG from context for deterministic tests, then domain shim, then Math.random
   private rng(): number {
     try {
       if (this.context && typeof this.context.rng === 'function') return this.context.rng();
-      // Use runtimeRng as a runtime-only fallback. This intentionally uses require() because the RNG
-      // can be swapped at runtime in tests; keep a single inline disable for the rule.
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      return require('../utils/seededRng').runtimeRng();
+      // prefer central helper which checks source, domain shim, then runtime seeded RNG
+      try {
+        const g = getRng(this.gameStore);
+        if (typeof g === 'function') return g();
+      } catch (e) {
+        // ignore and fall back
+      }
+  // final fallback via runtimeRng or Math.random
+  try { return (typeof runtimeRng === 'function') ? runtimeRng() : Math.random(); } catch (e) { return Math.random(); }
     } catch (e) {
-      // fallback to seededRng if dynamic load fails
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      return require('../utils/seededRng').runtimeRng();
+      try { return getRng(this.gameStore)(); } catch (ee) { return Math.random(); }
     }
   }
 
@@ -198,23 +262,22 @@ export class CombatSystem {
     // Calculate turn order based on speed using a sorted copy to avoid
     // mutating the participants array (tests assume original ordering).
     // Sort by speed desc; tie-breaker: player-first, then higher atk, then seeded RNG to keep deterministic tests
-    const rng = this.rng();
+    // rngVal is a numeric sample; preserve by calling rng() once for tie-break mixing
+    const rngVal = this.rng();
     this.state.turnOrder = [...this.state.participants]
       .sort((a, b) => {
         if (b.stats.speed !== a.stats.speed) return b.stats.speed - a.stats.speed;
-        // player goes first in ties
-        if (a.id === 'player' && b.id !== 'player') return -1;
-        if (b.id === 'player' && a.id !== 'player') return 1;
-        // Prefer a small offensive prowess heuristic instead of raw atk for tie-breaking
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const { computeOffensiveProwess } = require('./combatConfig');
-        const pa = computeOffensiveProwess(a);
-        const pb = computeOffensiveProwess(b);
-        if (pb !== pa) return pb - pa;
+  // player goes first in ties
+  if (a.id === 'player' && b.id !== 'player') return -1;
+  if (b.id === 'player' && a.id !== 'player') return 1;
+  // Prefer a small offensive prowess heuristic instead of raw atk for tie-breaking
+  const pa = computeOffensiveProwess(a);
+  const pb = computeOffensiveProwess(b);
+  if (pb !== pa) return pb - pa;
         // fallback deterministic tie-break using seeded RNG mixed with ids
         const seedA = Array.from(a.id).reduce((s, ch) => s + ch.charCodeAt(0), 0);
         const seedB = Array.from(b.id).reduce((s, ch) => s + ch.charCodeAt(0), 0);
-        return (seedB + Math.floor(rng * 10)) - (seedA + Math.floor(rng * 10));
+        return (seedB + Math.floor(rngVal * 10)) - (seedA + Math.floor(rngVal * 10));
       })
       .map(p => p.id);
 
@@ -235,16 +298,21 @@ export class CombatSystem {
   // Apply optional formation from context to participant base stats (multipliers)
   private applyFormationFromContext(): void {
     try {
-      const formationId = this.context.formationId;
+  const formationId = this.context.formationId;
       if (!formationId) return;
       const applyTo = this.context.applyFormationTo || 'player_team';
       const formation = getFormationById(formationId);
       if (!formation) return;
+
+      // Legacy formation multipliers for backward compatibility
       const atkMult = Math.max(0, formation.atkMult || 1);
       const defMult = Math.max(0, formation.defMult || 1);
       const speedMult = Math.max(0, formation.speedMult || 1);
       this.formationEffects = { atkMult, defMult, speedMult, target: applyTo };
-      
+
+      // Set up positional formations for enhanced system
+      this.setupPositionalFormations(formation, applyTo);
+
       const applyToParticipant = (p: any) => {
         // decide team: assume id 'player' and anything not 'player' is enemy (simple convention for tests)
         const isPlayerTeam = p.id === 'player' || p.id?.startsWith('ally_');
@@ -259,6 +327,98 @@ export class CombatSystem {
     } catch (e) {
       // ignore formation apply errors in constrained environments
     }
+  }
+
+  /**
+   * Sets up positional formations for enhanced combat mechanics
+   */
+  private setupPositionalFormations(formation: any, applyTo: string): void {
+    const playerTeam = this.state.participants.filter(p => p.id === 'player' || p.id?.startsWith('ally_'));
+    const enemyTeam = this.state.participants.filter(p => p.id !== 'player' && !p.id?.startsWith('ally_'));
+
+    if (applyTo === 'both' || applyTo === 'player_team') {
+      if (playerTeam.length > 0) {
+        const layout = this.nodeMapSystem.createFormationLayout(formation, 2, 2);
+        const unitIds = playerTeam.map(p => p.id);
+        const assignedLayout = this.nodeMapSystem.assignUnitsToFormation(layout, unitIds);
+        this.formationLayouts.set('player_team', assignedLayout);
+      }
+    }
+
+    if (applyTo === 'both' || applyTo === 'enemy_team') {
+      if (enemyTeam.length > 0) {
+        const layout = this.nodeMapSystem.createFormationLayout(formation, 7, 2);
+        const unitIds = enemyTeam.map(p => p.id);
+        const assignedLayout = this.nodeMapSystem.assignUnitsToFormation(layout, unitIds);
+        this.formationLayouts.set('enemy_team', assignedLayout);
+      }
+    }
+  }
+
+  /**
+   * Gets positional bonuses for a participant
+   */
+  private getPositionalBonuses(participantId: string): { atk: number; def: number; speed: number; flankingBonus: number; backAttackBonus: number } {
+    const playerLayout = this.formationLayouts.get('player_team');
+    const enemyLayout = this.formationLayouts.get('enemy_team');
+
+    // Check both layouts for the participant
+    let layout = null;
+    if (playerLayout && playerLayout.nodes.some((n: MapNode) => n.unitId === participantId)) {
+      layout = playerLayout;
+    } else if (enemyLayout && enemyLayout.nodes.some((n: MapNode) => n.unitId === participantId)) {
+      layout = enemyLayout;
+    }
+
+    if (layout) {
+      return this.nodeMapSystem.calculatePositionalBonuses(layout, participantId);
+    }
+
+    return { atk: 0, def: 0, speed: 0, flankingBonus: 0, backAttackBonus: 0 };
+  }
+
+  /**
+   * Checks if an attack is a flanking attack
+   */
+  private isFlankingAttack(attackerId: string, targetId: string): boolean {
+    const attackerLayout = this.getParticipantLayout(attackerId);
+    const targetLayout = this.getParticipantLayout(targetId);
+
+    if (attackerLayout && targetLayout) {
+      return this.nodeMapSystem.canFlank(attackerLayout, attackerId, targetId);
+    }
+
+    return false;
+  }
+
+  /**
+   * Checks if an attack is from behind
+   */
+  private isBackAttack(attackerId: string, targetId: string): boolean {
+    const attackerLayout = this.getParticipantLayout(attackerId);
+    const targetLayout = this.getParticipantLayout(targetId);
+
+    if (attackerLayout && targetLayout) {
+      return this.nodeMapSystem.isBackAttack(attackerLayout, attackerId, targetId);
+    }
+
+    return false;
+  }
+
+  /**
+   * Gets the formation layout for a participant
+   */
+  private getParticipantLayout(participantId: string): any {
+    const playerLayout = this.formationLayouts.get('player_team');
+    const enemyLayout = this.formationLayouts.get('enemy_team');
+
+    if (playerLayout && playerLayout.nodes.some((n: MapNode) => n.unitId === participantId)) {
+      return playerLayout;
+    } else if (enemyLayout && enemyLayout.nodes.some((n: MapNode) => n.unitId === participantId)) {
+      return enemyLayout;
+    }
+
+    return null;
   }
 
   public getContext(): CombatContext {
@@ -303,8 +463,23 @@ export class CombatSystem {
     if (!participant) return [];
 
     const stance = participant.stance ?? 'neutral';
-    const apModifier = stance === 'movement' ? 0.9 : stance === 'defensive' ? 1.1 : 1.0;
-    const qiModifier = stance === 'offensive' ? 1.05 : 1.0;
+
+    // Stance modifiers based on the new stance system
+    const stanceModifiers = {
+      neutral: { apCostMultiplier: 1.0, qiCostMultiplier: 1.0 },
+      balanced: { apCostMultiplier: 1.0, qiCostMultiplier: 1.0 },
+      offensive: { apCostMultiplier: 1.15, qiCostMultiplier: 0.9 },
+      defensive: { apCostMultiplier: 1.1, qiCostMultiplier: 1.0 },
+  movement: { apCostMultiplier: 0.9, qiCostMultiplier: 1.1 },
+      evasive: { apCostMultiplier: 1.0, qiCostMultiplier: 1.1 },
+      counter: { apCostMultiplier: 1.0, qiCostMultiplier: 1.1 },
+      aggressive: { apCostMultiplier: 1.15, qiCostMultiplier: 0.9 }
+    };
+
+    const modifiers = stanceModifiers[stance] || stanceModifiers.neutral;
+    const apModifier = modifiers.apCostMultiplier;
+    const qiModifier = modifiers.qiCostMultiplier;
+
     const weather = this.context.weather || 'clear';
     const weatherApMod = weather === 'rain' ? 1.05 : weather === 'storm' ? 1.1 : weather === 'fog' ? 1.05 : 1.0;
 
@@ -318,7 +493,7 @@ export class CombatSystem {
   }
 
   // Change stance with a tiny AP cost (default 0) and log it
-  public setStance(participantId: string, stance: NonNullable<CombatParticipant['stance']>, apCost: number = 0): boolean {
+  public setStance(participantId: string, stance: NonNullable<CombatParticipant['stance']>, apCost = 0): boolean {
     const participant = this.getParticipant(participantId);
     if (!participant) return false;
     if (participant.ap < apCost) return false;
@@ -361,7 +536,8 @@ export class CombatSystem {
     const weather = this.context.weather || 'clear';
     const weatherApMod = weather === 'rain' ? 1.05 : weather === 'storm' ? 1.1 : weather === 'fog' ? 1.05 : 1.0;
   // Intensity: determine once and clamp (1%..100%)
-  const intensity = typeof options?.intensity === 'number' ? Math.max(0.01, Math.min(1, options!.intensity)) : 1;
+  const rawIntensity = options?.intensity;
+  const intensity = typeof rawIntensity === 'number' ? Math.max(0.01, Math.min(1, rawIntensity)) : 1;
 
   // Compute base costs
     let apCost = Math.max(0, Math.floor(technique.apCost * apModifier * weatherApMod));
@@ -374,21 +550,14 @@ export class CombatSystem {
     }
 
     // AP efficiency scaling: higher cultivation reduces AP cost modestly (up to ~30%)
-    try {
-  // cultivationUtils is required dynamically for runtime configs
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const { getCultivationMultiplier } = require('./cultivationUtils');
-      const cultMul = getCultivationMultiplier((participant as any).cultivation);
-      // Map cultMul in [1, ~6+] to efficiency in [1.0, 1 - MAX_AP_REDUCTION]
-      const maxMul = 6; // multiplier at which we reach max efficiency
-      const norm = Math.min(cultMul, maxMul);
-      const reduction = CombatSystem.MAX_AP_REDUCTION * ((norm - 1) / (maxMul - 1));
-      const efficiency = 1 - reduction;
-      const apEfficiency = Math.max(1 - CombatSystem.MAX_AP_REDUCTION, Math.min(1.0, efficiency));
-      apCost = Math.max(0, Math.floor(apCost * apEfficiency));
-    } catch (e) {
-      // if cultivation utils missing, silently skip AP scaling
-    }
+    const cultMul = getCultivationMultiplier((participant as any).cultivation);
+    // Map cultMul in [1, ~6+] to efficiency in [1.0, 1 - MAX_AP_REDUCTION]
+    const maxMul = 6; // multiplier at which we reach max efficiency
+    const norm = Math.min(cultMul, maxMul);
+    const reduction = CombatSystem.MAX_AP_REDUCTION * ((norm - 1) / (maxMul - 1));
+    const efficiency = 1 - reduction;
+    const apEfficiency = Math.max(1 - CombatSystem.MAX_AP_REDUCTION, Math.min(1.0, efficiency));
+    apCost = Math.max(0, Math.floor(apCost * apEfficiency));
 
     // Check if technique can be used
     if (apCost > participant.ap || qiCost > participant.qi) {
@@ -419,6 +588,35 @@ export class CombatSystem {
       technique.masteryXp = 0;
       technique.masteryRank = Math.min((technique.masteryRank || 0) + 1, 5);
       this.addToLog(`${participant.name} has improved their ${technique.name} mastery! (Rank ${technique.masteryRank})`);
+    }
+
+    // Gain weapon mastery XP
+    if (technique.weaponType && participant.weaponMastery) {
+      const weaponType = technique.weaponType;
+      if (!participant.weaponMastery[weaponType]) {
+        participant.weaponMastery[weaponType] = {
+          level: 1,
+          experience: 0,
+          tier: 1,
+          bonuses: {}
+        };
+      }
+      const mastery = participant.weaponMastery[weaponType];
+      mastery.experience += 2; // gain 2 XP per use
+      // Level up every 10 XP
+      while (mastery.experience >= 10) {
+        mastery.experience -= 10;
+        mastery.level += 1;
+        // Tier up every 5 levels
+        if (mastery.level % 5 === 0) {
+          mastery.tier += 1;
+          // Add bonuses on tier up
+          this.applyWeaponMasteryBonuses(mastery);
+          this.addToLog(`${participant.name} has advanced their ${weaponType} mastery to tier ${mastery.tier}!`);
+        } else {
+          this.addToLog(`${participant.name}'s ${weaponType} mastery has increased to level ${mastery.level}!`);
+        }
+      }
     }
 
     this.addToLog(`${participant.name} uses ${technique.name}!`);
@@ -477,10 +675,31 @@ export class CombatSystem {
         /* intentionally ignored */
       }
 
-    // Fallback: pick any available attack
+    // Lightweight heuristic before pure fallback:
+    // - If low HP (<35%) and has a defense technique, prefer it.
+    // - If very low Qi and has meditation, recover qi.
     if (!techniqueToUse) {
-      techniqueToUse = this.findTechniqueByType(current, 'attack') || current.techniques[0]?.id || null;
-      plannedIntent = techniqueToUse ? 'attack' : 'regather';
+      const hpPct = current.maxHp > 0 ? current.hp / current.maxHp : 1;
+      const lowQi = current.qi < 10;
+      if (hpPct < 0.35) {
+        const guardId = this.findTechniqueByType(current, 'defense');
+        if (guardId) {
+          techniqueToUse = guardId;
+          plannedIntent = 'defend';
+        }
+      }
+      if (!techniqueToUse && lowQi) {
+        const meditate = this.getAvailableTechniques(current.id).find(t => t.id === 'meditation');
+        if (meditate) {
+          techniqueToUse = meditate.id;
+          plannedIntent = 'regather';
+        }
+      }
+      // Otherwise attack
+      if (!techniqueToUse) {
+        techniqueToUse = this.findTechniqueByType(current, 'attack') || current.techniques[0]?.id || null;
+        plannedIntent = techniqueToUse ? 'attack' : 'regather';
+      }
     }
 
     // Telegraph intent before executing
@@ -512,23 +731,15 @@ export class CombatSystem {
     }
     // Simple heuristic: highest value damage first
     const attacks = usable.filter(t => t.type === 'attack');
-    try {
-      // Prefer central offensive prowess when available: estimate technique contribution by combining
-      // technique base damage with the user's offensive prowess to better rank multi-effect techniques.
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const { computeOffensiveProwess } = require('./combatConfig');
-      attacks.sort((a, b) => {
-        const aBase = a.effects?.[0]?.value || 0;
-        const bBase = b.effects?.[0]?.value || 0;
-        const ap = computeOffensiveProwess(p) + aBase;
-        const bp = computeOffensiveProwess(p) + bBase;
-        return bp - ap;
-      });
-      return attacks[0]?.id || usable[0]?.id || null;
-    } catch (e) {
-      attacks.sort((a, b) => (b.effects?.[0]?.value || 0) - (a.effects?.[0]?.value || 0));
-      return attacks[0]?.id || usable[0]?.id || null;
-    }
+    // Rank by offensive prowess + technique base damage
+    attacks.sort((a, b) => {
+      const aBase = a.effects?.[0]?.value || 0;
+      const bBase = b.effects?.[0]?.value || 0;
+      const ap = computeOffensiveProwess(p) + aBase;
+      const bp = computeOffensiveProwess(p) + bBase;
+      return bp - ap;
+    });
+    return attacks[0]?.id || usable[0]?.id || null;
   }
 
 
@@ -577,12 +788,11 @@ export class CombatSystem {
     }
   }
 
-  private applyTechniqueEffects(user: CombatParticipant, technique: CombatTechnique, targetId?: string, _intensity: number = 1): void {
+  private applyTechniqueEffects(user: CombatParticipant, technique: CombatTechnique, targetId?: string, _intensity = 1): void {
     // Support technique-level mechanics metadata if present (multiHit, chain, conditional)
     const mechanics = (technique as any).mechanics || [];
-  // Lazy import cultivation utils to avoid cyclic deps. Runtime require is intentional.
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const { getCultivationMultiplier } = require('./cultivationUtils');
+  // Use cultivation utils imported at module level to avoid runtime require
+  // getCultivationMultiplier imported at top
 
     // Helper: evaluate simple conditional string patterns
     const evalCondition = (cond: string | undefined, u: CombatParticipant, t: CombatParticipant): boolean => {
@@ -640,27 +850,16 @@ export class CombatSystem {
             let baseValue = Math.floor((effect.value || 0) * masteryBonus);
 
             // Apply cultivation multiplier (if user has cultivation info)
-            try {
-              const cultInfo = (user as any).cultivation as any;
-              const cultMul = getCultivationMultiplier(cultInfo);
-              baseValue = Math.max(1, Math.floor(baseValue * cultMul));
-            } catch (e) {
-              // ignore and continue
-            }
+            const cultInfo = (user as any).cultivation as any;
+            const cultMul = getCultivationMultiplier(cultInfo);
+            baseValue = Math.max(1, Math.floor(baseValue * cultMul));
 
             // Determine diminishing return factor based on how often this technique was used
             let dimFactor = 1;
-            try {
-              const counts = (user as any)._techUseCounts = (user as any)._techUseCounts || {};
-              const used = counts[technique.id] || 0;
-              // runtime require: getDiminishingReturnFactor for diminishing returns
-              // eslint-disable-next-line @typescript-eslint/no-var-requires
-              const { getDiminishingReturnFactor: _gdrf } = require('./cultivationUtils');
-              dimFactor = _gdrf(used + 1); // include this impending use
-              counts[technique.id] = used + 1;
-            } catch (e) {
-              // ignore
-            }
+            const counts = (user as any)._techUseCounts = (user as any)._techUseCounts || {};
+            const used = counts[technique.id] || 0;
+            dimFactor = getDiminishingReturnFactor(used + 1); // include this impending use
+            counts[technique.id] = used + 1;
 
             baseValue = Math.max(1, Math.floor(baseValue * dimFactor));
 
@@ -770,21 +969,17 @@ export class CombatSystem {
   }
 
   private applyDamage(attacker: CombatParticipant, target: CombatParticipant, baseDamage: number, technique?: CombatTechnique): void {
-    // RNG hook for deterministic tests
-    const rng = this.context.rng || Math.random;
+    // Resolve RNG at call-time using central helper so resolution order is consistent
+    // Priority: this.context.rng -> this.gameStore.rng -> domainShim.getRng() -> seeded.runtimeRng() -> Math.random
+    const rng = getRng(this.context || this.gameStore);
 
     // Config map for terrain/weather multipliers
     const terrain = this.context.terrain || 'city';
     const weather = this.context.weather || 'clear';
 
-    // Use shared config
-    // The combatConfig is intentionally required at runtime (contains large maps); annotate for the linter
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { TERRAIN_MULTIPLIERS, WEATHER_MULTIPLIERS } = require('./combatConfig');
-
-    const atkMod = TERRAIN_MULTIPLIERS[terrain].atk * WEATHER_MULTIPLIERS[weather].atk;
-    let defMod = TERRAIN_MULTIPLIERS[terrain].def * WEATHER_MULTIPLIERS[weather].def;
-    let dmgMod = TERRAIN_MULTIPLIERS[terrain].dmg * WEATHER_MULTIPLIERS[weather].dmg;
+  const atkMod = TERRAIN_MULTIPLIERS[terrain].atk * WEATHER_MULTIPLIERS[weather].atk;
+  let defMod = TERRAIN_MULTIPLIERS[terrain].def * WEATHER_MULTIPLIERS[weather].def;
+  let dmgMod = TERRAIN_MULTIPLIERS[terrain].dmg * WEATHER_MULTIPLIERS[weather].dmg;
 
     // Stance influence
     const stance = attacker.stance || 'neutral';
@@ -795,33 +990,63 @@ export class CombatSystem {
       defMod *= 1.1;
     }
 
-    const effectiveAtk = Math.max(0, Math.floor(attacker.stats.atk * atkMod));
-    const effectiveDef = Math.max(0, Math.floor(target.stats.def * defMod));
+    // Apply weapon mastery bonuses
+    let weaponAtkBonus = 0;
+    let weaponDefBonus = 0;
+    if (technique?.weaponType && attacker.weaponMastery?.[technique.weaponType]) {
+      const mastery = attacker.weaponMastery[technique.weaponType];
+      weaponAtkBonus = mastery.bonuses.atk || 0;
+      weaponDefBonus = mastery.bonuses.def || 0;
+    }
+
+    // Apply positional bonuses
+    const attackerPosBonuses = this.getPositionalBonuses(attacker.id);
+    const targetPosBonuses = this.getPositionalBonuses(target.id);
+
+    const effectiveAtk = Math.max(0, Math.floor((attacker.stats.atk + weaponAtkBonus + attackerPosBonuses.atk) * atkMod));
+    const effectiveDef = Math.max(0, Math.floor((target.stats.def + weaponDefBonus + targetPosBonuses.def) * defMod));
 
     const raw = baseDamage + effectiveAtk - effectiveDef;
-    let damage = Math.max(1, Math.floor(raw * dmgMod));
+  let damage = Math.max(1, Math.floor(raw * dmgMod));
+
+    // Apply flanking and back attack bonuses
+    let specialAttackMultiplier = 1.0;
+    let specialAttackMessage = '';
+
+    if (this.isBackAttack(attacker.id, target.id)) {
+      specialAttackMultiplier *= (1 + attackerPosBonuses.backAttackBonus);
+      specialAttackMessage = 'Back attack! ';
+    } else if (this.isFlankingAttack(attacker.id, target.id)) {
+      specialAttackMultiplier *= (1 + attackerPosBonuses.flankingBonus);
+      specialAttackMessage = 'Flanking attack! ';
+    }
+
+    damage = Math.max(1, Math.floor(damage * specialAttackMultiplier));
 
     // Allow per-technique and attacker cultivation-based multipliers to further modify final damage
-    try {
-    // The cultivation utilities are only needed in some runtime contexts; require dynamically and annotate for ESLint
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { getCultivationMultiplier, adjustDamageForRealmGap } = require('./cultivationUtils');
-      const cultMul = getCultivationMultiplier((attacker as any).cultivation);
-      damage = Math.max(1, Math.floor(damage * cultMul));
+    const cultMul = getCultivationMultiplier((attacker as any).cultivation);
+    damage = Math.max(1, Math.floor(damage * cultMul));
 
-      // Apply realm-gap protection using attacker/target cultivation info and simple prowess metrics
-      const attackerStage = ((attacker as any).cultivation || {}).stage || 0;
-      const targetStage = ((target as any).cultivation || {}).stage || 0;
-  // Use central helper for offensive prowess to keep the heuristic consistent
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const { computeOffensiveProwess } = require('./combatConfig');
-  const attackerProwess = computeOffensiveProwess(attacker);
-  const targetProwess = (target.stats.def || 0) + (targetStage * 10);
-      damage = adjustDamageForRealmGap({ attackerStage, targetStage, attackerProwess, targetProwess, damage, targetMaxHp: target.maxHp });
-    } catch (e) {
-      // ignore and continue with base damage if cultivation utils unavailable
-      /* intentionally ignored */
+    // Immortal fantasy: apply a global damage scaler from player/world settings.
+    try {
+      // Derive a plausible player reference from gameStore; if missing, use attacker speed/atk heuristic
+      const store = this.gameStore || {};
+      const p = (store.player as any) || null;
+      const world = (store.world as any) || undefined;
+      const { damageScale } = getPowerScale(p, world);
+      if (damageScale && damageScale !== 1) {
+        damage = Math.max(1, Math.floor(damage * damageScale));
+      }
+    } catch {
+      // ignore scaling errors
     }
+
+    // Apply realm-gap protection using attacker/target cultivation info and simple prowess metrics
+    const attackerStage = ((attacker as any).cultivation || {}).stage || 0;
+    const targetStage = ((target as any).cultivation || {}).stage || 0;
+    const attackerProwess = computeOffensiveProwess(attacker);
+    const targetProwess = (target.stats.def || 0) + (targetStage * 10);
+    damage = adjustDamageForRealmGap({ attackerStage, targetStage, attackerProwess, targetProwess, damage, targetMaxHp: target.maxHp });
 
     // Crit/Miss (behind flag) — allow per-technique overrides
     if (this.context.enableCritMiss) {
@@ -854,10 +1079,10 @@ export class CombatSystem {
       );
     }
 
-    target.hp = Math.max(0, target.hp - damage);
+  target.hp = Math.max(0, target.hp - damage);
 
-    // --- Handle Triggered Effects (e.g., Thorn Armor) ---
-    // Check target's buffs for on_take_damage effects
+  // --- Handle Triggered Effects (e.g., Thorn Armor) ---
+  // Check target's buffs for on_take_damage effects
     target.buffs.forEach(buff => {
       const reflectEffect = buff.effects?.triggered?.on_take_damage;
       if (reflectEffect?.type === 'reflect_damage' && reflectEffect.percent > 0) {
@@ -869,7 +1094,75 @@ export class CombatSystem {
       }
     });
 
-    this.addToLog(`${target.name} takes ${damage} damage! (${target.hp}/${target.maxHp} HP remaining)`);
+    this.addToLog(`${specialAttackMessage}${target.name} takes ${damage} damage! (${target.hp}/${target.maxHp} HP remaining)`);
+
+    // If the target is the player, enqueue inner thoughts on near-death/death
+    try {
+        if (target.id === 'player') {
+        try {
+          const iv = (globalThis as any).InnerVoice || null;
+          if (iv && typeof iv.enqueueThoughtAuto === 'function') {
+            const hpRatio = target.maxHp > 0 ? (target.hp / target.maxHp) : 0;
+            if (hpRatio <= 0) {
+              iv.enqueueThoughtAuto('combat_near_death', 'player', "I can't die here... not yet.", { importance: 5, ttlMs: 60_000 });
+            } else if (hpRatio < 0.1) {
+              iv.enqueueThoughtAuto('combat_near_death', 'player', "My life hangs by a thread... hold on!", { importance: 4, ttlMs: 45_000 });
+            } else if (hpRatio < 0.3) {
+              iv.enqueueThoughtAuto('combat', 'player', "This is bad — I need to recover!", { importance: 2, ttlMs: 25_000 });
+            }
+          }
+        } catch (e) { /* non-fatal */ }
+      }
+    } catch (e) {
+      // non-fatal
+    }
+
+    // --- Passive onHit / proc hooks ---
+    try {
+      const rngFn = this.rng.bind(this);
+
+      // Attacker onHit hooks: allow handlers to optionally return a number which will be
+      // applied as extra damage to the target (positive values -> extra damage).
+      const attackerHooks = (attacker as any)?._passiveHooks;
+      if (attackerHooks && Array.isArray(attackerHooks.onHit)) {
+        attackerHooks.onHit.forEach((h: any) => {
+          try {
+            const res = h.fn({ attacker, target, damage, technique, rng: rngFn, combatSystem: this });
+            if (typeof res === 'number') {
+              const extra = Math.max(0, Math.floor(res));
+              target.hp = Math.max(0, target.hp - extra);
+              this.addToLog(`${attacker.name}'s passive ${h.id} deals ${extra} bonus damage to ${target.name}!`);
+            }
+          } catch (e) { /* swallow hook errors */ }
+        });
+      }
+
+      // Attacker proc hooks: these functions are responsible for chance checks using rng
+      if (attackerHooks && Array.isArray(attackerHooks.proc)) {
+        attackerHooks.proc.forEach((h: any) => {
+          try {
+            h.fn({ attacker, target, damage, technique, rng: rngFn, combatSystem: this });
+          } catch (e) { /* ignore */ }
+        });
+      }
+
+      // Target-side onHit (e.g., retaliation) - call target's onHit with swapped roles
+      const targetHooks = (target as any)?._passiveHooks;
+      if (targetHooks && Array.isArray(targetHooks.onHit)) {
+        targetHooks.onHit.forEach((h: any) => {
+          try {
+            const res = h.fn({ attacker: target, target: attacker, damage, technique, rng: rngFn, combatSystem: this });
+            if (typeof res === 'number') {
+              const extra = Math.max(0, Math.floor(res));
+              attacker.hp = Math.max(0, attacker.hp - extra);
+              this.addToLog(`${target.name}'s passive ${h.id} deals ${extra} damage back to ${attacker.name}!`);
+            }
+          } catch (e) { /* swallow */ }
+        });
+      }
+    } catch (e) {
+      // defensive: ensure passive hooks never break combat
+    }
   }
 
   private applyHealing(target: CombatParticipant, amount: number): void {
@@ -911,29 +1204,51 @@ export class CombatSystem {
   }
 
   private applyDebuff(target: CombatParticipant, effect: CombatEffect): void {
-    if (!effect.stat || !effect.value || !effect.duration) return;
+    // Support two debuff styles:
+    // 1) flat stat change: effect.stat='def', effect.value = amount, duration
+    // 2) multiplier-style: effect.stat='def' (or 'def_multiplier') and effect.multiplier present
+    if (!effect.stat || !effect.duration) return;
 
     const debuff: CombatDebuff = {
       id: `debuff_${Date.now()}`,
       name: `${effect.stat} reduction`,
-      description: `-${effect.value} ${effect.stat}`,
+      description: effect.multiplier
+        ? `Defense reduced x${(1 / (effect.multiplier || 1)).toFixed(2)}`
+        : `-${effect.value} ${effect.stat}`,
       duration: effect.duration,
-      effects: { stats: { [effect.stat]: -effect.value } },
+      effects: { stats: {} as any },
       appliedEffects: { stats: {} }
     };
 
-    // Apply debuff effect immediately to stats
-    const statEffects = debuff.effects.stats;
-    if (statEffects) {
-      Object.entries(statEffects).forEach(([stat, val]) => {
-        if (stat in target.stats && typeof val === 'number') {
-          // @ts-expect-error dynamic key access
-          target.stats[stat] = Math.max(1, (target.stats as any)[stat] + val);
-          if (debuff.appliedEffects?.stats) {
-            (debuff.appliedEffects.stats as any)[stat] = val;
-          }
+    // Multiplier style: compute the delta based on current stat value
+    if (typeof (effect as any).multiplier === 'number') {
+      const mult = (effect as any).multiplier;
+      // target stat name (default to 'def')
+      const statName = (effect.stat === 'def_multiplier' ? 'def' : effect.stat) as keyof typeof target.stats;
+      if (statName in target.stats) {
+        const oldVal = (target.stats as any)[statName];
+        const newVal = Math.max(1, Math.floor(oldVal * mult));
+        const delta = newVal - oldVal; // negative
+        debuff.effects.stats[statName] = delta;
+        if (debuff.appliedEffects?.stats) {
+          (debuff.appliedEffects.stats as any)[statName] = delta;
         }
-      });
+        // Apply immediately
+        (target.stats as any)[statName] = newVal;
+      }
+    } else if (typeof effect.value === 'number') {
+      // Flat value style
+      const statName = effect.stat as keyof typeof target.stats;
+      const val = -effect.value; // debuff stores negative
+      debuff.effects.stats[statName] = val;
+      if (debuff.appliedEffects?.stats) {
+        (debuff.appliedEffects.stats as any)[statName] = val;
+      }
+      if (statName in target.stats && typeof val === 'number') {
+        (target.stats as any)[statName] = Math.max(1, (target.stats as any)[statName] + val);
+      }
+    } else {
+      return; // nothing to apply
     }
 
     target.debuffs.push(debuff);
@@ -995,6 +1310,16 @@ export class CombatSystem {
       }
       return true;
     });
+
+    // Invoke any auraTick passive hooks attached to participant
+    try {
+      const hooks = (participant as any)?._passiveHooks;
+      if (hooks && Array.isArray(hooks.auraTick)) {
+        hooks.auraTick.forEach((h: any) => {
+          try { h.fn(participant, { combatSystem: this }); } catch (e) { /* ignore hook errors */ }
+        });
+      }
+    } catch (e) { /* noop */ }
 
     // Process debuffs (decrement duration; if expired, revert their effects)
     participant.debuffs = participant.debuffs.filter(debuff => {
@@ -1062,13 +1387,22 @@ export class CombatSystem {
         this.handleSectWarOutcome(outcome);
         break;
     }
+    // After outcome, process end-of-combat buffs on the player state if available
+    try {
+      if (this.gameStore && this.gameStore.buffSystem && this.gameStore.player && typeof this.gameStore.updatePlayerState === 'function') {
+        const processed = this.gameStore.buffSystem.processBuffsOnCombatEnd(this.gameStore.player);
+        this.gameStore.updatePlayerState(processed);
+      }
+    } catch (e) {
+      // ignore non-fatal errors in buff cleanup
+    }
   }
 
 
 
   private handleFactionBattleOutcome(outcome: 'victory' | 'defeat'): void {
     if (!this.context.faction || !this.gameStore) {
-      console.warn('Missing faction context or game store for faction battle outcome');
+  logger.warn('Missing faction context or game store for faction battle outcome');
       return;
     }
 
@@ -1135,7 +1469,7 @@ export class CombatSystem {
       }
 
     } catch (error) {
-      console.error('Error handling faction battle outcome:', error);
+  logger.error('Error handling faction battle outcome:', error);
       this.addToLog('Error processing faction battle consequences');
     }
   }
@@ -1150,7 +1484,7 @@ export class CombatSystem {
         const rival = this.rivalSystem.getRival(p.id.replace(/^rival_/, ''));
         return sum + (rival?.level || 10);
       }
-      return sum + (this.gameStore?.player?.realmId || 10);
+  return sum + (getPlayerRealmId(this.gameStore?.player) || 10);
     }, 0);
 
     intensity *= Math.min(2.0, totalLevels / 100); // Scale based on total power
@@ -1239,7 +1573,7 @@ export class CombatSystem {
       try {
         this.gameStore.adjustSectReputation(this.context.sect, sectRepChange);
       } catch (error) {
-        console.warn('Could not access game store for sect outcome:', error);
+  logger.warn('Could not access game store for sect outcome:', error);
       }
     }
   }
@@ -1264,9 +1598,6 @@ export class CombatSystem {
       let factionId: string | null = null;
 
       // Use local safe number helpers to coerce values
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const { toSafeNumber, clamp: clampNum } = require('../utils/numberUtils');
-
       if (isPlayer) {
         const playerSect = this.gameStore.player?.sect;
         if (!playerSect) {
@@ -1278,7 +1609,6 @@ export class CombatSystem {
           const clampedReputation = clampNum(sectReputation, -100, 100);
           factionBonus = this.calculateFactionBonus(clampedReputation, 'sect');
         }
-
       } else if (isRival && this.rivalSystem) {
         const rival = this.rivalSystem.getRival(participant.id)
           || this.rivalSystem.getRival(participant.id.replace(/^rival_/, ''))
@@ -1306,7 +1636,7 @@ export class CombatSystem {
         }
 
         if (Math.abs(factionBonus - 1.0) > 0.1) {
-          console.log(`Applied faction bonus ${factionBonus.toFixed(2)} to ${participant.name} (${factionId})`);
+          try { logger.debug(`Applied faction bonus ${factionBonus.toFixed(2)} to ${participant.name} (${factionId})`); } catch (e) { void e; }
         }
       }
 
@@ -1341,7 +1671,7 @@ export class CombatSystem {
       }
 
     } catch (error) {
-      console.error(`Error applying faction stat adjustments to ${participant.name}:`, error);
+  logger.error(`Error applying faction stat adjustments to ${participant.name}:`, error);
       participant.stats = { ...originalStats };
     }
   }
@@ -1497,10 +1827,10 @@ export class CombatSystem {
       const currentValue = participant.stats[statKey];
 
       if (currentValue > originalValue * maxMultiplier) {
-        console.warn(`Faction adjustment: ${statKey} exceeded maximum multiplier, clamping from ${currentValue} to ${originalValue * maxMultiplier}`);
+  logger.warn(`Faction adjustment: ${statKey} exceeded maximum multiplier, clamping from ${currentValue} to ${originalValue * maxMultiplier}`);
         participant.stats[statKey] = Math.floor(originalValue * maxMultiplier);
       } else if (currentValue < minStatValue) {
-        console.warn(`Faction adjustment: ${statKey} below minimum value, clamping from ${currentValue} to ${minStatValue}`);
+  logger.warn(`Faction adjustment: ${statKey} below minimum value, clamping from ${currentValue} to ${minStatValue}`);
         participant.stats[statKey] = minStatValue;
       }
     });
@@ -1518,16 +1848,33 @@ export class CombatSystem {
         || (this.context.rivalId ? this.rivalSystem.getRival(this.context.rivalId) : null);
       
       if (!rival) {
-        console.warn(`Rival not found for participant ${participant.id}`);
+  logger.warn(`Rival not found for participant ${participant.id}`);
         return;
       }
 
-      // Cache original stats for validation
+  // Cache original stats for validation
       const originalStats = { ...participant.stats };
 
       // Apply enhanced personality-based stat adjustments
       const personalityEffects = this.getPersonalityEffects(rival.personality);
       this.applyPersonalityEffects(participant, personalityEffects);
+
+      // Special handling for Kid God (half-power until 50% HP)
+      if (rival.specialAbilities && Array.isArray(rival.specialAbilities) && rival.specialAbilities.includes('half_power_then_unleash')) {
+        // Mark participant with a temporary combat flag to indicate limited abilities
+        // We'll use a custom buff id to represent the limited state
+        const hpPercent = participant.hp / participant.maxHp;
+        // If above 50% HP, restrict to half techniques (first half of list)
+        if (hpPercent > 0.5) {
+          (participant as any)._halfPowerMode = true;
+        } else {
+          if ((participant as any)._halfPowerMode) {
+            // Transition: unleash full power
+            delete (participant as any)._halfPowerMode;
+            this.addToLog(`${participant.name} suddenly shifts — unleashing their full power!`);
+          }
+        }
+      }
 
       // Enforce minimum/maximum outcomes relative to pre-personality stats to satisfy expected behavior
       switch (rival.personality) {
@@ -1580,7 +1927,7 @@ export class CombatSystem {
       this.logRivalAdjustments(participant, rival);
 
     } catch (error) {
-      console.error(`Error applying rival mechanics to ${participant.id}:`, error);
+  logger.error(`Error applying rival mechanics to ${participant.id}:`, error);
     }
   }
 
@@ -1798,6 +2145,16 @@ export class CombatSystem {
     }
   }
 
+  private applyWeaponMasteryBonuses(mastery: WeaponMastery): void {
+    // Clear existing bonuses
+    mastery.bonuses = {};
+    // Add bonuses based on tier
+    const tier = mastery.tier;
+    mastery.bonuses.atk = tier * 5; // +5 atk per tier
+    mastery.bonuses.def = tier * 2; // +2 def per tier
+    mastery.bonuses.speed = tier * 1; // +1 speed per tier
+  }
+
   public flee(): boolean {
     const player = this.getParticipant('player');
     if (!player) return false;
@@ -1805,8 +2162,6 @@ export class CombatSystem {
     // Flee chance based on speed difference
     const enemies = this.state.participants.filter(p => p.id !== 'player');
   // Compute flee chance robustly: compare player's offensive prowess vs average enemy prowess
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const { computeOffensiveProwess } = require('./combatConfig');
   const avgEnemyProwess = enemies.reduce((sum, e) => sum + computeOffensiveProwess(e), 0) / Math.max(1, enemies.length);
   const playerProwess = computeOffensiveProwess(player) || 0.0001;
   const fleeChance = Math.min(0.9, Math.max(0.1, playerProwess / Math.max(0.0001, avgEnemyProwess)));
@@ -1858,15 +2213,47 @@ export class CombatSystem {
       return this.getDefaultAIProfile();
     }
 
-    return {
+    const result: RivalAIProfile = {
       personality: rival.personality,
-      preferredTechniques: rival.techniques,
+      // Start with rival's intrinsic techniques, then merge any context-level preferredTechniques
+      preferredTechniques: Array.isArray(rival.techniques) ? [...rival.techniques] : [],
       riskTolerance: this.getRiskToleranceForPersonality(rival.personality),
       adaptability: this.getAdaptabilityForPersonality(rival.personality),
       taunts: this.getTauntsForPersonality(rival.personality),
       victoryQuotes: this.getVictoryQuotesForPersonality(rival.personality),
       defeatQuotes: this.getDefeatQuotesForPersonality(rival.personality)
     };
+
+    // If context provided preferredTechniques (e.g., from encounter template), merge them in
+    try {
+      // Merge any runtime AI hints stored on the rival (from RivalSystem.applyLearningToRival)
+      try {
+        const rivalHints = (rival as any).aiHints;
+        if (rivalHints) {
+          const merged = new Set<string>(result.preferredTechniques || []);
+          if (Array.isArray(rivalHints.preferredTechniques)) {
+            for (const t of rivalHints.preferredTechniques) merged.add(String(t));
+          }
+          result.preferredTechniques = Array.from(merged);
+          // Use preferredStrategy to nudge riskTolerance if present
+          if (rivalHints.preferredStrategy === 'aggressive') result.riskTolerance = Math.min(1, (result.riskTolerance || 0.5) + 0.1);
+          if (rivalHints.preferredStrategy === 'defensive') result.riskTolerance = Math.max(0, (result.riskTolerance || 0.5) - 0.15);
+        }
+      } catch (err) { void err; }
+      const ctxPreferred = (this.context as any)?.preferredTechniques;
+      if (Array.isArray(ctxPreferred) && ctxPreferred.length > 0) {
+        const merged = new Set<string>(result.preferredTechniques || []);
+        for (const t of ctxPreferred) merged.add(String(t));
+        result.preferredTechniques = Array.from(merged);
+      }
+      // Expose openingBias as riskTolerance tweak or flag if present
+      if ((this.context as any)?.openingBias) {
+        // Slightly increase aggressiveness on opening round
+        result.riskTolerance = Math.min(1, (result.riskTolerance || 0.5) + 0.15);
+      }
+    } catch (e) { void e; }
+
+    return result;
   }
 
   private getDefaultAIProfile(): RivalAIProfile {
@@ -1985,8 +2372,27 @@ export class CombatSystem {
     // Personality-based technique selection
     const techniqueWeights: number[] = [];
 
-    availableTechniques.forEach(technique => {
+    // If rival is in half-power mode, restrict available techniques to the first half
+    let usableTechniques = availableTechniques;
+    try {
+      if ((rival as any)._halfPowerMode) {
+        const half = Math.max(1, Math.floor(availableTechniques.length / 2));
+        usableTechniques = availableTechniques.slice(0, half);
+      }
+    } catch (e) {
+      usableTechniques = availableTechniques;
+    }
+
+    usableTechniques.forEach(technique => {
       let weight = 1;
+
+      // Prefer techniques explicitly flagged in AI profile
+      if (aiProfile.preferredTechniques && aiProfile.preferredTechniques.length > 0) {
+        if (aiProfile.preferredTechniques.includes(technique.id)) {
+          // On opening round, prefer preferred techniques even more
+          weight *= (this.state.round === 1 ? 3.0 : 2.0);
+        }
+      }
 
       switch (aiProfile.personality) {
         case 'aggressive':
@@ -2033,16 +2439,16 @@ export class CombatSystem {
 
     // Select technique based on weights
     const totalWeight = techniqueWeights.reduce((sum, w) => sum + w, 0);
-  let random = this.rng() * totalWeight;
+    let random = this.rng() * totalWeight;
 
-    for (let i = 0; i < availableTechniques.length; i++) {
+    for (let i = 0; i < usableTechniques.length; i++) {
       random -= techniqueWeights[i];
       if (random <= 0) {
-        return availableTechniques[i];
+        return usableTechniques[i];
       }
     }
 
-    return availableTechniques[0];
+    return usableTechniques[0] || availableTechniques[0];
   }
 
   private selectRivalTarget(rival: CombatParticipant, _technique: CombatTechnique, _aiProfile: RivalAIProfile): string | undefined {
@@ -2090,7 +2496,7 @@ export class CombatSystem {
     if (this.context.rivalId && this.gameStore) {
       const rival = this.rivalSystem?.getRival(this.context.rivalId);
       if (!rival) {
-        console.warn(`Rival not found: ${this.context.rivalId}`);
+  logger.warn(`Rival not found: ${this.context.rivalId}`);
         return;
       }
 
@@ -2146,7 +2552,7 @@ export class CombatSystem {
           this.gameStore.adjustReputation(rival.faction, finalRepChange);
           this.addToLog(`${rival.faction} faction standing: ${finalRepChange > 0 ? '+' : ''}${finalRepChange}`);
         } catch (error) {
-          console.warn('Could not access game store for rival faction outcome:', error);
+          logger.warn('Could not access game store for rival faction outcome:', error);
         }
       }
       
@@ -2159,7 +2565,7 @@ export class CombatSystem {
             this.addToLog(`${rival.sect} sect reputation: ${sectRepChange > 0 ? '+' : ''}${sectRepChange}`);
           }
         } catch (error) {
-          console.warn('Could not access game store for sect reputation:', error);
+          logger.warn('Could not access game store for sect reputation:', error);
         }
       }
 
@@ -2179,7 +2585,7 @@ export class CombatSystem {
         this.updateRivalRelationship(rival, outcome);
         
       } catch (error) {
-        console.warn('Could not access game store for rival outcome:', error);
+  logger.warn('Could not access game store for rival outcome:', error);
       }
     }
   }
@@ -2265,6 +2671,9 @@ export class CombatSystem {
   }
 }
 
+// Mark domainShim as intentionally unused in this file (used via comments and optional runtime hooks)
+void domainShim;
+
 // Default techniques
 export const DEFAULT_TECHNIQUES: CombatTechnique[] = [
   {
@@ -2276,7 +2685,8 @@ export const DEFAULT_TECHNIQUES: CombatTechnique[] = [
     type: 'attack',
     effects: [
       { type: 'damage', target: 'enemy', value: 10 }
-    ]
+    ],
+    weaponType: 'fist'
   },
   {
     id: 'qi_blast',

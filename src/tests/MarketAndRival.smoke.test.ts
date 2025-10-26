@@ -8,7 +8,7 @@ describe('MarketSystem and RivalSystem weapon sampling smoke', () => {
   test('MarketSystem refresh can insert a sampled weapon listing when sampleWeapon returns a weapon', () => {
     const market = new MarketSystem();
     // Mock sampleWeapon to return a deterministic weapon
-    const spy = jest.spyOn(WeaponSpawner, 'sampleWeapon').mockImplementation(() => ({ id: 'test_unique_weapon', name: 'Test Unique Weapon', rarity: 'rare', stats: { atk: 999 } } as any));
+    const spy = jest.spyOn(WeaponSpawner, 'sampleWeapon').mockImplementation(() => ({ id: 'test_unique_weapon', name: 'Test Unique Weapon', rarity: "F", stats: { atk: 999 } } as any));
 
     // Use a cheap player state for market queries
     const playerState: any = { realm: 10, combatPower: 100000, yuan: 100000, spiritStones: { low: 0, mid: 0, high: 0 }, karma: 0 };
@@ -28,7 +28,7 @@ describe('MarketSystem and RivalSystem weapon sampling smoke', () => {
 
   test('RivalSystem generateRival can produce loot that includes a sampled weapon when sampler is mocked', () => {
     const rivalSys = new RivalSystem(() => 0.5);
-    const spy = jest.spyOn(WeaponSpawner, 'sampleWeapon').mockImplementation(() => ({ id: 'test_unique_weapon_2', name: 'Rival Unique', rarity: 'rare', stats: { atk: 500 } } as any));
+    const spy = jest.spyOn(WeaponSpawner, 'sampleWeapon').mockImplementation(() => ({ id: 'test_unique_weapon_2', name: 'Rival Unique', rarity: "F", stats: { atk: 500 } } as any));
 
     const rival = rivalSys.generateRival({ minLevel: 1, maxLevel: 5, silent: true });
 

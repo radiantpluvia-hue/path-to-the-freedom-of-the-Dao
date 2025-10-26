@@ -1,0 +1,2 @@
+<!-- Archived: TODO_RIVAL_SYSTEM_IMPLEMENTATION_PLAN.md -->
+Contents archived from root TODO_RIVAL_SYSTEM_IMPLEMENTATION_PLAN.md

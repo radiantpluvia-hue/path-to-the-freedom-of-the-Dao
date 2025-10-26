@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DAO_TYPES = exports.TRIBULATIONS = exports.BREAKTHROUGH_SUCCESS_RATES = exports.STATE_MODIFIERS = exports.ENVIRONMENT_MODIFIERS = exports.TALENT_CULTIVATION_MULTIPLIERS = exports.BASE_CULTIVATION_RATES = void 0;
+exports.calculateCultivationSpeedSoft = exports.resolveBreakthroughSoftHeavy = exports.calculateBreakthroughChanceSoftHeavy = exports.DAO_TYPES = exports.TRIBULATIONS = exports.BREAKTHROUGH_SUCCESS_RATES = exports.STATE_MODIFIERS = exports.ENVIRONMENT_MODIFIERS = exports.TALENT_CULTIVATION_MULTIPLIERS = exports.BASE_CULTIVATION_RATES = void 0;
 exports.calculateCultivationSpeed = calculateCultivationSpeed;
 exports.calculateBreakthroughChance = calculateBreakthroughChance;
 exports.generateCultivationSession = generateCultivationSession;
@@ -8,9 +8,12 @@ exports.generateBreakthroughAttempt = generateBreakthroughAttempt;
 exports.getTribulationForLevel = getTribulationForLevel;
 exports.calculateDaoComprehensionProgress = calculateDaoComprehensionProgress;
 exports.getApplicableModifiers = getApplicableModifiers;
+exports.getBackgroundPassiveModifiersFromPlayer = getBackgroundPassiveModifiersFromPlayer;
+exports.qiDeviationRisk = qiDeviationRisk;
 const cultivationRealms_1 = require("./src/data/cultivationRealms");
 const bloodlines_fixed_1 = require("./src/data/bloodlines_fixed");
 const physiques_1 = require("./src/data/physiques");
+const manuals_1 = require("./src/data/manuals");
 // Base cultivation rates per realm (qi per minute)
 exports.BASE_CULTIVATION_RATES = {
     mortal: 1,
@@ -350,8 +353,91 @@ function getApplicableModifiers(environment, states, bloodline, physique, manual
             });
         }
     }
-    // TODO: Add manual modifiers when those systems are integrated
+    // Manual modifiers (unscaled: use base manual effects)
+    if (manual) {
+        try {
+            const manualData = manuals_1.ALL_MANUALS.find(m => m.id === manual);
+            if (manualData) {
+                const effects = manualData.effects || {};
+                // Normalize possible keys: cultivationSpeed or cultivation_speed
+                const raw = effects.cultivationSpeed ?? effects.cultivation_speed;
+                if (raw != null) {
+                    let multiplier = 0;
+                    if (typeof raw === 'number') {
+                        multiplier = raw;
+                    }
+                    else if (typeof raw === 'object' && typeof raw.base === 'number') {
+                        multiplier = raw.base;
+                    }
+                    if (multiplier && multiplier > 0) {
+                        modifiers.push({
+                            type: 'manual',
+                            name: manualData.name,
+                            multiplier,
+                            description: manualData.description
+                        });
+                    }
+                }
+            }
+        }
+        catch (e) {
+            // ignore manual lookup failures
+        }
+    }
     return modifiers;
+}
+// Derive cultivation-related modifiers from player's background and passives when available.
+// This is intentionally tolerant: if fields are missing, returns an empty list.
+function getBackgroundPassiveModifiersFromPlayer(player) {
+    const out = [];
+    try {
+        if (!player)
+            return out;
+        // Background: look for normalized keys on effects or stats
+        const bg = player.background;
+        if (bg && typeof bg === 'object') {
+            const effects = (bg.effects || {});
+            // Prefer explicit effects.cultivationSpeed/cultivation_speed if present
+            let raw = effects.cultivationSpeed ?? effects.cultivation_speed;
+            if (raw == null && effects.stats && typeof effects.stats === 'object') {
+                raw = effects.stats.cultivationSpeed ?? effects.stats.cultivation_speed;
+            }
+            let multiplier = 0;
+            if (typeof raw === 'number')
+                multiplier = raw;
+            else if (raw && typeof raw === 'object' && typeof raw.base === 'number')
+                multiplier = raw.base;
+            if (multiplier && multiplier > 0) {
+                out.push({
+                    type: 'background',
+                    name: bg.name || 'Background',
+                    multiplier,
+                    description: 'Background effect on cultivation'
+                });
+            }
+        }
+        // Passive-derived: if player.stats carries an accumulated cultivationSpeed value, honor it.
+        // Some systems aggregate passives/equipment into stats; we accept both camel and snake case.
+        const stats = player.stats || {};
+        let ps = (stats.cultivationSpeed ?? stats.cultivation_speed);
+        let pMult = 0;
+        if (typeof ps === 'number')
+            pMult = ps;
+        else if (ps && typeof ps === 'object' && typeof ps.base === 'number')
+            pMult = ps.base;
+        if (pMult && pMult > 0) {
+            out.push({
+                type: 'passive',
+                name: 'Passive effects',
+                multiplier: pMult,
+                description: 'Accumulated passives/equipment effect on cultivation'
+            });
+        }
+    }
+    catch (_e) {
+        // ignore
+    }
+    return out;
 }
 // Export default object for easy importing
 exports.default = {
@@ -362,6 +448,7 @@ exports.default = {
     getTribulationForLevel,
     calculateDaoComprehensionProgress,
     getApplicableModifiers,
+    getBackgroundPassiveModifiersFromPlayer,
     BASE_CULTIVATION_RATES: exports.BASE_CULTIVATION_RATES,
     TALENT_CULTIVATION_MULTIPLIERS: exports.TALENT_CULTIVATION_MULTIPLIERS,
     ENVIRONMENT_MODIFIERS: exports.ENVIRONMENT_MODIFIERS,
@@ -370,3 +457,11 @@ exports.default = {
     TRIBULATIONS: exports.TRIBULATIONS,
     DAO_TYPES: exports.DAO_TYPES
 };
+// Compatibility aliases for legacy imports used across the codebase
+exports.calculateBreakthroughChanceSoftHeavy = calculateBreakthroughChance;
+exports.resolveBreakthroughSoftHeavy = generateBreakthroughAttempt;
+exports.calculateCultivationSpeedSoft = calculateCultivationSpeed;
+function qiDeviationRisk(..._args) {
+    // Legacy shim: return a conservative low risk by default
+    return 0.05;
+}

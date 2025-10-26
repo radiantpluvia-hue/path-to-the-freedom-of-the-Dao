@@ -2,11 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.demonstrateRivalCombat = demonstrateRivalCombat;
 const CombatSystem_1 = require("./CombatSystem");
+const rng_1 = require("../utils/rng");
+const logger_1 = require("../utils/logger");
 const SectSystem_1 = require("./SectSystem");
 const RivalSystem_1 = require("./RivalSystem");
 // Demo function to show rival combat integration
 function demonstrateRivalCombat() {
-    console.log('=== Rival Combat System Demo ===');
+    logger_1.logger.info('=== Rival Combat System Demo ===');
     // Create sect system with actual rival system
     const sectSystem = new SectSystem_1.SectFactionSystem(new RivalSystem_1.RivalSystem());
     // Create player character
@@ -31,7 +33,7 @@ function demonstrateRivalCombat() {
     // Generate a rival from Azure Cloud Sect
     const rival = sectSystem.generateRivalFromSect('azure_cloud_sect', 5);
     if (!rival) {
-        console.log('Failed to generate rival');
+        logger_1.logger.warn('Failed to generate rival');
         return;
     }
     // Create rival combat participant
@@ -61,12 +63,12 @@ function demonstrateRivalCombat() {
             getAllRivals: () => [],
             getRivalsByFaction: () => [],
             getRivalsBySect: () => [],
-            updateRivalRelationship: () => { },
-            markRivalDefeated: () => { },
+            updateRivalRelationship: () => { void 0; },
+            markRivalDefeated: () => { void 0; },
             addRivalEncounter: () => 'encounter_1',
             getRivalEncounters: () => [],
             startFactionBattle: () => 'battle_1',
-            resolveFactionBattle: () => { },
+            resolveFactionBattle: () => { void 0; },
             getFactionBattles: () => [],
             canEncounterRival: () => true,
             getRivalAsCombatParticipant: () => rivalParticipant
@@ -77,11 +79,11 @@ function demonstrateRivalCombat() {
         type: 'rival',
         rivalId: 'azure_cloud_disciple_1'
     });
-    console.log('Rival combat initiated!');
-    console.log(`Player: ${player.name}`);
-    console.log(`Rival: ${rivalParticipant.name}`);
-    console.log(`Rival Level: ${rival.level}`);
-    console.log(`Rival Techniques: ${rival.techniques.join(', ')}`);
+    logger_1.logger.info('Rival combat initiated!');
+    logger_1.logger.info(`Player: ${player.name}`);
+    logger_1.logger.info(`Rival: ${rivalParticipant.name}`);
+    logger_1.logger.info(`Rival Level: ${rival.level}`);
+    logger_1.logger.info(`Rival Techniques: ${rival.techniques.join(', ')}`);
     // Simulate a few combat turns
     for (let i = 0; i < 3; i++) {
         if (combatSystem.getState().status !== 'ongoing')
@@ -95,23 +97,24 @@ function demonstrateRivalCombat() {
             // Rival uses random technique
             const availableTechs = combatSystem.getAvailableTechniques(current.id);
             if (availableTechs.length > 0) {
-                const randomTech = availableTechs[Math.floor(Math.random() * availableTechs.length)];
+                const rng = (0, rng_1.getRng)(mockGameStore);
+                const randomTech = availableTechs[Math.floor(rng() * availableTechs.length)];
                 combatSystem.useTechnique(current.id, randomTech.id, 'player');
             }
         }
         combatSystem.endTurn();
     }
     const combatState = combatSystem.getState();
-    console.log('\nCombat Log:');
-    combatState.combatLog.forEach(log => console.log(log));
-    console.log('\nFinal Combat Status:', combatState.status);
+    logger_1.logger.info('\nCombat Log:');
+    combatState.combatLog.forEach(log => logger_1.logger.info(log));
+    logger_1.logger.info('\nFinal Combat Status:', combatState.status);
     // Show reputation impact (would be handled by game store in real implementation)
     if (combatState.status === 'victory') {
-        console.log('Player defeated rival! Reputation with Azure Cloud Sect increased.');
+        logger_1.logger.info('Player defeated rival! Reputation with Azure Cloud Sect increased.');
         sectSystem.adjustSectReputation('azure_cloud_sect', 15);
     }
     else if (combatState.status === 'defeat') {
-        console.log('Player was defeated by rival! Reputation with Azure Cloud Sect decreased.');
+        logger_1.logger.info('Player was defeated by rival! Reputation with Azure Cloud Sect decreased.');
         sectSystem.adjustSectReputation('azure_cloud_sect', -10);
     }
 }

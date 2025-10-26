@@ -1,8 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = StudyModal;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const useGameStore_1 = require("../../store/useGameStore");
+const TierBadge_1 = __importDefault(require("./TierBadge"));
 function StudyModal({ open, sutra, onClose }) {
     const store = useGameStore_1.useGameStore.getState();
     const getPlayer = () => store.player;
@@ -24,5 +28,5 @@ function StudyModal({ open, sutra, onClose }) {
             }
         }
     }
-    return ((0, jsx_runtime_1.jsx)("div", { className: "modal-backdrop", "data-testid": "study-modal", children: (0, jsx_runtime_1.jsxs)("div", { className: "modal", children: [(0, jsx_runtime_1.jsxs)("h3", { className: "xui-title", children: ["Study: ", sutra.name] }), (0, jsx_runtime_1.jsx)("div", { className: "xui-muted", children: sutra.description }), (0, jsx_runtime_1.jsxs)("div", { className: "modal-body", children: [(0, jsx_runtime_1.jsxs)("div", { className: "xui-muted", children: ["Tier: ", sutra.tier, " \u00A0 \u2022 \u00A0 AP: ", sutra.cost?.ap || 0, " \u2022 QI: ", sutra.cost?.qi || 0] }), (0, jsx_runtime_1.jsxs)("div", { className: "xui-note", children: ["Study Cost: ", (0, jsx_runtime_1.jsx)("strong", { children: costYuan }), " yuan and ", (0, jsx_runtime_1.jsx)("strong", { children: costQi }), " QI"] })] }), (0, jsx_runtime_1.jsxs)("div", { className: "modal-actions", children: [(0, jsx_runtime_1.jsx)("button", { className: "xbtn", onClick: onClose, children: "Cancel" }), (0, jsx_runtime_1.jsx)("button", { className: "xbtn", onClick: confirmStudy, disabled: !canAfford, "data-testid": "confirm-study", children: canAfford ? 'Confirm Study' : 'Insufficient Resources' })] })] }) }));
+    return ((0, jsx_runtime_1.jsx)("div", { className: "modal-backdrop", "data-testid": "study-modal", children: (0, jsx_runtime_1.jsxs)("div", { className: "modal", children: [(0, jsx_runtime_1.jsxs)("h3", { className: "xui-title", children: ["Study: ", sutra.name] }), (0, jsx_runtime_1.jsx)("div", { className: "xui-muted", children: sutra.description }), (0, jsx_runtime_1.jsxs)("div", { className: "modal-body", children: [(0, jsx_runtime_1.jsxs)("div", { className: "xui-muted", children: ["Tier: ", (0, jsx_runtime_1.jsx)(TierBadge_1.default, { tier: sutra.tier, small: true }), " \u00A0 \u2022 \u00A0 AP: ", sutra.cost?.ap || 0, " \u2022 QI: ", sutra.cost?.qi || 0] }), (0, jsx_runtime_1.jsxs)("div", { className: "xui-note", children: ["Study Cost: ", (0, jsx_runtime_1.jsx)("strong", { children: costYuan }), " yuan and ", (0, jsx_runtime_1.jsx)("strong", { children: costQi }), " QI"] })] }), (0, jsx_runtime_1.jsxs)("div", { className: "modal-actions", children: [(0, jsx_runtime_1.jsx)("button", { type: "button", className: "xbtn", onClick: onClose, children: "Cancel" }), (0, jsx_runtime_1.jsx)("button", { type: "button", className: "xbtn", onClick: confirmStudy, disabled: !canAfford, "data-testid": "confirm-study", children: canAfford ? 'Confirm Study' : 'Insufficient Resources' })] })] }) }));
 }

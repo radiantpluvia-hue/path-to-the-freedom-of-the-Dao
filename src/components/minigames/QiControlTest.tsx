@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { getRng } from '../../utils/rng';
+import { runtimeRng } from '../../utils/seededRng';
 import { ChallengeResult } from '../../types/MentorTeaching';
 
 interface QiControlTestProps {
@@ -82,10 +84,18 @@ export const QiControlTest: React.FC<QiControlTestProps> = ({
 
   const spawnNewTarget = () => {
     if (!isActive) return;
-    
+    const resolveRng = () => {
+      const maybe = getRng();
+      if (typeof maybe === 'function') return maybe;
+      const rt = runtimeRng();
+      if (typeof rt === 'function') return rt;
+      return Math.random;
+    };
+    const rng = resolveRng();
+
     const newTarget = {
-      x: Math.random() * 80 + 10, // 10-90%
-      y: Math.random() * 80 + 10,
+      x: rng() * 80 + 10, // 10-90%
+      y: rng() * 80 + 10,
       size: settings.targetSize
     };
     

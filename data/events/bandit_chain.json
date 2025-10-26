@@ -1,0 +1,29 @@
+[
+  {
+    "id": "bandit_ambush",
+    "title": "Bandit Ambush",
+    "choices": [
+      { "id": "fight", "text": "Fight the bandits", "effects": [{ "type": "spawn", "what": "bandit_leader" }] },
+      { "id": "flee", "text": "Withdraw", "effects": [{ "type": "world_mutation", "mut": { "corruption": 1 } }] }
+    ],
+    "nextEvents": ["bandit_leader_escape"]
+  },
+  {
+    "id": "bandit_leader_escape",
+    "title": "Bandit Leader Escapes",
+    "choices": [
+      { "id": "pursue", "text": "Pursue the leader", "effects": [{ "type": "lore", "ref": "bandit_001" }] },
+      { "id": "let_go", "text": "Let it go", "effects": [{ "type": "reputation", "delta": -1 }] }
+    ],
+    "nextEvents": ["bandit_leader_returns"]
+  },
+  {
+    "id": "bandit_leader_returns",
+    "title": "Bandit Leader Returns",
+    "choices": [
+      { "id": "confront", "text": "Confront leader", "effects": [{ "type": "combat", "difficulty": "hard" }] },
+      { "id": "avoid", "text": "Avoid the leader", "effects": [{ "type": "safety", "gain": 1 }] }
+    ],
+    "nextEvents": []
+  }
+]

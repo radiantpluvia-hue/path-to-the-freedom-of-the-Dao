@@ -32,7 +32,7 @@ const fn_act2_mentor_guidance = (state, args) => {
     // Mentor offers teaching: give a basic manual and a skill point
     const manuals = s.player.manuals;
     if (!manuals.find(m => m && m.id === 'mentor_basics'))
-        manuals.push({ id: 'mentor_basics', name: 'Mentor Basics', type: 'movement', rarity: 'common' });
+        manuals.push({ id: 'mentor_basics', name: 'Mentor Basics', type: 'movement', rarity: "H", description: 'Core mentoring guidance covering basic formations and practice routines.', effects: { martialMastery: 1, atk: 2 } });
     s.player.skillPoints = (s.player.skillPoints || 0) + 1;
     s.world.flags.mentor_taught = true;
     (s.__meta || (s.__meta = {})).eventsRan = s.__meta.eventsRan || [];

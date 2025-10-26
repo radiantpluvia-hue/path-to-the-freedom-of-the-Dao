@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Encounter Template",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string" },
+    "title": { "type": "string" },
+    "body": { "type": "string" },
+    "choices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "text": { "type": "string" },
+          "consequence": { "type": "string", "enum": ["combat", "peace", "reward", "escape"] },
+          "nextTemplateId": { "type": ["string", "null"] },
+          "requires": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "skill": { "type": "string" },
+              "minLevel": { "type": "number" },
+              "itemId": { "type": "string" },
+              "minYuan": { "type": "number" },
+              "flags": { "type": "object", "additionalProperties": true },
+              "questState": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string" },
+                  "status": { "type": "string", "enum": ["not_started", "active", "completed"] }
+                },
+                "required": ["id", "status"]
+              },
+              "chance": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          },
+          "reward": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "yuan": { "type": "number" },
+              "item": {
+                "type": "object",
+                "additionalProperties": true,
+                "properties": { "id": { "type": "string" }, "name": { "type": "string" }, "qty": { "type": "number" } },
+                "required": ["id"]
+              },
+              "cost": { "type": "object", "properties": { "yuan": { "type": "number" } }, "additionalProperties": false }
+            }
+          }
+        },
+        "required": ["id", "text", "consequence"]
+      }
+    },
+    "ai": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "preferredTechniques": { "type": "array", "items": { "type": "string" } },
+        "openingBias": { "type": "boolean" }
+      }
+    },
+    "techniques": { "type": "array", "items": { "type": "string" } },
+    "hp": { "type": "number" },
+    "loot": { "type": "array", "items": { "type": "object" }, "default": [] }
+  },
+  "required": ["id", "title", "body"]
+}

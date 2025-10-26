@@ -1,4 +1,5 @@
 import { useGameStore } from '@/store/useGameStore';
+import SmallChip from '@/components/ui/SmallChip';
 import { Button } from '@/components/core/Button';
 import { Card } from '@/components/core/Card';
 import { sectQuests } from '@/events/storyData';
@@ -47,12 +48,11 @@ export function MainQuestPanel() {
                 display: 'flex', 
                 justifyContent: 'space-between', 
                 alignItems: 'center', 
-                opacity: obj.isCompleted ? 0.5 : 1,
-                padding: '4px 0'
+                opacity: obj.isCompleted ? 0.5 : 1
               }}>
                 <span>- {obj.description}</span>
                 {obj.isCompleted && (
-                  <span style={{ color: 'var(--success)' }}>✓</span>
+                  <SmallChip style={{ color: 'var(--success)', marginLeft: 8 }}>✓</SmallChip>
                 )}
               </div>
             ))}
@@ -100,7 +100,7 @@ export function SectQuestsPanel() {
                   <span>- {obj.description}</span>
                   {obj.type === 'trigger_event' && !obj.isCompleted(useGameStore.getState()) && (
                     <Button onClick={() => addEventLog(`Trigger event: ${String(obj.target)}`)} size="small">
-                      Begin
+                      <SmallChip>Begin</SmallChip>
                     </Button>
                   )}
                   {obj.isCompleted(useGameStore.getState()) && (
@@ -138,7 +138,7 @@ export function BetrayalMissionsPanel() {
               size="small"
               variant="danger"
             >
-              Complete Task
+              <SmallChip variant="danger">Complete Task</SmallChip>
             </Button>
           </div>
         ))}

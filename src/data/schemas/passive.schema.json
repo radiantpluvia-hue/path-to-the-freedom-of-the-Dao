@@ -1,0 +1,12 @@
+{
+  "$id": "passive.schema.json",
+  "type": "object",
+  "required": ["id", "name", "effect"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "effect": { "type": ["string","object"] },
+    "tags": { "type": ["array","null"] }
+  },
+  "additionalProperties": true
+}

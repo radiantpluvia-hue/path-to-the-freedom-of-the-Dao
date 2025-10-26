@@ -1,5 +1,6 @@
 import { MentorTeaching, ChallengeResult, Prerequisites } from '../types/MentorTeaching';
 import { GameState, TeachingProgress, MentorTeachingProgress as PlayerMentorProgress } from '../types';
+import { roll, randInt } from '../utils/rng';
 
 const TEACHING_COOLDOWN_TICKS = 2000; // cooldown after any teaching attempt/success
 
@@ -22,13 +23,13 @@ export class MentorTeachingSystem {
   }
 
   public isOnMentorCooldown(mentorId: string, gameState: GameState): boolean {
-    const mp = gameState.player.mentorProgress?.[mentorId] as PlayerMentorProgress | undefined;
+    const mp = gameState.systems.mentorProgress?.[mentorId] as PlayerMentorProgress | undefined;
     const lastTick = mp?.lastTaughtTick ?? -Infinity;
     return (gameState.world.tick - lastTick) < TEACHING_COOLDOWN_TICKS;
   }
 
   public getMentorCooldownRemaining(mentorId: string, gameState: GameState): number {
-    const mp = gameState.player.mentorProgress?.[mentorId] as PlayerMentorProgress | undefined;
+    const mp = gameState.systems.mentorProgress?.[mentorId] as PlayerMentorProgress | undefined;
     const lastTick = mp?.lastTaughtTick ?? -Infinity;
     const remaining = TEACHING_COOLDOWN_TICKS - (gameState.world.tick - lastTick);
     return Math.max(0, remaining);
@@ -78,16 +79,16 @@ export class MentorTeachingSystem {
     const playerSkill = this.calculatePlayerSkill(gameState.player, teaching.challenge.type);
     
     const successChance = Math.min(0.95, playerSkill * difficultyMultiplier);
-    const success = Math.random() < successChance;
+    const success = roll(gameState) < successChance;
     
-    const score = success ? Math.floor(Math.random() * 20 + 80) : Math.floor(Math.random() * 60);
-    const timeTaken = Math.floor(Math.random() * (teaching.challenge.timeLimit || 60) * 0.5);
+  const score = success ? Math.floor(randInt(20, gameState) + 80) : Math.floor(randInt(60, gameState));
+  const timeTaken = Math.floor((roll(gameState) * (teaching.challenge.timeLimit || 60) * 0.5));
 
     const result: ChallengeResult = {
       success,
       score,
       timeTaken,
-      accuracy: success ? (score / 100) * 100 : Math.floor(Math.random() * 50),
+  accuracy: success ? (score / 100) * 100 : Math.floor(randInt(50, gameState)),
       efficiency: success ? (timeTaken / (teaching.challenge.timeLimit || 60)) * 100 : 0,
       bonusRewards: success ? this.calculateBonusRewards(score, teaching) : undefined,
       penaltyConsequences: !success ? teaching.failureConsequence : undefined
@@ -97,7 +98,7 @@ export class MentorTeachingSystem {
 
     // Build mentor progress patch (cooldown starts after any attempt)
     if (mentorId) {
-      const mp = (gameState.player.mentorProgress?.[mentorId] as PlayerMentorProgress | undefined) || {
+      const mp = (gameState.systems.mentorProgress?.[mentorId] as PlayerMentorProgress | undefined) || {
         teachingsReceived: 0,
         lastTaughtTimestamp: 0,
         lastTaughtTick: undefined,
@@ -144,19 +145,19 @@ export class MentorTeachingSystem {
   private calculatePlayerSkill(playerState: GameState['player'], challengeType: string): number {
     // Calculate player skill based on relevant stats for the challenge type
     let baseSkill = 0.5; // Base 50% chance
-    
+
     if (challengeType.includes('meditation') || challengeType.includes('qi')) {
       baseSkill += (playerState.skills?.qiControl?.level || 0) * 0.1;
-      baseSkill += playerState.insight * 0.01;
+  baseSkill += (playerState.insight ?? 0) * 0.01;
     } else if (challengeType.includes('combat')) {
       baseSkill += (playerState.skills?.combatSkills?.level || 0) * 0.1;
-      baseSkill += playerState.combatPower * 0.0001;
+  baseSkill += (playerState.combatPower ?? 0) * 0.0001;
     } else if (challengeType.includes('puzzle') || challengeType.includes('memory')) {
       baseSkill += (playerState.skills?.mentalFortitude?.level || 0) * 0.1;
-      baseSkill += playerState.insight * 0.01;
+  baseSkill += (playerState.insight ?? 0) * 0.01;
     }
-    
-    return Math.min(0.95, baseSkill);
+
+    return Math.min(0.95, Math.max(0.05, baseSkill)); // Ensure skill is between 5% and 95%
   }
 
   private calculateBonusRewards(score: number, teaching: MentorTeaching): Record<string, any> {
@@ -228,7 +229,7 @@ export class MentorTeachingSystem {
                 break;
             case 'requiredTeachings':
                 for (const tid of reqValue as string[]) {
-                    const tp = gameState.player.teachingProgress?.[tid];
+                    const tp = gameState.systems.teachingProgress?.[tid];
                     if (!tp?.completed) return false;
                 }
                 break;
@@ -255,9 +256,9 @@ export class MentorTeachingSystem {
 
   // New method to get teaching progress
   private getTeachingProgress(teachingId: string, gameState: GameState): TeachingProgress {
-    return gameState.player.teachingProgress?.[teachingId] || {
-      attempts: 0, 
-      completed: false, 
+    return gameState.systems.teachingProgress?.[teachingId] || {
+      attempts: 0,
+      completed: false,
       bestScore: 0,
       currentStage: 0,
       masteryLevel: 0,

@@ -1,0 +1,37 @@
+{
+  "id": "dao_reversal",
+  "name": "Dao of Reversal",
+  "category": "Heaven-Defying",
+  "core_tenets": [
+    "To return is to advance.",
+    "Cause and effect are illusions of flow.",
+    "Emotion anchors fate."
+  ],
+  "techniques": [
+    {
+      "id": "reverse_pulse_sutra",
+      "type": "Qi",
+      "name": "Reverse Pulse Sutra",
+      "effect": "+30% healing efficiency, risk of backlash (20% HP loss on failure).",
+      "tags": ["Flow", "Return"]
+    },
+    {
+      "id": "temporal_echo",
+      "type": "Dao Art",
+      "name": "Temporal Echo",
+      "effect": "Undo one recent mistake or failed roll at 50% Dao Heart cost.",
+      "tags": ["Echo", "Temporal"]
+    },
+    {
+      "id": "still_flow_meditation",
+      "type": "Meditation",
+      "name": "Still Flow Meditation",
+      "effect": "+25% Dao comprehension, -30% emotional recovery.",
+      "tags": ["Meditation", "Still"]
+    }
+  ],
+  "passives": {
+    "reversal_resonance": "+12% efficiency for techniques with 'Flow', 'Cycle', or 'Return' keywords."
+  },
+  "notes": "Design-time data for the Dao of Reversal. Systems must map technique effects to in-game mechanics (healing, dao heart costs, etc.)."
+}

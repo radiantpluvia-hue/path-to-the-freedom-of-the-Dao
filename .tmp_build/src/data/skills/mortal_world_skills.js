@@ -171,7 +171,7 @@ for (let i = 0; i < 60; i++) {
         apCost: Math.min(2, Math.floor(tier / 2)),
         qiCost: tierQi + (i % Math.max(3, tier * 3)),
         effects: [{ type: 'damage', target: 'enemy', value: base }],
-        description: `A common mortal-world ${form.toLowerCase()} variant #${i}`
+        description: `A H mortal-world ${form.toLowerCase()} variant #${i}`
     });
 }
 exports.default = exports.MORTAL_WORLD_SKILLS;

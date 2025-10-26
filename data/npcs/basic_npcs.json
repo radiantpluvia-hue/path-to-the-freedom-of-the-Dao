@@ -1,0 +1,4 @@
+[
+  { "id": "npc_zhou", "name": "Zhou the Hermit", "startingRealm": 1, "startingProgress": 0, "affiliation": "neutral" },
+  { "id": "npc_li", "name": "Li the Disciple", "startingRealm": 1, "startingProgress": 10, "affiliation": "sect_a" }
+]

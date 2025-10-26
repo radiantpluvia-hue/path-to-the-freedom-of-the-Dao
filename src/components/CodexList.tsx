@@ -5,13 +5,10 @@ import '../styles/codex.css';
 
 // Optional virtualization via react-window. It's a soft dependency used only when the
 // `virtualize` prop is true. This keeps the default bundle small for small codex sizes.
-let FixedSizeList: any = null;
-try {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports
-  FixedSizeList = require('react-window').FixedSizeList;
-} catch (e) {
-  FixedSizeList = null;
-}
+const _FixedSizeList: any = null;
+void _FixedSizeList;
+// Defer loading react-window until requested to avoid making it a hard dependency for the main bundle.
+// We'll perform a dynamic import at render-time when virtualization is requested.
 
 const allEntries = Object.values(CODEX_ENTRIES);
 
@@ -22,6 +19,8 @@ type Props = {
 
 export const CodexList: React.FC<Props> = ({ virtualize = false, height = 400 }) => {
   const [query, setQuery] = useState('');
+  const [windowLoaded, setWindowLoaded] = useState(false);
+  const [WindowComponent, setWindowComponent] = useState<any>(null);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -44,39 +43,47 @@ export const CodexList: React.FC<Props> = ({ virtualize = false, height = 400 })
     </details>
   );
 
-  if (virtualize && FixedSizeList) {
-    const Row = ({ index, style }: { index: number; style: React.CSSProperties }) => {
-      const entry = filtered[index];
+  if (virtualize) {
+    // kick off dynamic import on-demand
+    if (!windowLoaded) {
+      // react-window is optional; attempt to load it and mark loaded regardless so UI doesn't hang
+      import('react-window').then((mod: any) => { setWindowComponent(mod.FixedSizeList || mod.FixedSizeList); setWindowLoaded(true); }).catch(() => { setWindowLoaded(true); });
+      return <div className="codex-list">Loading...</div>;
+    }
+    if (WindowComponent) {
+      const Row = ({ index, style }: { index: number; style: React.CSSProperties }) => {
+        const entry = filtered[index];
+        return (
+          <div style={style}>
+            {renderEntry(entry)}
+          </div>
+        );
+      };
+
       return (
-        <div style={style}>
-          {renderEntry(entry)}
+        <div className="codex-list">
+          <div className="codex-search-row">
+            <input
+              aria-label="Search codex"
+              placeholder="Search codex..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="codex-search-input"
+            />
+          </div>
+          <WindowComponent
+            height={height}
+            itemCount={filtered.length}
+            itemSize={88}
+            width="100%"
+          >
+            {Row}
+          </WindowComponent>
         </div>
       );
-    };
-
-    return (
-      <div className="codex-list">
-        <div className="codex-search-row">
-          <input
-            aria-label="Search codex"
-            placeholder="Search codex..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="codex-search-input"
-          />
-        </div>
-        <FixedSizeList
-          height={height}
-          itemCount={filtered.length}
-          itemSize={88}
-          width="100%"
-        >
-          {Row}
-        </FixedSizeList>
-      </div>
-    );
+    }
+    return <div className="codex-list">No virtualization available.</div>;
   }
-
   return (
     <div className="codex-list">
       <div className="codex-search-row">

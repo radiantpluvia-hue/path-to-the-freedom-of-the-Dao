@@ -4,6 +4,7 @@ exports.TutorialPage = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const react_1 = require("react");
 const useGameStore_1 = require("@/store/useGameStore");
+const logger_1 = require("../../utils/logger");
 // Dedicated tutorial screen with concise sections
 const TutorialPage = () => {
     const { setUIProperty } = (0, useGameStore_1.useGameStore)();
@@ -11,8 +12,9 @@ const TutorialPage = () => {
         try {
             localStorage.setItem('xg_tutorial_seen', '1');
         }
-        catch (e) { /* ignore storage errors */
-            console.debug('TutorialPage: localStorage.setItem failed', e);
+        catch (e) {
+            /* ignore storage errors */
+            logger_1.logger.debug('TutorialPage: localStorage.setItem failed', e);
         }
     }, []);
     const backToGame = () => setUIProperty('currentScreen', 'game');

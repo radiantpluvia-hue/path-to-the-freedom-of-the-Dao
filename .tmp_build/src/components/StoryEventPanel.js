@@ -14,7 +14,7 @@ const StoryEventPanel = () => {
     const [activeEvent, setActiveEvent] = (0, react_1.useState)(null);
     const [showEventModal, setShowEventModal] = (0, react_1.useState)(false);
     (0, react_1.useEffect)(() => {
-        const events = getAvailableEvents();
+        const events = (typeof getAvailableEvents === 'function') ? getAvailableEvents() : [];
         setAvailableEvents(events);
     }, [getAvailableEvents]);
     const handleTriggerEvent = (eventId) => {
@@ -30,12 +30,12 @@ const StoryEventPanel = () => {
     const handleMakeChoice = (choiceId) => {
         if (!activeEvent)
             return;
-        const success = makeStoryChoice(activeEvent.id, choiceId);
+        const success = (typeof makeStoryChoice === 'function') ? makeStoryChoice(activeEvent.id, choiceId) : false;
         if (success) {
             setShowEventModal(false);
             setActiveEvent(null);
             // Refresh available events
-            const events = getAvailableEvents();
+            const events = (typeof getAvailableEvents === 'function') ? getAvailableEvents() : [];
             setAvailableEvents(events);
         }
     };

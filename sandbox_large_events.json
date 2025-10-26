@@ -1,0 +1,4377 @@
+[
+  {
+    "id": "sandbox_large_e0001",
+    "title": "Abandoned Ruins 1",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0008"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0001"
+  },
+  {
+    "id": "sandbox_large_e0002",
+    "title": "Moonlit Meditation 2",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0008"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0002"
+  },
+  {
+    "id": "sandbox_large_e0003",
+    "title": "Broken Sword 3",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0010"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0003"
+  },
+  {
+    "id": "sandbox_large_e0004",
+    "title": "Market Brawl 4",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0005"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0004"
+  },
+  {
+    "id": "sandbox_large_e0005",
+    "title": "Fateful Meeting 5",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0005"
+  },
+  {
+    "id": "sandbox_large_e0006",
+    "title": "Lost Manual 6",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0003"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0007"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0006"
+  },
+  {
+    "id": "sandbox_large_e0007",
+    "title": "Wandering Merchant 7",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0004"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0012"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0007"
+  },
+  {
+    "id": "sandbox_large_e0008",
+    "title": "Training Montage 8",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0011"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0008"
+  },
+  {
+    "id": "sandbox_large_e0009",
+    "title": "Broken Sword 9",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0012"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0009"
+  },
+  {
+    "id": "sandbox_large_e0010",
+    "title": "Bloodline Echo 10",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0010"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0012"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0010"
+  },
+  {
+    "id": "sandbox_large_e0011",
+    "title": "Hermit Offer 11",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0015"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0011"
+  },
+  {
+    "id": "sandbox_large_e0012",
+    "title": "Misty Pass 12",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0012"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0012"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0012"
+  },
+  {
+    "id": "sandbox_large_e0013",
+    "title": "Lost Manual 13",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0014"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0013"
+  },
+  {
+    "id": "sandbox_large_e0014",
+    "title": "Misty Pass 14",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0022"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0014"
+  },
+  {
+    "id": "sandbox_large_e0015",
+    "title": "Rival Encounter 15",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0017"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0015"
+  },
+  {
+    "id": "sandbox_large_e0016",
+    "title": "Secret Lesson 16",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0016"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0017"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0016"
+  },
+  {
+    "id": "sandbox_large_e0017",
+    "title": "Heavenly Sign 17",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0019"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0017"
+  },
+  {
+    "id": "sandbox_large_e0018",
+    "title": "Rival Encounter 18",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0016"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0025"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0018"
+  },
+  {
+    "id": "sandbox_large_e0019",
+    "title": "Hidden Shrine 19",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0021"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0017"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0019"
+  },
+  {
+    "id": "sandbox_large_e0020",
+    "title": "Minor Sect Event 20",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0017"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0019"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0020"
+  },
+  {
+    "id": "sandbox_large_e0021",
+    "title": "Strange Artifact 21",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0022"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0022"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0021"
+  },
+  {
+    "id": "sandbox_large_e0022",
+    "title": "Training Montage 22",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0029"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0022"
+  },
+  {
+    "id": "sandbox_large_e0023",
+    "title": "Secret Lesson 23",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0029"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0023"
+  },
+  {
+    "id": "sandbox_large_e0024",
+    "title": "Wandering Merchant 24",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0025"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0024"
+  },
+  {
+    "id": "sandbox_large_e0025",
+    "title": "Secret Lesson 25",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0024"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0023"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0025"
+  },
+  {
+    "id": "sandbox_large_e0026",
+    "title": "Broken Sword 26",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0031"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0026"
+  },
+  {
+    "id": "sandbox_large_e0027",
+    "title": "Hidden Shrine 27",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0031"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0027"
+  },
+  {
+    "id": "sandbox_large_e0028",
+    "title": "Rival Encounter 28",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0031"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0028"
+  },
+  {
+    "id": "sandbox_large_e0029",
+    "title": "Minor Sect Event 29",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0031"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0029"
+  },
+  {
+    "id": "sandbox_large_e0030",
+    "title": "Trial of Spirit 30",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0033"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0030"
+  },
+  {
+    "id": "sandbox_large_e0031",
+    "title": "Market Brawl 31",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0032"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0031"
+  },
+  {
+    "id": "sandbox_large_e0032",
+    "title": "Lost Manual 32",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0032"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0033"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0032"
+  },
+  {
+    "id": "sandbox_large_e0033",
+    "title": "Old Friend 33",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0035"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0033"
+  },
+  {
+    "id": "sandbox_large_e0034",
+    "title": "Moonlit Meditation 34",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0037"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0034"
+  },
+  {
+    "id": "sandbox_large_e0035",
+    "title": "Strange Artifact 35",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0037"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0034"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0035"
+  },
+  {
+    "id": "sandbox_large_e0036",
+    "title": "Rival Encounter 36",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0040"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0036"
+  },
+  {
+    "id": "sandbox_large_e0037",
+    "title": "Misty Pass 37",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0037"
+  },
+  {
+    "id": "sandbox_large_e0038",
+    "title": "Strange Artifact 38",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0044"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0038"
+  },
+  {
+    "id": "sandbox_large_e0039",
+    "title": "Moonlit Meditation 39",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0040"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0039"
+  },
+  {
+    "id": "sandbox_large_e0040",
+    "title": "Rival Encounter 40",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0044"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0040"
+  },
+  {
+    "id": "sandbox_large_e0041",
+    "title": "Hermit Offer 41",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0041"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0042"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0041"
+  },
+  {
+    "id": "sandbox_large_e0042",
+    "title": "Misty Pass 42",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0043"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0051"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0042"
+  },
+  {
+    "id": "sandbox_large_e0043",
+    "title": "Misty Pass 43",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0040"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0045"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0043"
+  },
+  {
+    "id": "sandbox_large_e0044",
+    "title": "Fateful Meeting 44",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0046"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0045"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0044"
+  },
+  {
+    "id": "sandbox_large_e0045",
+    "title": "Hidden Shrine 45",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0047"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0045"
+  },
+  {
+    "id": "sandbox_large_e0046",
+    "title": "Misty Pass 46",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0044"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0053"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0046"
+  },
+  {
+    "id": "sandbox_large_e0047",
+    "title": "Trial of Spirit 47",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0055"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0047"
+  },
+  {
+    "id": "sandbox_large_e0048",
+    "title": "Spirit Beast Hunt 48",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0048"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0046"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0048"
+  },
+  {
+    "id": "sandbox_large_e0049",
+    "title": "Trial of Spirit 49",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0056"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0049"
+  },
+  {
+    "id": "sandbox_large_e0050",
+    "title": "Market Brawl 50",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0050"
+  },
+  {
+    "id": "sandbox_large_e0051",
+    "title": "Broken Sword 51",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0051"
+  },
+  {
+    "id": "sandbox_large_e0052",
+    "title": "Wandering Merchant 52",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0054"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0055"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0052"
+  },
+  {
+    "id": "sandbox_large_e0053",
+    "title": "Hidden Shrine 53",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0053"
+  },
+  {
+    "id": "sandbox_large_e0054",
+    "title": "Abandoned Ruins 54",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0059"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0054"
+  },
+  {
+    "id": "sandbox_large_e0055",
+    "title": "Trial of Spirit 55",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0057"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0055"
+  },
+  {
+    "id": "sandbox_large_e0056",
+    "title": "Minor Sect Event 56",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0061"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0056"
+  },
+  {
+    "id": "sandbox_large_e0057",
+    "title": "Wandering Merchant 57",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0054"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0057"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0057"
+  },
+  {
+    "id": "sandbox_large_e0058",
+    "title": "Trial of Spirit 58",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0060"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0064"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0058"
+  },
+  {
+    "id": "sandbox_large_e0059",
+    "title": "Lost Manual 59",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0061"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0067"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0059"
+  },
+  {
+    "id": "sandbox_large_e0060",
+    "title": "Heavenly Sign 60",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0058"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0069"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0060"
+  },
+  {
+    "id": "sandbox_large_e0061",
+    "title": "Wandering Merchant 61",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0063"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0061"
+  },
+  {
+    "id": "sandbox_large_e0062",
+    "title": "Secret Lesson 62",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0063"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0064"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0062"
+  },
+  {
+    "id": "sandbox_large_e0063",
+    "title": "Old Friend 63",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0063"
+  },
+  {
+    "id": "sandbox_large_e0064",
+    "title": "Bloodline Echo 64",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0072"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0064"
+  },
+  {
+    "id": "sandbox_large_e0065",
+    "title": "Fateful Meeting 65",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0073"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0065"
+  },
+  {
+    "id": "sandbox_large_e0066",
+    "title": "Heavenly Sign 66",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0071"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0066"
+  },
+  {
+    "id": "sandbox_large_e0067",
+    "title": "Bloodline Echo 67",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0069"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0067"
+  },
+  {
+    "id": "sandbox_large_e0068",
+    "title": "Hidden Shrine 68",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0070"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0068"
+  },
+  {
+    "id": "sandbox_large_e0069",
+    "title": "Heavenly Sign 69",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0077"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0069"
+  },
+  {
+    "id": "sandbox_large_e0070",
+    "title": "Rival Encounter 70",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0078"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0070"
+  },
+  {
+    "id": "sandbox_large_e0071",
+    "title": "Old Friend 71",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0071"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0078"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0071"
+  },
+  {
+    "id": "sandbox_large_e0072",
+    "title": "Bloodline Echo 72",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0080"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0072"
+  },
+  {
+    "id": "sandbox_large_e0073",
+    "title": "Wandering Merchant 73",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0072"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0080"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0073"
+  },
+  {
+    "id": "sandbox_large_e0074",
+    "title": "Spirit Beast Hunt 74",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0080"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0074"
+  },
+  {
+    "id": "sandbox_large_e0075",
+    "title": "Wandering Merchant 75",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0074"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0078"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0075"
+  },
+  {
+    "id": "sandbox_large_e0076",
+    "title": "Broken Sword 76",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0076"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0081"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0076"
+  },
+  {
+    "id": "sandbox_large_e0077",
+    "title": "Minor Sect Event 77",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0076"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0078"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0077"
+  },
+  {
+    "id": "sandbox_large_e0078",
+    "title": "Trial of Spirit 78",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0079"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0085"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0078"
+  },
+  {
+    "id": "sandbox_large_e0079",
+    "title": "Fateful Meeting 79",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0086"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0079"
+  },
+  {
+    "id": "sandbox_large_e0080",
+    "title": "Minor Sect Event 80",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0080"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0082"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0080"
+  },
+  {
+    "id": "sandbox_large_e0081",
+    "title": "Broken Sword 81",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0084"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0081"
+  },
+  {
+    "id": "sandbox_large_e0082",
+    "title": "Wandering Merchant 82",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0083"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0082"
+  },
+  {
+    "id": "sandbox_large_e0083",
+    "title": "Moonlit Meditation 83",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0088"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0083"
+  },
+  {
+    "id": "sandbox_large_e0084",
+    "title": "Spirit Beast Hunt 84",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0084"
+  },
+  {
+    "id": "sandbox_large_e0085",
+    "title": "Trial of Spirit 85",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0085"
+  },
+  {
+    "id": "sandbox_large_e0086",
+    "title": "Hermit Offer 86",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0087"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0086"
+  },
+  {
+    "id": "sandbox_large_e0087",
+    "title": "Bloodline Echo 87",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0094"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0087"
+  },
+  {
+    "id": "sandbox_large_e0088",
+    "title": "Trial of Spirit 88",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0090"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0088"
+  },
+  {
+    "id": "sandbox_large_e0089",
+    "title": "Abandoned Ruins 89",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0094"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0089"
+  },
+  {
+    "id": "sandbox_large_e0090",
+    "title": "Misty Pass 90",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0096"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0090"
+  },
+  {
+    "id": "sandbox_large_e0091",
+    "title": "Trial of Spirit 91",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0092"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0091"
+  },
+  {
+    "id": "sandbox_large_e0092",
+    "title": "Strange Artifact 92",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0090"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0093"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0092"
+  },
+  {
+    "id": "sandbox_large_e0093",
+    "title": "Bloodline Echo 93",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0093"
+  },
+  {
+    "id": "sandbox_large_e0094",
+    "title": "Market Brawl 94",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0095"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0094"
+  },
+  {
+    "id": "sandbox_large_e0095",
+    "title": "Minor Sect Event 95",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0095"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0102"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0095"
+  },
+  {
+    "id": "sandbox_large_e0096",
+    "title": "Moonlit Meditation 96",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0101"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0096"
+  },
+  {
+    "id": "sandbox_large_e0097",
+    "title": "Spirit Beast Hunt 97",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0103"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0097"
+  },
+  {
+    "id": "sandbox_large_e0098",
+    "title": "Abandoned Ruins 98",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0100"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0098"
+  },
+  {
+    "id": "sandbox_large_e0099",
+    "title": "Bloodline Echo 99",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0100"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0099"
+  },
+  {
+    "id": "sandbox_large_e0100",
+    "title": "Heavenly Sign 100",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0107"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0100"
+  },
+  {
+    "id": "sandbox_large_e0101",
+    "title": "Trial of Spirit 101",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0107"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0101"
+  },
+  {
+    "id": "sandbox_large_e0102",
+    "title": "Lost Manual 102",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0102"
+  },
+  {
+    "id": "sandbox_large_e0103",
+    "title": "Strange Artifact 103",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0110"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0103"
+  },
+  {
+    "id": "sandbox_large_e0104",
+    "title": "Trial of Spirit 104",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0103"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0108"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0104"
+  },
+  {
+    "id": "sandbox_large_e0105",
+    "title": "Wandering Merchant 105",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0103"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0104"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0105"
+  },
+  {
+    "id": "sandbox_large_e0106",
+    "title": "Broken Sword 106",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0107"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0106"
+  },
+  {
+    "id": "sandbox_large_e0107",
+    "title": "Training Montage 107",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0114"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0107"
+  },
+  {
+    "id": "sandbox_large_e0108",
+    "title": "Broken Sword 108",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0112"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0108"
+  },
+  {
+    "id": "sandbox_large_e0109",
+    "title": "Rival Encounter 109",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0108"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0108"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0109"
+  },
+  {
+    "id": "sandbox_large_e0110",
+    "title": "Fateful Meeting 110",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0118"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0110"
+  },
+  {
+    "id": "sandbox_large_e0111",
+    "title": "Lost Manual 111",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0117"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0111"
+  },
+  {
+    "id": "sandbox_large_e0112",
+    "title": "Minor Sect Event 112",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0113"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0112"
+  },
+  {
+    "id": "sandbox_large_e0113",
+    "title": "Abandoned Ruins 113",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0116"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0113"
+  },
+  {
+    "id": "sandbox_large_e0114",
+    "title": "Abandoned Ruins 114",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0119"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0114"
+  },
+  {
+    "id": "sandbox_large_e0115",
+    "title": "Broken Sword 115",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0123"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0115"
+  },
+  {
+    "id": "sandbox_large_e0116",
+    "title": "Rival Encounter 116",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0121"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0116"
+  },
+  {
+    "id": "sandbox_large_e0117",
+    "title": "Moonlit Meditation 117",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0125"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0117"
+  },
+  {
+    "id": "sandbox_large_e0118",
+    "title": "Trial of Spirit 118",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0116"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0117"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0118"
+  },
+  {
+    "id": "sandbox_large_e0119",
+    "title": "Hidden Shrine 119",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0122"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0119"
+  },
+  {
+    "id": "sandbox_large_e0120",
+    "title": "Spirit Beast Hunt 120",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0120"
+  },
+  {
+    "id": "sandbox_large_e0121",
+    "title": "Old Friend 121",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0129"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0121"
+  },
+  {
+    "id": "sandbox_large_e0122",
+    "title": "Minor Sect Event 122",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0129"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0122"
+  },
+  {
+    "id": "sandbox_large_e0123",
+    "title": "Spirit Beast Hunt 123",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0122"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0128"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0123"
+  },
+  {
+    "id": "sandbox_large_e0124",
+    "title": "Heavenly Sign 124",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0123"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0122"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0124"
+  },
+  {
+    "id": "sandbox_large_e0125",
+    "title": "Trial of Spirit 125",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0122"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0131"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0125"
+  },
+  {
+    "id": "sandbox_large_e0126",
+    "title": "Broken Sword 126",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0127"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0126"
+  },
+  {
+    "id": "sandbox_large_e0127",
+    "title": "Minor Sect Event 127",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0129"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0135"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0127"
+  },
+  {
+    "id": "sandbox_large_e0128",
+    "title": "Broken Sword 128",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0134"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0128"
+  },
+  {
+    "id": "sandbox_large_e0129",
+    "title": "Hermit Offer 129",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0129"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0133"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0129"
+  },
+  {
+    "id": "sandbox_large_e0130",
+    "title": "Strange Artifact 130",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0130"
+  },
+  {
+    "id": "sandbox_large_e0131",
+    "title": "Rival Encounter 131",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0135"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0131"
+  },
+  {
+    "id": "sandbox_large_e0132",
+    "title": "Strange Artifact 132",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0136"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0132"
+  },
+  {
+    "id": "sandbox_large_e0133",
+    "title": "Heavenly Sign 133",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0133"
+  },
+  {
+    "id": "sandbox_large_e0134",
+    "title": "Heavenly Sign 134",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0135"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0134"
+  },
+  {
+    "id": "sandbox_large_e0135",
+    "title": "Lost Manual 135",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0140"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0135"
+  },
+  {
+    "id": "sandbox_large_e0136",
+    "title": "Spirit Beast Hunt 136",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0144"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0136"
+  },
+  {
+    "id": "sandbox_large_e0137",
+    "title": "Spirit Beast Hunt 137",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0141"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0137"
+  },
+  {
+    "id": "sandbox_large_e0138",
+    "title": "Wandering Merchant 138",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0135"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0136"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0138"
+  },
+  {
+    "id": "sandbox_large_e0139",
+    "title": "Old Friend 139",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0141"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0146"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0139"
+  },
+  {
+    "id": "sandbox_large_e0140",
+    "title": "Moonlit Meditation 140",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0140"
+  },
+  {
+    "id": "sandbox_large_e0141",
+    "title": "Moonlit Meditation 141",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0149"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0141"
+  },
+  {
+    "id": "sandbox_large_e0142",
+    "title": "Moonlit Meditation 142",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0150"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0142"
+  },
+  {
+    "id": "sandbox_large_e0143",
+    "title": "Hermit Offer 143",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0145"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0143"
+  },
+  {
+    "id": "sandbox_large_e0144",
+    "title": "Minor Sect Event 144",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0151"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0144"
+  },
+  {
+    "id": "sandbox_large_e0145",
+    "title": "Fateful Meeting 145",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0152"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0145"
+  },
+  {
+    "id": "sandbox_large_e0146",
+    "title": "Hidden Shrine 146",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0146"
+  },
+  {
+    "id": "sandbox_large_e0147",
+    "title": "Training Montage 147",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0147"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0153"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0147"
+  },
+  {
+    "id": "sandbox_large_e0148",
+    "title": "Trial of Spirit 148",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0149"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0151"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0148"
+  },
+  {
+    "id": "sandbox_large_e0149",
+    "title": "Wandering Merchant 149",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0146"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0147"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0149"
+  },
+  {
+    "id": "sandbox_large_e0150",
+    "title": "Heavenly Sign 150",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0150"
+  },
+  {
+    "id": "sandbox_large_e0151",
+    "title": "Market Brawl 151",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0156"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0151"
+  },
+  {
+    "id": "sandbox_large_e0152",
+    "title": "Strange Artifact 152",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0155"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0152"
+  },
+  {
+    "id": "sandbox_large_e0153",
+    "title": "Hermit Offer 153",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0155"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0162"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0153"
+  },
+  {
+    "id": "sandbox_large_e0154",
+    "title": "Old Friend 154",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0158"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0154"
+  },
+  {
+    "id": "sandbox_large_e0155",
+    "title": "Secret Lesson 155",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0160"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0155"
+  },
+  {
+    "id": "sandbox_large_e0156",
+    "title": "Bloodline Echo 156",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0159"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0156"
+  },
+  {
+    "id": "sandbox_large_e0157",
+    "title": "Secret Lesson 157",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0157"
+  },
+  {
+    "id": "sandbox_large_e0158",
+    "title": "Old Friend 158",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0158"
+  },
+  {
+    "id": "sandbox_large_e0159",
+    "title": "Bloodline Echo 159",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0165"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0159"
+  },
+  {
+    "id": "sandbox_large_e0160",
+    "title": "Strange Artifact 160",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0160"
+  },
+  {
+    "id": "sandbox_large_e0161",
+    "title": "Hermit Offer 161",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0158"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0160"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0161"
+  },
+  {
+    "id": "sandbox_large_e0162",
+    "title": "Fateful Meeting 162",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0166"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0162"
+  },
+  {
+    "id": "sandbox_large_e0163",
+    "title": "Wandering Merchant 163",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0170"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0163"
+  },
+  {
+    "id": "sandbox_large_e0164",
+    "title": "Training Montage 164",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0163"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0163"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0164"
+  },
+  {
+    "id": "sandbox_large_e0165",
+    "title": "Trial of Spirit 165",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0169"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0165"
+  },
+  {
+    "id": "sandbox_large_e0166",
+    "title": "Minor Sect Event 166",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0163"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0167"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0166"
+  },
+  {
+    "id": "sandbox_large_e0167",
+    "title": "Hermit Offer 167",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0169"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0167"
+  },
+  {
+    "id": "sandbox_large_e0168",
+    "title": "Lost Manual 168",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0172"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0168"
+  },
+  {
+    "id": "sandbox_large_e0169",
+    "title": "Rival Encounter 169",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0169"
+  },
+  {
+    "id": "sandbox_large_e0170",
+    "title": "Heavenly Sign 170",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0174"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0170"
+  },
+  {
+    "id": "sandbox_large_e0171",
+    "title": "Market Brawl 171",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0175"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0171"
+  },
+  {
+    "id": "sandbox_large_e0172",
+    "title": "Trial of Spirit 172",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0172"
+  },
+  {
+    "id": "sandbox_large_e0173",
+    "title": "Strange Artifact 173",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0174"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0173"
+  },
+  {
+    "id": "sandbox_large_e0174",
+    "title": "Minor Sect Event 174",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0182"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0174"
+  },
+  {
+    "id": "sandbox_large_e0175",
+    "title": "Strange Artifact 175",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0176"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0180"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0175"
+  },
+  {
+    "id": "sandbox_large_e0176",
+    "title": "Fateful Meeting 176",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0179"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0176"
+  },
+  {
+    "id": "sandbox_large_e0177",
+    "title": "Broken Sword 177",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0179"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0182"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0177"
+  },
+  {
+    "id": "sandbox_large_e0178",
+    "title": "Market Brawl 178",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0181"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0178"
+  },
+  {
+    "id": "sandbox_large_e0179",
+    "title": "Misty Pass 179",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0179"
+  },
+  {
+    "id": "sandbox_large_e0180",
+    "title": "Abandoned Ruins 180",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0183"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0180"
+  },
+  {
+    "id": "sandbox_large_e0181",
+    "title": "Strange Artifact 181",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0185"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0181"
+  },
+  {
+    "id": "sandbox_large_e0182",
+    "title": "Abandoned Ruins 182",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0188"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0182"
+  },
+  {
+    "id": "sandbox_large_e0183",
+    "title": "Hermit Offer 183",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0182"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0190"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0183"
+  },
+  {
+    "id": "sandbox_large_e0184",
+    "title": "Hidden Shrine 184",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0186"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0183"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0184"
+  },
+  {
+    "id": "sandbox_large_e0185",
+    "title": "Strange Artifact 185",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0187"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0186"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0185"
+  },
+  {
+    "id": "sandbox_large_e0186",
+    "title": "Spirit Beast Hunt 186",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0193"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0186"
+  },
+  {
+    "id": "sandbox_large_e0187",
+    "title": "Training Montage 187",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0186"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0187"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0187"
+  },
+  {
+    "id": "sandbox_large_e0188",
+    "title": "Market Brawl 188",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0196"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0188"
+  },
+  {
+    "id": "sandbox_large_e0189",
+    "title": "Lost Manual 189",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0193"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0189"
+  },
+  {
+    "id": "sandbox_large_e0190",
+    "title": "Fateful Meeting 190",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0195"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0190"
+  },
+  {
+    "id": "sandbox_large_e0191",
+    "title": "Spirit Beast Hunt 191",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0194"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0191"
+  },
+  {
+    "id": "sandbox_large_e0192",
+    "title": "Old Friend 192",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0198"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0192"
+  },
+  {
+    "id": "sandbox_large_e0193",
+    "title": "Lost Manual 193",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0200"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0193"
+  },
+  {
+    "id": "sandbox_large_e0194",
+    "title": "Broken Sword 194",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0191"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0203"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0194"
+  },
+  {
+    "id": "sandbox_large_e0195",
+    "title": "Abandoned Ruins 195",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0192"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0194"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0195"
+  },
+  {
+    "id": "sandbox_large_e0196",
+    "title": "Secret Lesson 196",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0197"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0196"
+  },
+  {
+    "id": "sandbox_large_e0197",
+    "title": "Lost Manual 197",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0205"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0197"
+  },
+  {
+    "id": "sandbox_large_e0198",
+    "title": "Market Brawl 198",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0195"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0199"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0198"
+  },
+  {
+    "id": "sandbox_large_e0199",
+    "title": "Hermit Offer 199",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0202"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0199"
+  },
+  {
+    "id": "sandbox_large_e0200",
+    "title": "Broken Sword 200",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0200"
+  },
+  {
+    "id": "sandbox_large_e0201",
+    "title": "Secret Lesson 201",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0208"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0201"
+  },
+  {
+    "id": "sandbox_large_e0202",
+    "title": "Market Brawl 202",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0204"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0202"
+  },
+  {
+    "id": "sandbox_large_e0203",
+    "title": "Rival Encounter 203",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0203"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0203"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0203"
+  },
+  {
+    "id": "sandbox_large_e0204",
+    "title": "Broken Sword 204",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0206"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0204"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0204"
+  },
+  {
+    "id": "sandbox_large_e0205",
+    "title": "Secret Lesson 205",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0206"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0205"
+  },
+  {
+    "id": "sandbox_large_e0206",
+    "title": "Old Friend 206",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0205"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0204"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0206"
+  },
+  {
+    "id": "sandbox_large_e0207",
+    "title": "Hidden Shrine 207",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0207"
+  },
+  {
+    "id": "sandbox_large_e0208",
+    "title": "Strange Artifact 208",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0210"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0208"
+  },
+  {
+    "id": "sandbox_large_e0209",
+    "title": "Spirit Beast Hunt 209",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0210"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0209"
+  },
+  {
+    "id": "sandbox_large_e0210",
+    "title": "Lost Manual 210",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0217"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0210"
+  },
+  {
+    "id": "sandbox_large_e0211",
+    "title": "Minor Sect Event 211",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0208"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0212"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0211"
+  },
+  {
+    "id": "sandbox_large_e0212",
+    "title": "Training Montage 212",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0210"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0214"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0212"
+  },
+  {
+    "id": "sandbox_large_e0213",
+    "title": "Training Montage 213",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0218"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0213"
+  },
+  {
+    "id": "sandbox_large_e0214",
+    "title": "Strange Artifact 214",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0217"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0214"
+  },
+  {
+    "id": "sandbox_large_e0215",
+    "title": "Old Friend 215",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0220"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0215"
+  },
+  {
+    "id": "sandbox_large_e0216",
+    "title": "Minor Sect Event 216",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0221"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0216"
+  },
+  {
+    "id": "sandbox_large_e0217",
+    "title": "Market Brawl 217",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0217"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0220"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0217"
+  },
+  {
+    "id": "sandbox_large_e0218",
+    "title": "Market Brawl 218",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0216"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0222"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0218"
+  },
+  {
+    "id": "sandbox_large_e0219",
+    "title": "Trial of Spirit 219",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0224"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0219"
+  },
+  {
+    "id": "sandbox_large_e0220",
+    "title": "Secret Lesson 220",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0222"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0220"
+  },
+  {
+    "id": "sandbox_large_e0221",
+    "title": "Spirit Beast Hunt 221",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0228"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0221"
+  },
+  {
+    "id": "sandbox_large_e0222",
+    "title": "Hermit Offer 222",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0220"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0225"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0222"
+  },
+  {
+    "id": "sandbox_large_e0223",
+    "title": "Wandering Merchant 223",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0230"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0223"
+  },
+  {
+    "id": "sandbox_large_e0224",
+    "title": "Rival Encounter 224",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0227"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0224"
+  },
+  {
+    "id": "sandbox_large_e0225",
+    "title": "Wandering Merchant 225",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0223"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0233"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0225"
+  },
+  {
+    "id": "sandbox_large_e0226",
+    "title": "Misty Pass 226",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0228"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0226"
+  },
+  {
+    "id": "sandbox_large_e0227",
+    "title": "Spirit Beast Hunt 227",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0232"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0227"
+  },
+  {
+    "id": "sandbox_large_e0228",
+    "title": "Spirit Beast Hunt 228",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0228"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0236"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0228"
+  },
+  {
+    "id": "sandbox_large_e0229",
+    "title": "Heavenly Sign 229",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0232"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0229"
+  },
+  {
+    "id": "sandbox_large_e0230",
+    "title": "Heavenly Sign 230",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0234"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0230"
+  },
+  {
+    "id": "sandbox_large_e0231",
+    "title": "Moonlit Meditation 231",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0238"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0231"
+  },
+  {
+    "id": "sandbox_large_e0232",
+    "title": "Abandoned Ruins 232",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0237"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0232"
+  },
+  {
+    "id": "sandbox_large_e0233",
+    "title": "Market Brawl 233",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0230"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0240"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0233"
+  },
+  {
+    "id": "sandbox_large_e0234",
+    "title": "Spirit Beast Hunt 234",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0238"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0234"
+  },
+  {
+    "id": "sandbox_large_e0235",
+    "title": "Training Montage 235",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0240"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0235"
+  },
+  {
+    "id": "sandbox_large_e0236",
+    "title": "Moonlit Meditation 236",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0236"
+  },
+  {
+    "id": "sandbox_large_e0237",
+    "title": "Old Friend 237",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0244"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0237"
+  },
+  {
+    "id": "sandbox_large_e0238",
+    "title": "Heavenly Sign 238",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0243"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0238"
+  },
+  {
+    "id": "sandbox_large_e0239",
+    "title": "Misty Pass 239",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0239"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0248"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0239"
+  },
+  {
+    "id": "sandbox_large_e0240",
+    "title": "Secret Lesson 240",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0240"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0245"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0240"
+  },
+  {
+    "id": "sandbox_large_e0241",
+    "title": "Wandering Merchant 241",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0239"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0250"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0241"
+  },
+  {
+    "id": "sandbox_large_e0242",
+    "title": "Minor Sect Event 242",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0239"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0251"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0242"
+  },
+  {
+    "id": "sandbox_large_e0243",
+    "title": "Bloodline Echo 243",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0241"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0241"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0243"
+  },
+  {
+    "id": "sandbox_large_e0244",
+    "title": "Bloodline Echo 244",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0245"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0247"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0244"
+  },
+  {
+    "id": "sandbox_large_e0245",
+    "title": "Training Montage 245",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0249"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0245"
+  },
+  {
+    "id": "sandbox_large_e0246",
+    "title": "Abandoned Ruins 246",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0249"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0246"
+  },
+  {
+    "id": "sandbox_large_e0247",
+    "title": "Spirit Beast Hunt 247",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0251"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0247"
+  },
+  {
+    "id": "sandbox_large_e0248",
+    "title": "Heavenly Sign 248",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0248"
+  },
+  {
+    "id": "sandbox_large_e0249",
+    "title": "Lost Manual 249",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0248"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0255"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0249"
+  },
+  {
+    "id": "sandbox_large_e0250",
+    "title": "Strange Artifact 250",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0256"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0250"
+  },
+  {
+    "id": "sandbox_large_e0251",
+    "title": "Abandoned Ruins 251",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0252"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0255"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0251"
+  },
+  {
+    "id": "sandbox_large_e0252",
+    "title": "Moonlit Meditation 252",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0253"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0251"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0252"
+  },
+  {
+    "id": "sandbox_large_e0253",
+    "title": "Misty Pass 253",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0253"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0256"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0253"
+  },
+  {
+    "id": "sandbox_large_e0254",
+    "title": "Trial of Spirit 254",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0251"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0260"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0254"
+  },
+  {
+    "id": "sandbox_large_e0255",
+    "title": "Heavenly Sign 255",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0260"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0255"
+  },
+  {
+    "id": "sandbox_large_e0256",
+    "title": "Fateful Meeting 256",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0262"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0256"
+  },
+  {
+    "id": "sandbox_large_e0257",
+    "title": "Trial of Spirit 257",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0257"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0263"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0257"
+  },
+  {
+    "id": "sandbox_large_e0258",
+    "title": "Moonlit Meditation 258",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0265"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0258"
+  },
+  {
+    "id": "sandbox_large_e0259",
+    "title": "Training Montage 259",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0257"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0260"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0259"
+  },
+  {
+    "id": "sandbox_large_e0260",
+    "title": "Trial of Spirit 260",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0264"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0260"
+  },
+  {
+    "id": "sandbox_large_e0261",
+    "title": "Training Montage 261",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0259"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0270"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0261"
+  },
+  {
+    "id": "sandbox_large_e0262",
+    "title": "Hermit Offer 262",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0266"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0262"
+  },
+  {
+    "id": "sandbox_large_e0263",
+    "title": "Hidden Shrine 263",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0265"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0263"
+  },
+  {
+    "id": "sandbox_large_e0264",
+    "title": "Secret Lesson 264",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0264"
+  },
+  {
+    "id": "sandbox_large_e0265",
+    "title": "Bloodline Echo 265",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0265"
+  },
+  {
+    "id": "sandbox_large_e0266",
+    "title": "Lost Manual 266",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0271"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0266"
+  },
+  {
+    "id": "sandbox_large_e0267",
+    "title": "Hermit Offer 267",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0275"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0267"
+  },
+  {
+    "id": "sandbox_large_e0268",
+    "title": "Hidden Shrine 268",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0272"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0268"
+  },
+  {
+    "id": "sandbox_large_e0269",
+    "title": "Broken Sword 269",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0270"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0269"
+  },
+  {
+    "id": "sandbox_large_e0270",
+    "title": "Bloodline Echo 270",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0270"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0269"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0270"
+  },
+  {
+    "id": "sandbox_large_e0271",
+    "title": "Strange Artifact 271",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0276"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0271"
+  },
+  {
+    "id": "sandbox_large_e0272",
+    "title": "Lost Manual 272",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0277"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0272"
+  },
+  {
+    "id": "sandbox_large_e0273",
+    "title": "Moonlit Meditation 273",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0280"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0273"
+  },
+  {
+    "id": "sandbox_large_e0274",
+    "title": "Hidden Shrine 274",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0275"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0274"
+  },
+  {
+    "id": "sandbox_large_e0275",
+    "title": "Hermit Offer 275",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0276"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0283"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0275"
+  },
+  {
+    "id": "sandbox_large_e0276",
+    "title": "Broken Sword 276",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0280"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0276"
+  },
+  {
+    "id": "sandbox_large_e0277",
+    "title": "Training Montage 277",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0275"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0282"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0277"
+  },
+  {
+    "id": "sandbox_large_e0278",
+    "title": "Strange Artifact 278",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0275"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0283"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0278"
+  },
+  {
+    "id": "sandbox_large_e0279",
+    "title": "Spirit Beast Hunt 279",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0286"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0279"
+  },
+  {
+    "id": "sandbox_large_e0280",
+    "title": "Training Montage 280",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0280"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0284"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0280"
+  },
+  {
+    "id": "sandbox_large_e0281",
+    "title": "Heavenly Sign 281",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0287"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0281"
+  },
+  {
+    "id": "sandbox_large_e0282",
+    "title": "Lost Manual 282",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0282"
+  },
+  {
+    "id": "sandbox_large_e0283",
+    "title": "Bloodline Echo 283",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0287"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0283"
+  },
+  {
+    "id": "sandbox_large_e0284",
+    "title": "Hermit Offer 284",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0285"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0284"
+  },
+  {
+    "id": "sandbox_large_e0285",
+    "title": "Bloodline Echo 285",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0286"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0285"
+  },
+  {
+    "id": "sandbox_large_e0286",
+    "title": "Moonlit Meditation 286",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0284"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0293"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0286"
+  },
+  {
+    "id": "sandbox_large_e0287",
+    "title": "Strange Artifact 287",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0290"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0287"
+  },
+  {
+    "id": "sandbox_large_e0288",
+    "title": "Minor Sect Event 288",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0289"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0288"
+  },
+  {
+    "id": "sandbox_large_e0289",
+    "title": "Minor Sect Event 289",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0286"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0292"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0289"
+  },
+  {
+    "id": "sandbox_large_e0290",
+    "title": "Old Friend 290",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0294"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0290"
+  },
+  {
+    "id": "sandbox_large_e0291",
+    "title": "Old Friend 291",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0299"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0291"
+  },
+  {
+    "id": "sandbox_large_e0292",
+    "title": "Hidden Shrine 292",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0294"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0292"
+  },
+  {
+    "id": "sandbox_large_e0293",
+    "title": "Trial of Spirit 293",
+    "description": "This could lead to a long and winding journey.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0295"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0297"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0293"
+  },
+  {
+    "id": "sandbox_large_e0294",
+    "title": "Spirit Beast Hunt 294",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0294"
+  },
+  {
+    "id": "sandbox_large_e0295",
+    "title": "Bloodline Echo 295",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0299"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0295"
+  },
+  {
+    "id": "sandbox_large_e0296",
+    "title": "Abandoned Ruins 296",
+    "description": "A faint hum of spiritual energy can be heard.",
+    "choices": [
+      {
+        "id": "continue",
+        "text": "Continue wandering",
+        "next": null
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0296"
+  },
+  {
+    "id": "sandbox_large_e0297",
+    "title": "Broken Sword 297",
+    "description": "Danger and reward entwine in equal measure.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0301"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0297"
+  },
+  {
+    "id": "sandbox_large_e0298",
+    "title": "Heavenly Sign 298",
+    "description": "An opportunity that could change your path appears.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0299"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0307"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0298"
+  },
+  {
+    "id": "sandbox_large_e0299",
+    "title": "Misty Pass 299",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "next",
+        "text": "Proceed",
+        "next": "sandbox_large_e0304"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0299"
+  },
+  {
+    "id": "sandbox_large_e0300",
+    "title": "Secret Lesson 300",
+    "description": "A quiet moment of insight reveals itself.",
+    "choices": [
+      {
+        "id": "a",
+        "text": "Take path A",
+        "next": "sandbox_large_e0302"
+      },
+      {
+        "id": "b",
+        "text": "Take path B",
+        "next": "sandbox_large_e0306"
+      }
+    ],
+    "executorId": "fn_sandbox_large_e0300"
+  }
+]

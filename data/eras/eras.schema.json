@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Era",
+  "type": "object",
+  "required": ["id","name","index","description","modifiers","startingFactions","uniqueEvents","availableMentors"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "index": { "type": "integer", "minimum": 0 },
+    "description": { "type": "string" },
+    "seedHint": { "type": "string" },
+    "modifiers": {
+      "type": "object",
+      "required": ["qiDensity","demonicQi","holyQi","sectCorruptionRate","eventBias","tribulationSeverity","artifactDensity"],
+      "properties": {
+        "qiDensity": { "type": "integer", "minimum": 0 },
+        "demonicQi": { "type": "integer", "minimum": 0 },
+        "holyQi": { "type": "integer", "minimum": 0 },
+        "sectCorruptionRate": { "type": "integer", "minimum": 0 },
+        "eventBias": {
+          "type": "object",
+          "properties": {
+            "dark": { "type": "number", "minimum": 0, "maximum": 1 },
+            "neutral": { "type": "number", "minimum": 0, "maximum": 1 },
+            "light": { "type": "number", "minimum": 0, "maximum": 1 }
+          },
+          "required": ["dark","neutral","light"]
+        },
+        "tribulationSeverity": { "type": "number", "minimum": 0, "maximum": 0.95 },
+        "artifactDensity": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "startingFactions": {
+      "type": "array",
+      "items": {
+        "type":"object",
+        "required":["id","type","influence"],
+        "properties": {
+          "id": {"type":"string"},
+          "type": {"type":"string"},
+          "influence": {"type":"number"}
+        }
+      }
+    },
+    "uniqueEvents": { "type": "array", "items": {"type":"string"} },
+    "availableMentors": { "type": "array", "items": {"type":"string"} }
+  }
+}

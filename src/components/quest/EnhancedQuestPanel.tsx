@@ -1,8 +1,10 @@
 /* eslint-disable no-restricted-imports -- component imports EnhancedQuestSystem for display */
 import React, { useState, useEffect } from 'react';
+import { logger } from '../../utils/logger';
 import { Card } from '../core/Card';
 import { Progress } from '../core/Progress';
 import { EnhancedQuest, QuestType, QuestDifficulty } from '../../systems/EnhancedQuestSystem';
+import SmallChip from '../ui/SmallChip';
 
 interface EnhancedQuestPanelProps {
   quests: EnhancedQuest[];
@@ -40,7 +42,7 @@ export const EnhancedQuestPanel: React.FC<EnhancedQuestPanelProps> = ({
       case 'easy': return '#3b82f6'; // blue
       case 'normal': return '#f59e0b'; // yellow
       case 'hard': return '#ef4444'; // red
-      case 'legendary': return '#8b5cf6'; // purple
+      case "D": return '#8b5cf6'; // purple
       default: return '#6b7280'; // gray
     }
   };
@@ -97,7 +99,7 @@ export const EnhancedQuestPanel: React.FC<EnhancedQuestPanelProps> = ({
         const quest = quests.find(q => q.id === questId);
         if (quest) {
           // You could trigger a toast notification here
-          console.log(`Quest completed: ${quest.title}`);
+          logger.debug(`Quest completed: ${quest.title}`);
         }
       });
     }
@@ -119,7 +121,7 @@ export const EnhancedQuestPanel: React.FC<EnhancedQuestPanelProps> = ({
   }
 
   return (
-    <Card title={`${getTypeIcon(showType || 'main')} ${showType ? showType.charAt(0).toUpperCase() + showType.slice(1) : 'Active'} Quests`}>
+    <Card title={`${getTypeIcon(showType || 'main')} ${showType ? showType.charAt(0).toUpperCase() + showType.slice(1) : 'Active'} Quests`} aria-label={`${showType || 'Active'} quests list`}>
       <div style={{ display: 'grid', gap: '12px' }}>
         {sortedQuests.map(quest => {
           const progress = getQuestProgress(quest);
@@ -142,7 +144,17 @@ export const EnhancedQuestPanel: React.FC<EnhancedQuestPanelProps> = ({
                 transition: 'all 0.2s ease',
                 opacity: isCompleted ? 0.8 : 1
               }}
+              role="button"
+              tabIndex={0}
+              aria-expanded={isSelected}
               onClick={() => handleQuestClick(quest.id)}
+              aria-label={`${quest.title}, difficulty ${quest.difficulty}, ${isCompleted ? 'completed' : `${progress.completed} of ${progress.total} objectives`}`}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleQuestClick(quest.id);
+                }
+              }}
             >
               {/* Quest Header */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
@@ -151,26 +163,21 @@ export const EnhancedQuestPanel: React.FC<EnhancedQuestPanelProps> = ({
                     <span style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--primary)' }}>
                       {quest.title}
                     </span>
-                    {isCompleted && <span style={{ color: '#10b981', fontSize: '1.2rem' }}>✓</span>}
+                    {isCompleted && <SmallChip variant="success" style={{ fontSize: '0.9rem' }}>✓</SmallChip>}
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem' }}>
-                    <span style={{ 
-                      color: getDifficultyColor(quest.difficulty),
-                      fontWeight: 'bold',
-                      textTransform: 'uppercase'
-                    }}>
-                      {quest.difficulty}
-                    </span>
-                    <span style={{ color: 'var(--muted)' }}>•</span>
-                    <span style={{ color: 'var(--muted)' }}>
-                      {quest.type.charAt(0).toUpperCase() + quest.type.slice(1)}
-                    </span>
+                    <SmallChip style={{
+                      fontSize: '0.8rem',
+                      background: getDifficultyColor(quest.difficulty),
+                      color: 'white',
+                      textTransform: 'uppercase',
+                      fontWeight: 'bold'
+                    }}>{quest.difficulty}</SmallChip>
+                    <SmallChip style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>{quest.type.charAt(0).toUpperCase() + quest.type.slice(1)}</SmallChip>
                     {quest.experience > 0 && (
                       <>
                         <span style={{ color: 'var(--muted)' }}>•</span>
-                        <span style={{ color: 'var(--accent)' }}>
-                          {quest.experience} XP
-                        </span>
+                        <SmallChip variant="accent" style={{ fontSize: '0.8rem' }}>{quest.experience} XP</SmallChip>
                       </>
                     )}
                   </div>
@@ -234,30 +241,15 @@ export const EnhancedQuestPanel: React.FC<EnhancedQuestPanelProps> = ({
                             gap: '8px',
                             fontSize: '0.85rem'
                           }}>
-                            <span style={{ 
-                              color: objective.isCompleted ? '#10b981' : 'var(--text)',
-                              textDecoration: objective.isCompleted ? 'line-through' : 'none'
-                            }}>
-                              {objective.isCompleted ? '✓' : '○'} {objective.description}
-                            </span>
-                            {objective.isOptional && (
-                              <span style={{ 
-                                color: 'var(--muted)', 
-                                fontSize: '0.75rem',
-                                fontStyle: 'italic'
-                              }}>
-                                (Optional)
-                              </span>
-                            )}
-                            {!objective.isCompleted && objProgress.target > 1 && (
-                              <span style={{ 
-                                color: 'var(--accent)',
-                                fontSize: '0.75rem',
-                                marginLeft: 'auto'
-                              }}>
-                                {objProgress.current}/{objProgress.target}
-                              </span>
-                            )}
+                              <SmallChip variant={objective.isCompleted ? 'success' : 'neutral'} style={{ fontSize: '0.85rem', textDecoration: objective.isCompleted ? 'line-through' : 'none' }}>
+                                {objective.isCompleted ? '\u2713' : '\u25cb'} {objective.description}
+                              </SmallChip>
+                              {objective.isOptional && (
+                                <SmallChip style={{ color: 'var(--muted)', fontSize: '0.75rem', fontStyle: 'italic' }}>Optional</SmallChip>
+                              )}
+                              {!objective.isCompleted && objProgress.target > 1 && (
+                                <SmallChip variant="accent" style={{ fontSize: '0.75rem', marginLeft: 'auto' }}>{objProgress.current}/{objProgress.target}</SmallChip>
+                              )}
                           </div>
                         );
                       })}
@@ -282,26 +274,14 @@ export const EnhancedQuestPanel: React.FC<EnhancedQuestPanelProps> = ({
                         fontSize: '0.8rem'
                       }}>
                         {quest.experience > 0 && (
-                          <span style={{ 
-                            background: 'rgba(59, 130, 246, 0.2)',
-                            color: '#3b82f6',
-                            padding: '2px 6px',
-                            borderRadius: '4px',
-                            border: '1px solid rgba(59, 130, 246, 0.3)'
-                          }}>
+                          <SmallChip variant="accent" style={{ borderRadius: 4, fontSize: '0.8rem' }}>
                             {quest.experience} XP
-                          </span>
+                          </SmallChip>
                         )}
                         {quest.rewards.map((reward, index) => (
-                          <span key={index} style={{ 
-                            background: 'rgba(16, 185, 129, 0.2)',
-                            color: '#10b981',
-                            padding: '2px 6px',
-                            borderRadius: '4px',
-                            border: '1px solid rgba(16, 185, 129, 0.3)'
-                          }}>
+                          <SmallChip key={index} variant="success" style={{ borderRadius: 4, fontSize: '0.8rem' }}>
                             {reward.description}
-                          </span>
+                          </SmallChip>
                         ))}
                       </div>
                     </div>

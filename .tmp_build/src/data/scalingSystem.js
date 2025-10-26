@@ -120,13 +120,13 @@ function scaleTeachingReward(reward, realm) {
 // Get rarity multiplier for scaling base stats
 function getRarityMultiplier(rarity) {
     const multipliers = {
-        'common': 1.0,
-        'uncommon': 1.3,
-        'rare': 1.6,
-        'epic': 2.0,
-        'legendary': 3.0,
+        "H": 1.0,
+        "G": 1.3,
+        "F": 1.6,
+        "E": 2.0,
+        "D": 3.0,
         'mythical': 4.5,
-        'transcendent': 6.0
+        "B": 6.0
     };
     return multipliers[rarity] || 1.0;
 }

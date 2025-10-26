@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-non-null-assertion: "off" */
 import React from 'react';
 import { render, screen, fireEvent, within } from '@testing-library/react';
 import '@testing-library/jest-dom';

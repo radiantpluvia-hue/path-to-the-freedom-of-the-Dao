@@ -1,7 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ActiveBuffsDisplay = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
+const RichTooltip_1 = __importDefault(require("@/components/ui/RichTooltip"));
 const useGameStore_1 = require("@/store/useGameStore");
 const getBuffEffectText = (buff) => {
     // Handle stat buffs
@@ -39,15 +43,15 @@ const ActiveBuffsDisplay = () => {
             flexDirection: 'column',
             gap: '8px',
             zIndex: 1000
-        }, children: player.activeBuffs.map(buff => ((0, jsx_runtime_1.jsxs)("div", { title: `${buff.name}: ${buff.description}`, style: {
-                padding: '8px 12px',
-                background: 'rgba(34, 197, 94, 0.2)',
-                border: '1px solid var(--success)',
-                borderRadius: '6px',
-                color: 'var(--text-primary)',
-                fontSize: '0.85rem',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
-                cursor: 'help'
-            }, children: [(0, jsx_runtime_1.jsx)("strong", { children: buff.name }), (0, jsx_runtime_1.jsx)("div", { style: { color: 'var(--success-dark)', fontWeight: 'bold' }, children: getBuffEffectText(buff) }), (0, jsx_runtime_1.jsx)("div", { style: { color: 'var(--muted)', fontSize: '0.8rem', marginTop: '4px' }, children: buff.durationType === 'ticks' ? `Time Left: ${buff.duration}` : `Uses Left: ${buff.duration}` })] }, buff.id))) }));
+        }, children: player.activeBuffs.map(buff => ((0, jsx_runtime_1.jsx)(RichTooltip_1.default, { content: `${buff.name}: ${buff.description}`, children: (0, jsx_runtime_1.jsxs)("div", { style: {
+                    padding: '8px 12px',
+                    background: 'rgba(34, 197, 94, 0.2)',
+                    border: '1px solid var(--success)',
+                    borderRadius: '6px',
+                    color: 'var(--text-primary)',
+                    fontSize: '0.85rem',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+                    cursor: 'help'
+                }, children: [(0, jsx_runtime_1.jsx)("strong", { children: buff.name }), (0, jsx_runtime_1.jsx)("div", { style: { color: 'var(--success-dark)', fontWeight: 'bold' }, children: getBuffEffectText(buff) }), (0, jsx_runtime_1.jsx)("div", { style: { color: 'var(--muted)', fontSize: '0.8rem', marginTop: '4px' }, children: buff.durationType === 'ticks' ? `Time Left: ${buff.duration}` : `Uses Left: ${buff.duration}` })] }, buff.id) }, buff.id))) }));
 };
 exports.ActiveBuffsDisplay = ActiveBuffsDisplay;

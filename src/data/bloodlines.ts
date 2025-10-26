@@ -1,5 +1,6 @@
 import { Bloodline } from '@/types';
 import { getRarityMultiplier, scaleBloodlineStats } from './scalingSystem';
+import { migrateTier } from '@/migrations/tierMigration';
 
 // Helper function to generate bloodline IDs from names
 function generateBloodlineId(name: string): string {
@@ -8,25 +9,39 @@ function generateBloodlineId(name: string): string {
     .replace(/(^_+|_+$)/g, '');
 }
 
-// Base stats for different rarity tiers
+// Base stats for different rarity tiers (canonical letter codes used where possible)
 const BASE_STATS = {
+  H: { qi: 60, atk: 12, def: 18 },
+  G: { qi: 90, atk: 18, def: 27 },
+  F: { qi: 160, atk: 32, def: 48 },
+  E: { qi: 240, atk: 48, def: 72 },
+  D: { qi: 400, atk: 80, def: 120 },
+  mythical: { qi: 720, atk: 144, def: 216 },
+  B: { qi: 1200, atk: 240, def: 360 },
+  // keep legacy-words as aliases
   common: { qi: 60, atk: 12, def: 18 },
   uncommon: { qi: 90, atk: 18, def: 27 },
   rare: { qi: 160, atk: 32, def: 48 },
   epic: { qi: 240, atk: 48, def: 72 },
   legendary: { qi: 400, atk: 80, def: 120 },
-  mythical: { qi: 720, atk: 144, def: 216 },
   transcendent: { qi: 1200, atk: 240, def: 360 }
 };
 
 // Base skill bonuses for different rarity tiers
 const BASE_SKILLS = {
+  H: { combatSkills: 2, qiControl: 2 },
+  G: { combatSkills: 3, qiControl: 3 },
+  F: { combatSkills: 6, qiControl: 6 },
+  E: { combatSkills: 8, qiControl: 8 },
+  D: { combatSkills: 13, qiControl: 13 },
+  mythical: { combatSkills: 21, qiControl: 21 },
+  B: { combatSkills: 30, qiControl: 30 },
+  // legacy-word aliases
   common: { combatSkills: 2, qiControl: 2 },
   uncommon: { combatSkills: 3, qiControl: 3 },
   rare: { combatSkills: 6, qiControl: 6 },
   epic: { combatSkills: 8, qiControl: 8 },
   legendary: { combatSkills: 13, qiControl: 13 },
-  mythical: { combatSkills: 21, qiControl: 21 },
   transcendent: { combatSkills: 30, qiControl: 30 }
 };
 
@@ -135,12 +150,19 @@ function getSpecialEffects(name: string, rarity: string): string[] {
   
   // Limit effects based on rarity
   const maxEffects = {
+    H: 1,
+    G: 1,
+    F: 2,
+    E: 2,
+    D: 3,
+    mythical: 4,
+    B: 5,
+    // legacy aliases
     common: 1,
     uncommon: 1,
     rare: 2,
     epic: 2,
     legendary: 3,
-    mythical: 4,
     transcendent: 5
   };
   
@@ -150,21 +172,36 @@ function getSpecialEffects(name: string, rarity: string): string[] {
 // Function to determine rarity based on name and index
 function determineRarity(index: number, total: number): string {
   const percent = (index / total) * 100;
-  if (percent < 40) return 'common';
-  if (percent < 60) return 'uncommon';
-  if (percent < 75) return 'rare';
-  if (percent < 85) return 'epic';
-  if (percent < 92) return 'legendary';
+  if (percent < 40) return "H";
+  if (percent < 60) return "G";
+  if (percent < 75) return "F";
+  if (percent < 85) return "E";
+  if (percent < 92) return "D";
   if (percent < 97) return 'mythical';
-  return 'transcendent';
+  return "B";
 }
 
 // Function to create bloodline from name
 function createBloodline(name: string, index: number, total: number): Bloodline {
   const rarity = determineRarity(index, total);
   const rarityMultiplier = getRarityMultiplier(rarity);
-  const baseStats = BASE_STATS[rarity as keyof typeof BASE_STATS];
-  const baseSkills = BASE_SKILLS[rarity as keyof typeof BASE_SKILLS];
+  // Map single-letter codes (H/G/F/E/D/B) or legacy words to BASE_* keys
+  // Prefer canonical single-letter tier codes when possible. Keep legacy-word aliases for compatibility.
+  const LEGACY_TO_LETTER: Record<string, keyof typeof BASE_STATS> = {
+    common: 'H',
+    uncommon: 'G',
+    rare: 'F',
+    epic: 'E',
+    legendary: 'D',
+    transcendent: 'B',
+    mythical: 'mythical'
+  };
+
+  const mappedRarity = ((BASE_STATS as any)[rarity]
+    ? (rarity as keyof typeof BASE_STATS)
+    : (LEGACY_TO_LETTER[(rarity || '').toString().toLowerCase()] || (rarity as keyof typeof BASE_STATS))) as keyof typeof BASE_STATS;
+  const baseStats = BASE_STATS[mappedRarity];
+  const baseSkills = BASE_SKILLS[mappedRarity];
   
   // Apply rarity multiplier to stats
   const stats = Object.fromEntries(
@@ -183,21 +220,22 @@ function createBloodline(name: string, index: number, total: number): Bloodline 
     name: name,
     description: `The ancient ${name} bloodline, carrying powerful ancestral powers and unique abilities.`,
     rarity: rarity as any,
+    rarityCode: migrateTier(rarity),
     effects: {
       stats,
       skills,
       special: specialEffects
     },
     awakening_requirements: {
-      realm: rarity === 'transcendent' ? 'chaos_saint' : 
+      realm: rarity === "B" ? 'chaos_saint' : 
              rarity === 'mythical' ? 'core_formation' :
-             rarity === 'legendary' ? 'soul_transformation' :
-             rarity === 'epic' ? 'golden_immortal' : 'foundation_establishment',
-      qi: 1000 * (rarity === 'transcendent' ? 100 : 
+             rarity === "D" ? 'soul_transformation' :
+             rarity === "E" ? 'golden_immortal' : 'foundation_establishment',
+      qi: 1000 * (rarity === "B" ? 100 : 
                   rarity === 'mythical' ? 50 :
-                  rarity === 'legendary' ? 25 :
-                  rarity === 'epic' ? 10 :
-                  rarity === 'rare' ? 5 : 1)
+                  rarity === "D" ? 25 :
+                  rarity === "E" ? 10 :
+                  rarity === "F" ? 5 : 1)
     }
   };
 }
@@ -389,7 +427,7 @@ const ORIGINAL_MAIN_CHARACTER_BLOODLINES: Bloodline[] = [
     id: 'fate_destroyer',
     name: 'Fate Destroyer Bloodline',
     description: 'Bloodline blessed by the Fate Destroying Emperor, capable of severing destiny itself.',
-    rarity: 'legendary',
+    rarity: "D",
     effects: {
       stats: { qi: 200, atk: 50, def: 50 },
       skills: { combatSkills: 5, qiControl: 5 },
@@ -400,7 +438,7 @@ const ORIGINAL_MAIN_CHARACTER_BLOODLINES: Bloodline[] = [
     id: 'heaven_sealer',
     name: 'Heaven Sealer Bloodline',
     description: 'Bloodline of Meng Hao, master of sealing arts and heavenly defiance.',
-    rarity: 'legendary',
+    rarity: "D",
     effects: {
       stats: { qi: 180, atk: 45, def: 45 },
       skills: { daoInsight: 5, mentalFortitude: 5 },
@@ -411,7 +449,7 @@ const ORIGINAL_MAIN_CHARACTER_BLOODLINES: Bloodline[] = [
     id: 'eternal_alchemist',
     name: 'Eternal Alchemist Bloodline',
     description: 'Bloodline of Bai Xiaochun, master of immortality and pill refinement.',
-    rarity: 'legendary',
+    rarity: "D",
     effects: {
       stats: { qi: 190, atk: 40, def: 40 },
       skills: { alchemy: 5, combatSkills: 4 },
@@ -422,7 +460,7 @@ const ORIGINAL_MAIN_CHARACTER_BLOODLINES: Bloodline[] = [
     id: 'dao_comprehender',
     name: 'Dao Comprehender Bloodline',
     description: 'Bloodline of Han Jue, with unparalleled understanding of the Dao and fate.',
-    rarity: 'legendary',
+    rarity: "D",
     effects: {
       stats: { qi: 210, atk: 55, def: 55 },
       skills: { daoInsight: 6, qiControl: 6 },
@@ -433,7 +471,7 @@ const ORIGINAL_MAIN_CHARACTER_BLOODLINES: Bloodline[] = [
     id: 'sword_sovereign',
     name: 'Sword Sovereign Bloodline',
     description: 'Bloodline of Ji Ning, ultimate master of the sword and spatial techniques.',
-    rarity: 'legendary',
+    rarity: "D",
     effects: {
       stats: { qi: 220, atk: 60, def: 60 },
       skills: { combatSkills: 6, daoInsight: 5 },
@@ -444,7 +482,7 @@ const ORIGINAL_MAIN_CHARACTER_BLOODLINES: Bloodline[] = [
     id: 'dragon_emperor',
     name: 'Dragon Emperor Bloodline',
     description: 'Bloodline of Linley, with draconic heritage and noble warrior spirit.',
-    rarity: 'legendary',
+    rarity: "D",
     effects: {
       stats: { qi: 200, atk: 50, def: 50 },
       skills: { combatSkills: 5, mentalFortitude: 4 },
@@ -455,7 +493,7 @@ const ORIGINAL_MAIN_CHARACTER_BLOODLINES: Bloodline[] = [
     id: 'renegade_immortal',
     name: 'Renegade Immortal Bloodline',
     description: 'Bloodline of Wang Lin, known for incredible resilience and killing intent.',
-    rarity: 'legendary',
+    rarity: "D",
     effects: {
       stats: { qi: 210, atk: 55, def: 55 },
       skills: { combatSkills: 6, mentalFortitude: 5 },
@@ -466,7 +504,7 @@ const ORIGINAL_MAIN_CHARACTER_BLOODLINES: Bloodline[] = [
     id: 'frost_monarch',
     name: 'Frost Monarch Bloodline',
     description: 'Bloodline of Xue Ying, absolute master of ice and frost elements.',
-    rarity: 'legendary',
+    rarity: "D",
     effects: {
       stats: { qi: 200, atk: 50, def: 50 },
       skills: { elementalMastery: 5, combatSkills: 4 },
@@ -477,7 +515,7 @@ const ORIGINAL_MAIN_CHARACTER_BLOODLINES: Bloodline[] = [
     id: 'chaos_origin',
     name: 'Chaos Origin Bloodline',
     description: 'Bloodline originating from primordial chaos, with reality-bending powers.',
-    rarity: 'legendary',
+    rarity: "D",
     effects: {
       stats: { qi: 230, atk: 60, def: 60 },
       skills: { daoInsight: 7, qiControl: 6 },

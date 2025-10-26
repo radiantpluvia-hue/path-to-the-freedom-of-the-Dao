@@ -1,0 +1,94 @@
+{
+    "pathways": [
+        {
+            "id": "path_soul_refine",
+            "name": "Soul Refiner",
+            "description": "Focuses on refining the soul for perception and control. Great for insight and crit effects.",
+            "bonuses": { "perception": 5, "critChancePct": 2 }
+        },
+        {
+            "id": "path_body_iron",
+            "name": "Iron Body",
+            "description": "Fortify the body to resist damage and sustain longer fights.",
+            "bonuses": { "defense": 6, "hp": 40 }
+        },
+        {
+            "id": "path_qi_conduit",
+            "name": "Qi Conduit",
+            "description": "Smooth circulation of qi to improve regen and technique speed.",
+            "bonuses": { "qiRegenPct": 0.12, "actionSpeedPct": 3 }
+        },
+        {
+            "id": "path_flame_tread",
+            "name": "Flame Tread",
+            "description": "Harnesses internal fire for sustained damage over time.",
+            "bonuses": { "dotDamagePct": 8 }
+        },
+        {
+            "id": "path_shadow_step",
+            "name": "Shadow Step",
+            "description": "Specializes in mobility and surprise attacks; improves evasion and first-strike.",
+            "bonuses": { "evasionPct": 6, "firstStrikeBonusPct": 5 }
+        },
+        {
+            "id": "path_mystic_arch",
+            "name": "Mystic Architect",
+            "description": "Structures reality to favor buffs and barriers for allies.",
+            "bonuses": { "shieldPct": 10, "allyBuffDurationPct": 15 }
+        },
+        {
+            "id": "path_life_root",
+            "name": "Root of Life",
+            "description": "Greatly enhances healing potency and passive recovery.",
+            "bonuses": { "healingPct": 12, "hpRegen": 3 }
+        },
+        {
+            "id": "path_storm_caller",
+            "name": "Storm Caller",
+            "description": "Channel tempest qi to increase AoE damage and control.",
+            "bonuses": { "aoeDamagePct": 10, "stunChancePct": 3 }
+        },
+        {
+            "id": "path_dragon_blood",
+            "name": "Dragonblood Lineage",
+            "description": "Ancestral bloodline path granting raw power and noble effects.",
+            "bonuses": { "attackPct": 8, "noblePresence": true }
+        },
+        {
+            "id": "path_ice_bind",
+            "name": "Ice Bind",
+            "description": "Cold control path that slows enemies and reduces their output.",
+            "bonuses": { "slowPct": 12, "enemyActionSpeedReductionPct": 5 }
+        },
+        {
+            "id": "path_iron_will",
+            "name": "Iron Will",
+            "description": "Mental fortitude path that resists debuffs and fear effects.",
+            "bonuses": { "debuffResistPct": 10, "fearResistPct": 15 }
+        },
+        {
+            "id": "path_spirit_weaver",
+            "name": "Spirit Weaver",
+            "description": "Manipulates spirits for utility — summons, traps, and information.",
+            "bonuses": { "summonPowerPct": 10, "trapDurationPct": 20 }
+        },
+        {
+            "id": "path_ember_blood",
+            "name": "Emberblood",
+            "description": "Aggressive path that converts damage taken into power.",
+            "bonuses": { "damageConversionPct": 6 }
+        },
+        {
+            "id": "path_serene_mind",
+            "name": "Serene Mind",
+            "description": "Calms the mind to increase focus and reduce technique cooldowns.",
+            "bonuses": { "cooldownReductionPct": 8, "focusGainPct": 5 }
+        },
+        {
+            "id": "path_earth_sculpt",
+            "name": "Earth Sculptor",
+            "description": "Shapes the earth to bolster defenses and control terrain.",
+            "bonuses": { "terrainControlPct": 10, "armorPct": 6 }
+        }
+    ]
+}

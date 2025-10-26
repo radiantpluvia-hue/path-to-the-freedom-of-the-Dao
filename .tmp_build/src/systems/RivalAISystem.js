@@ -1,8 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RivalAISystem = void 0;
+const logger_1 = require("../utils/logger");
 class RivalAISystem {
     constructor() {
+        // Debug flag controls internal console logging
+        this.debug = false;
         // Data structures for AI learning
         this.combatHistory = [];
         this.learningData = new Map();
@@ -105,8 +108,10 @@ class RivalAISystem {
             }
             // Update learning data
             this.updateLearningData(record);
-            // Log for debugging (can be removed in production)
-            console.log(`AI Learning: Recorded ${outcome} for ${rivalId} in ${rounds} rounds`);
+            // Log for debugging (only when enabled)
+            if (this.debug) {
+                logger_1.logger.debug(`AI Learning: Recorded ${outcome} for ${rivalId} in ${rounds} rounds`);
+            }
         }
         catch (e) {
             // Swallow errors to avoid cascading failures from optional AI logic

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CURATED from '../minigames/sutras';
 // useGameStore import removed (unused)
 import StudyModal from './StudyModal';
+import TierBadge from './TierBadge';
 
 export default function SutraBrowser() {
   const sutras = CURATED;
@@ -22,11 +23,11 @@ export default function SutraBrowser() {
         {sutras.map((s: any) => (
           <li key={s.id} className="sutra-item">
             <div>
-              <div><strong>{s.name}</strong> <span className="xui-muted">(Tier {s.tier})</span></div>
+              <div><strong>{s.name}</strong> <span className="xui-muted">(<TierBadge tier={s.tier} small={true} />)</span></div>
               <div className="xui-muted">{s.description}</div>
             </div>
             <div>
-              <button className="xbtn" onClick={() => openStudy(s)} data-testid={`study-${s.id}`}>Study</button>
+              <button type="button" className="xbtn" onClick={() => openStudy(s)} data-testid={`study-${s.id}`}>Study</button>
             </div>
           </li>
         ))}

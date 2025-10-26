@@ -1,0 +1,13 @@
+{
+  "$id": "event.schema.json",
+  "type": "object",
+  "required": ["id", "title", "description"],
+  "properties": {
+    "id": { "type": "string" },
+    "title": { "type": "string" },
+    "description": { "type": "string" },
+    "effects": { "type": ["array","null"] },
+    "choices": { "type": ["array","null"] }
+  },
+  "additionalProperties": true
+}

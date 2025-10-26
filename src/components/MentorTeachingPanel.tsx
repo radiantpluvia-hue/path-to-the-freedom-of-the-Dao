@@ -3,6 +3,7 @@ import { useGameStore } from '../store/useGameStore';
 import { MentorTeaching, ChallengeResult, TeachingChallengeType, TeachingDifficulty } from '../types/MentorTeaching';
 import { MinigameManager } from './minigames/MinigameManager';
 import allMentors from '../data/mentors_runtime';
+import SmallChip from './ui/SmallChip';
 import { PlaytestScaling } from '../utils/playtestScaling';
 
 const mentorColors: Record<string, string> = {
@@ -58,23 +59,42 @@ const MentorTeachingPanel: React.FC = () => {
     color: mentorColors[m.id] || '#6c757d'
   }));
 
+  // Load teachings initially and whenever selectedMentor or the store's world.tick changes
   useEffect(() => {
-    if (player && getAvailableTeachingsForMentor) {
+    let mounted = true;
+    const load = () => {
+      if (!player || !getAvailableTeachingsForMentor) return setAvailableTeachings([]);
       try {
         const teachings = getAvailableTeachingsForMentor(selectedMentor);
-        setAvailableTeachings(teachings || []);
+        if (mounted) setAvailableTeachings(teachings || []);
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Error loading teachings:', error);
-        setAvailableTeachings([]);
+        if (mounted) setAvailableTeachings([]);
       }
-    }
-    // Refresh periodically to update cooldown remaining
-    const t = setInterval(() => {
-      // trigger re-render by setting state from store (no-op read)
-      setAvailableTeachings(prev => prev);
+    };
+
+    load();
+
+    // Use a light-weight interval to refresh availability (cooldowns). Avoid writing the same state value to prevent
+    // triggering external-store snapshot churn which can cause React to re-evaluate subscriptions in a tight loop.
+    const iv = setInterval(() => {
+      // read fresh from store and update only when changed
+      try {
+        const teachings = getAvailableTeachingsForMentor ? getAvailableTeachingsForMentor(selectedMentor) : [];
+        // shallow compare by length and ids to avoid frequent setState with identical arrays
+        const same = teachings && teachings.length === availableTeachings.length && teachings.every((t, i) => availableTeachings[i] && availableTeachings[i].id === t.id);
+        if (!same) {
+          if (mounted) setAvailableTeachings(teachings || []);
+        }
+      } catch (e) {
+        // ignore transient errors
+      }
     }, 1000);
-    return () => clearInterval(t);
-  }, [selectedMentor, player, world, story, ui, getAvailableTeachingsForMentor]);
+
+    return () => { mounted = false; clearInterval(iv); };
+    // Note: intentionally not including deep objects (player, world, story, ui) in deps to avoid frequent reloads.
+  }, [selectedMentor, getAvailableTeachingsForMentor]);
 
   const attemptTeaching = async (teachingId: string): Promise<void> => {
     if (!mentorTeachingSystem || !player) return;
@@ -328,16 +348,9 @@ const MentorTeachingPanel: React.FC = () => {
                     marginBottom: '10px'
                   }}>
                     <h4 style={{ margin: 0, color: '#333' }}>{teaching.title}</h4>
-                    <span style={{
-                      padding: '4px 8px',
-                      borderRadius: '4px',
-                      fontSize: '12px',
-                      fontWeight: 'bold',
-                      color: 'white',
-                      backgroundColor: getDifficultyColor(teaching.challenge?.difficulty || 'unknown')
-                    }}>
+                    <SmallChip style={{ borderRadius: 4, fontSize: '12px', fontWeight: 'bold', color: 'white', background: getDifficultyColor(teaching.challenge?.difficulty || 'unknown') }}>
                       {(teaching.challenge?.difficulty || 'UNKNOWN').toUpperCase()}
-                    </span>
+                    </SmallChip>
                   </div>
                   
                   <p style={{ 
@@ -404,13 +417,15 @@ const MentorTeachingPanel: React.FC = () => {
                       transition: 'all 0.2s ease'
                     }}
                   >
-                    {mentorCooldown
-                      ? `On cooldown (${cooldownRemaining} ticks)`
-                      : isLoading
-                        ? 'Processing...'
-                        : canAttempt
-                          ? 'Attempt Teaching'
-                          : 'Prerequisites Not Met'}
+                    <SmallChip style={{ display: 'inline-block', width: '100%', background: 'transparent', color: 'inherit', fontWeight: 'bold', padding: 0 }}>
+                      {mentorCooldown
+                        ? `On cooldown (${cooldownRemaining} ticks)`
+                        : isLoading
+                          ? 'Processing...'
+                          : canAttempt
+                            ? 'Attempt Teaching'
+                            : 'Prerequisites Not Met'}
+                    </SmallChip>
                   </button>
                 </div>
               );

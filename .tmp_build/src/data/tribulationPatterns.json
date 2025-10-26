@@ -1,0 +1,433 @@
+{
+    "patterns": {
+        "heavenly_thunder": {
+            "name": "Heavenly Thunder Tribulation",
+            "description": "Classic heavenly tribulation with escalating thunder strikes",
+            "waves": [
+                {
+                    "wave": 1,
+                    "damage": 100,
+                    "type": "lightning",
+                    "description": "Initial thunderclap that tests foundation",
+                    "effects": {
+                        "damage": 100,
+                        "mentalStress": 10,
+                        "daoDeviation": 5
+                    },
+                    "rewards": {
+                        "daoInsight": 5,
+                        "mentalFortitude": 2,
+                        "tribulationResistance": 1
+                    }
+                },
+                {
+                    "wave": 2,
+                    "damage": 250,
+                    "type": "lightning",
+                    "description": "Dual thunder strikes with increased intensity",
+                    "effects": {
+                        "damage": 250,
+                        "mentalStress": 25,
+                        "daoDeviation": 10
+                    },
+                    "rewards": {
+                        "daoInsight": 10,
+                        "mentalFortitude": 5,
+                        "tribulationResistance": 2
+                    }
+                },
+                {
+                    "wave": 3,
+                    "damage": 500,
+                    "type": "lightning",
+                    "description": "Heavenly thunder net that envelops the area",
+                    "effects": {
+                        "damage": 500,
+                        "mentalStress": 50,
+                        "daoDeviation": 20
+                    },
+                    "rewards": {
+                        "daoInsight": 20,
+                        "mentalFortitude": 10,
+                        "tribulationResistance": 3
+                    }
+                }
+            ],
+            "curses": ["paralysis", "deafening_roar"],
+            "completionBonus": {
+                "lightningAffinity": 5,
+                "thunderResistance": 10
+            }
+        },
+        "heart_demon_assault": {
+            "name": "Heart Demon Assault",
+            "description": "Inner demons manifest as external threats",
+            "waves": [
+                {
+                    "wave": 1,
+                    "damage": 50,
+                    "type": "mental",
+                    "description": "Whispers of doubt begin to manifest",
+                    "effects": {
+                        "damage": 50,
+                        "mentalStress": 100,
+                        "daoDeviation": 25
+                    },
+                    "rewards": {
+                        "daoInsight": 15,
+                        "mentalFortitude": 20,
+                        "tribulationResistance": 2
+                    }
+                },
+                {
+                    "wave": 2,
+                    "damage": 150,
+                    "type": "mental",
+                    "description": "Demons take physical form, attacking weaknesses",
+                    "effects": {
+                        "damage": 150,
+                        "mentalStress": 200,
+                        "daoDeviation": 50
+                    },
+                    "rewards": {
+                        "daoInsight": 30,
+                        "mentalFortitude": 30,
+                        "tribulationResistance": 4
+                    }
+                },
+                {
+                    "wave": 3,
+                    "damage": 300,
+                    "type": "mental",
+                    "description": "Heart demon horde overwhelms the mind",
+                    "effects": {
+                        "damage": 300,
+                        "mentalStress": 400,
+                        "daoDeviation": 100
+                    },
+                    "rewards": {
+                        "daoInsight": 50,
+                        "mentalFortitude": 50,
+                        "tribulationResistance": 6
+                    }
+                }
+            ],
+            "curses": ["hallucinations", "self_doubt"],
+            "completionBonus": {
+                "mentalFortitude": 25,
+                "heartDemonResistance": 15
+            }
+        },
+        "karmic_retribution": {
+            "name": "Karmic Retribution",
+            "description": "Past actions return as tribulation forces",
+            "waves": [
+                {
+                    "wave": 1,
+                    "damage": 75,
+                    "type": "karmic",
+                    "description": "Minor karmic debts manifest as shadowy figures",
+                    "effects": {
+                        "damage": 75,
+                        "mentalStress": 30,
+                        "daoDeviation": 15
+                    },
+                    "rewards": {
+                        "daoInsight": 8,
+                        "mentalFortitude": 8,
+                        "tribulationResistance": 1
+                    }
+                },
+                {
+                    "wave": 2,
+                    "damage": 200,
+                    "type": "karmic",
+                    "description": "Karmic chains bind and constrict",
+                    "effects": {
+                        "damage": 200,
+                        "mentalStress": 75,
+                        "daoDeviation": 35
+                    },
+                    "rewards": {
+                        "daoInsight": 18,
+                        "mentalFortitude": 15,
+                        "tribulationResistance": 3
+                    }
+                },
+                {
+                    "wave": 3,
+                    "damage": 400,
+                    "type": "karmic",
+                    "description": "Full karmic reckoning unleashes all past transgressions",
+                    "effects": {
+                        "damage": 400,
+                        "mentalStress": 150,
+                        "daoDeviation": 75
+                    },
+                    "rewards": {
+                        "daoInsight": 35,
+                        "mentalFortitude": 25,
+                        "tribulationResistance": 5
+                    }
+                }
+            ],
+            "curses": ["karmic_debt", "regret"],
+            "completionBonus": {
+                "karmicAffinity": 10,
+                "karmicResistance": 20
+            }
+        },
+        "dao_chaos_storm": {
+            "name": "Dao Chaos Storm",
+            "description": "Chaotic dao energies create unpredictable tribulation",
+            "waves": [
+                {
+                    "wave": 1,
+                    "damage": 120,
+                    "type": "chaos",
+                    "description": "Chaotic energies begin to swirl and condense",
+                    "effects": {
+                        "damage": 120,
+                        "mentalStress": 40,
+                        "daoDeviation": 30
+                    },
+                    "rewards": {
+                        "daoInsight": 12,
+                        "mentalFortitude": 10,
+                        "tribulationResistance": 2
+                    }
+                },
+                {
+                    "wave": 2,
+                    "damage": 300,
+                    "type": "chaos",
+                    "description": "Dao storm intensifies with elemental chaos",
+                    "effects": {
+                        "damage": 300,
+                        "mentalStress": 100,
+                        "daoDeviation": 60
+                    },
+                    "rewards": {
+                        "daoInsight": 25,
+                        "mentalFortitude": 20,
+                        "tribulationResistance": 4
+                    }
+                },
+                {
+                    "wave": 3,
+                    "damage": 600,
+                    "type": "chaos",
+                    "description": "Ultimate chaos - all dao principles clash violently",
+                    "effects": {
+                        "damage": 600,
+                        "mentalStress": 200,
+                        "daoDeviation": 120
+                    },
+                    "rewards": {
+                        "daoInsight": 45,
+                        "mentalFortitude": 35,
+                        "tribulationResistance": 7
+                    }
+                }
+            ],
+            "curses": ["dao_instability", "elemental_chaos"],
+            "completionBonus": {
+                "daoMastery": 15,
+                "chaosResistance": 25
+            }
+        },
+        "bloodline_awakening": {
+            "name": "Bloodline Awakening Tribulation",
+            "description": "Ancient bloodline powers surge during breakthrough",
+            "waves": [
+                {
+                    "wave": 1,
+                    "damage": 80,
+                    "type": "bloodline",
+                    "description": "Bloodline energies begin to stir and awaken",
+                    "effects": {
+                        "damage": 80,
+                        "mentalStress": 20,
+                        "daoDeviation": 10
+                    },
+                    "rewards": {
+                        "daoInsight": 6,
+                        "mentalFortitude": 5,
+                        "tribulationResistance": 1
+                    }
+                },
+                {
+                    "wave": 2,
+                    "damage": 220,
+                    "type": "bloodline",
+                    "description": "Bloodline visions and ancestral memories flood the mind",
+                    "effects": {
+                        "damage": 220,
+                        "mentalStress": 60,
+                        "daoDeviation": 25
+                    },
+                    "rewards": {
+                        "daoInsight": 15,
+                        "mentalFortitude": 12,
+                        "tribulationResistance": 2
+                    }
+                },
+                {
+                    "wave": 3,
+                    "damage": 450,
+                    "type": "bloodline",
+                    "description": "Full bloodline awakening - ancestral powers manifest",
+                    "effects": {
+                        "damage": 450,
+                        "mentalStress": 120,
+                        "daoDeviation": 50
+                    },
+                    "rewards": {
+                        "daoInsight": 30,
+                        "mentalFortitude": 20,
+                        "tribulationResistance": 4
+                    }
+                }
+            ],
+            "curses": ["ancestral_visions", "bloodline_instability"],
+            "completionBonus": {
+                "bloodlinePurity": 10,
+                "ancestralPower": 15
+            }
+        }
+    },
+    "curses": {
+        "paralysis": {
+            "name": "Thunder Paralysis",
+            "description": "Lightning damage has chance to paralyze for 3 turns",
+            "effect": "paralyze",
+            "duration": 3,
+            "chance": 0.25
+        },
+        "deafening_roar": {
+            "name": "Deafening Thunder",
+            "description": "Thunder strikes reduce hearing, lowering perception",
+            "effect": "debuff_perception",
+            "duration": 10,
+            "strength": -20
+        },
+        "hallucinations": {
+            "name": "Demonic Hallucinations",
+            "description": "Mental attacks cause hallucinations, reducing accuracy",
+            "effect": "debuff_accuracy",
+            "duration": 5,
+            "strength": -15
+        },
+        "self_doubt": {
+            "name": "Self Doubt",
+            "description": "Inner demons plant seeds of doubt, reducing confidence",
+            "effect": "debuff_morale",
+            "duration": 15,
+            "strength": -25
+        },
+        "karmic_debt": {
+            "name": "Karmic Debt",
+            "description": "Past actions create lingering karmic wounds",
+            "effect": "damage_over_time",
+            "duration": 20,
+            "damage": 10
+        },
+        "regret": {
+            "name": "Endless Regret",
+            "description": "Regret saps willpower and cultivation speed",
+            "effect": "debuff_cultivation",
+            "duration": 30,
+            "strength": -30
+        },
+        "dao_instability": {
+            "name": "Dao Instability",
+            "description": "Chaotic dao energies cause random stat fluctuations",
+            "effect": "random_stat_changes",
+            "duration": 10,
+            "variance": 0.2
+        },
+        "elemental_chaos": {
+            "name": "Elemental Chaos",
+            "description": "Tribulation infuses body with conflicting elemental energies",
+            "effect": "elemental_imbalance",
+            "duration": 25,
+            "damage": 15
+        },
+        "ancestral_visions": {
+            "name": "Ancestral Visions",
+            "description": "Overwhelming ancestral memories disrupt focus",
+            "effect": "debuff_concentration",
+            "duration": 8,
+            "strength": -35
+        },
+        "bloodline_instability": {
+            "name": "Bloodline Instability",
+            "description": "Unstable bloodline powers cause internal conflict",
+            "effect": "internal_conflict",
+            "duration": 12,
+            "damage": 20
+        }
+    },
+    "modifiers": {
+        "realm_scaling": {
+            "mortal": 0.5,
+            "qi_refinement": 0.7,
+            "foundation_establishment": 1.0,
+            "body_integration": 1.3,
+            "mahayana": 1.6,
+            "golden_immortal": 2.0,
+            "taiyi_golden_immortal": 2.5,
+            "daluo_golden_immortal": 3.0,
+            "zenith_immortal": 3.2,
+            "freedom_zenith_immortal": 3.4,
+            "soul_transformation": 3.5,
+            "void_refinement": 4.0,
+            "saint": 4.5,
+            "primordial_saint": 5.0,
+            "dao": 6.0,
+            "eternal_dao_sovereign": 7.0,
+            "infinite_dao_master": 8.0,
+            "core_formation": 9.0,
+            "nascent_soul": 10.0,
+            "true_immortal": 12.0,
+            "quasi_saint": 15.0,
+            "dao_ancestor": 18.0,
+            "dimension_lord": 22.0,
+            "chaos_saint": 27.0,
+            "supreme_dao_origin": 33.0,
+            "void_transcendent": 40.0,
+            "reality_weaver": 50.0,
+            "multiverse_sovereign": 65.0,
+            "omniversal_emperor": 85.0,
+            "absolute_existence": 110.0,
+            "primordial_chaos_lord": 145.0,
+            "eternal_dao_emperor": 190.0
+        },
+        "bloodline_multipliers": {
+            "none": 1.0,
+            "mortal": 1.1,
+            "earth": 1.2,
+            "heaven": 1.4,
+            "immortal": 1.6,
+            "divine": 1.8,
+            "primordial": 2.0,
+            "chaos": 2.2,
+            "creation": 2.5,
+            "destruction": 2.8,
+            "transcendent": 3.2
+        },
+        "physique_multipliers": {
+            "none": 1.0,
+            "mortal": 1.05,
+            "earth": 1.1,
+            "heaven": 1.2,
+            "immortal": 1.3,
+            "divine": 1.4,
+            "primordial": 1.5,
+            "chaos": 1.6,
+            "creation": 1.7,
+            "destruction": 1.8,
+            "transcendent": 2.0
+        }
+    }
+}

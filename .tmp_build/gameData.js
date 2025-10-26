@@ -5,19 +5,18 @@ exports.getRealmById = getRealmById;
 exports.getRealmByName = getRealmByName;
 exports.getTalentById = getTalentById;
 exports.assignRandomTalent = assignRandomTalent;
-exports.REALM_DATA = [
-    { id: 0, name: 'Mortal', lifespan: 80, breakthroughQi: 100 },
-    { id: 1, name: 'Qi Refinement', lifespan: 150, breakthroughQi: 1000 },
-    { id: 2, name: 'Foundation Establishment', lifespan: 300, breakthroughQi: 10000 },
-    { id: 3, name: 'Golden Core', lifespan: 1000, breakthroughQi: 100000 },
-    { id: 4, name: 'Nascent Soul', lifespan: 5000, breakthroughQi: 1000000 },
-    { id: 5, name: 'Soul Formation', lifespan: 25000, breakthroughQi: 10000000 },
-    { id: 6, name: 'Void Amalgamation', lifespan: 100000, breakthroughQi: 100000000 },
-    { id: 7, name: 'Body Integration', lifespan: 500000, breakthroughQi: 500000000 },
-    { id: 8, name: 'Mahayana', lifespan: 1000000, breakthroughQi: 1000000000 },
-    { id: 9, name: 'Loose Immortal', lifespan: 10000000, breakthroughQi: Infinity },
-    // Further realms can be added here, e.g., Heavenly Immortal, True Immortal, etc.
-];
+const cultivationRealms_1 = require("./src/data/cultivationRealms");
+// Build a stable REALM_DATA array from the authoritative cultivationRealms export.
+// The ordering is taken from REALM_ORDER to ensure numeric ids remain stable.
+exports.REALM_DATA = cultivationRealms_1.REALM_ORDER.map((realmId, index) => {
+    const entry = cultivationRealms_1.CULTIVATION_REALMS[realmId];
+    return {
+        id: index,
+        name: entry?.name || realmId.replace(/_/g, ' '),
+        lifespan: entry?.lifespanBonus || 0,
+        breakthroughQi: entry?.qiRequirement ?? 0
+    };
+});
 /**
  * A helper function to get realm data by its ID.
  * @param realmId The ID of the realm.

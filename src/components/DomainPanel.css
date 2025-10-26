@@ -1,0 +1,47 @@
+:root{
+  --panel-bg: rgba(20,20,20,0.6);
+  --card-bg: rgba(30,30,30,0.6);
+  --accent: #d4af37;
+  --muted: rgba(255,255,255,0.06);
+}
+.domain-panel{font-family:var(--font,-apple-system,Segoe UI,Roboto);color:var(--primary,#fff)}
+.domain-panel h3{margin:0 0 8px 0}
+.domain-overview{display:flex;gap:16px;align-items:flex-start;margin-bottom:12px}
+.domain-header{min-width:220px}
+.domain-xp{font-size:13px;margin-top:6px}
+.xp-bar{width:160px;height:10px;background:var(--muted);border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+.xp-fill{height:100%;background:linear-gradient(90deg,#ffd36b,#d4af37);transition:width 350ms ease}
+.domain-resources{flex:1}
+.resource-grid{display:flex;gap:8px;flex-wrap:wrap}
+.resource-item{background:var(--card-bg);padding:8px;border-radius:8px;min-width:100px;display:flex;flex-direction:column;align-items:flex-start;border:1px solid rgba(255,255,255,0.03)}
+.resource-icon{font-size:20px}
+.resource-value{font-weight:600;margin-top:4px}
+.resource-income{font-size:12px;color:#bfbfbf}
+.territories-section{margin-top:8px}
+.territories-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.territory-card{background:var(--card-bg);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);cursor:pointer}
+.territory-card.selected{outline:2px solid rgba(212,175,55,0.12)}
+.territory-header{display:flex;justify-content:space-between;align-items:center}
+.rarity-badge{font-size:12px;padding:2px 6px;border-radius:6px;background:rgba(0,0,0,0.2)}
+.territory-info{margin-top:8px}
+.info-item{display:flex;justify-content:space-between;margin-bottom:6px}
+.influence-breakdown{display:flex;gap:8px;flex-wrap:wrap}
+.influence-item{background:rgba(0,0,0,0.12);padding:4px 6px;border-radius:6px;font-size:12px}
+.influence-item .positive{color:#4caf50}
+.influence-item .negative{color:#e57373}
+.territory-actions{display:flex;gap:8px;margin-top:8px}
+.territory-actions button{padding:6px 8px;border-radius:6px;background:transparent;border:1px solid rgba(212,175,55,0.12);color:var(--primary);cursor:pointer}
+.factions-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.faction-card{background:var(--card-bg);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);cursor:pointer}
+.faction-header{display:flex;justify-content:space-between;align-items:center}
+.relationship-badge{font-size:12px;padding:2px 6px;border-radius:6px;background:rgba(0,0,0,0.12)}
+.faction-actions{display:flex;gap:8px;margin-top:8px}
+.faction-actions button{padding:6px 8px;border-radius:6px;background:transparent;border:1px solid rgba(212,175,55,0.12);color:var(--primary);cursor:pointer}
+.formation-section{margin-top:12px;padding:10px;background:var(--panel-bg);border-radius:8px}
+.domain-actions{margin-top:12px}
+.action-buttons{display:flex;gap:8px}
+.action-buttons button{padding:6px 8px;border-radius:6px;border:1px solid rgba(212,175,55,0.12);background:transparent;color:var(--primary);cursor:pointer}
+@media (max-width:800px){
+  .domain-overview{flex-direction:column}
+  .territories-section{grid-template-columns:1fr}
+}

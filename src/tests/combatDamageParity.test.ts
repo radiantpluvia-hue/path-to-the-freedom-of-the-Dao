@@ -3,6 +3,7 @@ import { CombatSystem } from '../systems/CombatSystem';
 // This test ensures the realm-gap damage adjustment path remains functional after migrating the
 // offensive prowess helper. We construct attacker/target with identical stats to keep damage stable.
 
+/* eslint @typescript-eslint/no-non-null-assertion: "off" */
 describe('CombatSystem damage realm-gap parity', () => {
   test('damage computation remains consistent for simple attack', () => {
     const attacker = {

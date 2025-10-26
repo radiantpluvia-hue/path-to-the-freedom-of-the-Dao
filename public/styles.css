@@ -112,7 +112,6 @@ input::placeholder {
   border-radius: var(--radius-lg);
   padding: 2rem;
   box-shadow: var(--shadow-glow);
-  backdrop-filter: blur(10px);
 }
 
 /* Utility Classes */
@@ -183,3 +182,84 @@ input::placeholder {
     font-size: 14px;
   }
 }
+
+/* Main grid layout for the game interface */
+
+/* Keep a neutral main-grid helper (not enforced) but avoid forcing full-viewport width
+   which previously caused horizontal overflow in some layouts. The component now sets
+   the grid inline; these are just safe defaults. */
+.main-grid {
+  display: grid;
+  /* Three-column layout tuned to match the user's sketch: left and right
+     sidebars are narrower (~280px) and the center is constrained to ~520px.
+     This produces a deterministic layout that won't overlap. */
+  grid-template-columns: minmax(220px, 280px) 1fr minmax(240px, 280px);
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  align-items: start;
+  width: 100%;
+  max-width: 1120px; /* sum of column caps (280 + 520 + 280) + gaps */
+  margin: 0 auto; /* center on large viewports */
+}
+
+/* Ensure overlays/modals and other non-column direct children don't occupy
+   the grid's column slots — force them to span the full width so the
+   three-column layout remains stable and non-overlapping. */
+.main-grid > :not(.left-sidebar):not(.main-content):not(.right-sidebar) {
+  grid-column: 1 / -1;
+}
+
+/* Responsive fallbacks: collapse right column on medium screens, then to single
+   column on small screens so cards stack vertically and never overlap. */
+@media (max-width: 1100px) {
+  .main-grid {
+    grid-template-columns: minmax(220px, 320px) 1fr; /* hide right column visually by removing it from grid */
+  }
+  .right-sidebar { display: none; }
+}
+
+@media (max-width: 700px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+    padding: 12px;
+    gap: 12px;
+  }
+  .left-sidebar, .right-sidebar { display: none; }
+}
+
+/* Per-column helpers remain available; component inline styles control exact spacing. */
+.left-sidebar, .main-content, .right-sidebar {
+  min-width: 0; /* prevents overflow inside grid */
+  overflow: hidden; /* or auto, if you want scrollbars */
+  box-sizing: border-box;
+}
+
+/* Safety: ensure cards never exceed their container width (prevent overlap) */
+.main-grid .card,
+.left-sidebar .card,
+.main-content .card,
+.right-sidebar .card,
+.card {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Numeric column caps to guarantee components don't overlap.
+   These are explicit pixel bounds so the layout is deterministic. */
+.main-grid > .left-sidebar {
+  max-width: 280px;
+  width: 100%;
+}
+.main-grid > .right-sidebar {
+  max-width: 280px;
+  width: 100%;
+}
+
+.main-grid > .main-content {
+  max-width: 520px;
+  width: 100%;
+}
+
+/* If specific card margins were previously added to nudge cards, prefer
+   editing the column gap or grid template instead of per-card margins. */

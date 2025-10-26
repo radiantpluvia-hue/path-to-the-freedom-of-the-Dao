@@ -1,0 +1,776 @@
+[
+  {
+    "id": "mentor_beggars_chief.quest01",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Broken Cup Story",
+    "description": "The chief tells a small tale about a broken cup that taught him thrift and wit.",
+    "choices": [
+      {
+        "id": "listen",
+        "text": "Listen and nod along.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 6
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest01.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "leave",
+        "text": "Thank him and leave.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest01.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest02",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Shared Stew",
+    "description": "You help ladle stew for the group; the chief watches how you share.",
+    "choices": [
+      {
+        "id": "help",
+        "text": "Help serve the stew.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 8
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest02.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "refuse",
+        "text": "Politely refuse.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest02.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest03",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Finger Trick",
+    "description": "The chief shows a sleight-of-hand trick and offers to teach a simple misdirection.",
+    "choices": [
+      {
+        "id": "learn",
+        "text": "Learn the trick.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 7
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest03.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "decline",
+        "text": "Decline politely.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest03.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest04",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Patchwork Shawl",
+    "description": "An old shawl needs mending; the chief invites you to stitch and hear his advice.",
+    "choices": [
+      {
+        "id": "stitch",
+        "text": "Help mend the shawl.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 5
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest04.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "watch",
+        "text": "Watch and listen.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest04.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_beggars_chief.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_beggars_chief",
+    "id": "mentor_beggars_chief.quest05",
+    "title": "Nomad Trap",
+    "description": "The Chief demonstrates a simple trap and the network of scouts who use it — a lesson in preparation and community tactics.",
+    "choices": [
+      {
+        "id": "learn",
+        "label": "Learn to set the trap",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_beggars_chief",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "beggars_trick_note_05"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_beggars_chief.quest05.completed"
+              ]
+            }
+          }
+        ],
+        "text": "learn"
+      },
+      {
+        "id": "decline",
+        "label": "Decline politely",
+        "effects": [
+          {
+            "add_event_log": "You decline and the Chief shrugs, already moving to the next story."
+          }
+        ],
+        "text": "decline"
+      }
+    ],
+    "requiresWorldFlag": "mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest05",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Sneak Path Practice",
+    "description": "A short stealth exercise to move quietly between tents.",
+    "choices": [
+      {
+        "id": "practice",
+        "text": "Practice moving quietly.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 8
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest05.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "opt_out",
+        "text": "Opt out of the exercise.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest05.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest06",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Map of Hidden Routes",
+    "description": "He unfurls a crude map and offers to show you unseen routes; knowledge for those who care.",
+    "choices": [
+      {
+        "id": "follow",
+        "text": "Follow him and study the routes.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 9
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest06.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "decline",
+        "text": "Decline politely.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest06.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_beggars_chief.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_beggars_chief",
+    "id": "mentor_beggars_chief.quest06",
+    "title": "Network Building",
+    "description": "He outlines how favors, food, and stories bind people; you practice a small act of service to learn the lesson.",
+    "choices": [
+      {
+        "id": "help",
+        "label": "Perform the service",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_beggars_chief",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "beggars_trick_note_06"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_beggars_chief.quest06.completed"
+              ]
+            }
+          }
+        ],
+        "text": "help"
+      },
+      {
+        "id": "watch",
+        "label": "Watch",
+        "effects": [
+          {
+            "add_event_log": "You watch as the Chief weaves favors into obligations and back into protection."
+          }
+        ],
+        "text": "watch"
+      }
+    ],
+    "requiresWorldFlag": "mentor_beggars_chief.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_beggars_chief",
+    "id": "mentor_beggars_chief.quest07",
+    "title": "Ambush Basics",
+    "description": "A compact lesson in silent positioning and timing; the Chief teaches how to make noise somewhere else while the real work happens.",
+    "choices": [
+      {
+        "id": "participate",
+        "label": "Participate in the drill",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_beggars_chief",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "beggars_trick_note_07"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_beggars_chief.quest07.completed"
+              ]
+            }
+          }
+        ],
+        "text": "participate"
+      },
+      {
+        "id": "sit_out",
+        "label": "Sit it out",
+        "effects": [
+          {
+            "add_event_log": "You sit out the ambush drill, taking in the Chief's sly grin."
+          }
+        ],
+        "text": "sit_out"
+      }
+    ],
+    "requiresWorldFlag": "mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest07",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Ring Story Challenge",
+    "description": "He sets a small challenge — tell a concise true story to earn a ring as token.",
+    "choices": [
+      {
+        "id": "tell",
+        "text": "Tell a true story.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 7
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest07.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "refuse",
+        "text": "Refuse the challenge.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest07.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_beggars_chief.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_beggars_chief",
+    "id": "mentor_beggars_chief.quest08",
+    "title": "Improvised Arsenal",
+    "description": "The Chief shows how a simple stick and string can become a weapon — ingenuity more than steel matters here.",
+    "choices": [
+      {
+        "id": "craft",
+        "label": "Craft an improvised tool",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_beggars_chief",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "beggars_trick_note_08"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_beggars_chief.quest08.completed"
+              ]
+            }
+          }
+        ],
+        "text": "craft"
+      },
+      {
+        "id": "refuse",
+        "label": "Refuse the tool",
+        "effects": [
+          {
+            "add_event_log": "You refuse the improvised tool, preferring cleaner weapons, and the Chief laughs."
+          }
+        ],
+        "text": "refuse"
+      }
+    ],
+    "requiresWorldFlag": "mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest08",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Sharpen Thoughts",
+    "description": "A casual riddle and the chief observes how you think under pressure.",
+    "choices": [
+      {
+        "id": "solve",
+        "text": "Try to solve the riddle.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 6
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest08.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "pass",
+        "text": "Pass on the riddle.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest08.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest09",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Night Watch",
+    "description": "Take a turn on watch and show your reliability to the chief.",
+    "choices": [
+      {
+        "id": "take_watch",
+        "text": "Take the watch.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 8
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest09.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "skip",
+        "text": "Skip the watch.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest09.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest10",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Last Cookie Trade",
+    "description": "A small barter for a treat — the chief tests your fairness in trade.",
+    "choices": [
+      {
+        "id": "fair",
+        "text": "Trade fairly.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 9
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest10.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "cheat",
+        "text": "Try to cheat the trade.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest10.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest11",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Shared Spoon Oath",
+    "description": "The chief asks you to share a single spoon between two bowls as a small test of trust and patience.",
+    "choices": [
+      {
+        "id": "share",
+        "text": "Share the spoon without complaint.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 8
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest11.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "insist",
+        "text": "Insist on your own bowl.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest11.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest12",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Streetwise Lesson",
+    "description": "He gives a short lesson on reading faces and crowds — small skills for staying safe and finding opportunity.",
+    "choices": [
+      {
+        "id": "learn",
+        "text": "Listen and practice the lesson.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 9
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest12.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "dismiss",
+        "text": "Dismiss it as trivial.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest12.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest13",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Traveling Story Trade",
+    "description": "He offers a small trinket in exchange for a travel tip — a brief test of generosity and knowledge.",
+    "choices": [
+      {
+        "id": "trade",
+        "text": "Share a helpful travel tip and accept the trinket.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 10
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest13.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "refuse",
+        "text": "Refuse the trade.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest13.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_beggars_chief.disciple"
+  },
+  {
+    "id": "mentor_beggars_chief.quest14",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_beggars_chief",
+    "title": "Parting Smoke and Luck",
+    "description": "Before you leave the camp the chief offers a pinch of ceremonial smoke and a short word of luck.",
+    "choices": [
+      {
+        "id": "accept",
+        "text": "Accept the smoke and bow.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_beggars_chief",
+            "amount": 12
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest14.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "decline",
+        "text": "Decline and thank him.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_beggars_chief.quest14.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_beggars_chief.disciple"
+  }
+]

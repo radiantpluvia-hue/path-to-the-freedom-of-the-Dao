@@ -1,0 +1,21 @@
+{
+  "merchant_deal": {
+    "id": "merchant_deal",
+    "title": "A Shady Merchant",
+    "body": "The merchant offers a mysterious trinket for sale.",
+    "choices": [
+      { "id": "buy_trinket", "text": "Buy the trinket (10 yuan)", "consequence": "reward", "reward": { "item": { "id": "trinket_01", "name": "Mysterious Trinket" } }, "requires": { "minYuan": 10 } },
+      { "id": "refuse_trinket", "text": "Refuse politely", "consequence": "escape" }
+    ]
+  },
+  "guard_challenge": {
+    "id": "guard_challenge",
+    "title": "A Stern Guard",
+    "body": "A city guard blocks your path and demands proof of business.",
+    "choices": [
+      { "id": "show_permit", "text": "Show permit", "consequence": "peace", "requires": { "itemId": "permit_pass" } },
+      { "id": "bribe_guard", "text": "Bribe the guard (5 yuan)", "consequence": "reward", "reward": { "yuan": 5 } },
+      { "id": "fight_guard", "text": "Refuse and fight", "consequence": "combat" }
+    ]
+  }
+}

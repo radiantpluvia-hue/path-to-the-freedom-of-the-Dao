@@ -31,7 +31,14 @@ const fn_act1_tutorial_welcome = (state) => {
     s.world.flags.tutorial_welcome_seen = true;
     const existingManuals = s.player.manuals;
     if (!existingManuals.find((m) => m && m.id === 'intro_meditation')) {
-        existingManuals.push({ id: 'intro_meditation', name: 'Intro to Meditation', type: 'dao', rarity: 'common' });
+        existingManuals.push({
+            id: 'intro_meditation',
+            name: 'Intro to Meditation',
+            type: 'dao',
+            rarity: "H",
+            description: 'Basic meditation techniques to calm the mind and sense spiritual qi.',
+            effects: { cultivationSpeed: 1.05, qiGathering: 5 }
+        });
     }
     // record event run
     (s.__meta || (s.__meta = {})).eventsRan = (s.__meta.eventsRan || []);

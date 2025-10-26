@@ -36,9 +36,21 @@ export default defineConfig(({ mode }) => {
         // Code split heavy panels into separate chunks
         output: {
           manualChunks(id) {
+            // Keep existing panel splits
             if (id.includes('/components/game/MarketPanel')) return 'market'
             if (id.includes('/components/game/SectJoiningPanel')) return 'sect'
             if (id.includes('/components') && id.toLowerCase().includes('rival')) return 'rival'
+
+            // Split generated assets (passives, abilities) into their own chunk
+            if (id.includes('generated')) return 'generated'
+
+            // Large systems and registries
+            if (id.includes('/systems/MarketSystem')) return 'market-system'
+            if (id.includes('/systems/relicRegistry')) return 'relic-registry'
+
+            // Mentor runtime / heavy runtime registries
+            if (id.toLowerCase().includes('mentors') || id.toLowerCase().includes('mentors_runtime')) return 'mentors-runtime'
+
             return undefined
           },
         },
@@ -57,6 +69,11 @@ export default defineConfig(({ mode }) => {
       cssCodeSplit: true,
       assetsInlineLimit: 0,
       reportCompressedSize: true,
+      // Raise threshold slightly: a few chunks hover just above 500k after
+      // minification due to generated data. We've split generated assets, so
+      // a 700k warning limit avoids noisy alerts while keeping attention on
+      // genuinely large bundles.
+      chunkSizeWarningLimit: 700,
       target: 'es2019',
     },
     esbuild: {

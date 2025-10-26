@@ -3,6 +3,7 @@ import { useGameStore, Buff } from '@/store/useGameStore';
 import '../styles/buffPanel.css';
 import statIcon from '@/assets/icons/stat.svg';
 import defaultIcon from '@/assets/icons/default.svg';
+import RichTooltip from '@/components/ui/RichTooltip';
 
 const Icon = ({ type }: { type: string }) => {
   const src = type === 'stat' ? statIcon : defaultIcon;
@@ -12,7 +13,7 @@ const Icon = ({ type }: { type: string }) => {
 export const BuffPanel: React.FC = () => {
   const player = useGameStore(state => state.player);
   const removeBuff = useGameStore(state => state.removeBuff);
-  const [tick, setTick] = useState(() => useGameStore.getState().world.tick || 0);
+  const [_tick, setTick] = useState(() => useGameStore.getState().world.tick || 0);
 
   useEffect(() => {
     // subscribe to store changes and detect tick changes (typings vary by zustand version)
@@ -24,7 +25,12 @@ export const BuffPanel: React.FC = () => {
     return () => unsub();
   }, []);
 
-  if (!player.activeBuffs || player.activeBuffs.length === 0) {
+  // Explicitly reference _tick to indicate it's intentionally unused (used indirectly by effect)
+  void _tick;
+
+  const hasBuffs = player.activeBuffs && player.activeBuffs.length > 0;
+
+  if (!hasBuffs) {
     return null;
   }
 
@@ -36,13 +42,15 @@ export const BuffPanel: React.FC = () => {
   };
 
   return (
-    <aside className="buff-panel" aria-label="Active buffs">
-      <div className="buff-panel__header">
-        <h4 style={{ margin: 0, fontSize: '1rem' }}>Active Buffs</h4>
-        <div style={{ fontSize: '0.85rem', color: 'var(--muted)' }}>{player.activeBuffs.length}</div>
-      </div>
+    <aside className="buff-panel" aria-label="Active buffs and skills">
+      {hasBuffs && (
+        <>
+          <div className="buff-panel__header">
+            <h4 style={{ margin: 0, fontSize: '1rem' }}>Active Buffs</h4>
+            <div style={{ fontSize: '0.85rem', color: 'var(--muted)' }}>{player.activeBuffs.length}</div>
+          </div>
 
-      {player.activeBuffs.map((b: Buff) => {
+          {player.activeBuffs.map((b: Buff) => {
         // Detect percent-based stat effects for chart
         const percentStatKey = b.effects?.stats && Object.entries(b.effects.stats).find(([, v]) => typeof v === 'object' && (v as any).percent);
         const percentValue = percentStatKey ? ((percentStatKey[1] as any).percent as number) : 0;
@@ -52,17 +60,16 @@ export const BuffPanel: React.FC = () => {
         const dir = document.documentElement.getAttribute('dir') === 'rtl' ? 'rtl' : 'ltr';
 
         return (
-          <div
-            key={b.id}
-            role="button"
-            tabIndex={0}
-            aria-pressed={false}
-            onKeyDown={(e) => onKey(e, b.id)}
-            onClick={() => removeBuff(b.id)}
-            title={`${b.name}: ${b.description}`}
-            className={`buff-card ${b.expiring ? 'expiring' : ''}`}
-            dir={dir}
-          >
+          <RichTooltip key={b.id} content={`${b.name}: ${b.description}`}>
+            <div
+              role="button"
+              tabIndex={0}
+              aria-pressed={false}
+              onKeyDown={(e) => onKey(e, b.id)}
+              onClick={() => removeBuff(b.id)}
+              className={`buff-card ${b.expiring ? 'expiring' : ''}`}
+              dir={dir}
+            >
             <div className="buff-card__icon">
               <Icon type={b.category || 'default'} />
             </div>
@@ -91,7 +98,7 @@ export const BuffPanel: React.FC = () => {
                 </div>
               )}
 
-              {/* Progress for remaining duration (animated) */}
+              {/* Progress for remaining duration (animated) */} 
               {initial > 0 && (
                 <div>
                   <div className="buff-chart" aria-hidden>
@@ -103,7 +110,7 @@ export const BuffPanel: React.FC = () => {
             </div>
 
             <div>
-              <button
+              <button type="button"
                 className="buff-card__remove"
                 aria-label={`Remove buff ${b.name}`}
                 onClick={(e) => { e.stopPropagation(); removeBuff(b.id); }}
@@ -113,8 +120,13 @@ export const BuffPanel: React.FC = () => {
               </button>
             </div>
           </div>
+            </RichTooltip>
         );
-      })}
+          })}
+        </>
+      )}
+
+      {/* Skills UI removed - legacy tab */}
     </aside>
   );
 };

@@ -1,0 +1,17 @@
+[
+  { "id": "it_seed_01", "name": "Copper Tuning Fork", "type": "tool", "rarity": "common", "description": "A practice aid that helps with qi sensing.", "effects": [{ "type": "xp_multiplier", "value": 1.05 }] },
+  { "id": "it_seed_02", "name": "Minor Healing Pill", "type": "consumable", "rarity": "common", "description": "Restores a small amount of qi and hp.", "effects": [{ "type": "heal", "hp": 10, "qi": 10 }] },
+  { "id": "it_seed_03", "name": "Broken Celestial Mirror Shard", "type": "artifact", "rarity": "rare", "description": "A shard with faint astral resonance.", "effects": [{ "type": "insight_bonus", "value": 2 }] },
+  { "id": "it_seed_04", "name": "Whetstone of Endurance", "type": "equipment", "rarity": "uncommon", "description": "Improves stamina recovery.", "effects": [{ "type": "stamina_recovery", "value": 1.1 }] },
+  { "id": "it_seed_05", "name": "Seeker's Lantern", "type": "tool", "rarity": "uncommon", "description": "Reveals hidden passages during exploration.", "effects": [{ "type": "reveal_chance", "value": 0.15 }] },
+  { "id": "it_seed_06", "name": "Fragmented Dao Stone", "type": "crafting", "rarity": "rare", "description": "A material used in advanced manuals.", "effects": [] },
+  { "id": "it_seed_07", "name": "Traveler's Satchel", "type": "equipment", "rarity": "common", "description": "Small inventory expansion.", "effects": [{ "type": "inventory_slots", "value": 2 }] },
+  { "id": "it_seed_08", "name": "Ember of Resolve", "type": "consumable", "rarity": "uncommon", "description": "Temporary boost to resolve.", "effects": [{ "type": "resolve_buff", "value": 5, "durationSec": 600 }] }
+  ,
+  { "id": "it_sacrificial_incense", "name": "Sacrificial Incense", "type": "consumable", "rarity": "uncommon", "description": "A fragrant incense used in rites; often burned to call or placate spirits.", "effects": [{ "type": "training_cost_reduction", "value": 0.05 }] },
+  { "id": "it_heavenly_pearl", "name": "Heavenly Pearl", "type": "consumable", "rarity": "rare", "description": "A luminous pearl said to enhance one's receptivity to heavenly resonance.", "effects": [{ "type": "training_success_bonus", "value": 0.12 }] },
+  { "id": "it_taming_whistle", "name": "Taming Whistle", "type": "tool", "rarity": "uncommon", "description": "A carved whistle used to call and calm beasts during training.", "effects": [{ "type": "beast_taming_bonus", "value": 0.15 }] },
+  { "id": "it_array_stone", "name": "Array Stone", "type": "crafting", "rarity": "rare", "description": "A compact stone used to stabilise minor formation arrays.", "effects": [{ "type": "array_training_bonus", "value": 0.12 }] },
+  { "id": "it_basic_herbs", "name": "Basic Herbs", "type": "consumable", "rarity": "common", "description": "Common herbs used in simple cultivation practices.", "effects": [{ "type": "train_recovery", "hp": 5, "qi": 10 }] },
+  { "id": "it_cleansing_salve", "name": "Cleansing Salve", "type": "consumable", "rarity": "uncommon", "description": "A salve used to treat minor spiritual taint or injury after risky practices.", "effects": [{ "type": "remove_debuff_chance", "value": 0.2 }] }
+]

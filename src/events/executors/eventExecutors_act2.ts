@@ -29,7 +29,7 @@ const fn_act2_mentor_guidance: EventExecutor = (state, args) => {
   const s: any = { ...state, player: { ...state.player, manuals: Array.isArray(state.player.manuals) ? [...state.player.manuals] : [], skillPoints: state.player.skillPoints || 0, stats: { ...state.player.stats } }, world: { ...state.world, flags: { ...(state.world.flags || {}) } } };
   // Mentor offers teaching: give a basic manual and a skill point
   const manuals = s.player.manuals as any[];
-  if (!manuals.find(m => m && m.id === 'mentor_basics')) manuals.push({ id: 'mentor_basics', name: 'Mentor Basics', type: 'movement', rarity: 'common' });
+  if (!manuals.find(m => m && m.id === 'mentor_basics')) manuals.push({ id: 'mentor_basics', name: 'Mentor Basics', type: 'movement', rarity: "H", description: 'Core mentoring guidance covering basic formations and practice routines.', effects: { martialMastery: 1, atk: 2 } });
   s.player.skillPoints = (s.player.skillPoints || 0) + 1;
   s.world.flags.mentor_taught = true;
   (s.__meta ||= {}).eventsRan = s.__meta.eventsRan || [];

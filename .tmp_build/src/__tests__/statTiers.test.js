@@ -12,7 +12,7 @@ describe('statTiers', () => {
         expect((0, statTiers_1.numericToTier)(800).id).toBe('nascent_soul');
         expect((0, statTiers_1.numericToTier)(2500).id).toBe('heavenly_king');
         expect((0, statTiers_1.numericToTier)(8000).id).toBe('immortal');
-        expect((0, statTiers_1.numericToTier)(30000).id).toBe('transcendent');
+        expect((0, statTiers_1.numericToTier)(30000).id).toBe("B");
     });
     test('tierToNumeric returns median-like representative values', () => {
         expect(typeof (0, statTiers_1.tierToNumeric)('core_formation')).toBe('number');

@@ -1,4 +1,5 @@
 import { CULTIVATION_REALMS } from '../data/cultivationRealms';
+import { randInt, getRng } from '../utils/rng';
 
 export interface MinorStage {
   stage: number;
@@ -206,7 +207,8 @@ export class BreakthroughSystem {
     const difficulty = Math.floor(realmData.breakthroughDifficulty * (currentStage / realmData.minorStages));
     const successChance = this.calculateMinorBreakthroughChance(difficulty, playerStats, playerSkills);
     
-    const success = Math.random() < successChance;
+  const rng = getRng();
+  const success = rng() < successChance;
     
     if (success) {
       const newStage = currentStage + 1;
@@ -284,7 +286,8 @@ export class BreakthroughSystem {
     }
 
     const successChance = this.calculateRealmBreakthroughChance(challenge, playerStats, playerSkills);
-    const success = Math.random() < successChance;
+  const rng = getRng();
+  const success = rng() < successChance;
 
     const realmData = CULTIVATION_REALMS[currentRealm];
     const nextRealm = realmData?.nextRealm;
@@ -299,11 +302,11 @@ export class BreakthroughSystem {
       };
     } else {
       const penalties = this.calculateChallengeFailurePenalties(challenge);
-      return {
-        success: false,
-        penalties,
-        message: `Breakthrough failed. ${challenge.risks[Math.floor(Math.random() * challenge.risks.length)]}`
-      };
+  return {
+    success: false,
+    penalties,
+    message: `Breakthrough failed. ${challenge.risks[randInt(challenge.risks.length, { rng })]}`
+  };
     }
   }
 

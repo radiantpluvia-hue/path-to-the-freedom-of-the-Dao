@@ -32,7 +32,7 @@ export const StoryEventPanel: React.FC = () => {
   const [showEventModal, setShowEventModal] = useState(false);
 
   useEffect(() => {
-    const events = getAvailableEvents();
+    const events = (typeof getAvailableEvents === 'function') ? getAvailableEvents() : [];
     setAvailableEvents(events);
   }, [getAvailableEvents]);
 
@@ -50,12 +50,12 @@ export const StoryEventPanel: React.FC = () => {
   const handleMakeChoice = (choiceId: string) => {
     if (!activeEvent) return;
     
-    const success = makeStoryChoice(activeEvent.id, choiceId);
+    const success = (typeof makeStoryChoice === 'function') ? makeStoryChoice(activeEvent.id, choiceId) : false;
     if (success) {
       setShowEventModal(false);
       setActiveEvent(null);
       // Refresh available events
-      const events = getAvailableEvents();
+      const events = (typeof getAvailableEvents === 'function') ? getAvailableEvents() : [];
       setAvailableEvents(events);
     }
   };

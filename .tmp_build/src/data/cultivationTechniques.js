@@ -8,7 +8,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'sword_ruptures_heaven',
         name: 'Sword That Ruptures Heaven',
         description: 'A supreme Sword Dao technique that splits the heavens and sunders fate itself.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Comprehend Sword Dao at the peak of a tribulation.',
         daoType: 'Sword Dao',
         effects: { might: 9999, cooldown: 10, xianxiaEffects: ['heaven_split', 'fate_sunder'] }
@@ -26,7 +26,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'domain_of_providence',
         name: 'Domain of Providence',
         description: 'A Heavenly Domain that manipulates fate and luck, shielding the cultivator from calamity.',
-        rarity: 'legendary',
+        rarity: "D",
         unlockCondition: 'Unlock after a series of fortuitous encounters and lucky escapes.',
         daoType: 'Heavenly Domain',
         effects: { might: 7000, cooldown: 20, xianxiaEffects: ['fate_manipulation', 'luck_shield'] }
@@ -44,7 +44,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'heavenly_pulse_resonance',
         name: 'Heavenly Pulse Resonance',
         description: 'A support technique that unleashes a burst of heavenly resonance, greatly increasing all attributes for a short time.',
-        rarity: 'legendary',
+        rarity: "D",
         unlockCondition: 'Complete the first major story arc.',
         daoType: 'Heavenly Resonance',
         effects: { might: 5000, cooldown: 15, xianxiaEffects: ['attribute_boost', 'divine_resistance'] }
@@ -54,7 +54,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'starforged_sword_domain',
         name: 'Starforged Sword Domain',
         description: 'Unleashes a domain of sword energy forged from the stars, overwhelming all foes.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Master the Starforged Sword Manual.',
         daoType: 'Sword Dao',
         effects: { might: 9500, cooldown: 12, xianxiaEffects: ['star_sword_domain', 'overwhelm'] }
@@ -72,7 +72,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'chaos_origin_strike',
         name: 'Chaos Origin Strike',
         description: 'A primordial chaos attack that distorts reality and devastates the battlefield.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Comprehend the Dao of Primordial Chaos.',
         daoType: 'Fate Law',
         effects: { might: 10000, cooldown: 20, xianxiaEffects: ['chaos_distortion', 'reality_break'] }
@@ -81,7 +81,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'moonshadow_concealment',
         name: 'Moonshadow Concealment',
         description: 'Allows the cultivator to vanish under moonlight, evading detection and attacks.',
-        rarity: 'legendary',
+        rarity: "D",
         unlockCondition: 'Master the Moonshadow Concealment Technique.',
         daoType: 'Movement Art',
         effects: { might: 6000, cooldown: 8, xianxiaEffects: ['moonlight_vanish', 'stealth'] }
@@ -90,7 +90,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'samsara_cycle',
         name: 'Samsara Cycle',
         description: 'Manipulates the cycle of reincarnation, restoring life or banishing souls.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Comprehend the Dao of Samsara.',
         daoType: 'Soul Technique',
         effects: { might: 9800, cooldown: 25, xianxiaEffects: ['reincarnation', 'soul_banish'] }
@@ -99,7 +99,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'heavenly_law_comprehension',
         name: 'Heavenly Law Comprehension',
         description: 'Grants insight into the laws of heaven, boosting all cultivation.',
-        rarity: 'legendary',
+        rarity: "D",
         unlockCondition: 'Complete the Heavenly Law Comprehension Manual.',
         daoType: 'Fate Law',
         effects: { might: 7000, cooldown: 10, xianxiaEffects: ['law_insight', 'cultivation_boost'] }
@@ -108,7 +108,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'spirit_beast_taming',
         name: 'Spirit Beast Taming',
         description: 'Allows the cultivator to tame and command spirit beasts.',
-        rarity: 'epic',
+        rarity: "E",
         unlockCondition: 'Obtain the Spirit Beast Taming Art.',
         daoType: 'Transformation',
         effects: { might: 5000, cooldown: 20, xianxiaEffects: ['beast_taming', 'command'] }
@@ -117,7 +117,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'fate_weaving_hand',
         name: 'Fate Weaving Hand',
         description: 'Manipulates the threads of fate, altering destiny for self or others.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Comprehend the Dao of Fate.',
         daoType: 'Fate Law',
         effects: { might: 9900, cooldown: 22, xianxiaEffects: ['fate_weave', 'destiny_alter'] }
@@ -135,7 +135,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'heavenly_star_chart',
         name: 'Heavenly Star Chart',
         description: 'Unleashes the power of the stars, boosting all Dao comprehension.',
-        rarity: 'legendary',
+        rarity: "D",
         unlockCondition: 'Complete the Heavenly Star Chart Manual.',
         daoType: 'Heavenly Resonance',
         effects: { might: 6500, cooldown: 14, xianxiaEffects: ['star_power', 'dao_boost'] }
@@ -144,7 +144,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'primordial_chaos_body',
         name: 'Primordial Chaos Body',
         description: 'Transforms the cultivator’s body into primordial chaos, granting immense power.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Comprehend the Dao of Primordial Chaos.',
         daoType: 'Transformation',
         effects: { might: 10000, cooldown: 30, xianxiaEffects: ['chaos_body', 'power_surge'] }
@@ -153,7 +153,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'lotus_heart_meditation',
         name: 'Lotus Heart Meditation',
         description: 'Calms the mind and purifies the soul, boosting spiritual defenses.',
-        rarity: 'epic',
+        rarity: "E",
         unlockCondition: 'Master the Lotus Heart Meditation.',
         daoType: 'Soul Technique',
         effects: { might: 4800, cooldown: 12, xianxiaEffects: ['soul_purification', 'spirit_defense'] }
@@ -162,7 +162,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'thunder_emperor_wrath',
         name: 'Thunder Emperor’s Wrath',
         description: 'Summons a storm of thunder, devastating all enemies.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Comprehend the Dao of Thunder.',
         daoType: 'Elemental Art',
         effects: { might: 9800, cooldown: 18, xianxiaEffects: ['thunder_storm', 'devastation'] }
@@ -180,7 +180,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'spirit_sealing_array',
         name: 'Spirit Sealing Array',
         description: 'Seals the spirits of enemies, preventing their escape or resurrection.',
-        rarity: 'legendary',
+        rarity: "D",
         unlockCondition: 'Complete the Spirit Sealing Technique.',
         daoType: 'Fate Law',
         effects: { might: 7000, cooldown: 15, xianxiaEffects: ['spirit_seal', 'resurrection_block'] }
@@ -189,7 +189,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'heavenly_tribulation_survival',
         name: 'Heavenly Tribulation Survival',
         description: 'Grants the ability to survive even the deadliest heavenly tribulations.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Survive a Heavenly Tribulation.',
         daoType: 'Body Refinement',
         effects: { might: 10000, cooldown: 40, xianxiaEffects: ['tribulation_survival', 'body_fortification'] }
@@ -198,7 +198,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'dao_of_luck',
         name: 'Dao of Luck',
         description: 'Manipulates luck to favor the cultivator in all endeavors.',
-        rarity: 'legendary',
+        rarity: "D",
         unlockCondition: 'Comprehend the Dao of Luck.',
         daoType: 'Fate Law',
         effects: { might: 7000, cooldown: 10, xianxiaEffects: ['luck_manipulation', 'fortune_boost'] }
@@ -207,7 +207,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'heavenly_opportunity_grasp',
         name: 'Heavenly Opportunity Grasp',
         description: 'Allows the cultivator to seize rare opportunities and fortuitous encounters.',
-        rarity: 'legendary',
+        rarity: "D",
         unlockCondition: 'Unlock after a series of lucky events.',
         daoType: 'Heavenly Resonance',
         effects: { might: 6500, cooldown: 12, xianxiaEffects: ['opportunity_grasp', 'luck_enhance'] }
@@ -216,7 +216,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'dao_of_destiny',
         name: 'Dao of Destiny',
         description: 'Grants mastery over destiny, allowing the cultivator to rewrite fate.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Comprehend the Dao of Destiny.',
         daoType: 'Fate Law',
         effects: { might: 10000, cooldown: 25, xianxiaEffects: ['destiny_rewrite', 'fate_control'] }
@@ -225,7 +225,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'heavenly_will_manifestation',
         name: 'Heavenly Will Manifestation',
         description: 'Manifests the will of heaven, empowering all actions.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Comprehend the Will of Heaven.',
         daoType: 'Heavenly Resonance',
         effects: { might: 10000, cooldown: 20, xianxiaEffects: ['will_manifest', 'action_empower'] }
@@ -234,7 +234,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'dao_of_karma',
         name: 'Dao of Karma',
         description: 'Manipulates karma, bringing retribution or reward.',
-        rarity: 'legendary',
+        rarity: "D",
         unlockCondition: 'Comprehend the Dao of Karma.',
         daoType: 'Fate Law',
         effects: { might: 7000, cooldown: 15, xianxiaEffects: ['karma_manipulation', 'retribution'] }
@@ -243,7 +243,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'heavenly_blessing',
         name: 'Heavenly Blessing',
         description: 'Bestows a blessing from the heavens, greatly increasing luck and protection.',
-        rarity: 'legendary',
+        rarity: "D",
         unlockCondition: 'Receive a heavenly blessing in a rare event.',
         daoType: 'Heavenly Resonance',
         effects: { might: 6500, cooldown: 10, xianxiaEffects: ['blessing', 'luck_protection'] }
@@ -252,7 +252,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'dao_of_fortune',
         name: 'Dao of Fortune',
         description: 'Grants mastery over fortune, attracting wealth and opportunity.',
-        rarity: 'legendary',
+        rarity: "D",
         unlockCondition: 'Comprehend the Dao of Fortune.',
         daoType: 'Fate Law',
         effects: { might: 7000, cooldown: 10, xianxiaEffects: ['fortune_attraction', 'wealth_boost'] }
@@ -261,7 +261,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'heavenly_star_chart',
         name: 'Heavenly Star Chart',
         description: 'Unleashes the power of the stars, boosting all Dao comprehension.',
-        rarity: 'legendary',
+        rarity: "D",
         unlockCondition: 'Complete the Heavenly Star Chart Manual.',
         daoType: 'Heavenly Resonance',
         effects: { might: 6500, cooldown: 14, xianxiaEffects: ['star_power', 'dao_boost'] }
@@ -270,7 +270,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'dao_of_space_time',
         name: 'Dao of Space-Time',
         description: 'Manipulates space and time, allowing for teleportation and time dilation.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Comprehend the Dao of Space-Time.',
         daoType: 'Fate Law',
         effects: { might: 10000, cooldown: 30, xianxiaEffects: ['space_manipulation', 'time_dilation'] }
@@ -288,7 +288,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'dao_of_illusion',
         name: 'Dao of Illusion',
         description: 'Creates powerful illusions to deceive and control enemies.',
-        rarity: 'legendary',
+        rarity: "D",
         unlockCondition: 'Comprehend the Dao of Illusion.',
         daoType: 'Soul Technique',
         effects: { might: 7000, cooldown: 12, xianxiaEffects: ['illusion_creation', 'mind_control'] }
@@ -297,7 +297,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'heavenly_memory_recall',
         name: 'Heavenly Memory Recall',
         description: 'Recalls ancient memories, granting insight and wisdom.',
-        rarity: 'epic',
+        rarity: "E",
         unlockCondition: 'Master the Heavenly Memory Recall Manual.',
         daoType: 'Soul Technique',
         effects: { might: 5000, cooldown: 10, xianxiaEffects: ['memory_recall', 'wisdom_boost'] }
@@ -306,7 +306,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'dao_of_progenitors',
         name: 'Dao of Progenitors',
         description: 'Grants the power of ancient progenitors, boosting all stats.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Comprehend the Dao of Progenitors.',
         daoType: 'Transformation',
         effects: { might: 10000, cooldown: 30, xianxiaEffects: ['progenitor_power', 'stat_boost'] }
@@ -315,7 +315,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'heavenly_fate_weaving',
         name: 'Heavenly Fate Weaving',
         description: 'Weaves the threads of fate, altering destiny for all.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Comprehend the Dao of Fate.',
         daoType: 'Fate Law',
         effects: { might: 10000, cooldown: 25, xianxiaEffects: ['fate_weaving', 'destiny_alter'] }
@@ -324,7 +324,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'dao_of_unity',
         name: 'Dao of Unity',
         description: 'Unites all Daos, granting harmony and immense power.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Comprehend the Dao of Unity.',
         daoType: 'Heavenly Resonance',
         effects: { might: 10000, cooldown: 30, xianxiaEffects: ['dao_unity', 'harmony'] }
@@ -333,7 +333,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'heavenly_harmony',
         name: 'Heavenly Harmony',
         description: 'Grants perfect harmony with the heavens, boosting all cultivation.',
-        rarity: 'legendary',
+        rarity: "D",
         unlockCondition: 'Achieve harmony with the heavens.',
         daoType: 'Heavenly Resonance',
         effects: { might: 7000, cooldown: 12, xianxiaEffects: ['harmony', 'cultivation_boost'] }
@@ -342,7 +342,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'dao_of_creation',
         name: 'Dao of Creation',
         description: 'Grants the power to create worlds and life.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Comprehend the Dao of Creation.',
         daoType: 'Transformation',
         effects: { might: 10000, cooldown: 40, xianxiaEffects: ['world_creation', 'life_creation'] }
@@ -351,7 +351,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'heavenly_unity',
         name: 'Heavenly Unity',
         description: 'Unites the cultivator with the heavens, granting immense power.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Achieve unity with the heavens.',
         daoType: 'Heavenly Resonance',
         effects: { might: 10000, cooldown: 30, xianxiaEffects: ['heaven_unity', 'power_surge'] }
@@ -360,7 +360,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'dao_of_destruction',
         name: 'Dao of Destruction',
         description: 'Grants the power to destroy worlds and Daos.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Comprehend the Dao of Destruction.',
         daoType: 'Transformation',
         effects: { might: 10000, cooldown: 40, xianxiaEffects: ['world_destruction', 'dao_destruction'] }
@@ -369,7 +369,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'heavenly_destruction',
         name: 'Heavenly Destruction',
         description: 'Unleashes the destructive power of the heavens.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Achieve destruction with the heavens.',
         daoType: 'Heavenly Resonance',
         effects: { might: 10000, cooldown: 40, xianxiaEffects: ['heaven_destruction', 'power_surge'] }
@@ -378,7 +378,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'dao_of_rebirth',
         name: 'Dao of Rebirth',
         description: 'Grants the power to be reborn and start anew.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Comprehend the Dao of Rebirth.',
         daoType: 'Transformation',
         effects: { might: 10000, cooldown: 40, xianxiaEffects: ['rebirth', 'new_beginning'] }
@@ -387,7 +387,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'heavenly_rebirth',
         name: 'Heavenly Rebirth',
         description: 'Unleashes the power of heavenly rebirth.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Achieve rebirth with the heavens.',
         daoType: 'Heavenly Resonance',
         effects: { might: 10000, cooldown: 40, xianxiaEffects: ['heaven_rebirth', 'new_beginning'] }
@@ -396,7 +396,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'dao_of_eternity',
         name: 'Dao of Eternity',
         description: 'Grants the power of eternal existence.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Comprehend the Dao of Eternity.',
         daoType: 'Transformation',
         effects: { might: 10000, cooldown: 40, xianxiaEffects: ['eternity', 'immortality'] }
@@ -405,7 +405,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'heavenly_eternity',
         name: 'Heavenly Eternity',
         description: 'Unleashes the power of heavenly eternity.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Achieve eternity with the heavens.',
         daoType: 'Heavenly Resonance',
         effects: { might: 10000, cooldown: 40, xianxiaEffects: ['heaven_eternity', 'immortality'] }
@@ -414,7 +414,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'dao_of_primordial_chaos',
         name: 'Dao of Primordial Chaos',
         description: 'Grants the power of primordial chaos.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Comprehend the Dao of Primordial Chaos.',
         daoType: 'Transformation',
         effects: { might: 10000, cooldown: 40, xianxiaEffects: ['primordial_chaos', 'chaos_power'] }
@@ -423,7 +423,7 @@ exports.CULTIVATION_TECHNIQUES = [
         id: 'heavenly_chaos',
         name: 'Heavenly Chaos',
         description: 'Unleashes the power of heavenly chaos.',
-        rarity: 'transcendent',
+        rarity: "B",
         unlockCondition: 'Achieve chaos with the heavens.',
         daoType: 'Heavenly Resonance',
         effects: { might: 10000, cooldown: 40, xianxiaEffects: ['heaven_chaos', 'chaos_power'] }

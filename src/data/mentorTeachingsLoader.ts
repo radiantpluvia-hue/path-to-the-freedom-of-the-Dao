@@ -145,12 +145,12 @@ export class MentorTeachingsLoader {
     return typeMappings[rawType] || 'qi_control_test';
   }
 
-  private mapDifficulty(rawDifficulty: string, teachingNumber: number): "easy" | "medium" | "hard" | "extreme" | "legendary" | "mythical" | "transcendent" | "impossible" {
+  private mapDifficulty(rawDifficulty: string, teachingNumber: number): "easy" | "medium" | "hard" | "extreme" | "D" | "mythical" | "B" | "impossible" {
     if (rawDifficulty) {
-      return rawDifficulty as "easy" | "medium" | "hard" | "extreme" | "legendary" | "mythical" | "transcendent" | "impossible";
+      return rawDifficulty as "easy" | "medium" | "hard" | "extreme" | "D" | "mythical" | "B" | "impossible";
     }
     
-    const difficulties = ['easy', 'medium', 'hard', 'extreme', 'legendary', 'mythical', 'transcendent'] as const;
+    const difficulties = ['easy', 'medium', 'hard', 'extreme', "D", 'mythical', "B"] as const;
     return difficulties[Math.min(teachingNumber - 1, difficulties.length - 1)];
   }
 

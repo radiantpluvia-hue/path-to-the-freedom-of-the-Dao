@@ -1,0 +1,734 @@
+[
+  {
+    "id": "mentor_shaolin_abbot.quest01",
+    "type": "mentor_encounter",
+    "title": "Broken Bell",
+    "description": "A bell with a cracked tongue stands in the training hall. The abbot asks you to learn why small details matter by tending to it.",
+    "choices": [
+      {
+        "id": "tend",
+        "text": "Carefully adjust the bell and test its tone.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.broken_bell"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest01.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "ignore",
+        "text": "Leave it cracked; it's still a bell.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest01.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest02",
+    "type": "mentor_encounter",
+    "title": "Morning Kettle",
+    "description": "The abbot asks you to keep the morning kettle at a steady simmer — a test of attention and rhythm.",
+    "choices": [
+      {
+        "id": "tend",
+        "text": "Tend the kettle carefully until it's just right.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.morning_kettle"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest02.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "neglect",
+        "text": "Leave it; it's only tea.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest02.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest03",
+    "type": "mentor_encounter",
+    "title": "Row of Bowls",
+    "description": "A neat row of bowls needs arranging by size and cleanliness. The abbot uses this to teach order.",
+    "choices": [
+      {
+        "id": "arrange",
+        "text": "Arrange and polish each bowl carefully.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.row_of_bowls"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest03.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "slapdash",
+        "text": "Throw them in order of convenience.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest03.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest04",
+    "type": "mentor_encounter",
+    "title": "Bamboo Sweeps",
+    "description": "The abbot demonstrates a sweeping motion; he asks you to copy it until the movement is calm and precise.",
+    "choices": [
+      {
+        "id": "copy",
+        "text": "Practice the sweep slowly.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.bamboo_sweeps"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest04.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "half",
+        "text": "Do it hastily; it's fine.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest04.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_shaolin_abbot.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_shaolin_abbot",
+    "id": "mentor_shaolin_abbot.quest05",
+    "title": "Whistling Bamboo",
+    "description": "The Abbot gestures to a grove of bamboo and demonstrates a breathing drill that makes the stalks hum — an exercise in focus and timing.",
+    "choices": [
+      {
+        "id": "accept",
+        "label": "Practice the bamboo breathing",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_shaolin_abbot",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "shaolin_training_note_05"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_shaolin_abbot.quest05.completed"
+              ]
+            }
+          }
+        ],
+        "text": "accept"
+      },
+      {
+        "id": "decline",
+        "label": "Politely decline",
+        "effects": [
+          {
+            "add_event_log": "You bow and decline the Abbot's offer, keeping to your own path for now."
+          }
+        ],
+        "text": "decline"
+      }
+    ],
+    "requiresWorldFlag": "mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest05",
+    "type": "mentor_encounter",
+    "title": "Whistling Bamboo (Recap)",
+    "description": "The abbot asks you to recall the whistling bamboo exercise and apply it to a new row of poles.",
+    "choices": [
+      {
+        "id": "apply",
+        "text": "Apply the whistling rhythm to each pole.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.whistling_bamboo_recap"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest05.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "ignore",
+        "text": "Skip the exercise.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest05.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_shaolin_abbot.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_shaolin_abbot",
+    "id": "mentor_shaolin_abbot.quest06",
+    "title": "Iron Palm Drill",
+    "description": "The Abbot demonstrates an iron palm conditioning drill. He offers you a guided set of strikes to build resilience.",
+    "choices": [
+      {
+        "id": "train",
+        "label": "Endure the patience of the drill",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_shaolin_abbot",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "shaolin_training_note_06"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_shaolin_abbot.quest06.completed"
+              ]
+            }
+          }
+        ],
+        "text": "train"
+      },
+      {
+        "id": "rest",
+        "label": "Ask to rest instead",
+        "effects": [
+          {
+            "add_event_log": "You ask for a brief rest; the Abbot nods and lets you breathe."
+          }
+        ],
+        "text": "rest"
+      }
+    ],
+    "requiresWorldFlag": "mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest06",
+    "type": "mentor_encounter",
+    "title": "Iron Palm Drill (Recap)",
+    "description": "The abbot sets you on a slow iron-palm drill to feel the edge of control and restraint.",
+    "choices": [
+      {
+        "id": "drill",
+        "text": "Perform the drill with steady force.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.iron_palm_drill_recap"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest06.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sloppy",
+        "text": "Strike quickly without focus.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest06.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_shaolin_abbot.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_shaolin_abbot",
+    "id": "mentor_shaolin_abbot.quest07",
+    "title": "Morning Kneeling",
+    "description": "Before dawn the Abbot leads a simple kneeling ritual to sharpen humility and endurance. He invites you to join.",
+    "choices": [
+      {
+        "id": "join",
+        "label": "Join the kneeling ritual",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_shaolin_abbot",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "shaolin_training_note_07"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_shaolin_abbot.quest07.completed"
+              ]
+            }
+          }
+        ],
+        "text": "join"
+      },
+      {
+        "id": "observe",
+        "label": "Watch quietly",
+        "effects": [
+          {
+            "add_event_log": "You watch the ritual, feeling a slow calm settle over you."
+          }
+        ],
+        "text": "observe"
+      }
+    ],
+    "requiresWorldFlag": "mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest07",
+    "type": "mentor_encounter",
+    "title": "Morning Kneeling (Recap)",
+    "description": "Kneel with the monks and learn to steady your back and breath; the abbot watches your humility.",
+    "choices": [
+      {
+        "id": "kneel",
+        "text": "Kneel and focus on breath and posture.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.morning_kneeling_recap"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest07.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "half_kneel",
+        "text": "Half-hearted kneel; finish quickly.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest07.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_shaolin_abbot.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_shaolin_abbot",
+    "id": "mentor_shaolin_abbot.quest08",
+    "title": "Moonlit Forms",
+    "description": "Under the moon the Abbot guides you through fluid forms designed to align breath and motion. It feels like learning to move as one organism.",
+    "choices": [
+      {
+        "id": "practice",
+        "label": "Practice the moonlit form",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_shaolin_abbot",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "shaolin_training_note_08"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_shaolin_abbot.quest08.completed"
+              ]
+            }
+          }
+        ],
+        "text": "practice"
+      },
+      {
+        "id": "retire",
+        "label": "Take your leave",
+        "effects": [
+          {
+            "add_event_log": "You take your leave, storing the memory of the Abbot's form for quiet practice."
+          }
+        ],
+        "text": "retire"
+      }
+    ],
+    "requiresWorldFlag": "mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest08",
+    "type": "mentor_encounter",
+    "title": "Moonlit Forms (Recap)",
+    "description": "Under moonlight the abbot asks you to practice forms slowly and with purpose.",
+    "choices": [
+      {
+        "id": "practice",
+        "text": "Move through the forms deliberately.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.moonlit_forms_recap"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest08.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "brisk",
+        "text": "Speed through without feeling.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest08.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest09",
+    "type": "mentor_encounter",
+    "title": "Silent Observation",
+    "description": "The abbot asks you to sit and observe without acting — a test of presence and restraint.",
+    "choices": [
+      {
+        "id": "observe",
+        "text": "Sit and observe patiently.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.silent_observation"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest09.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "fidget",
+        "text": "Fidget and glance around; it's boring.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest09.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest10",
+    "type": "mentor_encounter",
+    "title": "Sweeping Endurance",
+    "description": "Sweep the courtyard until your arms tire — the abbot gauges your willingness to sustain small, repeated acts.",
+    "choices": [
+      {
+        "id": "sweep",
+        "text": "Sweep steadily until the courtyard is clean.",
+        "effects": [
+          {
+            "grant_trust": 2
+          },
+          {
+            "lore_collect": "shaolin.sweeping_endurance"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest10.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "half_sweep",
+        "text": "Do a quick pass and stop.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest10.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest11",
+    "type": "mentor_encounter",
+    "title": "Kettledrum Patience",
+    "description": "The abbot asks you to keep a slow, steady rhythm on a kettledrum for an hour — a test of patience and focus.",
+    "choices": [
+      {
+        "id": "keep_rhythm",
+        "text": "Keep the rhythm steadily, matching the abbot's breathing.",
+        "effects": [
+          {
+            "grant_trust": 3
+          },
+          {
+            "lore_collect": "shaolin.kettledrum_patience"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest11.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "drift",
+        "text": "Let your mind wander and play when it feels natural.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest11.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest12",
+    "type": "mentor_encounter",
+    "title": "Morning Kata Alignment",
+    "description": "The abbot requests you to repeat a simple set of forms while focusing on alignment over power.",
+    "choices": [
+      {
+        "id": "focus_alignment",
+        "text": "Move slowly and emphasize posture and balance.",
+        "effects": [
+          {
+            "grant_trust": 4
+          },
+          {
+            "lore_collect": "shaolin.morning_kata_alignment"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest12.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "rush",
+        "text": "Rush through the motions to finish quickly.",
+        "effects": [
+          {
+            "grant_trust": 1
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest12.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest13",
+    "type": "mentor_encounter",
+    "title": "Silent Kettling",
+    "description": "A small iron kettle must be warmed and poured without a sound. The abbot watches for care and humility.",
+    "choices": [
+      {
+        "id": "careful",
+        "text": "Perform the task with care and total silence.",
+        "effects": [
+          {
+            "grant_trust": 3
+          },
+          {
+            "lore_collect": "shaolin.silent_kettling"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest13.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "hasty",
+        "text": "Hurry and get it done before it cools.",
+        "effects": [
+          {
+            "grant_trust": 0
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest13.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_shaolin_abbot.disciple"
+  },
+  {
+    "id": "mentor_shaolin_abbot.quest14",
+    "type": "mentor_encounter",
+    "title": "Sweeping Reflection",
+    "description": "At dusk you are asked to sweep the outer courtyard while reflecting on a teaching the abbot whispers.",
+    "choices": [
+      {
+        "id": "reflect",
+        "text": "Sweep slowly and reflect on the abbot's instruction.",
+        "effects": [
+          {
+            "grant_trust": 5
+          },
+          {
+            "lore_collect": "shaolin.sweeping_reflection"
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest14.completed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "finish_fast",
+        "text": "Finish quickly and be done with it.",
+        "effects": [
+          {
+            "grant_trust": 1
+          },
+          {
+            "world_mutation": {
+              "set": "mentor_shaolin_abbot.quest14.completed"
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_shaolin_abbot.disciple"
+  }
+]

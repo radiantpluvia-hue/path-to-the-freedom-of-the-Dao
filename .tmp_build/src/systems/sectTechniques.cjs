@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PHILOSOPHY_MAP = exports.SECT_TECHNIQUE_MAP = void 0;
 exports.getTechniquesForSect = getTechniquesForSect;
 const SectSystem_1 = require("./SectSystem");
+const legacyIdAliases_1 = require("../utils/legacyIdAliases");
 // Generate per-sect personalized technique manuals (lightweight Skill objects)
 exports.SECT_TECHNIQUE_MAP = {};
 const BASE_MOVES = ['Palm', 'Saber', 'Thrust', 'Strike', 'Slash', 'Step', 'Thump', 'Gouge', 'Sweep'];
@@ -13,7 +14,7 @@ exports.PHILOSOPHY_MAP = {
     'blood_moon_sect': 'Power through sacrifice and forbidden truth',
     'eternal_dao_academy': 'Comprehend the Dao to reshape reality',
     'dragon_emperor_palace': 'Honor bloodline and imperial might',
-    'void_emperor_sect': 'Walk the void between worlds',
+    'emptiness_emperor_sect': 'Walk the emptiness between worlds',
     'mount_hua_sect': 'Balance swordcraft with inner clarity',
     'buddha_sect': 'Compassion breeds true power',
     'starlight_sect': 'Harmony with celestial cycles',
@@ -44,7 +45,8 @@ function generateForSect(sect) {
         // Create some deterministic passive IDs to associate with manuals (these are lightweight references
         // to passive effects which can be implemented elsewhere). Naming pattern: `${sect.id}_passive_${idx}`
         const passiveId = `${sect.id}_passive_${idx}`;
-        const philosophy = exports.PHILOSOPHY_MAP[sect.id] || sect.description || '';
+        const normId = (0, legacyIdAliases_1.normalizeId)(sect.id) || sect.id;
+        const philosophy = exports.PHILOSOPHY_MAP[normId] || exports.PHILOSOPHY_MAP[sect.id] || sect.description || '';
         const description = `A sect manual from ${sect.name}: the ${base} sequence ${idx} is taught to disciples to embody the school's flavor and rhythm. Philosophy: ${philosophy}.`;
         const unlock = {
             sectId: sect.id,
@@ -80,7 +82,8 @@ function generateForSect(sect) {
 // Build map for all major sects
 for (const sect of SectSystem_1.MAJOR_SECTS) {
     const list = generateForSect(sect);
-    exports.SECT_TECHNIQUE_MAP[sect.id] = list;
+    const norm = (0, legacyIdAliases_1.normalizeId)(sect.id) || sect.id;
+    exports.SECT_TECHNIQUE_MAP[norm] = list;
     // Attach ids back to sect benefits (avoid duplicates)
     const existing = Array.isArray(sect.benefits?.techniques) ? [...sect.benefits.techniques] : [];
     const newIds = list.map(s => s.id);

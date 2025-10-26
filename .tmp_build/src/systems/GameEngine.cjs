@@ -1,8 +1,44 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameEngine = void 0;
 const combatConfig_1 = require("./combatConfig");
 const QuestSystem_1 = require("./QuestSystem");
+// domainSystem is not required at module runtime here; keep code minimal to avoid
+// pulling unnecessary runtime modules into the client bundle.
+const rng_1 = require("../utils/rng");
 // Adjust class to use correct method names and handle missing methods gracefully
 class GameEngine {
     constructor(rivalSystem, combatSystem, mentorSystem, sectSystem, marketSystem) {
@@ -119,7 +155,10 @@ class GameEngine {
         if (typeof this.mentorSystem.attemptTeaching === 'function') {
             const result = this.mentorSystem.attemptTeaching(teachingId, gameState);
             if (result.result.success) {
-                gameState.systems.teachingProgress[teachingId] = result.updatedProgress;
+                const upd = result.updatedProgress;
+                if (typeof upd !== 'undefined') {
+                    gameState.systems.teachingProgress[teachingId] = upd;
+                }
                 this.applyTeachingRewards(result.result, gameState);
                 gameState.player.mentorAffinity[mentorId] =
                     (gameState.player.mentorAffinity[mentorId] || 0) + 5;
@@ -147,10 +186,11 @@ class GameEngine {
         return false;
     }
     completeSectMission(missionId, gameState) {
-        if (typeof this.sectSystem.getCurrentSect === 'function' &&
+        // SectFactionSystem exposes getPlayerSect() and adjustSectReputation()
+        if (typeof this.sectSystem.getPlayerSect === 'function' &&
             typeof this.sectSystem.adjustSectReputation === 'function') {
-            const currentSect = this.sectSystem.getCurrentSect();
-            if (currentSect) {
+            const currentSect = this.sectSystem.getPlayerSect();
+            if (typeof currentSect === 'string' && currentSect) {
                 this.sectSystem.adjustSectReputation(currentSect, 10);
             }
         }
@@ -187,16 +227,19 @@ class GameEngine {
         return completedQuests;
     }
     updateRivalRelationshipsForSectChange(sectId, _gameState) {
-        if (typeof this.sectSystem.getSectRivals === 'function' &&
-            typeof this.sectSystem.getSectAllies === 'function') {
-            const rivalIds = this.sectSystem.getSectRivals(sectId);
-            const allyIds = this.sectSystem.getSectAllies(sectId);
-            rivalIds.forEach(rivalId => {
+        // SectFactionSystem doesn't expose typed helpers for rivals/allies in the current build,
+        // so use a permissive access pattern to avoid compile errors while preserving behavior.
+        const getSectRivals = this.sectSystem.getSectRivals;
+        const getSectAllies = this.sectSystem.getSectAllies;
+        if (typeof getSectRivals === 'function' && typeof getSectAllies === 'function') {
+            const rivalIds = getSectRivals(sectId) || [];
+            const allyIds = getSectAllies(sectId) || [];
+            rivalIds.forEach((rivalId) => {
                 if (typeof this.rivalSystem.updateRivalRelationship === 'function') {
                     this.rivalSystem.updateRivalRelationship(rivalId, -20);
                 }
             });
-            allyIds.forEach(allyId => {
+            allyIds.forEach((allyId) => {
                 if (typeof this.rivalSystem.updateRivalRelationship === 'function') {
                     this.rivalSystem.updateRivalRelationship(allyId, 10);
                 }
@@ -211,18 +254,19 @@ class GameEngine {
         // In a real implementation, you'd populate sect quests here
     }
     updateFactionReputations(result, _gameState) {
-        if (typeof this.sectSystem.getFactionEnemies === 'function' &&
-            typeof this.sectSystem.adjustFactionStanding === 'function') {
-            const factions = this.sectSystem.getFactionEnemies(result.participants[0]);
+        const getFactionEnemies = this.sectSystem.getFactionEnemies;
+        const adjustFactionStanding = this.sectSystem.adjustFactionStanding;
+        if (typeof getFactionEnemies === 'function' && typeof adjustFactionStanding === 'function') {
+            const factions = getFactionEnemies(result.participants[0]) || [];
             const reputationChange = result.winner === 'player' ? 5 : -5;
-            factions.forEach(factionId => {
-                this.sectSystem.adjustFactionStanding(factionId, reputationChange);
+            factions.forEach((factionId) => {
+                adjustFactionStanding(factionId, reputationChange);
             });
         }
     }
     applyCombatRewards(result, gameState) {
         if (result.rewards.experience) {
-            gameState.player.level += Math.floor(result.rewards.experience / 100);
+            gameState.player.level = (gameState.player.level ?? 0) + Math.floor(result.rewards.experience / 100);
         }
         if (result.rewards.items) {
             gameState.player.inventory.push(...result.rewards.items);
@@ -232,15 +276,15 @@ class GameEngine {
         if (result.bonusRewards) {
             Object.entries(result.bonusRewards).forEach(([key, value]) => {
                 if (key === 'insight') {
-                    gameState.player.insight += value;
+                    gameState.player.insight = (gameState.player.insight ?? 0) + value;
                 }
                 else if (key === 'combatPower') {
                     // If the entity prefers using a computed combatPower, respect that; otherwise, add as-is.
                     if (gameState.player && gameState.player._preferEntityCombatPower) {
-                        gameState.player.combatPower = (0, combatConfig_1.computeCombatPower)(gameState.player);
+                        gameState.player.combatPower = (0, combatConfig_1.computeCombatPower)(gameState.player) ?? (gameState.player.combatPower ?? 0);
                     }
                     else {
-                        gameState.player.combatPower += value;
+                        gameState.player.combatPower = (gameState.player.combatPower ?? 0) + value;
                     }
                 }
             });
@@ -253,7 +297,7 @@ class GameEngine {
     applyQuestRewards(questId, gameState) {
         // Apply rewards for completed quest
         // This is a placeholder - in a real implementation, you'd look up quest rewards
-        gameState.player.level += 1;
+        gameState.player.level = (gameState.player.level ?? 0) + 1;
         // Note: experience property may not exist on PlayerState, so we'll skip it for now
     }
     updateFactionStandingForMarket(_marketId, _gameState) {
@@ -271,13 +315,89 @@ class GameEngine {
         // In a real implementation, you'd refresh market data here
         this.checkForNewEvents(gameState);
     }
-    checkForNewEvents(gameState) {
+    async checkForNewEvents(gameState) {
+        const rngFn = (0, rng_1.getRng)(gameState);
+        const rng = typeof rngFn === 'function' ? rngFn : (0, rng_1.getRng)(gameState);
         Object.values(gameState.systems.rivals).forEach(rival => {
-            if (Math.random() < 0.1) {
+            if (rng() < 0.1) {
                 this.handleRivalEncounter(rival.id, gameState);
             }
         });
-        if (gameState.player.sect && Math.random() < 0.05) {
+        // Hidden encounter checks (rare, high-tier)
+        try {
+            const hiddenEncountersMod = await Promise.resolve().then(() => __importStar(require('../data/hiddenEncounters'))).catch(() => null);
+            const HIDDEN_ENCOUNTERS = hiddenEncountersMod ? hiddenEncountersMod.HIDDEN_ENCOUNTERS || hiddenEncountersMod.default || [] : [];
+            const realmHelpersMod = await Promise.resolve().then(() => __importStar(require('../utils/realmHelpers'))).catch(() => null);
+            const getRealmIdFromPlayer = realmHelpersMod ? realmHelpersMod.getRealmIdFromPlayer || (() => -1) : (() => -1);
+            const playerRealmId = getRealmIdFromPlayer(gameState.player);
+            const requiredRealmId = 23;
+            if (playerRealmId >= requiredRealmId) {
+                gameState.world = gameState.world || {};
+                gameState.world.flags = gameState.world.flags || {};
+                const lastKidGod = gameState.world.flags.lastKidGodSpawn || 0;
+                const kidGodCooldownDays = 365;
+                if (!(gameState.world.day && (gameState.world.day - lastKidGod) < kidGodCooldownDays)) {
+                    for (const enc of HIDDEN_ENCOUNTERS) {
+                        try {
+                            if (typeof enc.spawnCondition === 'function' && !enc.spawnCondition(gameState))
+                                continue;
+                            const chance = typeof enc.chance === 'number' ? enc.chance : 0.01;
+                            if (rng() < chance) {
+                                try {
+                                    const hiddenRivalsMod = await Promise.resolve().then(() => __importStar(require('../data/hiddenRivals'))).catch(() => null);
+                                    const HIDDEN_RIVALS = hiddenRivalsMod ? hiddenRivalsMod.HIDDEN_RIVALS || hiddenRivalsMod.default || [] : [];
+                                    if (Array.isArray(HIDDEN_RIVALS)) {
+                                        for (const rivalTemplate of HIDDEN_RIVALS) {
+                                            try {
+                                                if (typeof this.rivalSystem.getRival !== 'function')
+                                                    continue;
+                                                if (!this.rivalSystem.getRival(rivalTemplate.id)) {
+                                                    if (typeof this.rivalSystem.addRival === 'function') {
+                                                        this.rivalSystem.addRival(JSON.parse(JSON.stringify(rivalTemplate)));
+                                                    }
+                                                }
+                                            }
+                                            catch (e) {
+                                                // ignore individual rival injection failures
+                                            }
+                                        }
+                                    }
+                                }
+                                catch (e) {
+                                    // ignore injection failure
+                                }
+                                const encounter = enc.createEncounter(gameState);
+                                gameState.systems.rivalEncounters.push(encounter);
+                                try {
+                                    if (gameState.world && typeof gameState.world.day === 'number') {
+                                        gameState.world.flags.lastKidGodSpawn = gameState.world.day;
+                                    }
+                                    else {
+                                        gameState.world.flags.lastKidGodSpawn = Date.now();
+                                    }
+                                }
+                                catch (e) {
+                                    void e;
+                                }
+                                try {
+                                    const analyticsMod = await Promise.resolve().then(() => __importStar(require('../systems/Analytics'))).catch(() => null);
+                                    if (analyticsMod && analyticsMod.default && typeof analyticsMod.default.record === 'function')
+                                        analyticsMod.default.record('hiddenEncounterSpawned', { id: enc.id });
+                                }
+                                catch (e) { /* ignore */ }
+                            }
+                        }
+                        catch (e) {
+                            // ignore per-encounter failures
+                        }
+                    }
+                }
+            }
+        }
+        catch (e) {
+            // non-fatal
+        }
+        if (gameState.player.sect && rngFn() < 0.05) {
             this.generateSectMission(gameState);
         }
     }

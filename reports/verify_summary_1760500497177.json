@@ -1,0 +1,46 @@
+{
+  "timestamp": "2025-10-15T03:54:56.430Z",
+  "steps": [
+    {
+      "name": "build:node",
+      "cmd": "npm run build:node",
+      "result": {
+        "ok": false,
+        "out": "",
+        "status": 1
+      }
+    },
+    {
+      "name": "smoke_test_compiled_cjs",
+      "cmd": "node scripts/run_compiled_smoke_cjs.cjs",
+      "result": {
+        "ok": true,
+        "out": "Compiled CJS smoke test run for 50 executors\nAll compiled smoke checks passed\n"
+      }
+    },
+    {
+      "name": "verify_content",
+      "cmd": "node scripts/verify_content.cjs",
+      "result": {
+        "ok": true,
+        "out": "Found 295 unique executorIds in acts\nAll executorIds referenced in act content have implementations in the compiled registry\n"
+      }
+    },
+    {
+      "name": "verify_content_extended",
+      "cmd": "node scripts/verify_content_extended.cjs",
+      "result": {
+        "ok": true,
+        "out": "Extended content verification passed: mentor unlocks, codex/lore references, race/physique mappings OK\n"
+      }
+    },
+    {
+      "name": "report_missing_unlocks",
+      "cmd": "node scripts/report_missing_unlocks.cjs",
+      "result": {
+        "ok": true,
+        "out": "Compiled skills module path checked under: C:\\Users\\xbo4k.ZLOVE.000\\Downloads\\xianxia game\\.tmp_build\\src\\data\nALL_SKILLS count: 778\nMissing mentor unlocks count: 0\nNo missing mentor unlocks found.\n\nSample skill presence: {\n  sect_generic_0: true,\n  heaven_splitter: true,\n  void_dragon_saber: true,\n  starfall_sword_dance: true,\n  purifying_sutra: true\n}\n\nWrote report to .tmp_build/reports/missing_mentor_unlocks.json\n"
+      }
+    }
+  ]
+}

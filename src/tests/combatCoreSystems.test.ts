@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-non-null-assertion: "off" */
 import { CombatSystem, type CombatParticipant, type CombatTechnique, type CombatContext } from '@/systems/CombatSystem';
 
 const makeParticipant = (id: string, name: string, stats: { atk: number; def: number; speed: number }, extra?: Partial<CombatParticipant>): CombatParticipant => ({

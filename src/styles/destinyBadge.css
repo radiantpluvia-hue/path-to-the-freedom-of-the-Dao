@@ -1,0 +1,86 @@
+:root {
+  --destiny-tooltip-bg: rgba(0,0,0,0.92);
+  --destiny-tooltip-border: rgba(255,255,255,0.06);
+  --destiny-tooltip-text: #ffffff;
+}
+
+.destiny-badge {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+}
+
+.destiny-badge:focus {
+  outline: 3px solid rgba(99,102,241,0.24);
+  outline-offset: 2px;
+}
+
+.destiny-badge.compact {
+  margin-top: 2px;
+  font-size: 0.85rem;
+}
+
+.destiny-badge.regular {
+  margin-top: 6px;
+  font-size: 0.9rem;
+}
+
+.destiny-badge__mini {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 1100;
+  background: var(--destiny-tooltip-bg);
+  color: var(--destiny-tooltip-text);
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--destiny-tooltip-border);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  max-width: 320px;
+  width: max-content;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-6px) scale(0.98);
+  transition: opacity 180ms ease, transform 180ms ease;
+  font-size: 0.85rem;
+}
+
+/* When visible, enable pointer events and animate into place */
+.destiny-badge__mini.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.destiny-badge__sparkline {
+  width: 90px;
+  height: 28px;
+}
+
+.destiny-badge__history {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.destiny-badge__button {
+  padding: 6px 8px;
+  font-size: 0.8rem;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--destiny-tooltip-text);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.destiny-badge__button:focus {
+  outline: 2px solid rgba(99,102,241,0.6);
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .destiny-badge__mini,
+  .destiny-badge__mini.show {
+    transition: none !important;
+    transform: none !important;
+  }
+}

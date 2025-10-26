@@ -1,0 +1,565 @@
+--- BEGIN PATCH ---
+
+diff --git a/src/config/heavenlyDao.ts b/src/config/heavenlyDao.ts
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/src/config/heavenlyDao.ts
+@@ -0,0 +1,32 @@
++// File: src/config/heavenlyDao.ts
++export const HEAVENLY_RANKING = {
++  CATEGORY_NAMES: ['power', 'providence', 'karma'] as const,
++  MAX_ENTRIES: 100,
++  TOP_REWARD_THRESHOLD: 10,
++  RANKING_CYCLE_YEARS: 5000, // game years per season
++  MIN_REALM_FOR_RANKING: 'immortal_early', // adjust to your realm enum
++  COMPRESSION_ALPHA: 0.55, // project compression constant
++  // weights for composite sorting (tweak as desired)
++  POWER_WEIGHT: 0.6,
++  PROVIDENCE_WEIGHT: 0.25,
++  KARMA_WEIGHT: 0.15,
++  // reward tuning (placeholders)
++  TOP_REWARD_TITLES: [
++    'Heaven\'s Chosen', 'Heaven\'s Champion', 'Heavenly Paragon'
++  ],
++};
++
+
+diff --git a/src/types/heavenly.ts b/src/types/heavenly.ts
+new file mode 100644
+index 0000000..2222222
+--- /dev/null
++++ b/src/types/heavenly.ts
+@@ -0,0 +1,41 @@
++// File: src/types/heavenly.ts
++export type EntityType = 'player' | 'npc' | 'sect' | 'beast' | 'artifact';
++
++export interface HeavenlyRankEntry {
++  id: string; // unique id: entityId or "sect:<id>"
++  name: string;
++  type: EntityType;
++  realm: string;
++  powerScore: number;
++  providenceScore: number;
++  karmaScore: number;
++  compositeScore: number;
++  lastUpdated: number; // epoch ms
++  notableAction?: string | null;
++}
++
++export interface HeavenlyRankingSeason {
++  seasonId: string;
++  seasonStartYear: number; // absolute game year
++  seasonEndYear: number;
++  entries: HeavenlyRankEntry[];
++  publishedAt?: number;
++}
++
++export interface HeavenlyDaoState {
++  currentSeason?: HeavenlyRankingSeason | null;
++  archive: HeavenlyRankingSeason[];
++}
++
+
+diff --git a/src/utils/scoring.ts b/src/utils/scoring.ts
+new file mode 100644
+index 0000000..3333333
+--- /dev/null
++++ b/src/utils/scoring.ts
+@@ -0,0 +1,106 @@
++// File: src/utils/scoring.ts
++import { HEAVENLY_RANKING } from '../config/heavenlyDao';
++import type { HeavenlyRankEntry } from '../types/heavenly';
++
++// Note: adjust entity interface based on your game models.
++export interface ScoringEntity {
++  id: string;
++  name: string;
++  type: string;
++  realm: string;
++  combatPowerRaw: number; // raw numeric combat power (big numbers ok, convert to Number carefully)
++  providence?: number; // raw providence points
++  karmicMerit?: number;
++  karmicDebt?: number;
++  bloodlineMultiplier?: number; // multiplicative hooks (default 1)
++  physiqueMultiplier?: number;  // multiplicative hooks (default 1)
++}
++
++const alpha = HEAVENLY_RANKING.COMPRESSION_ALPHA;
++
++export function computePowerScore(entity: ScoringEntity): number {
++  const base = Math.max(0, Number(entity.combatPowerRaw) || 0);
++  // compression (avoid negative/0 issues)
++  const compressed = base <= 0 ? 0 : Math.pow(base, alpha);
++  const mod = (entity.bloodlineMultiplier ?? 1) * (entity.physiqueMultiplier ?? 1);
++  return compressed * mod;
++}
++
++export function computeProvidenceScore(entity: ScoringEntity): number {
++  const raw = Math.max(0, Number(entity.providence) || 0);
++  // slight compression so very large providence doesn't dominate
++  return raw <= 0 ? 0 : Math.pow(raw, 0.9);
++}
++
++export function computeKarmaScore(entity: ScoringEntity): number {
++  const deeds = Math.max(0, Number(entity.karmicMerit) || 0);
++  const sins = Math.max(0, Number(entity.karmicDebt) || 0);
++  const value = Math.pow(deeds, 0.9) - Math.pow(sins, 0.8);
++  return Math.max(0, value);
++}
++
++export function computeComposite(power: number, prov: number, karma: number): number {
++  const wP = HEAVENLY_RANKING.POWER_WEIGHT;
++  const wPr = HEAVENLY_RANKING.PROVIDENCE_WEIGHT;
++  const wK = HEAVENLY_RANKING.KARMA_WEIGHT;
++  return wP * power + wPr * prov + wK * karma;
++}
++
++export function makeEntryFromEntity(entity: ScoringEntity): HeavenlyRankEntry {
++  const p = computePowerScore(entity);
++  const pr = computeProvidenceScore(entity);
++  const k = computeKarmaScore(entity);
++  const composite = computeComposite(p, pr, k);
++  return {
++    id: entity.id,
++    name: entity.name,
++    type: (entity.type as any) || 'npc',
++    realm: entity.realm,
++    powerScore: p,
++    providenceScore: pr,
++    karmaScore: k,
++    compositeScore: composite,
++    lastUpdated: Date.now(),
++    notableAction: null,
++  };
++}
++
+
+diff --git a/src/managers/HeavenlyRankingManager.ts b/src/managers/HeavenlyRankingManager.ts
+new file mode 100644
+index 0000000..4444444
+--- /dev/null
++++ b/src/managers/HeavenlyRankingManager.ts
+@@ -0,0 +1,208 @@
++// File: src/managers/HeavenlyRankingManager.ts
++import { HEAVENLY_RANKING } from '../config/heavenlyDao';
++import { makeEntryFromEntity } from '../utils/scoring';
++import type { HeavenlyDaoState, HeavenlyRankingSeason, HeavenlyRankEntry } from '../types/heavenly';
++
++/**
++ * Notes:
++ * - This manager is kept intentionally simple and synchronous.
++ * - Hook runSeason() into your world tick scheduler when the world year >= nextSeasonStart.
++ * - Replace repo-specific persistence functions with your game's save/load.
++ */
++
++const defaultState: HeavenlyDaoState = {
++  currentSeason: null,
++  archive: [],
++};
++
++// Provide global state object (replace with your game's gameState store)
++export const heavenlyState: HeavenlyDaoState = defaultState;
++
++/**
++ * getEligibleEntities() should be implemented to query your game state
++ * and return an array of scoring entities that meet the realm threshold.
++ * Replace the placeholder with your game's entity query.
++ */
++export type EntityProvider = () => Promise<any[]> | any[];
++
++// set by caller (injection for testing)
++export let entityProvider: EntityProvider | null = null;
++
++export function setEntityProvider(provider: EntityProvider) {
++  entityProvider = provider;
++}
++
++export function getEntitiesForRanking() {
++  if (!entityProvider) return [];
++  const arr = entityProvider();
++  return Array.isArray(arr) ? arr : [];
++}
++
++export function runSeason(currentYear: number) {
++  const provider = getEntitiesForRanking();
++  const seasonId = `season-${currentYear}`;
++  const start = currentYear;
++  const end = currentYear + HEAVENLY_RANKING.RANKING_CYCLE_YEARS;
++  // collect + score
++  const rawEntries: HeavenlyRankEntry[] = provider
++    .filter((e: any) => {
++      // Accept only entities at or above MIN_REALM_FOR_RANKING
++      // Replace this check with your realm comparison logic
++      const realm = e.realm ?? '';
++      return realm && realm.startsWith('immortal'); // simple guard; change as needed
++    })
++    .map((e: any) => makeEntryFromEntity(e));
++  // sort composite
++  rawEntries.sort((a, b) => b.compositeScore - a.compositeScore);
++  const top = rawEntries.slice(0, HEAVENLY_RANKING.MAX_ENTRIES);
++  const season: HeavenlyRankingSeason = {
++    seasonId,
++    seasonStartYear: start,
++    seasonEndYear: end,
++    entries: top,
++    publishedAt: Date.now(),
++  };
++  // persist
++  heavenlyState.currentSeason = season;
++  // broadcast (replace with your broadcast manager)
++  broadcastToImmortalRealms(createPublishMessage(season));
++  return season;
++}
++
++export function createPublishMessage(season: HeavenlyRankingSeason) {
++  const top5 = season.entries.slice(0, 5).map((e, i) => `${i + 1}) ${e.name}`).join(' | ');
++  return `WORLD-BROADCAST: The Heavenly Dao Rankings for ${season.seasonId} have been inscribed. Top 5: ${top5}`;
++}
++
++export function broadcastToImmortalRealms(message: string) {
++  // Replace with your world's broadcast system for immortal realms
++  console.info('[HEAVENLY BROADCAST]', message);
++}
++
++/**
++ * Immediate replacement when a ranked entity is defeated.
++ * Call this from your combat resolution logic.
++ */
++export function onEntityDefeated(defeatedId: string, attackerEntity: any) {
++  const season = heavenlyState.currentSeason;
++  if (!season) return false;
++  // only attackers from immortal realms qualify
++  if (!attackerEntity.realm || !attackerEntity.realm.startsWith('immortal')) return false;
++  const idx = season.entries.findIndex(e => e.id === defeatedId);
++  if (idx === -1) return false; // only react if defeated was ranked
++  const newEntry = makeEntryFromEntity(attackerEntity);
++  // replace in-place (keeps slot semantics) then re-sort + trim
++  season.entries[idx] = newEntry;
++  season.entries.sort((a, b) => b.compositeScore - a.compositeScore);
++  season.entries = season.entries.slice(0, HEAVENLY_RANKING.MAX_ENTRIES);
++  broadcastToImmortalRealms(`HEAVENLY BROADCAST: ${newEntry.name} has seized the place of ${defeatedId} on the Heavenly Dao Rankings!`);
++  return true;
++}
++
++/**
++ * Called on season end to distribute top-10 rewards and archive the season.
++ * Replace reward delivery functions with your game logic.
++ */
++export function onSeasonEnd() {
++  const season = heavenlyState.currentSeason;
++  if (!season) return;
++  const top10 = season.entries.slice(0, HEAVENLY_RANKING.TOP_REWARD_THRESHOLD);
++  top10.forEach((entry, idx) => {
++    // only reward players (customize for NPCs/sects)
++    if (entry.type === 'player') {
++      // replace with your player lookup + reward apply
++      console.info(`Granting rewards to player ${entry.name} for rank #${idx + 1}`);
++      grantTopRankRewards(entry, idx + 1, season.seasonId);
++    } else {
++      // optionally create reaction events for NPCs / sects
++      createFactionReactionEvents(entry);
++    }
++  });
++
++  // archive
++  heavenlyState.archive.push(season);
++  heavenlyState.currentSeason = null;
++  broadcastToImmortalRealms(`HEAVENLY DECREE: Season ${season.seasonId} has ended; top cultivators rewarded.`);
++}
++
++function grantTopRankRewards(entry: HeavenlyRankEntry, rank: number, seasonId: string) {
++  // TODO: implement actual reward logic; placeholders below
++  // e.g., add titles, DaoXP, shards, temporary edicts
++  console.info(`(placeholder) Grant rewards to ${entry.name} for season ${seasonId} rank ${rank}`);
++}
++
++function createFactionReactionEvents(entry: HeavenlyRankEntry) {
++  // TODO: use your EventPool to create NPC/sect reactions
++  console.info(`(placeholder) Create faction reaction for ${entry.name}`);
++}
++
+
+diff --git a/src/hooks/combatHook.ts b/src/hooks/combatHook.ts
+new file mode 100644
+index 0000000..5555555
+--- /dev/null
++++ b/src/hooks/combatHook.ts
+@@ -0,0 +1,32 @@
++// File: src/hooks/combatHook.ts
++import { onEntityDefeated } from '../managers/HeavenlyRankingManager';
++
++/**
++ * Call this function when a combat finishes and the defeated entity id and attacker object are available.
++ * Example usage from your combat resolution:
++ *
++ *   import { handleCombatEnd } from 'src/hooks/combatHook';
++ *   handleCombatEnd(defeatedId, attacker);
++ *
++ */
++export function handleCombatEnd(defeatedId: string, attackerEntity: any) {
++  try {
++    const replaced = onEntityDefeated(defeatedId, attackerEntity);
++    if (replaced) {
++      // optionally add local notifications or event entries
++      // e.g., EventPool.push({ type: 'HEAVENLY_REPLACEMENT', data: {...} });
++    }
++  } catch (err) {
++    console.error('Heavenly ranking combat hook error', err);
++  }
++}
++
+
+diff --git a/src/ui/HeavenlyStele.tsx b/src/ui/HeavenlyStele.tsx
+new file mode 100644
+index 0000000..6666666
+--- /dev/null
++++ b/src/ui/HeavenlyStele.tsx
+@@ -0,0 +1,156 @@
++// File: src/ui/HeavenlyStele.tsx
++import React, { useMemo, useState } from 'react';
++import type { HeavenlyRankingSeason, HeavenlyRankEntry } from '../types/heavenly';
++
++// Props: season (nullable) and onClose
++export default function HeavenlyStele({ season, onClose }: { season?: HeavenlyRankingSeason | null; onClose?: () => void; }) {
++  const [tab, setTab] = useState<'overall' | 'power' | 'providence' | 'karma'>('overall');
++  if (!season) {
++    return (
++      <div className="p-4 rounded-2xl shadow-lg bg-white">
++        <h2 className="text-lg font-bold">Heavenly Dao Rankings</h2>
++        <p className="text-sm mt-2">No active season.</p>
++      </div>
++    );
++  }
++
++  const entries = useMemo(() => {
++    switch (tab) {
++      case 'power':
++        return [...season.entries].sort((a, b) => b.powerScore - a.powerScore);
++      case 'providence':
++        return [...season.entries].sort((a, b) => b.providenceScore - a.providenceScore);
++      case 'karma':
++        return [...season.entries].sort((a, b) => b.karmaScore - a.karmaScore);
++      default:
++        return season.entries;
++    }
++  }, [season, tab]);
++
++  return (
++    <div className="p-4 rounded-2xl shadow-2xl bg-gradient-to-br from-white to-slate-50 max-w-4xl">
++      <div className="flex justify-between items-start">
++        <div>
++          <h1 className="text-xl font-extrabold">Heavenly Dao Rankings</h1>
++          <div className="text-xs text-slate-600">Season {season.seasonId} — {new Date(season.publishedAt ?? Date.now()).toDateString()}</div>
++        </div>
++        <div>
++          <button className="px-3 py-1 rounded-md border" onClick={onClose}>Close</button>
++        </div>
++      </div>
++
++      <div className="mt-3 flex gap-2">
++        <button onClick={() => setTab('overall')} className={`px-2 py-1 rounded ${tab === 'overall' ? 'bg-slate-100' : ''}`}>Overall</button>
++        <button onClick={() => setTab('power')} className={`px-2 py-1 rounded ${tab === 'power' ? 'bg-slate-100' : ''}`}>Power</button>
++        <button onClick={() => setTab('providence')} className={`px-2 py-1 rounded ${tab === 'providence' ? 'bg-slate-100' : ''}`}>Providence</button>
++        <button onClick={() => setTab('karma')} className={`px-2 py-1 rounded ${tab === 'karma' ? 'bg-slate-100' : ''}`}>Karma</button>
++      </div>
++
++      <div className="mt-4 overflow-auto max-h-[60vh]">
++        <table className="w-full table-auto text-sm">
++          <thead className="sticky top-0 bg-white">
++            <tr>
++              <th className="text-left p-2">#</th>
++              <th className="text-left p-2">Name</th>
++              <th className="text-left p-2">Type</th>
++              <th className="text-left p-2">Realm</th>
++              <th className="text-right p-2">Power</th>
++              <th className="text-right p-2">Providence</th>
++              <th className="text-right p-2">Karma</th>
++            </tr>
++          </thead>
++          <tbody>
++            {entries.map((e: HeavenlyRankEntry, i: number) => (
++              <tr key={e.id} className="hover:bg-slate-100 border-b">
++                <td className="p-2">{i + 1}</td>
++                <td className="p-2">{e.name}</td>
++                <td className="p-2">{e.type}</td>
++                <td className="p-2">{e.realm}</td>
++                <td className="p-2 text-right">{formatScore(e.powerScore)}</td>
++                <td className="p-2 text-right">{formatScore(e.providenceScore)}</td>
++                <td className="p-2 text-right">{formatScore(e.karmaScore)}</td>
++              </tr>
++            ))}
++          </tbody>
++        </table>
++      </div>
++    </div>
++  );
++}
++
++function formatScore(n: number) {
++  if (n >= 1e9) return (n / 1e9).toFixed(2) + 'B';
++  if (n >= 1e6) return (n / 1e6).toFixed(2) + 'M';
++  if (n >= 1e3) return (n / 1e3).toFixed(2) + 'k';
++  return Math.round(n * 100) / 100;
++}
++
+
+diff --git a/tests/scoring.test.ts b/tests/scoring.test.ts
+new file mode 100644
+index 0000000..7777777
+--- /dev/null
++++ b/tests/scoring.test.ts
+@@ -0,0 +1,48 @@
++// File: tests/scoring.test.ts
++import { computePowerScore, computeProvidenceScore, computeKarmaScore, computeComposite, makeEntryFromEntity } from '../src/utils/scoring';
++
++describe('Heavenly scoring functions', () => {
++  test('computePowerScore handles zero and compresses large numbers', () => {
++    const small = computePowerScore({id:'a', name:'a', type:'npc', realm:'immortal_early', combatPowerRaw: 0} as any);
++    expect(small).toBe(0);
++
++    const large = computePowerScore({id:'b', name:'b', type:'npc', realm:'immortal_late', combatPowerRaw: 1e12} as any);
++    // large should be > 0 and finite
++    expect(large).toBeGreaterThan(0);
++    expect(Number.isFinite(large)).toBeTruthy();
++  });
++
++  test('providence & karma basic behavior', () => {
++    const p = computeProvidenceScore({id:'x', name:'x', type:'npc', realm:'immortal', combatPowerRaw:0, providence: 1e6} as any);
++    expect(p).toBeGreaterThan(0);
++    const k = computeKarmaScore({id:'y', name:'y', type:'npc', realm:'immortal', combatPowerRaw:0, karmicMerit:100, karmicDebt:10} as any);
++    expect(k).toBeGreaterThan(0);
++  });
++
++  test('makeEntryFromEntity returns composite and fields', () => {
++    const e = makeEntryFromEntity({id:'tt', name:'tt', type:'player', realm:'immortal', combatPowerRaw:1000, providence: 50, karmicMerit:30} as any);
++    expect(e.compositeScore).toBeGreaterThanOrEqual(e.powerScore * 0.5); // quick sanity
++    expect(e.name).toBe('tt');
++  });
++});
++
+
+diff --git a/tests/replacement.test.ts b/tests/replacement.test.ts
+new file mode 100644
+index 0000000..8888888
+--- /dev/null
++++ b/tests/replacement.test.ts
+@@ -0,0 +1,74 @@
++// File: tests/replacement.test.ts
++import { setEntityProvider, runSeason, heavenlyState, onEntityDefeated } from '../src/managers/HeavenlyRankingManager';
++
++const sampleEntities = [
++  { id: 'npc1', name: 'Ancient One', type: 'npc', realm: 'immortal_early', combatPowerRaw: 1e9, providence: 1000, karmicMerit: 500 },
++  { id: 'npc2', name: 'Void Emperor', type: 'npc', realm: 'immortal_late', combatPowerRaw: 5e9, providence: 5000, karmicMerit: 1000 },
++  { id: 'player1', name: 'PlayerX', type: 'player', realm: 'immortal_early', combatPowerRaw: 1e8, providence: 300, karmicMerit: 200, bloodlineMultiplier: 1.1 }
++];
++
++describe('HeavenlyRankingManager replacement', () => {
++  beforeAll(() => {
++    setEntityProvider(() => sampleEntities);
++    runSeason(100000); // create season
++  });
++
++  test('season created and contains ranked entries', () => {
++    expect(heavenlyState.currentSeason).toBeDefined();
++    expect(heavenlyState.currentSeason!.entries.length).toBeGreaterThan(0);
++  });
++
++  test('onEntityDefeated replaces a ranked entity when attacker is immortal', () => {
++    // assume npc1 is ranked; attacker is player1
++    const defeatedId = 'npc1';
++    const attacker = sampleEntities.find(e => e.id === 'player1');
++    const before = heavenlyState.currentSeason!.entries.find(e => e.id === defeatedId);
++    const replaced = onEntityDefeated(defeatedId, attacker);
++    expect(replaced).toBeTruthy();
++    const now = heavenlyState.currentSeason!.entries.some(e => e.id === 'player1');
++    expect(now).toBeTruthy();
++  });
++});
++
+
+diff --git a/tests/seasonEnd.test.ts b/tests/seasonEnd.test.ts
+new file mode 100644
+index 0000000..9999999
+--- /dev/null
++++ b/tests/seasonEnd.test.ts
+@@ -0,0 +1,46 @@
++// File: tests/seasonEnd.test.ts
++import { heavenlyState, onSeasonEnd, setEntityProvider, runSeason } from '../src/managers/HeavenlyRankingManager';
++
++describe('Season end flow', () => {
++  test('onSeasonEnd archives and clears current season', () => {
++    setEntityProvider(() => [
++      { id: 'p1', name: 'P1', type: 'player', realm: 'immortal_early', combatPowerRaw: 1e8 },
++      { id: 'p2', name: 'P2', type: 'player', realm: 'immortal_early', combatPowerRaw: 9e7 },
++      { id: 'p3', name: 'P3', type: 'npc', realm: 'immortal_early', combatPowerRaw: 8e7 },
++      { id: 'p4', name: 'P4', type: 'npc', realm: 'immortal_early', combatPowerRaw: 7e7 },
++      { id: 'p5', name: 'P5', type: 'npc', realm: 'immortal_early', combatPowerRaw: 6e7 },
++      { id: 'p6', name: 'P6', type: 'npc', realm: 'immortal_early', combatPowerRaw: 5e7 },
++      { id: 'p7', name: 'P7', type: 'npc', realm: 'immortal_early', combatPowerRaw: 4e7 },
++      { id: 'p8', name: 'P8', type: 'npc', realm: 'immortal_early', combatPowerRaw: 3e7 },
++      { id: 'p9', name: 'P9', type: 'npc', realm: 'immortal_early', combatPowerRaw: 2e7 },
++      { id: 'p10', name: 'P10', type: 'npc', realm: 'immortal_early', combatPowerRaw: 1e7 },
++      { id: 'p11', name: 'P11', type: 'npc', realm: 'immortal_early', combatPowerRaw: 9e6 }
++    ]);
++    runSeason(200000);
++    expect(heavenlyState.currentSeason).toBeTruthy();
++    onSeasonEnd();
++    expect(heavenlyState.currentSeason).toBeNull();
++    expect(heavenlyState.archive.length).toBeGreaterThan(0);
++  });
++});
++
+
+diff --git a/samples/heavenly_season_sample.json b/samples/heavenly_season_sample.json
+new file mode 100644
+index 0000000..aaaaaaa
+--- /dev/null
++++ b/samples/heavenly_season_sample.json
+@@ -0,0 +1,48 @@
++{
++  "seasonId": "season-100000",
++  "seasonStartYear": 100000,
++  "seasonEndYear": 105000,
++  "publishedAt": 1735689600000,
++  "entries": [
++    {
++      "id": "void_emperor",
++      "name": "Void Emperor",
++      "type": "npc",
++      "realm": "immortal_late",
++      "powerScore": 1245000,
++      "providenceScore": 45000,
++      "karmaScore": 12000,
++      "compositeScore": 745202,
++      "lastUpdated": 1735689600000,
++      "notableAction": "Sealed three tribulation storms in a single instant"
++    },
++    {
++      "id": "celestial_matriarch",
++      "name": "Celestial Matriarch",
++      "type": "sect",
++      "realm": "immortal_late",
++      "powerScore": 1084000,
++      "providenceScore": 54000,
++      "karmaScore": 9000,
++      "compositeScore": 682320,
++      "lastUpdated": 1735689600000,
++      "notableAction": "Led the Convergence Rite"
++    },
++    {
++      "id": "player_ardent",
++      "name": "Ardent",
++      "type": "player",
++      "realm": "immortal_early",
++      "powerScore": 900000,
++      "providenceScore": 25000,
++      "karmaScore": 4500,
++      "compositeScore": 548750,
++      "lastUpdated": 1735689600000,
++      "notableAction": "Defeated the Fallen Archon"
++    }
++  ]
++}
++
+--- END PATCH ---

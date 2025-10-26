@@ -3,22 +3,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChoiceModal = ChoiceModal;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const useGameStore_1 = require("@/store/useGameStore");
-const eventResolver_1 = require("./eventResolver");
+const choiceHandler_1 = require("./src/systems/choiceHandler");
 const Card_1 = require("@/components/core/Card");
 const Button_1 = require("@/components/core/Button");
 function ChoiceModal() {
-    const { ui, player, addEventLog, setUIProperty } = (0, useGameStore_1.useGameStore)(state => ({
-        ui: state.ui,
-        player: state.player,
-        addEventLog: state.addEventLog,
-        setUIProperty: state.setUIProperty,
-    }));
-    const choiceData = ui.activeStoryChoice;
+    // Use separate selectors to avoid returning a new object identity each render
+    const choiceData = (0, useGameStore_1.useGameStore)(state => state.ui.activeStoryChoice);
+    const player = (0, useGameStore_1.useGameStore)(state => state.player);
+    const addEventLog = (0, useGameStore_1.useGameStore)(state => state.addEventLog);
+    const setUIProperty = (0, useGameStore_1.useGameStore)(state => state.setUIProperty);
     if (!choiceData)
         return null;
     const handleChoice = (choice) => {
-        const { newPlayerState, narrative } = (0, eventResolver_1.applyEventEffects)(player, choice.effects);
-        useGameStore_1.useGameStore.setState({ player: newPlayerState });
+        const handler = (0, choiceHandler_1.createDefaultChoiceHandler)();
+        const gs = useGameStore_1.useGameStore.getState();
+        const { newState, narrative } = handler.handleChoice(gs, choice);
+        useGameStore_1.useGameStore.setState(newState);
         addEventLog(choice.narrative || `You chose to "${choice.text}".`);
         if (narrative)
             addEventLog(narrative);

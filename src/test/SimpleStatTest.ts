@@ -21,7 +21,7 @@ function testRealmMultipliers() {
 function testRarityMultipliers() {
   console.log('\n=== Testing Rarity Multipliers ===');
 
-  const rarities = ['common', 'uncommon', 'rare', 'epic', 'legendary', 'mythical', 'transcendent'];
+  const rarities = ["H", "G", "F", "E", "D", 'mythical', "B"];
 
   rarities.forEach(rarity => {
     const multiplier = getRarityMultiplier(rarity);

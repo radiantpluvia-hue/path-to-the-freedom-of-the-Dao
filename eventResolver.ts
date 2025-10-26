@@ -1,4 +1,19 @@
 import { GameState, EventChoice } from './src/types';
+import { ChoiceHandler, createDefaultChoiceHandler } from './src/systems/choiceHandler';
+
+// Simple registry for handlers keyed by event type (string). Handlers decide how to
+// apply choice effects to the GameState. If no handler is registered for an event
+// type, the default RivalChoiceHandler is used which delegates to applyEventEffects.
+const handlerRegistry: Record<string, ChoiceHandler> = {};
+
+export function registerChoiceHandler(eventType: string, handler: ChoiceHandler) {
+  handlerRegistry[eventType] = handler;
+}
+
+export function getChoiceHandler(eventType?: string) {
+  if (eventType && handlerRegistry[eventType]) return handlerRegistry[eventType];
+  return createDefaultChoiceHandler();
+}
 
 /**
  * Applies the effects of an event choice to a player state.
@@ -44,4 +59,16 @@ export function applyEventEffects(
   const narrative = narrativeParts.length > 0 ? narrativeParts.join(' ') : 'You ponder your choice, but nothing seems to happen.';
 
   return { newPlayerState: newPlayer, narrative };
+}
+
+/**
+ * Resolve an event choice for use by Domain.resolveEvent / replay tools.
+ * If a handler is registered for the given eventType it will be used, otherwise
+ * the default handler is used.
+ */
+export function resolveEvent(gs: GameState, eventId: string, choice?: EventChoice, eventType?: string) {
+  if (!choice) return gs;
+  const handler = getChoiceHandler(eventType);
+  const res = handler.handleChoice(gs, choice as any);
+  return res.newState;
 }

@@ -1,9 +1,15 @@
 import { Rival, RivalEncounter, FactionBattle } from '../types';
+// Weapon sampling is relatively heavy (large data). We avoid statically
+// importing WeaponSpawner here so bundlers can split it into a separate chunk
+// when used by UI code. Provide a sync proxy that returns null until the
+// module finishes loading; this mirrors the approach in MarketSystem.
 import { MAJOR_SECTS, MAJOR_FACTIONS, Sect } from './SectSystem';
 import type { CombatParticipant } from './CombatSystem';
 import { RIVAL_ARCHETYPES, getRandomArchetype, getArchetypeById, type RivalArchetype } from '../data/rivalArchetypes';
-import { RivalAISystem } from './RivalAISystem';
+import { getEnemyBaseMultiplier } from '../config/balance';
+import { safeImport } from '../utils/safeImport';
 import { runtimeRng } from '@/utils/seededRng';
+import { logger } from '../utils/logger';
 
 export interface RivalGenerationOptions {
   minLevel?: number;
@@ -19,12 +25,49 @@ export class RivalSystem {
   private rivals: Rival[] = [];
   private encounters: RivalEncounter[] = [];
   private factionBattles: FactionBattle[] = [];
-  private aiSystem: RivalAISystem | null = null;
+  private aiSystem: any = null;
+  // Track how many new combat records have accumulated since last learning application
+  private learningApplyCounters: Map<string, number> = new Map();
+  // Track the last time learning was applied for a rival (ms epoch)
+  private lastLearningApplied: Map<string, number> = new Map();
+  private static readonly LEARNING_APPLY_THRESHOLD = 3; // apply after N new records
+  private static readonly LEARNING_APPLY_MAX_AGE_MS = 24 * 60 * 60 * 1000; // or once per day
   private externalRng?: () => number;
-  constructor(rng?: () => number) {
-    this.externalRng = rng;
+  private injectedSampler?: () => any;
+  private static _warnedNoSectsOrFactions = false;
+
+  private static _sampleWeaponFn: ((filter?: any, rng?: () => number) => any) | null = null;
+  private static _sampleWeaponLoading = false;
+  private static trySampleWeaponSync(filter?: any, rng?: () => number) {
+    if (this._sampleWeaponFn) return this._sampleWeaponFn(filter, rng);
+    if (!this._sampleWeaponLoading) {
+      this._sampleWeaponLoading = true;
+      (async () => {
+        try {
+          const mod = await import('./WeaponSpawner');
+          if (mod && typeof (mod as any).sampleWeapon === 'function') this._sampleWeaponFn = (mod as any).sampleWeapon;
+        } catch { /* ignore */ }
+      })();
+    }
+    return null;
+  }
+  constructor(opts?: { rng?: () => number; sampleWeapon?: () => any } | (() => number), maybeSampler?: () => any) {
+    // Support two call styles for backwards compatibility:
+    // new RivalSystem(rng) or new RivalSystem({ rng, sampleWeapon })
+    if (typeof opts === 'function') {
+      this.externalRng = opts as () => number;
+      this.injectedSampler = maybeSampler;
+    } else if (opts && typeof opts === 'object') {
+      this.externalRng = (opts as any).rng;
+      this.injectedSampler = (opts as any).sampleWeapon;
+    }
     this.initializeDefaultRivals();
-    this.aiSystem = new RivalAISystem();
+    // Lazily initialize RivalAISystem if available without statically importing it
+    try {
+      void import('./RivalAISystem').then(mod => {
+        try { this.aiSystem = new (mod as any).RivalAISystem(); } catch { /* ignore */ }
+      }).catch(() => { void 0; });
+    } catch (e) { /* ignore */ }
   }
 
   private rng(): number {
@@ -56,7 +99,7 @@ export class RivalSystem {
         stats: { hp: 250, qi: 200, atk: 35, def: 25, speed: 30 },
         techniques: ['azure_sword_art', 'cloud_step', 'qi_blast'],
         personality: 'aggressive',
-        relationship: -30,
+        relationship: 0,
         lastEncounter: 0,
         encounterCount: 0,
         defeated: false,
@@ -78,7 +121,7 @@ export class RivalSystem {
         stats: { hp: 300, qi: 250, atk: 45, def: 20, speed: 35 },
         techniques: ['blood_sacrifice', 'crimson_claw', 'soul_devouring_art'],
         personality: 'treacherous',
-        relationship: -60,
+        relationship: 0,
         lastEncounter: 0,
         encounterCount: 0,
         defeated: false,
@@ -100,7 +143,7 @@ export class RivalSystem {
         stats: { hp: 280, qi: 350, atk: 30, def: 35, speed: 25 },
         techniques: ['dao_comprehension', 'reality_analysis', 'defensive_stance'],
         personality: 'honorable',
-        relationship: -10,
+        relationship: 0,
         lastEncounter: 0,
         encounterCount: 0,
         defeated: false,
@@ -125,11 +168,11 @@ export class RivalSystem {
     // Select archetype based on options with null safety
     const factionBias = faction ? [faction] : undefined;
     const sectBias = sect ? [sect] : undefined;
-    const archetype = getRandomArchetype(factionBias, sectBias);
+  const archetype = getRandomArchetype(factionBias, sectBias);
 
     // Fallback if archetype generation fails
     if (!archetype) {
-      if (!options.silent) console.warn('Failed to generate archetype, using fallback');
+      if (!options.silent) logger.warn('Failed to generate archetype, using fallback');
       const fallbackRival = this.generateFallbackRival(options);
       this.addRival(fallbackRival);
       return fallbackRival;
@@ -143,16 +186,19 @@ export class RivalSystem {
   const level = Math.max(minLevel, Math.min(maxLevel, baseLevel + Math.floor(this.rng() * 6) - 3)); // ±3 level variance
 
     // Select sect and faction based on archetype preferences with null safety
-    const availableSects = (archetype.sectBias && archetype.sectBias.length > 0)
-      ? MAJOR_SECTS.filter(s => archetype.sectBias.includes(s.type))
+    const availableSects = (archetype && Array.isArray((archetype as any).sectBias) && (archetype as any).sectBias.length > 0)
+      ? MAJOR_SECTS.filter((s: Sect) => (archetype as any).sectBias.includes(s.type))
       : MAJOR_SECTS;
-    const availableFactions = (archetype.factionBias && archetype.factionBias.length > 0)
-      ? MAJOR_FACTIONS.filter(f => archetype.factionBias.includes(f.type))
+    const availableFactions = (archetype && Array.isArray((archetype as any).factionBias) && (archetype as any).factionBias.length > 0)
+      ? MAJOR_FACTIONS.filter((f: any) => (archetype as any).factionBias.includes(f.type))
       : MAJOR_FACTIONS;
 
     // Ensure we have valid selections with additional validation
     if (availableSects.length === 0 || availableFactions.length === 0) {
-      if (!options.silent) console.warn('No valid sects or factions available, using fallback');
+      if (!options.silent && !RivalSystem._warnedNoSectsOrFactions) {
+        logger.warn('No valid sects or factions available, using fallback');
+        RivalSystem._warnedNoSectsOrFactions = true;
+      }
       const fallbackRival = this.generateFallbackRival(options);
       this.addRival(fallbackRival);
       return fallbackRival;
@@ -160,14 +206,14 @@ export class RivalSystem {
 
     // Additional validation for array integrity
     if (!Array.isArray(MAJOR_SECTS) || MAJOR_SECTS.length === 0) {
-      if (!options.silent) console.error('MAJOR_SECTS array is invalid or empty');
+      if (!options.silent) logger.error('MAJOR_SECTS array is invalid or empty');
       const fallbackRival = this.generateFallbackRival(options);
       this.addRival(fallbackRival);
       return fallbackRival;
     }
 
     if (!Array.isArray(MAJOR_FACTIONS) || MAJOR_FACTIONS.length === 0) {
-      if (!options.silent) console.error('MAJOR_FACTIONS array is invalid or empty');
+      if (!options.silent) logger.error('MAJOR_FACTIONS array is invalid or empty');
       const fallbackRival = this.generateFallbackRival(options);
       this.addRival(fallbackRival);
       return fallbackRival;
@@ -177,22 +223,22 @@ export class RivalSystem {
   const randomFaction = availableFactions[Math.floor(this.rng() * availableFactions.length)];
 
     // Calculate stats using archetype template and level scaling
-    const stats = this.calculateArchetypeStats(archetype, level);
+  const stats = this.calculateArchetypeStats(archetype as any, level);
 
     // Generate techniques combining archetype and sect-specific
-    const techniques = this.generateArchetypeTechniques(archetype, randomSect, level);
+  const techniques = this.generateArchetypeTechniques(archetype as any, randomSect, level);
 
     // Generate special abilities
-    const specialAbilities = this.generateArchetypeAbilities(archetype, randomSect, level);
+  const specialAbilities = this.generateArchetypeAbilities(archetype as any, randomSect, level);
 
     // Generate loot based on archetype
-    const loot = this.generateArchetypeLoot(archetype, randomSect, level);
+  const loot = this.generateArchetypeLoot(archetype as any, randomSect, level);
 
     // Generate title based on archetype and sect
-    const title = this.generateArchetypeTitle(archetype, randomSect, level);
+  const title = this.generateArchetypeTitle(archetype as any, randomSect, level);
 
     // Generate description
-    const description = this.generateArchetypeDescription(archetype, randomSect, selectedPersonality);
+  const description = this.generateArchetypeDescription(archetype as any, randomSect, selectedPersonality);
 
     const rival: Rival = {
   id: `rival_${Date.now()}_${Math.floor(this.rng() * 1e9).toString(36)}`,
@@ -238,7 +284,7 @@ export class RivalSystem {
   const level = Math.floor(this.rng() * (maxLevel - minLevel + 1)) + minLevel;
 
     // Use first available sect and faction as fallback
-    const fallbackSect = MAJOR_SECTS[0] || { id: 'unknown_sect', name: 'Unknown Sect', type: 'neutral' as const };
+  const fallbackSect = MAJOR_SECTS[0] || ({ id: 'unknown_sect', name: 'Unknown Sect', type: 'neutral' } as Sect);
     const fallbackFaction = MAJOR_FACTIONS[0] || { id: 'unknown_faction', name: 'Unknown Faction', type: 'political' as const };
 
     // Basic stats calculation
@@ -308,8 +354,8 @@ export class RivalSystem {
     if (level >= 15) techniques.push('defensive_stance');
 
     // Add sect-specific techniques
-    if (sect.benefits.techniques && sect.benefits.techniques.length > 0) {
-      const availableSectTechs = sect.benefits.techniques.filter((_, index) =>
+    if (sect.benefits && Array.isArray(sect.benefits.techniques) && sect.benefits.techniques.length > 0) {
+      const availableSectTechs = (sect.benefits.techniques as string[]).filter((_: string, index: number) =>
         index < Math.min(2, Math.floor(level / 10))
       );
       techniques.push(...availableSectTechs);
@@ -359,15 +405,8 @@ export class RivalSystem {
     return loot;
   }
 
-  private getInitialRelationship(personality: Rival['personality']): number {
-    switch (personality) {
-      case 'aggressive': return -40;
-      case 'treacherous': return -60;
-      case 'cunning': return -20;
-      case 'honorable': return -10;
-      case 'neutral': return 0;
-      default: return -20;
-    }
+  private getInitialRelationship(_personality: Rival['personality']): number {
+    return 0;
   }
 
   public addRival(rival: Rival): void {
@@ -380,6 +419,27 @@ export class RivalSystem {
 
   public getAllRivals(): Rival[] {
     return [...this.rivals];
+  }
+
+  // Export a deep copy of all rivals for save operations
+  public serializeRivals(): Rival[] {
+    try {
+      return JSON.parse(JSON.stringify(this.rivals));
+    } catch {
+      // Fallback shallow copy if JSON serialization fails
+      return [...this.rivals];
+    }
+  }
+
+  // Replace current rivals with a supplied list (used for load operations)
+  public replaceAllRivals(rivals: Rival[] = []): void {
+    const safe: Rival[] = Array.isArray(rivals) ? rivals.filter(Boolean) : [];
+    // Defensive copy to avoid external mutation after load
+    try {
+      this.rivals = JSON.parse(JSON.stringify(safe));
+    } catch {
+      this.rivals = [...safe];
+    }
   }
 
   public getRivalsByFaction(factionId: string): Rival[] {
@@ -400,7 +460,7 @@ export class RivalSystem {
     }
   }
 
-  public recordCombatOutcome(rivalId: string, outcome: 'victory' | 'defeat' | 'flee', rounds: number = 0) {
+  public recordCombatOutcome(rivalId: string, outcome: 'victory' | 'defeat' | 'flee', rounds = 0) {
     const ai = this.getAISystem?.() || null;
     const rival = this.getRival(rivalId) || this.getRival(rivalId.replace(/^rival_/, ''));
     if (!ai || !rival) return;
@@ -409,8 +469,61 @@ export class RivalSystem {
         ai.recordCombatOutcome(rival.id, outcome === 'victory' ? 'defeat' : 'victory', rounds);
       }
       // We could track flee as a neutral outcome later
+      // Schedule adaptive application: increment counter and apply only when threshold
+      try {
+        const current = this.learningApplyCounters.get(rival.id) || 0;
+        this.learningApplyCounters.set(rival.id, current + 1);
+
+        const lastApplied = this.lastLearningApplied.get(rival.id) || 0;
+        const now = Date.now();
+
+        // Apply if we've collected enough new records or the last application is too old
+        if ((this.learningApplyCounters.get(rival.id) || 0) >= RivalSystem.LEARNING_APPLY_THRESHOLD
+            || (now - lastApplied) >= RivalSystem.LEARNING_APPLY_MAX_AGE_MS) {
+          // Only apply if learning data is sufficient
+          const learning = typeof ai.getLearningData === 'function' ? ai.getLearningData(rival.id) : null;
+          if (learning && learning.totalCombats >= 3) {
+            this.applyLearningToRival(rival.id);
+            // reset counters and set lastApplied
+            this.learningApplyCounters.set(rival.id, 0);
+            this.lastLearningApplied.set(rival.id, now);
+          }
+        }
+      } catch (e) {
+        // Do not let adaptive integration break the game flow
+      }
     } catch (e) {
       /* intentionally ignored */
+    }
+  }
+
+  /**
+   * Apply AI learning outputs (from RivalAISystem) to the runtime Rival object.
+   * This is a lightweight integration that reorders or promotes "effective"
+   * techniques discovered by the learning system so CombatSystem will prefer them.
+   *
+   * This method is idempotent and safe to call; it will no-op if no AISystem
+   * or no effective techniques are found.
+   */
+  public applyLearningToRival(rivalId: string, limit = 3): void {
+    const ai = this.getAISystem?.() || null;
+    const rival = this.getRival(rivalId) || this.getRival(rivalId.replace(/^rival_/, ''));
+    if (!ai || !rival) return;
+
+    try {
+      if (typeof ai.getEffectiveTechniques !== 'function') return;
+      const effective = ai.getEffectiveTechniques(rival.id, limit) || [];
+      if (!Array.isArray(effective) || effective.length === 0) return;
+
+      // Apply learning as non-destructive AI hints on the Rival object.
+  const rAny: any = rival as any;
+  rAny.aiHints = rAny.aiHints || {};
+  rAny.aiHints.preferredTechniques = effective.filter((t: string) => (rAny.techniques || []).includes(t));
+  rAny.aiHints.preferredStrategy = typeof ai.getRecommendedStrategy === 'function' ? ai.getRecommendedStrategy(rival.id) : undefined;
+  rAny.aiHints.lastUpdated = Date.now();
+    } catch (e) {
+      // Swallow errors to avoid affecting game flow
+      return;
     }
   }
 
@@ -496,19 +609,22 @@ export class RivalSystem {
     // Ensure the participant id follows the 'rival_' prefix convention used by CombatSystem
     const participantId = rival.id.startsWith('rival_') ? rival.id : `rival_${rival.id}`;
 
+    // Apply enemy baseline multiplier for rivals as well
+    const ENEMY_MUL = (typeof getEnemyBaseMultiplier === 'function') ? getEnemyBaseMultiplier() : 1;
+
     return {
       id: participantId,
       name: rival.name,
-      hp: rival.stats.hp,
-      maxHp: rival.stats.hp,
-      qi: rival.stats.qi,
-      maxQi: rival.stats.qi,
+      hp: Math.floor(rival.stats.hp * ENEMY_MUL),
+      maxHp: Math.floor(rival.stats.hp * ENEMY_MUL),
+      qi: Math.floor(rival.stats.qi * ENEMY_MUL),
+      maxQi: Math.floor(rival.stats.qi * ENEMY_MUL),
       ap: 5, // Default action points
       maxAp: 5,
       stats: {
-        atk: rival.stats.atk,
-        def: rival.stats.def,
-        speed: rival.stats.speed
+        atk: Math.floor(rival.stats.atk * ENEMY_MUL),
+        def: Math.floor(rival.stats.def * ENEMY_MUL),
+        speed: Math.floor(rival.stats.speed * Math.max(1, Math.min(ENEMY_MUL, 2)))
       },
       techniques: this.mapRivalTechniques(rival.techniques),
       buffs: [],
@@ -519,15 +635,38 @@ export class RivalSystem {
   private mapRivalTechniques(techniqueIds: string[]): any[] {
     // This would map technique IDs to actual technique objects
     // For now, return basic technique templates
-    return techniqueIds.map(id => ({
-      id,
-      name: id.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
-      description: `${id} technique`,
-      apCost: 1,
-      qiCost: 10,
-      type: 'attack' as const,
-      effects: [{ type: 'damage' as const, target: 'enemy' as const, value: 15 }]
-    }));
+    // Special-case Kid God techniques to include a defense-multiplier debuff (reduce defense by 1.5x)
+    return techniqueIds.map(id => {
+      if (id.startsWith('recoilless') || id.includes('ruyi') || id.includes('dragon') || id.includes('blue_dragon') || id.includes('ice_kick') || id.includes('baek_nok') || id.includes('ground_draw')) {
+        // Legendary Kid God technique mapping
+        return {
+          id,
+          name: id.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
+          description: `${id} technique (Kid God variant)` ,
+          apCost: 1,
+          qiCost: 60,
+          type: 'attack' as const,
+          // Primary damage and a debuff that multiplies target.def by 1/1.5 (i.e., reduce to ~66.7%) for 3 turns
+          effects: [
+            { type: 'damage' as const, target: 'enemy' as const, value: 180 },
+            { type: 'debuff' as const, target: 'enemy' as const, stat: 'def_multiplier', multiplier: 0.6666667, duration: 3 }
+          ],
+          cooldown: 3,
+          currentCooldown: 0
+        };
+      }
+
+      // Default mapping for other techniques
+      return {
+        id,
+        name: id.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
+        description: `${id} technique`,
+        apCost: 1,
+        qiCost: 10,
+        type: 'attack' as const,
+        effects: [{ type: 'damage' as const, target: 'enemy' as const, value: 15 }]
+      };
+    });
   }
 
   // Archetype-based generation methods
@@ -547,9 +686,9 @@ export class RivalSystem {
   private generateArchetypeTechniques(archetype: RivalArchetype, sect: Sect, level: number): string[] {
     const techniques = [...archetype.techniques];
 
-    // Add sect-specific techniques based on level
-    if (sect.benefits.techniques && sect.benefits.techniques.length > 0) {
-      const availableSectTechs = sect.benefits.techniques.filter((_, index) =>
+    // Add sect-specific techniques based on level (safe checks for permissive data shapes)
+    if (sect.benefits && Array.isArray(sect.benefits.techniques) && sect.benefits.techniques.length > 0) {
+      const availableSectTechs = (sect.benefits.techniques as string[]).filter((_: string, index: number) =>
         index < Math.min(2, Math.floor(level / 10))
       );
       techniques.push(...availableSectTechs);
@@ -598,15 +737,18 @@ export class RivalSystem {
     if (lootTable) {
   const rarityRoll = this.rng();
 
-      if (rarityRoll < 0.6 && lootTable.common) {
-        // Common loot
-        loot.push(...lootTable.common);
-      } else if (rarityRoll < 0.85 && lootTable.uncommon) {
-        // Uncommon loot
-        loot.push(...lootTable.uncommon);
-      } else if (lootTable.rare) {
-        // Rare loot
-        loot.push(...lootTable.rare);
+      // Normalize bucket lookup to accept either legacy-word keys or tier letters.
+  const ltAny = lootTable as any;
+  const commonBucket = lootTable.common || ltAny['H'] || ltAny['h'];
+  const uncommonBucket = lootTable.uncommon || ltAny['G'] || ltAny['g'];
+  const rareBucket = lootTable.rare || ltAny['F'] || ltAny['f'];
+
+      if (rarityRoll < 0.6 && commonBucket) {
+        loot.push(...commonBucket);
+      } else if (rarityRoll < 0.85 && uncommonBucket) {
+        loot.push(...uncommonBucket);
+      } else if (rareBucket) {
+        loot.push(...rareBucket);
       }
     }
 
@@ -617,6 +759,19 @@ export class RivalSystem {
         description: 'Partial cultivation manual',
         value: level * 5
       });
+    }
+
+    // Small chance to drop a sampled weapon (uses injected sampler when present)
+    try {
+      if (this.rng() < 0.04) {
+  const w = this.injectedSampler ? this.injectedSampler() : (RivalSystem as any).trySampleWeaponSync();
+        if (w) {
+          // Represent weapon in loot table with id/name for downstream handling
+          loot.push({ id: w.id, name: w.name || w.id, description: w.description || '', value: (w.value || 0), _weapon: w });
+        }
+      }
+    } catch (e) {
+      // non-fatal
     }
 
     // Fallback loot if no archetype loot was generated
@@ -744,7 +899,7 @@ export class RivalSystem {
       this.checkRivalEvolution(rival, archetype);
 
       // Log growth event
-      console.log(`${rival.name} has grown from level ${oldLevel} to ${rival.level}!`);
+  try { void (async () => { try { const mod = await safeImport(() => import('./Analytics')); if (mod && (mod as any).default && typeof (mod as any).default.record === 'function') (mod as any).default.record('rivalGrew', { id: rival.id, oldLevel, newLevel: rival.level }); } catch (e) { void e; } })(); } catch (e) { void e; }
     }
   }
 
@@ -786,7 +941,7 @@ export class RivalSystem {
         rival.stats.def += 10;
         rival.stats.speed += 5;
 
-        console.log(`${rival.name} has evolved into a ${newArchetype.name}!`);
+  try { void (async () => { try { const mod = await safeImport(() => import('./Analytics')); if (mod && (mod as any).default && typeof (mod as any).default.record === 'function') (mod as any).default.record('rivalEvolved', { id: rival.id, archetype: newArchetype.id }); } catch (e) { void e; } })(); } catch (e) { void e; }
       }
     }
   }
@@ -1016,7 +1171,11 @@ export class RivalSystem {
   private recordSectInteraction(rivalId: string, missionType: string, success: boolean): void {
     // This could be expanded to track sect mission interactions
     // for more sophisticated AI behavior
-    console.log(`Recorded sect interaction: ${rivalId} - ${missionType} - ${success ? 'success' : 'failure'}`);
+  try {
+    Promise.resolve().then(() => import('./Analytics')).then((mod: any) => {
+      if (mod && mod.default && typeof mod.default.record === 'function') mod.default.record('sectInteraction', { rivalId, missionType, success });
+    }).catch(() => { void 0; });
+  } catch (e) { void e; }
   }
 
   private handleRivalEventResponse(rival: any, eventType: string, context: any): void {

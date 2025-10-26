@@ -1,0 +1,23 @@
+[
+  {
+    "id": "destiny_affinity_example",
+    "title": "Crossroads of Fate",
+    "description": "You arrive at a crossroads that resonates with your destiny.",
+    "choices": [
+      {
+        "id": "help",
+        "text": "Aid the lost traveler",
+        "affinityWeight": 1,
+        "baseWeight": 1,
+        "effects": { "karma": 2 }
+      },
+      {
+        "id": "harm",
+        "text": "Exploit the traveler's weakness",
+        "affinityWeight": -1,
+        "baseWeight": 1,
+        "effects": { "gold": 10 }
+      }
+    ]
+  }
+]

@@ -8,6 +8,7 @@ const react_1 = require("react");
 const useGameStore_1 = require("../store/useGameStore");
 const MinigameManager_1 = require("./minigames/MinigameManager");
 const mentors_runtime_1 = __importDefault(require("../data/mentors_runtime"));
+const SmallChip_1 = __importDefault(require("./ui/SmallChip"));
 const playtestScaling_1 = require("../utils/playtestScaling");
 const mentorColors = {
     mentor_mo_wuji: '#8B0000', // Fang Yuan -> Mo Wuji
@@ -43,24 +44,45 @@ const MentorTeachingPanel = () => {
         title: m.dao,
         color: mentorColors[m.id] || '#6c757d'
     }));
+    // Load teachings initially and whenever selectedMentor or the store's world.tick changes
     (0, react_1.useEffect)(() => {
-        if (player && getAvailableTeachingsForMentor) {
+        let mounted = true;
+        const load = () => {
+            if (!player || !getAvailableTeachingsForMentor)
+                return setAvailableTeachings([]);
             try {
                 const teachings = getAvailableTeachingsForMentor(selectedMentor);
-                setAvailableTeachings(teachings || []);
+                if (mounted)
+                    setAvailableTeachings(teachings || []);
             }
             catch (error) {
+                // eslint-disable-next-line no-console
                 console.error('Error loading teachings:', error);
-                setAvailableTeachings([]);
+                if (mounted)
+                    setAvailableTeachings([]);
             }
-        }
-        // Refresh periodically to update cooldown remaining
-        const t = setInterval(() => {
-            // trigger re-render by setting state from store (no-op read)
-            setAvailableTeachings(prev => prev);
+        };
+        load();
+        // Use a light-weight interval to refresh availability (cooldowns). Avoid writing the same state value to prevent
+        // triggering external-store snapshot churn which can cause React to re-evaluate subscriptions in a tight loop.
+        const iv = setInterval(() => {
+            // read fresh from store and update only when changed
+            try {
+                const teachings = getAvailableTeachingsForMentor ? getAvailableTeachingsForMentor(selectedMentor) : [];
+                // shallow compare by length and ids to avoid frequent setState with identical arrays
+                const same = teachings && teachings.length === availableTeachings.length && teachings.every((t, i) => availableTeachings[i] && availableTeachings[i].id === t.id);
+                if (!same) {
+                    if (mounted)
+                        setAvailableTeachings(teachings || []);
+                }
+            }
+            catch (e) {
+                // ignore transient errors
+            }
         }, 1000);
-        return () => clearInterval(t);
-    }, [selectedMentor, player, world, story, ui, getAvailableTeachingsForMentor]);
+        return () => { mounted = false; clearInterval(iv); };
+        // Note: intentionally not including deep objects (player, world, story, ui) in deps to avoid frequent reloads.
+    }, [selectedMentor, getAvailableTeachingsForMentor]);
     const attemptTeaching = async (teachingId) => {
         if (!mentorTeachingSystem || !player)
             return;
@@ -225,14 +247,7 @@ const MentorTeachingPanel = () => {
                                             justifyContent: 'space-between',
                                             alignItems: 'flex-start',
                                             marginBottom: '10px'
-                                        }, children: [(0, jsx_runtime_1.jsx)("h4", { style: { margin: 0, color: '#333' }, children: teaching.title }), (0, jsx_runtime_1.jsx)("span", { style: {
-                                                    padding: '4px 8px',
-                                                    borderRadius: '4px',
-                                                    fontSize: '12px',
-                                                    fontWeight: 'bold',
-                                                    color: 'white',
-                                                    backgroundColor: getDifficultyColor(teaching.challenge?.difficulty || 'unknown')
-                                                }, children: (teaching.challenge?.difficulty || 'UNKNOWN').toUpperCase() })] }), (0, jsx_runtime_1.jsx)("p", { style: {
+                                        }, children: [(0, jsx_runtime_1.jsx)("h4", { style: { margin: 0, color: '#333' }, children: teaching.title }), (0, jsx_runtime_1.jsx)(SmallChip_1.default, { style: { borderRadius: 4, fontSize: '12px', fontWeight: 'bold', color: 'white', background: getDifficultyColor(teaching.challenge?.difficulty || 'unknown') }, children: (teaching.challenge?.difficulty || 'UNKNOWN').toUpperCase() })] }), (0, jsx_runtime_1.jsx)("p", { style: {
                                             margin: '10px 0',
                                             fontStyle: 'italic',
                                             color: '#555',
@@ -254,13 +269,13 @@ const MentorTeachingPanel = () => {
                                             backgroundColor: (!canAttempt || isLoading || mentorCooldown) ? '#6c757d' : '#007bff',
                                             opacity: isLoading ? 0.7 : 1,
                                             transition: 'all 0.2s ease'
-                                        }, children: mentorCooldown
-                                            ? `On cooldown (${cooldownRemaining} ticks)`
-                                            : isLoading
-                                                ? 'Processing...'
-                                                : canAttempt
-                                                    ? 'Attempt Teaching'
-                                                    : 'Prerequisites Not Met' })] }, teaching.id));
+                                        }, children: (0, jsx_runtime_1.jsx)(SmallChip_1.default, { style: { display: 'inline-block', width: '100%', background: 'transparent', color: 'inherit', fontWeight: 'bold', padding: 0 }, children: mentorCooldown
+                                                ? `On cooldown (${cooldownRemaining} ticks)`
+                                                : isLoading
+                                                    ? 'Processing...'
+                                                    : canAttempt
+                                                        ? 'Attempt Teaching'
+                                                        : 'Prerequisites Not Met' }) })] }, teaching.id));
                         }) }))] })] }));
 };
 exports.default = MentorTeachingPanel;

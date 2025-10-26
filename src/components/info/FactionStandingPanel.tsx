@@ -5,10 +5,10 @@ import { MAJOR_SECTS } from '@/systems/SectSystem';
 import { MAJOR_FACTIONS } from '@/systems/SectSystem';
 
 export const FactionStandingPanel: React.FC = () => {
-  const { player } = useGameStore();
+  const { player, systems } = useGameStore();
 
   const sectName = player.sect ? (MAJOR_SECTS.find(s => s.id === player.sect)?.name || player.sect) : 'None';
-  const sectRep = player.sect ? (player.sectReputations[player.sect] || 0) : 0;
+  const sectRep = player.sect ? (systems?.sectReputations?.[player.sect] || 0) : 0;
 
   return (
     <div style={{ display: 'grid', gap: 12 }}>
@@ -38,8 +38,8 @@ export const FactionStandingPanel: React.FC = () => {
       <div>
         <div style={{ color: 'var(--accent)', marginBottom: 4 }}>Factions</div>
         <div style={{ display: 'grid', gap: 6 }}>
-          {MAJOR_FACTIONS.map(f => {
-            const v = player.factionStandings?.[f.id] || 0;
+          {Array.isArray(MAJOR_FACTIONS) ? MAJOR_FACTIONS.map(f => {
+            const v = systems?.factionStandings?.[f.id] || 0;
             const bar = Math.max(0, Math.min(100, (v + 100) / 2));
             const color = v >= 50 ? '#16a34a' : v >= 0 ? '#ca8a04' : v >= -50 ? '#ea580c' : '#dc2626';
             return (
@@ -53,7 +53,7 @@ export const FactionStandingPanel: React.FC = () => {
                 </div>
               </div>
             );
-          })}
+          }) : null}
         </div>
       </div>
     </div>

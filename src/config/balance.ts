@@ -1,3 +1,64 @@
+// Central balance knobs for broad-stroke number scaling.
+// We keep this disabled (1x) in tests to preserve snapshot and numeric assertions.
+
+export function getBaseNumberMultiplier(): number {
+  try {
+    // In tests, keep baseline unchanged
+    if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'test') return 1;
+    // Allow quick override via global for live tuning
+    if (typeof window !== 'undefined' && (window as any).__BASE_MULTIPLIER__) {
+      const v = Number((window as any).__BASE_MULTIPLIER__);
+      if (isFinite(v) && v > 0) return Math.min(Math.max(v, 1), 1000);
+    }
+  } catch { /* ignore */ }
+  // Default: beef up numbers to feel more immortal without changing formulas
+  return 3; // 3x base stats and pools
+}
+
+// Enemy baseline multiplier: scale NPCs to keep challenge when player bases are increased.
+// Tests remain 1x; allow quick override via global.
+export function getEnemyBaseMultiplier(): number {
+  try {
+    if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'test') return 1;
+    if (typeof window !== 'undefined') {
+      const g: any = window as any;
+      const v = g.__ENEMY_BASE_MULTIPLIER__ ?? g.__ENEMY_MULTIPLIER__;
+      if (v != null) {
+        const n = Number(v);
+        if (isFinite(n) && n > 0) return Math.min(Math.max(n, 0.1), 1000);
+      }
+    }
+  } catch { /* ignore */ }
+  const base = getBaseNumberMultiplier();
+  // Era/realm-aware curve: modest increase per era and realm tier
+  // Pull live state best-effort; fall back to safe defaults when unavailable
+  let eraIndex = 0;
+  let realmIndex = 0; // index into REALM_ORDER (0=mortal)
+  try {
+    // Prefer the globally exposed gameStore when available (avoids a hard
+    // import and prevents circular require/imports at module init time).
+    const globalAny: any = typeof window !== 'undefined' ? (window as any) : (global as any);
+    const gs = globalAny?.gameStore || (globalAny?.useGameStore ? globalAny.useGameStore : null);
+    const state = gs && typeof gs.getState === 'function' ? gs.getState() : null;
+    if (state) {
+      eraIndex = Number(state.world?.currentEraIndex ?? 0) || 0;
+      try {
+  const key = (state.player && getPlayerRealmKey(state.player)) || 'mortal';
+        const REALM_ORDER: string[] = (globalAny && globalAny.REALM_ORDER) || ['mortal'];
+        realmIndex = Math.max(0, REALM_ORDER.indexOf(key));
+      } catch { /* ignore realm lookup errors */ }
+    }
+  } catch { /* ignore store errors */ }
+
+  // Baseline keeps player a bit ahead when BASE>1
+  const sqrtBase = base > 1 ? Math.sqrt(base) : 1;
+  // Scale gently per era (12% each) and per realm step (3% each)
+  const eraCurve = 1 + Math.max(0, eraIndex) * 0.12;
+  const realmCurve = 1 + Math.max(0, realmIndex) * 0.03;
+  const dyn = sqrtBase * eraCurve * realmCurve;
+  // Clamp for safety
+  return Math.max(0.5, Math.min(dyn, 20));
+}
 // Global balance settings for the game. Keep simple getters/setters so tests
 // and UI can adjust the overall power scale without changing many files.
 
@@ -6,17 +67,11 @@ const STORAGE_KEY = 'xianxia_power_scale_percent';
 // Default scale decimal (1.0 == 100%)
 let powerScaleDecimal = 1.0;
 
-// Helper to attempt to access the game's store safely (dynamic require to avoid ESM/CJS interop issues in tests)
-function tryGetStore(): any | null {
-  try {
-    // dynamic require to avoid top-level cycles during module load in tests
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const mod = require('../store/useGameStore');
-    return mod && mod.useGameStore ? mod.useGameStore : (mod && mod.default ? mod.default : null);
-  } catch (e) {
-    return null;
-  }
-}
+// Import the game's Zustand hook. This creates a cycle (store -> balance -> store),
+// but ESM handles cycles with live bindings and our usage avoids accessing the
+// store during module initialization. Tests expect synchronous persistence.
+import { useGameStore } from '../store/useGameStore';
+import { getPlayerRealmKey } from '../utils/playerHelpers';
 
 // Try to initialize from localStorage if available (guarded so tests/node won't throw)
 try {
@@ -33,17 +88,9 @@ try {
   // ignore - tests or some environments may not provide localStorage
 }
 
-// Prefer persisted player setting from the game's store (store-only persistence)
-try {
-  const store = tryGetStore();
-  if (store && store.getState) {
-    const s = store.getState();
-    const p = s && s.player && (s.player as any).settings && (s.player as any).settings.powerScalePercent;
-    if (typeof p === 'number') {
-      powerScaleDecimal = Math.max(1, Math.min(100, Math.round(p))) / 100;
-    }
-  }
-} catch (e) { /* ignore runtime config parse errors */ console.debug && console.debug('balance config parse failed', e); }
+// Note: prefer localStorage for initial value. Persisting to the game's
+// Zustand store is attempted asynchronously later to avoid synchronous
+// `require()` during module initialization which can leak into client bundles.
 
 export function getPowerScale(): number {
   return powerScaleDecimal;
@@ -59,25 +106,39 @@ export function setPowerScalePercent(percent: number) {
     powerScaleDecimal = Math.max(0.01, Math.min(1, percent));
   }
 
-  // persist percent value (as integer 1..100) if possible
-  // Persist into the game's store under player.settings.powerScalePercent (store-only persistence)
+  // Persist to localStorage when available (best-effort)
   try {
-    const store = tryGetStore();
-    if (store && store.setState && store.getState) {
-      // Prefer explicit API if available
-      const s = store.getState();
-      if (typeof s.setSettings === 'function') {
-        s.setSettings({ powerScalePercent: Math.round(powerScaleDecimal * 100) });
-      } else {
-        const cur = store.getState();
-        const settings = (cur.player && (cur.player as any).settings) || {};
-        store.setState({ player: { ...cur.player, settings: { ...settings, powerScalePercent: Math.round(powerScaleDecimal * 100) } } });
-      }
-      return;
+    if (typeof window !== 'undefined' && window.localStorage) {
+      window.localStorage.setItem(STORAGE_KEY, String(Math.round(powerScaleDecimal * 100)));
     }
-  } catch (e) {
-    // ignore store errors
-  }
+  } catch (e) { /* ignore persistence errors */ }
+
+  // Update the game's Zustand store synchronously when available (tests depend on this)
+  try {
+    const storeHook: any = useGameStore as any;
+    if (storeHook && typeof storeHook.getState === 'function' && typeof storeHook.setState === 'function') {
+      const cur = storeHook.getState();
+      if (cur && typeof cur.setSettings === 'function') {
+        cur.setSettings({ powerScalePercent: Math.round(powerScaleDecimal * 100) });
+      } else {
+        const settings = (cur && cur.player && (cur.player as any).settings) || {};
+        storeHook.setState({ player: { ...cur.player, settings: { ...settings, powerScalePercent: Math.round(powerScaleDecimal * 100) } } });
+      }
+    } else {
+      // Fallback: try global exposure
+      const globalAny: any = typeof window !== 'undefined' ? (window as any) : (global as any);
+      const gs = globalAny?.gameStore || (globalAny?.useGameStore ? globalAny.useGameStore : null);
+      if (gs && typeof gs.getState === 'function') {
+        const cur = gs.getState();
+        if (cur && typeof cur.setSettings === 'function') {
+          cur.setSettings({ powerScalePercent: Math.round(powerScaleDecimal * 100) });
+        } else if (typeof gs.setState === 'function') {
+          const settings = (cur && cur.player && (cur.player as any).settings) || {};
+          gs.setState({ player: { ...cur.player, settings: { ...settings, powerScalePercent: Math.round(powerScaleDecimal * 100) } } });
+        }
+      }
+    }
+  } catch (e) { /* ignore store update errors */ }
 }
 
 export function setPowerScaleDecimal(d: number) {

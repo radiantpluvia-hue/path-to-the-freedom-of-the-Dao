@@ -41,7 +41,7 @@ describe('Xianxia Naming System Implementation', () => {
   });
 
   test('Bloodline stats scale with realm', () => {
-    const bloodline = ALL_BLOODLINES.find(b => b.rarity === 'rare' && b.effects.stats?.qi);
+    const bloodline = ALL_BLOODLINES.find(b => b.rarity === "F" && b.effects.stats?.qi);
     if (!bloodline) return;
     
     // Extract base stat values from StatEffect objects
@@ -58,7 +58,7 @@ describe('Xianxia Naming System Implementation', () => {
   });
 
   test('Physique stats scale with realm', () => {
-    const physique = ALL_PHYSIQUES.find(p => p.rarity === 'rare' && p.effects.stats?.qi);
+    const physique = ALL_PHYSIQUES.find(p => p.rarity === "F" && p.effects.stats?.qi);
     if (!physique) return;
     
     // Extract base stat values from StatEffect objects
@@ -88,7 +88,7 @@ describe('Xianxia Naming System Implementation', () => {
   });
 
   test('Manual effects scale with realm', () => {
-    const manual = ALL_MANUALS.find(m => m.rank === 'rare' && (m.effects.cultivationSpeed || m.effects.cultivation_speed));
+    const manual = ALL_MANUALS.find(m => m.rank === "F" && (m.effects.cultivationSpeed || m.effects.cultivation_speed));
     if (!manual) return;
     
     const mortalEffects = scaleManualEffects(manual.effects, 'mortal');
@@ -103,9 +103,9 @@ describe('Xianxia Naming System Implementation', () => {
   });
 
   test('Integrated stats calculation works', () => {
-    const bloodline = ALL_BLOODLINES.find(b => b.rarity === 'common');
-    const physique = ALL_PHYSIQUES.find(p => p.rarity === 'common');
-    const manual = ALL_MANUALS.find(m => m.rank === 'common');
+    const bloodline = ALL_BLOODLINES.find(b => b.rarity === "H");
+    const physique = ALL_PHYSIQUES.find(p => p.rarity === "H");
+    const manual = ALL_MANUALS.find(m => m.rank === "H");
     
   if (!bloodline || !physique || !manual) return;
     
@@ -131,7 +131,7 @@ describe('Xianxia Naming System Implementation', () => {
   });
 
   test('Bloodline awakening check works', () => {
-    const legendaryBloodline = ALL_BLOODLINES.find(b => b.rarity === 'legendary');
+    const legendaryBloodline = ALL_BLOODLINES.find(b => b.rarity === "D");
     if (!legendaryBloodline) return;
     
     const canAwakenMortal = canAwakenBloodline(legendaryBloodline.id, 'mortal', 10000);
@@ -143,9 +143,9 @@ describe('Xianxia Naming System Implementation', () => {
 
   test('Rarity distribution is correct', () => {
     const bloodlineRarities = ALL_BLOODLINES.map(b => b.rarity);
-    const commonBloodlines = bloodlineRarities.filter(r => r === 'common').length;
-    const legendaryBloodlines = bloodlineRarities.filter(r => r === 'legendary').length;
-    const transcendentBloodlines = bloodlineRarities.filter(r => r === 'transcendent').length;
+    const commonBloodlines = bloodlineRarities.filter(r => r === "H").length;
+    const legendaryBloodlines = bloodlineRarities.filter(r => r === "D").length;
+    const transcendentBloodlines = bloodlineRarities.filter(r => r === "B").length;
     
     // Should have more common than legendary, and more legendary than transcendent
     expect(commonBloodlines).toBeGreaterThan(legendaryBloodlines);

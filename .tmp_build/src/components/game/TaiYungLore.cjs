@@ -76,11 +76,11 @@ function TaiYungLore() {
                             fontFamily: 'var(--font-decorative)',
                             textShadow: '0 0 20px rgba(212, 175, 55, 0.3)',
                             marginBottom: '10px'
-                        }, children: "Tai Yung" }), (0, jsx_runtime_1.jsx)("p", { style: {
+                        }, children: "Sh\u00EDxi\u00E0ng m\u00E9n" }), (0, jsx_runtime_1.jsx)("p", { style: {
                             fontSize: '1.2rem',
                             color: 'var(--text-secondary)',
                             fontStyle: 'italic'
-                        }, children: "The Supreme Void" })] }), (0, jsx_runtime_1.jsx)("div", { style: {
+                        }, children: "Welcome to the world of Sh\u00EDxi\u00E0ng m\u00E9n" })] }), (0, jsx_runtime_1.jsx)("div", { style: {
                     maxWidth: '800px',
                     textAlign: 'center',
                     marginBottom: '60px',
@@ -91,7 +91,6 @@ function TaiYungLore() {
                         borderRadius: 'var(--radius-lg)',
                         padding: '40px',
                         boxShadow: '0 0 40px rgba(212, 175, 55, 0.2)',
-                        backdropFilter: 'blur(10px)',
                         minHeight: '200px',
                         display: 'flex',
                         alignItems: 'center',

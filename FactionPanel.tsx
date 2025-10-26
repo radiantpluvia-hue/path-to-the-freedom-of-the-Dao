@@ -4,14 +4,25 @@ import { MAJOR_FACTIONS } from '@/systems/SectSystem';
 export function FactionPanel() {
   const { player } = useGameStore();
   
-  const factionStandings = player.factionStandings || {};
+  const factionStandings = player?.factionStandings || {};
+
+  const factions = Array.isArray(MAJOR_FACTIONS) ? MAJOR_FACTIONS : [];
+
+  if (factions.length === 0) {
+    return (
+      <div style={{ fontSize: '0.9rem', color: 'var(--muted)' }}>
+        <h3 style={{ color: 'var(--primary)', marginBottom: '10px' }}>🏛️ Faction Relations</h3>
+        <div style={{ padding: 12 }}>No factions are defined for this world.</div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ fontSize: '0.9rem' }}>
       <h3 style={{ color: 'var(--primary)', marginBottom: '10px' }}>🏛️ Faction Relations</h3>
       
-      {MAJOR_FACTIONS.map(faction => {
-        const standing = factionStandings[faction.id] || 0;
+      {factions.map(faction => {
+        const standing = factionStandings?.[faction.id] || 0;
         const standingColor = standing >= 50 ? 'var(--success)' : 
                              standing >= 0 ? 'var(--accent)' : 
                              standing >= -50 ? 'var(--warning)' : 'var(--danger)';
@@ -39,7 +50,7 @@ export function FactionPanel() {
               </div>
             </div>
             
-            {faction.conflicts.length > 0 && (
+            {Array.isArray(faction.conflicts) && faction.conflicts.length > 0 && (
               <div style={{ marginTop: '5px', fontSize: '0.8rem', color: 'var(--muted)' }}>
                 Conflicts: {faction.conflicts.join(', ')}
               </div>

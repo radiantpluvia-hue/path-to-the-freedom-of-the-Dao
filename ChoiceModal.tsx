@@ -1,23 +1,23 @@
 import { useGameStore } from '@/store/useGameStore';
-import { applyEventEffects } from './eventResolver';
+import { createDefaultChoiceHandler } from './src/systems/choiceHandler';
 import { EventChoice } from '@/types';
 import { Card } from '@/components/core/Card';
 import { Button } from '@/components/core/Button';
 
 export function ChoiceModal() {
-  const { ui, player, addEventLog, setUIProperty } = useGameStore(state => ({
-    ui: state.ui,
-    player: state.player,
-    addEventLog: state.addEventLog,
-    setUIProperty: state.setUIProperty,
-  }));
-  const choiceData = ui.activeStoryChoice;
+  // Use separate selectors to avoid returning a new object identity each render
+  const choiceData = useGameStore(state => state.ui.activeStoryChoice);
+  const player = useGameStore(state => state.player);
+  const addEventLog = useGameStore(state => state.addEventLog);
+  const setUIProperty = useGameStore(state => state.setUIProperty);
 
   if (!choiceData) return null;
 
   const handleChoice = (choice: EventChoice) => {
-    const { newPlayerState, narrative } = applyEventEffects(player, choice.effects);
-    useGameStore.setState({ player: newPlayerState });
+    const handler = createDefaultChoiceHandler();
+    const gs = useGameStore.getState() as any;
+    const { newState, narrative } = handler.handleChoice(gs, choice as any);
+    useGameStore.setState(newState as any);
     addEventLog(choice.narrative || `You chose to "${choice.text}".`);
     if (narrative) addEventLog(narrative);
     setUIProperty('activeStoryChoice', undefined);

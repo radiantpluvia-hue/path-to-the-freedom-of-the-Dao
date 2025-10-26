@@ -1,6 +1,14 @@
 // Central combat scaling wrapper — Phase-1 conservative wrapper around existing scalingSystem
 import * as scaling from '../data/scalingSystem';
 import { PlaytestScaling } from '../utils/playtestScaling';
+// Re-export some combat core helpers for backwards compatibility with legacy import sites
+import { calculateDamage, resolveRound, applyCombatBuffs, defaultCombatant } from '../components/minigames/combatCore';
+export { calculateDamage, resolveRound, applyCombatBuffs, defaultCombatant };
+// Re-export commonly-used types from combatCore so callers can import them from combatConfig
+export type { Combatant, Action, EquipmentSlots } from '../components/minigames/combatCore';
+
+// re-export adjustDamageForRealmGap from cultivationUtils for backwards compatibility
+export { adjustDamageForRealmGap } from './cultivationUtils';
 
 export const getRealmMultiplier = scaling.getRealmMultiplier;
 export const scaleManualEffects = scaling.scaleManualEffects;

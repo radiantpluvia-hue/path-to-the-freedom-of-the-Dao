@@ -1,0 +1,44 @@
+{
+  "seasonId": "season-100000",
+  "seasonStartYear": 100000,
+  "seasonEndYear": 105000,
+  "publishedAt": 1735689600000,
+  "entries": [
+    {
+      "id": "void_emperor",
+      "name": "Void Emperor",
+      "type": "npc",
+      "realm": "immortal_late",
+      "powerScore": 1245000,
+      "providenceScore": 45000,
+      "karmaScore": 12000,
+      "compositeScore": 745202,
+      "lastUpdated": 1735689600000,
+      "notableAction": "Sealed three tribulation storms in a single instant"
+    },
+    {
+      "id": "celestial_matriarch",
+      "name": "Celestial Matriarch",
+      "type": "sect",
+      "realm": "immortal_late",
+      "powerScore": 1084000,
+      "providenceScore": 54000,
+      "karmaScore": 9000,
+      "compositeScore": 682320,
+      "lastUpdated": 1735689600000,
+      "notableAction": "Led the Convergence Rite"
+    },
+    {
+      "id": "player_ardent",
+      "name": "Ardent",
+      "type": "player",
+      "realm": "immortal_early",
+      "powerScore": 900000,
+      "providenceScore": 25000,
+      "karmaScore": 4500,
+      "compositeScore": 548750,
+      "lastUpdated": 1735689600000,
+      "notableAction": "Defeated the Fallen Archon"
+    }
+  ]
+}

@@ -34,7 +34,7 @@ export const createQuestSlice: StateCreator<GameState, [], [], QuestSlice> = (se
   updateQuestStatus: (questId, status) => {
   const { story, player } = get();
   const store = get() as any;
-  const addEventLog = typeof store.addEventLog === 'function' ? store.addEventLog : () => {};
+  const addEventLog = typeof store.addEventLog === 'function' ? store.addEventLog : () => { /* no-op */ };
     const quests = story.quests || [];
     const quest = quests.find((q: Quest) => q.id === questId);
 
@@ -95,7 +95,7 @@ export const createQuestSlice: StateCreator<GameState, [], [], QuestSlice> = (se
   requestSectMission: () => {
   const { player, story } = get();
   const store = get() as any;
-  const addEventLog = typeof store.addEventLog === 'function' ? store.addEventLog : () => {};
+  const addEventLog = typeof store.addEventLog === 'function' ? store.addEventLog : () => { /* no-op */ };
 
     if (!player.sect) {
       addEventLog("You are not part of a sect. You cannot request a mission.");

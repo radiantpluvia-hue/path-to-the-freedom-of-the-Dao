@@ -1,0 +1,12 @@
+[
+  { "id": "iron_spear_b", "name": "Iron Spear (B)", "rarity": "common", "description": "A well-balanced spear, good for practice.", "effects": [{ "atk": 2 }] },
+  { "id": "silk_robes_b", "name": "Silk Robes (B)", "rarity": "uncommon", "description": "Light robes that help with meditation.", "effects": [{ "stability": 3 }] },
+  { "id": "jade_amulet_b", "name": "Jade Amulet (B)", "rarity": "rare", "description": "A jade amulet rumored to calm the mind.", "effects": [{ "daoComprehension": 5 }] },
+  { "id": "herbal_tonic_b", "name": "Herbal Tonic (B)", "rarity": "common", "description": "Restores a small amount of HP.", "effects": [{ "hp": 50 }] },
+  { "id": "stone_tablet_b", "name": "Stone Tablet (B)", "rarity": "uncommon", "description": "An inscribed tablet that grants small lore when studied.", "effects": [{ "lore": 1 }] },
+  { "id": "wind_chime_b", "name": "Wind Chime (B)", "rarity": "rare", "description": "A chime that aids in balancing Qi.", "effects": [{ "stability": 5 }] },
+  { "id": "apprentice_blade_b", "name": "Apprentice Blade (B)", "rarity": "common", "description": "Simple blade used by students.", "effects": [{ "atk": 3 }] },
+  { "id": "mystic_ink_b", "name": "Mystic Ink (B)", "rarity": "epic", "description": "Used to copy advanced manuals.", "effects": [{ "manualCopyChance": 0.1 }] },
+  { "id": "lucky_coin_b", "name": "Lucky Coin (B)", "rarity": "uncommon", "description": "A coin said to tilt fate slightly in your favor.", "effects": [{ "luck": 2 }] },
+  { "id": "rune_fragment_b", "name": "Rune Fragment (B)", "rarity": "rare", "description": "A shard humming with faint power.", "effects": [{ "special": "rune_fragment" }] }
+]

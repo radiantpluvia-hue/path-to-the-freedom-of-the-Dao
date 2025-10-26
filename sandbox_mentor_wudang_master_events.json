@@ -1,0 +1,704 @@
+[
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest01",
+    "title": "Morning Sun Circulation",
+    "description": "The Grandmaster asks you to practice a gentle circulation at dawn to awaken the limbs without force.",
+    "choices": [
+      {
+        "id": "practice",
+        "label": "Practice the circulation carefully",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "wudang.circulation_note_01"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest01.completed"
+              ]
+            }
+          }
+        ],
+        "text": "practice"
+      },
+      {
+        "id": "skip",
+        "label": "Save energy and skip",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest01.completed"
+              ]
+            }
+          }
+        ],
+        "text": "skip"
+      }
+    ],
+    "requiresWorldFlag": "mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest02",
+    "title": "Balanced Step",
+    "description": "You are instructed to walk a measured line on the stone path, keeping balance as the Grandmaster watches.",
+    "choices": [
+      {
+        "id": "steady",
+        "label": "Take steady, mindful steps",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 3
+            }
+          },
+          {
+            "lore_collect": "wudang.balance_note_02"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest02.completed"
+              ]
+            }
+          }
+        ],
+        "text": "steady"
+      },
+      {
+        "id": "rush",
+        "label": "Hurry through the path",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest02.completed"
+              ]
+            }
+          }
+        ],
+        "text": "rush"
+      }
+    ],
+    "requiresWorldFlag": "mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest03",
+    "title": "Water Breathing",
+    "description": "A basin of cold water is set before you; the Grandmaster asks you to breathe in time with its ripples.",
+    "choices": [
+      {
+        "id": "match",
+        "label": "Match your breathing to the water",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "wudang.breathing_note_03"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest03.completed"
+              ]
+            }
+          }
+        ],
+        "text": "match"
+      },
+      {
+        "id": "distract",
+        "label": "Let thoughts wander",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest03.completed"
+              ]
+            }
+          }
+        ],
+        "text": "distract"
+      }
+    ],
+    "requiresWorldFlag": "mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest04",
+    "title": "Silk Thread Focus",
+    "description": "A length of silk is suspended; the Grandmaster asks you to hold it steady as a test of fine control.",
+    "choices": [
+      {
+        "id": "steady_hold",
+        "label": "Hold the silk steady",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 3
+            }
+          },
+          {
+            "lore_collect": "wudang.silk_note_04"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest04.completed"
+              ]
+            }
+          }
+        ],
+        "text": "steady_hold"
+      },
+      {
+        "id": "let_go",
+        "label": "Let the silk move naturally",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest04.completed"
+              ]
+            }
+          }
+        ],
+        "text": "let_go"
+      }
+    ],
+    "requiresWorldFlag": "mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest05",
+    "title": "Breathing Ripple",
+    "description": "The Grandmaster instructs a subtle breathing ripple to carry power through the limbs — a lesson in inner flow.",
+    "choices": [
+      {
+        "id": "attempt",
+        "label": "Attempt the ripple",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "wudang_training_note_05"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest05.completed"
+              ]
+            }
+          }
+        ],
+        "text": "attempt"
+      },
+      {
+        "id": "wait",
+        "label": "Ask for a simpler demonstration",
+        "effects": [
+          {
+            "add_event_log": "The Grandmaster smiles and demonstrates a simpler circulation instead."
+          }
+        ],
+        "text": "wait"
+      }
+    ],
+    "requiresWorldFlag": "mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest06",
+    "title": "Silk-Thread Saber",
+    "description": "A practiced cut so light it feels like pulling a thread — the Master teases the mechanics of economy and precision.",
+    "choices": [
+      {
+        "id": "practice",
+        "label": "Mimic the movement",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "wudang_training_note_06"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest06.completed"
+              ]
+            }
+          }
+        ],
+        "text": "practice"
+      },
+      {
+        "id": "refine",
+        "label": "Ask for refinement advice",
+        "effects": [
+          {
+            "add_event_log": "The Master offers a tiny correction that changes the geometry of your cut."
+          }
+        ],
+        "text": "refine"
+      }
+    ],
+    "requiresWorldFlag": "mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest07",
+    "title": "Hidden Water Step",
+    "description": "The Master demonstrates a footwork that flows like water, shifting weight invisibly — practice in evasive balance.",
+    "choices": [
+      {
+        "id": "learn",
+        "label": "Learn the water step",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "wudang_training_note_07"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest07.completed"
+              ]
+            }
+          }
+        ],
+        "text": "learn"
+      },
+      {
+        "id": "skip",
+        "label": "Skip the lesson",
+        "effects": [
+          {
+            "add_event_log": "You skip the lesson, noting the Master's quiet smile."
+          }
+        ],
+        "text": "skip"
+      }
+    ],
+    "requiresWorldFlag": "mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest08",
+    "title": "Meditative Feint",
+    "description": "In a controlled exercise the Grandmaster shows how a clear mind can hide intent — a feint that begins with an empty breath.",
+    "choices": [
+      {
+        "id": "attempt",
+        "label": "Try the feint",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "wudang_training_note_08"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest08.completed"
+              ]
+            }
+          }
+        ],
+        "text": "attempt"
+      },
+      {
+        "id": "watch",
+        "label": "Watch and learn",
+        "effects": [
+          {
+            "add_event_log": "You watch the Grandmaster and file away the pattern for later practice."
+          }
+        ],
+        "text": "watch"
+      }
+    ],
+    "requiresWorldFlag": "mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest09",
+    "title": "Bristle Stance Test",
+    "description": "The master asks you to hold a low stance while shifting weight like bristles in wind.",
+    "choices": [
+      {
+        "id": "hold",
+        "label": "Hold the stance despite the ache",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "wudang.stance_note_09"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest09.completed"
+              ]
+            }
+          }
+        ],
+        "text": "hold"
+      },
+      {
+        "id": "rest",
+        "label": "Take a breather and rest",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest09.completed"
+              ]
+            }
+          }
+        ],
+        "text": "rest"
+      }
+    ],
+    "requiresWorldFlag": "mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest10",
+    "title": "Sparring: Slow Motion",
+    "description": "You spar slowly with a senior disciple to learn control over momentum rather than speed.",
+    "choices": [
+      {
+        "id": "control",
+        "label": "Focus on control and timing",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "wudang.sparring_note_10"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest10.completed"
+              ]
+            }
+          }
+        ],
+        "text": "control"
+      },
+      {
+        "id": "win_quick",
+        "label": "Try to win by force",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest10.completed"
+              ]
+            }
+          }
+        ],
+        "text": "win_quick"
+      }
+    ],
+    "requiresWorldFlag": "mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest11",
+    "title": "Threaded Water Form",
+    "description": "Practice a flowing form that guides force like a thread through water.",
+    "choices": [
+      {
+        "id": "flow",
+        "label": "Move fluidly and accept guidance",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "wudang.form_note_11"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest11.completed"
+              ]
+            }
+          }
+        ],
+        "text": "flow"
+      },
+      {
+        "id": "stiff",
+        "label": "Hold rigid and correct posture later",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest11.completed"
+              ]
+            }
+          }
+        ],
+        "text": "stiff"
+      }
+    ],
+    "requiresWorldFlag": "mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest12",
+    "title": "Moon Tide Alignment",
+    "description": "At night you perform a sequence to align breathing with the moon's calm rhythm.",
+    "choices": [
+      {
+        "id": "align",
+        "label": "Align breath and movement",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "wudang.moon_note_12"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest12.completed"
+              ]
+            }
+          }
+        ],
+        "text": "align"
+      },
+      {
+        "id": "ignore",
+        "label": "Rest instead",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest12.completed"
+              ]
+            }
+          }
+        ],
+        "text": "ignore"
+      }
+    ],
+    "requiresWorldFlag": "mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest13",
+    "title": "Hidden Path Breath",
+    "description": "You are led along a narrow mountain path and instructed to breathe calmly to maintain footing.",
+    "choices": [
+      {
+        "id": "calm",
+        "label": "Breathe calmly and proceed",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 3
+            }
+          },
+          {
+            "lore_collect": "wudang.path_note_13"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest13.completed"
+              ]
+            }
+          }
+        ],
+        "text": "calm"
+      },
+      {
+        "id": "rush",
+        "label": "Hurry and get through it",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest13.completed"
+              ]
+            }
+          }
+        ],
+        "text": "rush"
+      }
+    ],
+    "requiresWorldFlag": "mentor_wudang_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_wudang_master",
+    "id": "mentor_wudang_master.quest14",
+    "title": "Final Water Gesture",
+    "description": "A culminating exercise: a small, precise water gesture to demonstrate everything learned.",
+    "choices": [
+      {
+        "id": "perform",
+        "label": "Perform the gesture with confidence",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "wudang.final_gesture_14"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest14.completed"
+              ]
+            }
+          }
+        ],
+        "text": "perform"
+      },
+      {
+        "id": "half",
+        "label": "Do a partial attempt",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_wudang_master",
+              "amount": 2
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_wudang_master.quest14.completed"
+              ]
+            }
+          }
+        ],
+        "text": "half"
+      }
+    ],
+    "requiresWorldFlag": "mentor_wudang_master.disciple"
+  }
+]

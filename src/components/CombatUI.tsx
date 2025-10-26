@@ -6,20 +6,24 @@ import { Progress } from './core/Progress';
 // Use centralized combat power helper when available to keep metrics consistent
  
 let computeCombatPower: ((e: any, opts?: any) => number) | null = null;
-try {
-  // require used to avoid static circular deps in some build setups
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  computeCombatPower = require('../systems/combatConfig').computeCombatPower;
-} catch (e) {
-  computeCombatPower = null;
-}
+// Prefer static import; keep a runtime-gated fallback to avoid circular-init issues in some test setups
+import { computeCombatPower as _computeCombatPower } from '../systems/combatConfig';
+computeCombatPower = _computeCombatPower || null;
+// If static import fails at runtime (rare), fall back to null — bundlers will handle ESM imports correctly.
 import { CombatState } from '../systems/CombatSystem';
+import { resolveActiveEncounterOutcome } from '@/systems/TravelEncounterSystem';
+import { getRng } from '../utils/rng';
+import { safeImport } from '@/utils/safeImport';
+import CombatTutorial from './ui/CombatTutorial';
+import RichTooltip from './ui/RichTooltip';
+import SmallChip from './ui/SmallChip';
 
 const CombatUI: React.FC = () => {
   const { combatSystem, setUIProperty, addEventLog, gainSkillExp, adjustRivalRelationship, markRivalDefeated, getFactionStanding, getSectReputation, adjustFactionStanding, adjustSectReputation, getVisibleStats } = useGameStore();
   const [combatState, setCombatState] = useState<CombatState | null>(null);
   const [combatOutcomeProcessed, setCombatOutcomeProcessed] = useState(false);
   const [reputationDelta, setReputationDelta] = useState<{ faction?: number | null; sect?: number | null }>({});
+  const [showTutorial, setShowTutorial] = useState(false);
 
   const handleCombatOutcome = useCallback((outcome: string) => {
     if (!combatSystem) return;
@@ -110,9 +114,48 @@ const CombatUI: React.FC = () => {
 
       applyReputationOutcome('victory', enemyParam);
 
-      if (Math.random() < 0.3) {
-        gainSkillExp('resourcefulness', 10);
-        addEventLog('Found some resources while searching the defeated opponent.');
+        // If this was an encounter, attempt to grant loot from template registry
+              try {
+              const sr: string[] = ctx?.specialRules || [];
+              const encRule = (sr || []).find((s: string) => typeof s === 'string' && s.startsWith('encounter:'));
+              if (encRule) {
+                const _encId = encRule.split(':')[1];
+                void _encId;
+                (async () => {
+                  try {
+                    const mod = await safeImport(() => import('../data/encounterTemplates'));
+                    const tmpl = mod ? (mod as any).getEncounterTemplate(_encId) : null;
+                    if (tmpl && tmpl.loot) {
+                      for (const item of tmpl.loot) {
+                        if (item.type === 'yuan') {
+                          setTimeout(() => { try { (useGameStore.getState() as any).setPlayerProperty?.('yuan', ((useGameStore.getState() as any).player.yuan || 0) + item.amount); } catch (e) { void e; } }, 0);
+                        } else if (item.type === 'spirit_stone') {
+                          setTimeout(() => { try { (useGameStore.getState() as any).setPlayerProperty?.('spiritStones', Object.assign({}, (useGameStore.getState() as any).player.spiritStones, { low: ((useGameStore.getState() as any).player.spiritStones?.low || 0) + (item.amount || 0) })); } catch (e) { void e; } }, 0);
+                        } else if (item.type === 'resource') {
+                          // add to inventory as simple item object
+                          setTimeout(() => { try { (useGameStore.getState() as any).addToInventory?.({ id: item.id || 'res', qty: item.qty || 1 }); } catch (e) { void e; } }, 0);
+                        }
+                      }
+                    }
+                  } catch (e) {
+                    // ignore missing template
+                  }
+                })();
+              }
+            } catch (e) { void e; }
+
+            try {
+        const ctx = (combatSystem as any).getContext ? (combatSystem as any).getContext() : null;
+        const ctxRng = (ctx && typeof ctx.rng === 'function') ? ctx.rng : getRng();
+        const r = (typeof ctxRng === 'function') ? ctxRng() : getRng()();
+        if (r < 0.3) {
+          gainSkillExp('resourcefulness', 10);
+          addEventLog('Found some resources while searching the defeated opponent.');
+        }
+      } catch (e) {
+        const f = getRng();
+        const r = f();
+        if (r < 0.3) { gainSkillExp('resourcefulness', 10); addEventLog('Found some resources while searching the defeated opponent.'); }
       }
     };
 
@@ -146,6 +189,22 @@ const CombatUI: React.FC = () => {
         handleFleeOutcome();
         break;
     }
+
+    // If this combat was started as an encounter (specialRules marker), notify encounter resolver
+    try {
+      const ctx = (combatSystem as any).getContext ? (combatSystem as any).getContext() : null;
+      const sr: string[] = ctx?.specialRules || [];
+      const encRule = (sr || []).find((s: string) => typeof s === 'string' && s.startsWith('encounter:'));
+      if (encRule) {
+        const _encId = encRule.split(':')[1];
+        void _encId;
+        // on victory -> resume travel, on defeat/fled -> do not resume
+        if (combatSystem.getState().status === 'victory') resolveActiveEncounterOutcome({ success: true, resumeTravel: true });
+        else resolveActiveEncounterOutcome({ success: false, resumeTravel: false });
+      }
+    } catch (e) {
+      // ignore
+    }
   }, [combatSystem, gainSkillExp, adjustRivalRelationship, markRivalDefeated, addEventLog, adjustFactionStanding, adjustSectReputation, setReputationDelta]);
 
   useEffect(() => {
@@ -176,6 +235,15 @@ const CombatUI: React.FC = () => {
 
     return () => clearInterval(interval);
   }, [combatSystem, combatOutcomeProcessed, handleCombatOutcome, setUIProperty]);
+
+  // Show tutorial on first combat unless the player has hidden it forever
+  useEffect(() => {
+    try {
+      const player = useGameStore.getState().player;
+      const hidden = player?.settings?.combatTutorialHidden;
+      if (!hidden) setShowTutorial(true);
+    } catch (e) { /* ignore */ }
+  }, [combatSystem]);
 
 
 
@@ -225,9 +293,9 @@ const CombatUI: React.FC = () => {
       <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginTop: 6, flexWrap: 'wrap' }}>
         {rival && (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
-            <span style={{ background: 'rgba(220,38,38,0.15)', color: '#ef4444', padding: '4px 8px', borderRadius: 6, border: '1px solid #ef4444', position: 'relative' }}>
+            <SmallChip variant="danger" style={{ position: 'relative' }} title={rival.name}>
               Rival: {rival.name}
-            </span>
+            </SmallChip>
             <div style={{ fontSize: '12px', color: '#666', display: 'flex', gap: '8px', textAlign: 'center' }}>
               <span>Relationship: {getRelationshipDescription(useGameStore.getState().getRivalRelationship(rival.id))}</span>
               <span>•</span>
@@ -236,24 +304,28 @@ const CombatUI: React.FC = () => {
           </div>
         )}
         {contextFaction && (
-          <span style={{ background: 'rgba(59,130,246,0.15)', color: standingColor(factionStanding), padding: '4px 8px', borderRadius: 6, border: '1px solid rgba(59,130,246,0.6)', position: 'relative' }}>
-            Faction: {contextFaction.replace('_',' ').toUpperCase()} ({formatStanding(factionStanding)})
+          <div style={{ position: 'relative' }}>
+            <SmallChip style={{ color: standingColor(factionStanding), border: '1px solid rgba(59,130,246,0.6)' }}>
+              Faction: {contextFaction.replace('_',' ').toUpperCase()} ({formatStanding(factionStanding)})
+            </SmallChip>
             {typeof reputationDelta.faction === 'number' && reputationDelta.faction !== 0 && (
               <span style={{ position: 'absolute', top: -10, right: -10, fontSize: 12, fontWeight: 700, color: reputationDelta.faction > 0 ? '#16a34a' : '#dc2626' }}>
                 {reputationDelta.faction > 0 ? '+' : ''}{reputationDelta.faction}
               </span>
             )}
-          </span>
+          </div>
         )}
         {contextSect && (
-          <span style={{ background: 'rgba(34,197,94,0.15)', color: standingColor(sectReputation), padding: '4px 8px', borderRadius: 6, border: '1px solid rgba(34,197,94,0.6)', position: 'relative' }}>
-            Sect: {contextSect.replace('_',' ').toUpperCase()} ({formatStanding(sectReputation)})
+          <div style={{ position: 'relative' }}>
+            <SmallChip style={{ color: standingColor(sectReputation), border: '1px solid rgba(34,197,94,0.6)' }}>
+              Sect: {contextSect.replace('_',' ').toUpperCase()} ({formatStanding(sectReputation)})
+            </SmallChip>
             {typeof reputationDelta.sect === 'number' && reputationDelta.sect !== 0 && (
               <span style={{ position: 'absolute', top: -10, right: -10, fontSize: 12, fontWeight: 700, color: reputationDelta.sect > 0 ? '#16a34a' : '#dc2626' }}>
                 {reputationDelta.sect > 0 ? '+' : ''}{reputationDelta.sect}
               </span>
             )}
-          </span>
+          </div>
         )}
       </div>
     );
@@ -274,6 +346,12 @@ const CombatUI: React.FC = () => {
 
   return (
     <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
+      {showTutorial && (
+        <CombatTutorial onClose={() => setShowTutorial(false)} onHideForever={() => {
+          try { useGameStore.getState().setPlayerProperty?.('settings', { ...(useGameStore.getState().player.settings || {}), combatTutorialHidden: true }); } catch (e) { void e; }
+          setShowTutorial(false);
+        }} />
+      )}
       <h2 style={{ color: 'var(--primary)', textAlign: 'center', marginBottom: '6px' }}>
         ⚔️ Combat - Round {combatState.round}
       </h2>
@@ -357,16 +435,14 @@ const CombatUI: React.FC = () => {
           {(player.buffs?.length || player.debuffs?.length) && (
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8 }}>
               {player.buffs?.map((b, idx) => (
-                <span key={`pb-${idx}`} title={b.description}
-                  style={{ background: 'rgba(34,197,94,0.12)', color: '#22c55e', padding: '2px 6px', borderRadius: 6, border: '1px solid rgba(34,197,94,0.5)', fontSize: 12 }}>
-                  🟢 {b.name} ({b.duration})
-                </span>
+                <RichTooltip key={`pb-${idx}`} content={b.description}>
+                  <SmallChip variant="success">🟢 {b.name} ({b.duration})</SmallChip>
+                </RichTooltip>
               ))}
               {player.debuffs?.map((d, idx) => (
-                <span key={`pd-${idx}`} title={d.description}
-                  style={{ background: 'rgba(239,68,68,0.12)', color: '#ef4444', padding: '2px 6px', borderRadius: 6, border: '1px solid rgba(239,68,68,0.5)', fontSize: 12 }}>
-                  🔴 {d.name} ({d.duration})
-                </span>
+                <RichTooltip key={`pd-${idx}`} content={d.description}>
+                  <SmallChip variant="danger">🔴 {d.name} ({d.duration})</SmallChip>
+                </RichTooltip>
               ))}
             </div>
           )}
@@ -382,9 +458,7 @@ const CombatUI: React.FC = () => {
           <h3 style={{ color: 'var(--danger)', marginBottom: '10px' }}>👹 {enemy.name}</h3>
           {enemyIntent && (
             <div style={{ marginBottom: '8px' }}>
-              <span style={{ background: 'rgba(239,68,68,0.12)', color: '#f87171', padding: '3px 8px', borderRadius: 6, border: '1px solid rgba(239,68,68,0.5)' }}>
-                Intent: {enemyIntent.intent.toUpperCase()} {enemyIntentTechniqueName ? `(${enemyIntentTechniqueName})` : ''}
-              </span>
+              <SmallChip variant="danger">Intent: {enemyIntent.intent.toUpperCase()} {enemyIntentTechniqueName ? `(${enemyIntentTechniqueName})` : ''}</SmallChip>
             </div>
           )}
           <div style={{ marginBottom: '10px' }}>
@@ -412,16 +486,14 @@ const CombatUI: React.FC = () => {
         {(enemy.buffs?.length || enemy.debuffs?.length) && (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8 }}>
             {enemy.buffs?.map((b, idx) => (
-              <span key={`eb-${idx}`} title={b.description}
-                style={{ background: 'rgba(34,197,94,0.12)', color: '#22c55e', padding: '2px 6px', borderRadius: 6, border: '1px solid rgba(34,197,94,0.5)', fontSize: 12 }}>
-                🟢 {b.name} ({b.duration})
-              </span>
+              <RichTooltip key={`eb-${idx}`} content={b.description}>
+                <SmallChip variant="success">🟢 {b.name} ({b.duration})</SmallChip>
+              </RichTooltip>
             ))}
             {enemy.debuffs?.map((d, idx) => (
-              <span key={`ed-${idx}`} title={d.description}
-                style={{ background: 'rgba(239,68,68,0.12)', color: '#ef4444', padding: '2px 6px', borderRadius: 6, border: '1px solid rgba(239,68,68,0.5)', fontSize: 12 }}>
-                🔴 {d.name} ({d.duration})
-              </span>
+              <RichTooltip key={`ed-${idx}`} content={d.description}>
+                <SmallChip variant="danger">🔴 {d.name} ({d.duration})</SmallChip>
+              </RichTooltip>
             ))}
           </div>
         )}

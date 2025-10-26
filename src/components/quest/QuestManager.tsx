@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/core/Card';
 import { Button } from '@/components/core/Button';
 import { EnhancedQuestPanel } from './EnhancedQuestPanel';
+import SmallChip from '@/components/ui/SmallChip';
 import { useGameStore } from '@/store/useGameStore';
 
 export const QuestManager: React.FC = () => {
@@ -53,6 +54,8 @@ export const QuestManager: React.FC = () => {
         {questCounts.map(tab => (
           <button
             key={tab.id}
+            type="button"
+            aria-pressed={activeTab === tab.id}
             onClick={() => setActiveTab(tab.id)}
             style={{
               background: activeTab === tab.id ? `${tab.color}20` : 'transparent',
@@ -83,20 +86,13 @@ export const QuestManager: React.FC = () => {
             }}
           >
             <span>{tab.icon}</span>
-            <span>{tab.label}</span>
+            <SmallChip style={{ fontSize: '0.9rem', background: 'transparent', color: activeTab === tab.id ? tab.color : 'var(--muted)', fontWeight: activeTab === tab.id ? 'bold' : 'normal', padding: 0 }}>
+              {tab.label}
+            </SmallChip>
             {(tab.activeCount > 0 || tab.availableCount > 0) && (
-              <span style={{
-                background: tab.color,
-                color: 'white',
-                borderRadius: '10px',
-                padding: '2px 6px',
-                fontSize: '0.7rem',
-                fontWeight: 'bold',
-                minWidth: '18px',
-                textAlign: 'center'
-              }}>
+              <SmallChip style={{ background: tab.color, color: 'white', borderRadius: 10, fontSize: '0.7rem', fontWeight: 'bold', minWidth: '18px', textAlign: 'center' }}>
                 {tab.activeCount + tab.availableCount}
-              </span>
+              </SmallChip>
             )}
           </button>
         ))}
@@ -177,27 +173,17 @@ export const QuestManager: React.FC = () => {
                       fontSize: '0.8rem',
                       marginBottom: '12px'
                     }}>
-                      <span style={{ 
-                        color: tabs.find(t => t.id === activeTab)?.color,
-                        fontWeight: 'bold',
-                        textTransform: 'uppercase'
-                      }}>
-                        {quest.difficulty}
-                      </span>
+                      <SmallChip style={{ fontSize: '0.8rem', background: tabs.find(t => t.id === activeTab)?.color, color: 'white', textTransform: 'uppercase', fontWeight: 'bold' }}>{quest.difficulty}</SmallChip>
                       {quest.experience > 0 && (
                         <>
                           <span style={{ color: 'var(--muted)' }}>•</span>
-                          <span style={{ color: 'var(--accent)' }}>
-                            {quest.experience} XP
-                          </span>
+                          <SmallChip variant="accent" style={{ fontSize: '0.8rem' }}>{quest.experience} XP</SmallChip>
                         </>
                       )}
                       {quest.rewards.length > 0 && (
                         <>
                           <span style={{ color: 'var(--muted)' }}>•</span>
-                          <span style={{ color: 'var(--success)' }}>
-                            {quest.rewards.length} Reward{quest.rewards.length > 1 ? 's' : ''}
-                          </span>
+                          <SmallChip variant="success" style={{ fontSize: '0.8rem' }}>{quest.rewards.length} Reward{quest.rewards.length > 1 ? 's' : ''}</SmallChip>
                         </>
                       )}
                     </div>
@@ -221,13 +207,14 @@ export const QuestManager: React.FC = () => {
                         setAvailableQuests(getAvailableEnhancedQuests());
                       }
                     }}
+                    aria-label={`Start quest ${quest.title}`}
                     size="small"
                     style={{ 
                       backgroundColor: tabs.find(t => t.id === activeTab)?.color,
                       borderColor: tabs.find(t => t.id === activeTab)?.color
                     }}
                   >
-                    Start Quest
+                    <SmallChip>Start Quest</SmallChip>
                   </Button>
                 </div>
               ))}

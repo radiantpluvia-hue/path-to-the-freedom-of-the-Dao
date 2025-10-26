@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.checkQuestCompletion = checkQuestCompletion;
+const realmHelpers_1 = require("../utils/realmHelpers");
 /**
  * Checks if a single quest objective is met by the current player state.
  */
@@ -8,9 +9,8 @@ function isObjectiveMet(objective, player) {
     switch (objective.type) {
         case 'REACH_REALM': {
             // Assumes objective.value is the string name of the realm.
-            // eslint-disable-next-line @typescript-eslint/no-var-requires
-            const { getRealmKeyFromPlayer } = require('../utils/realmHelpers');
-            return getRealmKeyFromPlayer(player) === objective.value;
+            // Use ES import for browser-safe code (see top-level import in file)
+            return (0, realmHelpers_1.getRealmKeyFromPlayer)(player) === objective.value;
         }
         case 'HAVE_STAT': {
             const stat = objective.target;

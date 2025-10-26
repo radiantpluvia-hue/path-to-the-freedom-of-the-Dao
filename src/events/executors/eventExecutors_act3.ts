@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { GameState, EventExecutor } from "../../../utils/types";
+import { ensureRealmId, getPlayerRealmId, getPlayerRealmKey } from '@/utils/playerHelpers';
+import { applyRealmToPlayer } from '../../utils/playerSetters';
+import { REALM_ORDER } from '../../data/cultivationRealms';
 const makeStub = (id: string): EventExecutor => (state: GameState) => {
   const s: any = { ...state };
   s.__meta = s.__meta || {};
@@ -309,7 +312,7 @@ const fn_act3_spellbinders_gathering: EventExecutor = (state, args) => {
   const attend = args && args.choice === 'attend_and_learn';
   const s: any = { ...state, player: { ...state.player, manuals: Array.isArray(state.player.manuals) ? [...state.player.manuals] : [], reputation: { ...(state.player.reputation || {}) } }, world: { ...state.world, flags: { ...(state.world.flags || {}) } } };
   if (attend) {
-    s.player.manuals.push({ id: 'spellbinders_note', name: 'Spellbinder Note', type: 'movement', rarity: 'uncommon' });
+  s.player.manuals.push({ id: 'spellbinders_note', name: 'Spellbinder Note', type: 'movement', rarity: "G", description: 'Notes from a spellbinder covering refined movement and flow techniques.', effects: { speed: 2, martialMastery: 2 } });
     s.player.reputation['scholar'] = (s.player.reputation['scholar'] || 0) + 2;
   } else {
     s.player.reputation['critic'] = (s.player.reputation['critic'] || 0) + 1;
@@ -510,10 +513,22 @@ const fn_act3_rival_assassination_attempt: EventExecutor = (state, args) => {
 // Final breakthrough: small permanent power increase if achieved
 const fn_act3_final_breakthrough: EventExecutor = (state, args) => {
   const breakthrough = args && args.choice === 'breakthrough';
-  const s: any = { ...state, player: { ...state.player, stats: { ...state.player.stats }, realm: state.player.realm }, world: { ...state.world, flags: { ...(state.world.flags || {}) } } };
+  // Preserve legacy 'realm' but ensure realmId is present in the derived state copy
+  const s: any = { ...state, player: { ...state.player, stats: { ...state.player.stats } }, world: { ...state.world, flags: { ...(state.world.flags || {}) } } };
+  // Use the helper to derive/ensure a numeric realmId and base arithmetic on that.
+  const currentRealmId = ensureRealmId(s.player);
   if (breakthrough) {
     s.player.stats.qi = (s.player.stats.qi || 0) + 25;
-    s.player.realm = (s.player.realm || 0) + 1;
+    try {
+      // Prefer the numeric realmId for progression arithmetic
+      applyRealmToPlayer(s.player, currentRealmId + 1);
+    } catch (e) {
+      // Conservative fallback: set realmId via helper and best-effort realm key
+      const newRealmId = currentRealmId + 1;
+      try { s.player.realmId = newRealmId; } catch (e2) { /* ignore if immutable */ }
+      const realmKey = REALM_ORDER[newRealmId - 1];
+      try { if (realmKey) s.player.realm = getPlayerRealmKey({ ...s.player, realmId: newRealmId }) || realmKey; } catch (e3) { /* ignore */ }
+    }
     s.world.flags.final_breakthrough = 'succeeded';
   } else {
     s.world.flags.final_breakthrough = 'deferred';
@@ -827,6 +842,7 @@ export const act3EventExecutors: Record<string, EventExecutor> = {
   "fn_act3_rivalry": fn_act3_rivalry,
   "fn_act3_first_breakthrough": fn_act3_first_breakthrough,
   "fn_act3_ancient_artifact": fn_act3_ancient_artifact,
+  "fn_act3_spellbinders_gathering": fn_act3_spellbinders_gathering,
   "fn_act3_spirit_beast_encounter": fn_act3_spirit_beast_encounter,
   "fn_act3_martial_competition": fn_act3_martial_competition,
   "fn_act3_mentor_guidance": fn_act3_mentor_guidance,

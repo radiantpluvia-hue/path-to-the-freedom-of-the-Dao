@@ -1,0 +1,704 @@
+[
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest01",
+    "title": "Dawn Boil of Tears",
+    "description": "The Matron asks you to collect dew at dawn and use it to brew a mild restorative tea — a lesson in gentle attention.",
+    "choices": [
+      {
+        "id": "collect",
+        "label": "Collect dew carefully and brew the tea",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 3
+            }
+          },
+          {
+            "lore_collect": "emei.dew_tea_01"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest01.completed"
+              ]
+            }
+          }
+        ],
+        "text": "collect"
+      },
+      {
+        "id": "ignore",
+        "label": "Leave the dew for the plants",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest01.completed"
+              ]
+            }
+          }
+        ],
+        "text": "ignore"
+      }
+    ],
+    "requiresWorldFlag": "mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest02",
+    "title": "Silk Bandage Practice",
+    "description": "You are taught to apply silk bandages with even tension — small hands, steady care.",
+    "choices": [
+      {
+        "id": "apply",
+        "label": "Apply bandages with care",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "emei.bandage_note_02"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest02.completed"
+              ]
+            }
+          }
+        ],
+        "text": "apply"
+      },
+      {
+        "id": "rush",
+        "label": "Wrap quickly to finish",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest02.completed"
+              ]
+            }
+          }
+        ],
+        "text": "rush"
+      }
+    ],
+    "requiresWorldFlag": "mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest03",
+    "title": "Bell and Salve",
+    "description": "The Matron strikes a small bell and asks you to prepare a salve while listening to its resonance — patience and skill combined.",
+    "choices": [
+      {
+        "id": "prepare",
+        "label": "Prepare the salve attentively",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 3
+            }
+          },
+          {
+            "lore_collect": "emei.salve_note_03"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest03.completed"
+              ]
+            }
+          }
+        ],
+        "text": "prepare"
+      },
+      {
+        "id": "clumsy",
+        "label": "Hurry and mix roughly",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest03.completed"
+              ]
+            }
+          }
+        ],
+        "text": "clumsy"
+      }
+    ],
+    "requiresWorldFlag": "mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest04",
+    "title": "Lotus Breathing",
+    "description": "You practice a slow breathing technique while holding a lotus petal; the Matron emphasizes gentleness.",
+    "choices": [
+      {
+        "id": "breathe",
+        "label": "Follow the breathing rhythm carefully",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "emei.lotus_breath_04"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest04.completed"
+              ]
+            }
+          }
+        ],
+        "text": "breathe"
+      },
+      {
+        "id": "fidget",
+        "label": "Find it boring and fidget",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest04.completed"
+              ]
+            }
+          }
+        ],
+        "text": "fidget"
+      }
+    ],
+    "requiresWorldFlag": "mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest05",
+    "title": "Purifying Sutra",
+    "description": "The Matron hums an old sutra while demonstrating a healing pass — a small lesson in channeling restorative qi.",
+    "choices": [
+      {
+        "id": "accept",
+        "label": "Receive healing instruction",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "emei_healing_note_05"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest05.completed"
+              ]
+            }
+          }
+        ],
+        "text": "accept"
+      },
+      {
+        "id": "decline",
+        "label": "Decline politely",
+        "effects": [
+          {
+            "add_event_log": "You bow and decline the Matron's tutoring for now."
+          }
+        ],
+        "text": "decline"
+      }
+    ],
+    "requiresWorldFlag": "mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest06",
+    "title": "Tenacious Guard",
+    "description": "She shows a bracing stance that supports others; the Matron insists you hold the pose until your limbs tremble.",
+    "choices": [
+      {
+        "id": "hold",
+        "label": "Hold the stance",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "emei_healing_note_06"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest06.completed"
+              ]
+            }
+          }
+        ],
+        "text": "hold"
+      },
+      {
+        "id": "soften",
+        "label": "Ask for easier variation",
+        "effects": [
+          {
+            "add_event_log": "She nods and guides you into a gentler variation, instructing patience over pride."
+          }
+        ],
+        "text": "soften"
+      }
+    ],
+    "requiresWorldFlag": "mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest07",
+    "title": "Restorative Forms",
+    "description": "The Matron demonstrates a flowing set designed to open wounds and mend chi — gentle, precise, and restorative.",
+    "choices": [
+      {
+        "id": "practice",
+        "label": "Practice the restorative form",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "emei_healing_note_07"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest07.completed"
+              ]
+            }
+          }
+        ],
+        "text": "practice"
+      },
+      {
+        "id": "observe",
+        "label": "Observe quietly",
+        "effects": [
+          {
+            "add_event_log": "You observe the Matron's hands; the motion feels like sewing wind into skin."
+          }
+        ],
+        "text": "observe"
+      }
+    ],
+    "requiresWorldFlag": "mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest08",
+    "title": "Soul Mending",
+    "description": "In a quiet alcove the Matron speaks of wounds the eyes cannot see and guides you through a meditative mending.",
+    "choices": [
+      {
+        "id": "engage",
+        "label": "Engage in the mending",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "emei_healing_note_08"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest08.completed"
+              ]
+            }
+          }
+        ],
+        "text": "engage"
+      },
+      {
+        "id": "step_back",
+        "label": "Step back for now",
+        "effects": [
+          {
+            "add_event_log": "You step back, keeping the Matron's words for later."
+          }
+        ],
+        "text": "step_back"
+      }
+    ],
+    "requiresWorldFlag": "mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest09",
+    "title": "Silent Heal Test",
+    "description": "A simulated wound is presented; you must tend it in silence to show focus and empathy.",
+    "choices": [
+      {
+        "id": "tend",
+        "label": "Tend it in silence with steady hands",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "emei.silent_heal_09"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest09.completed"
+              ]
+            }
+          }
+        ],
+        "text": "tend"
+      },
+      {
+        "id": "talk",
+        "label": "Talk through the process",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest09.completed"
+              ]
+            }
+          }
+        ],
+        "text": "talk"
+      }
+    ],
+    "requiresWorldFlag": "mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest10",
+    "title": "Sacred Band",
+    "description": "You are given a worn band to mend; the Matron watches how you sew patience into it.",
+    "choices": [
+      {
+        "id": "mend",
+        "label": "Sew carefully until it's whole",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "emei.sacred_band_10"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest10.completed"
+              ]
+            }
+          }
+        ],
+        "text": "mend"
+      },
+      {
+        "id": "patch",
+        "label": "Quick patch to make it usable",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest10.completed"
+              ]
+            }
+          }
+        ],
+        "text": "patch"
+      }
+    ],
+    "requiresWorldFlag": "mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest11",
+    "title": "Mending Song",
+    "description": "The Matron hums as you stitch; she judges not speed but the care woven into each stitch.",
+    "choices": [
+      {
+        "id": "attend",
+        "label": "Stitch carefully in time with the song",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "emei.mending_song_11"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest11.completed"
+              ]
+            }
+          }
+        ],
+        "text": "attend"
+      },
+      {
+        "id": "hurry",
+        "label": "Finish quickly without attention to rhythm",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest11.completed"
+              ]
+            }
+          }
+        ],
+        "text": "hurry"
+      }
+    ],
+    "requiresWorldFlag": "mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest12",
+    "title": "Calm Wind Gesture",
+    "description": "A small hand gesture calms an incense flame; the Matron asks you to replicate it precisely.",
+    "choices": [
+      {
+        "id": "replicate",
+        "label": "Replicate the gesture precisely",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "emei.gesture_note_12"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest12.completed"
+              ]
+            }
+          }
+        ],
+        "text": "replicate"
+      },
+      {
+        "id": "approx",
+        "label": "Approximate it and call it close enough",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest12.completed"
+              ]
+            }
+          }
+        ],
+        "text": "approx"
+      }
+    ],
+    "requiresWorldFlag": "mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest13",
+    "title": "Moonlit Salve",
+    "description": "At night you prepare a salve by moonlight; the Matron watches how you preserve its potency.",
+    "choices": [
+      {
+        "id": "preserve",
+        "label": "Keep the salve's potency with careful methods",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "emei.moon_salve_13"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest13.completed"
+              ]
+            }
+          }
+        ],
+        "text": "preserve"
+      },
+      {
+        "id": "cut_corners",
+        "label": "Cut corners to finish sooner",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest13.completed"
+              ]
+            }
+          }
+        ],
+        "text": "cut_corners"
+      }
+    ],
+    "requiresWorldFlag": "mentor_emei_matron.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_emei_matron",
+    "id": "mentor_emei_matron.quest14",
+    "title": "Parting Bless",
+    "description": "Before you leave the Matron offers a small blessing and asks you to reflect on compassion in practice.",
+    "choices": [
+      {
+        "id": "accept",
+        "label": "Accept the blessing and reflect",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "emei.parting_bless_14"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest14.completed"
+              ]
+            }
+          }
+        ],
+        "text": "accept"
+      },
+      {
+        "id": "keep_moving",
+        "label": "Decline politely and continue your path",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_emei_matron",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_emei_matron.quest14.completed"
+              ]
+            }
+          }
+        ],
+        "text": "keep_moving"
+      }
+    ],
+    "requiresWorldFlag": "mentor_emei_matron.disciple"
+  }
+]

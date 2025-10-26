@@ -1,0 +1,123 @@
+[
+  {
+    "id": "wanderer_storyteller",
+    "title": "A Traveling Storyteller",
+    "description": "A storyteller in the market murmurs tales of distant sects and offers to teach a short parable.",
+    "weight": 8,
+    "choices": [
+      { "text": "Listen and learn.", "effects": { "daoComprehension": 5 }, "narrative": "The parable resonates with your Dao study." },
+      { "text": "Ignore and move on.", "effects": { "karma": 1 } }
+    ]
+  },
+  {
+    "id": "herbalist_offer",
+    "title": "Herbalist's Bargain",
+    "description": "A shy herbalist offers a strange tonic at a discount.",
+    "weight": 6,
+    "choices": [
+      { "text": "Buy the tonic.", "effects": { "spiritStones": -30, "hp": 20 }, "narrative": "You feel a subtle warmth." },
+      { "text": "Decline.", "effects": { "cunning": 1 } }
+    ]
+  },
+  {
+    "id": "crossroads_brawl",
+    "title": "Crossroads Brawl",
+    "description": "Two drunks start a brawl, and a purse falls from a fleeing thief.",
+    "weight": 7,
+    "choices": [
+      { "text": "Return the purse.", "effects": { "karma": 3, "reputation": 1 } },
+      { "text": "Pocket it quietly.", "effects": { "spiritStones": 20, "guilt": 1 } }
+    ]
+  },
+  {
+    "id": "moonlit_meditation",
+    "title": "Moonlit Meditation",
+    "description": "Under a full moon, your meditation is unusually deep.",
+    "weight": 4,
+    "requirements": { "minimumRealm": 2 },
+    "choices": [
+      { "text": "Sink deeper.", "effects": { "daoComprehension": 20 } },
+      { "text": "Keep watch.", "effects": { "stability": 5 } }
+    ]
+  },
+  {
+    "id": "abandoned_shrine",
+    "title": "Abandoned Shrine",
+    "description": "A ruined shrine contains a faded mural and a sealed offering.",
+    "weight": 5,
+    "choices": [
+      { "text": "Open the offering.", "effects": { "specialItem": "shrine_fragment" } },
+      { "text": "Study the mural.", "effects": { "lore": 1 } }
+    ]
+  },
+  {
+    "id": "skeletal_bandit",
+    "title": "Skeletal Bandit",
+    "description": "A pale bandit steps out of a shadow, eyes empty as a bone.",
+    "weight": 6,
+    "choices": [
+      { "text": "Fight.", "effects": { "combatEncounter": "skeleton_bandit" } },
+      { "text": "Bribe.", "effects": { "spiritStones": -40 } }
+    ]
+  },
+  {
+    "id": "lost_child",
+    "title": "A Lost Child",
+    "description": "A crying child asks for help finding a parent.",
+    "weight": 9,
+    "choices": [
+      { "text": "Help search.", "effects": { "karma": 2 } },
+      { "text": "Ignore.", "effects": { "stress": 1 } }
+    ]
+  },
+  {
+    "id": "ancient_scroll_find",
+    "title": "Ancient Scroll Found",
+    "description": "You unroll a brittle scroll describing a forgotten technique.",
+    "weight": 3,
+    "choices": [
+      { "text": "Copy the technique.", "effects": { "manualLearn": "ancient_sutra_fragment" } },
+      { "text": "Sell the scroll.", "effects": { "spiritStones": 100 } }
+    ]
+  },
+  {
+    "id": "merchant_riddle",
+    "title": "Merchant's Riddle",
+    "description": "A merchant challenges you with a riddle; solve it for a reward.",
+    "weight": 5,
+    "choices": [
+      { "text": "Solve it.", "effects": { "spiritStones": 50 } },
+      { "text": "Refuse.", "effects": { "pride": 1 } }
+    ]
+  },
+  {
+    "id": "river_hermit",
+    "title": "A River Hermit",
+    "description": "A hermit by the river offers a small training exercise for free.",
+    "weight": 6,
+    "choices": [
+      { "text": "Train.", "effects": { "skillXP": { "proportion": 0.05 } } },
+      { "text": "Decline.", "effects": { "peace": 1 } }
+    ]
+  },
+  {
+    "id": "faded_letter",
+    "title": "Faded Letter",
+    "description": "A letter with a faded seal speaks of a debt owed long ago.",
+    "weight": 4,
+    "choices": [
+      { "text": "Investigate.", "effects": { "rumorSpawn": "old_debt" } },
+      { "text": "Burn it.", "effects": { "karma": -1 } }
+    ]
+  },
+  {
+    "id": "astral_glimmer",
+    "title": "Astral Glimmer",
+    "description": "A sudden glimmer in the sky hints at an approaching omen.",
+    "weight": 2,
+    "choices": [
+      { "text": "Follow the omen.", "effects": { "lore": 2, "daoComprehension": 10 } },
+      { "text": "Ignore and carry on.", "effects": { "stability": 2 } }
+    ]
+  }
+]

@@ -1,0 +1,123 @@
+import type { Dialogue } from '../types';
+
+const RIVAL_DIALOGUES: Dialogue[] = [
+  { id: 'rival_smirk_intro', title: 'Rival - Smirk Intro', lines: [{ speaker: 'rival_zhou', text: 'A face that smiles too easily hides a blade that strikes truer.' }], tags: ['rival','intro','taunt'] },
+  { id: 'rival_bloodline_brag', title: 'Rival - Bloodline Brag', mono: true, lines: [{ speaker: 'rival_zhou', text: 'My blood remembers battles I have yet to fight. Yours remembers only defeats.' }], tags: ['rival','brag'] },
+  { id: 'rival_cold_snarl', title: 'Rival - Cold Snarl', lines: [{ speaker: 'rival_chen', text: 'I will not give you a fair fight. Fairness is for children.' }], tags: ['rival','cold'] },
+  { id: 'rival_broken_promise', title: 'Rival - Broken Promise', mono: true, lines: [{ speaker: 'rival_xiao', text: 'Promises are like bows that were never strung — they snap at first real strain.' }], tags: ['rival','sad'] },
+  { id: 'rival_mentor_pride', title: 'Rival - Mentor Pride', lines: [{ speaker: 'rival_xiao', text: 'My master did not speak of mercy. He taught me to measure hearts by their weight.' }], tags: ['rival','mentor'] },
+  { id: 'rival_postvictory_kind', title: 'Rival - Post Victory Kind', lines: [{ speaker: 'rival_kind', text: 'You fought well. Keep your blade sharp; tomorrow the world asks again.' }], tags: ['rival','post','kind'] },
+  { id: 'rival_jealousy', title: 'Rival - Jealousy', lines: [ { speaker: 'rival_meng', text: 'You born with a better name and worse luck. That will change when I finish sharpening my blade.' } ], tags: ['rival','jealousy'] },
+  { id: 'rival_mentor_blast', title: 'Rival - Mentor Blast', mono: true, lines: [ { speaker: 'rival_meng', text: 'My master taught me ruthlessness. He taught me survival; that is something you do not yet possess.' } ], tags: ['rival','mentor'] },
+  { id: 'rival_old_friend_tease', title: 'Rival - Old Friend Tease', lines: [ { speaker: 'rival_lin', text: 'Still clumsy with your left hand. Grow into it and I might slow my blade.' } ], tags: ['rival','banter','taunt'] },
+  { id: 'rival_postduel_resolve', title: 'Rival - Post Duel Resolve', mono: true, lines: [ { speaker: 'rival_lin', text: 'A cut that teaches is kindlier than praise that hides ignorance.' } ], tags: ['rival','reflect'] }
+];
+
+// Additional prioritized rival lines
+RIVAL_DIALOGUES.push(
+  { id: 'rival_ice_brush', title: 'Rival - Ice Brush', lines: [{ speaker: 'rival', text: 'You move with the urgency of a trapped moth. Calm down, and you might last.' }], tags: ['rival','advice'] },
+  { id: 'rival_sun_cut', title: 'Rival - Sun Cut', lines: [{ speaker: 'rival', text: 'I aim for the gap between your courage and your caution.' }], tags: ['rival','taunt'] },
+  { id: 'rival_half_smile', title: 'Rival - Half Smile', mono: true, lines: [{ speaker: 'rival', text: 'A half smile that keeps the rest of the face for later.' }], tags: ['rival','mood'] },
+  { id: 'rival_slow_down', title: 'Rival - Slow Down', lines: [{ speaker: 'rival', text: 'Slow down. The more you rush, the clearer your errors become.' }], tags: ['rival','advice'] },
+  { id: 'rival_not_bad', title: 'Rival - Not Bad', lines: [{ speaker: 'rival', text: 'Not bad. For someone who pretends not to care.' }], tags: ['rival','backhanded'] },
+  { id: 'rival_shadow_dance', title: 'Rival - Shadow Dance', lines: [{ speaker: 'rival', text: 'We dance in the same shadow; I learned the steps first.' }], tags: ['rival','poetic'] },
+  { id: 'rival_edge_test', title: 'Rival - Edge Test', lines: [{ speaker: 'rival', text: 'Let me test your edge — I will see how easily it breaks.' }], tags: ['rival','threat'] },
+  { id: 'rival_final_bow', title: 'Rival - Final Bow', mono: true, lines: [{ speaker: 'rival', text: 'When this ends, we will both have stories. Mine will hurt less.' }], tags: ['rival','afterfight'] },
+  { id: 'rival_remember_this', title: 'Rival - Remember This', lines: [{ speaker: 'rival', text: 'Remember this moment. You’ll tell it wrong, but it will be true.' }], tags: ['rival','taunt'] },
+  { id: 'rival_wager', title: 'Rival - Wager', lines: [{ speaker: 'rival', text: 'Put something on the line. I like watching what people give up.' }], tags: ['rival','taunt'] }
+);
+
+// Additional rival entries (priority): pre-fight, mid-fight, grudges, mentorship, and final lines
+RIVAL_DIALOGUES.push(
+  { id: 'rival_precise_greet', title: 'Rival - Precise Greet', lines: [{ speaker: 'rival_shen', text: 'Precision is not born; it is carved. Show me how deeply you can carve.' }], tags: ['rival','taunt'] },
+  { id: 'rival_quick_mock', title: 'Rival - Quick Mock', lines: [{ speaker: 'rival_yu', text: 'You move like a rumor — much noise, little consequence.' }], tags: ['rival','mock'] },
+  { id: 'rival_sad_advice', title: 'Rival - Sad Advice', mono: true, lines: [{ speaker: 'rival_ling', text: 'I taught myself how to win, not how to be loved. The two are not the same.' }], tags: ['rival','advice'] },
+  { id: 'rival_midbattle_grunt', title: 'Rival - Midbattle Grunt', lines: [{ speaker: 'rival_han', text: 'Is that all you have? I warmed up with harder winds.' }], tags: ['rival','combat'] },
+  { id: 'rival_blood_heritage', title: 'Rival - Blood Heritage', mono: true, lines: [{ speaker: 'rival_xuan', text: 'Our blood sings of old wars. Listen and you may learn to bleed with purpose.' }], tags: ['rival','bloodline'] },
+  { id: 'rival_vengeful_whisper', title: 'Rival - Vengeful Whisper', lines: [{ speaker: 'rival_ze', text: 'Let my name be a bruise upon your memory.' }], tags: ['rival','vengeful'] },
+  { id: 'rival_aftershock', title: 'Rival - Aftershock', mono: true, lines: [{ speaker: 'rival_hao', text: 'Your victory tastes like coin — cold and handed back by strangers.' }], tags: ['rival','reflect'] },
+  { id: 'rival_disdain_exit', title: 'Rival - Disdain Exit', lines: [{ speaker: 'rival_wen', text: 'I leave because I choose to. Come to me when you stop pretending to be brave.' }], tags: ['rival','exit'] },
+  { id: 'rival_quiet_threat', title: 'Rival - Quiet Threat', mono: true, lines: [{ speaker: 'rival_mo', text: 'I will not shout. I will wait until the moment you can do nothing.' }], tags: ['rival','threat'] },
+
+  // Rival mentorship and testing lines
+  { id: 'rival_test_patience', title: 'Rival - Test Patience', lines: [{ speaker: 'rival_kai', text: 'If you cannot hold still for a breath, you cannot hold a stance.' }], tags: ['rival','mentor'] },
+  { id: 'rival_sharp_lesson', title: 'Rival - Sharp Lesson', mono: true, lines: [{ speaker: 'rival_kai', text: 'A blade learns faster when it hits bone; remember that when you mend your pride.' }], tags: ['rival','lesson'] },
+
+  // Rival arrogance and downfall hints
+  { id: 'rival_arrogant_claim', title: 'Rival - Arrogant Claim', lines: [{ speaker: 'rival_ren', text: 'I will be a storm. I will not apologize for the damage I cause.' }], tags: ['rival','boast'] },
+  { id: 'rival_prelude_fall', title: 'Rival - Prelude Fall', mono: true, lines: [{ speaker: 'rival_ren', text: 'Every thunder has a lull. Wait for it and then move.' }], tags: ['rival','foreshadow'] },
+
+  // Rival final soliloquies and curses
+  { id: 'rival_final_sigh', title: 'Rival - Final Sigh', mono: true, lines: [{ speaker: 'rival_final2', text: 'If I fade, write me down kindly; let the world think me noble if it must.' }], tags: ['rival','final'] },
+  { id: 'rival_last_curse', title: 'Rival - Last Curse', lines: [{ speaker: 'rival_final2', text: 'Curse the soil that took me, and know it will also make your fields bitter.' }], tags: ['rival','curse'] },
+
+  // Rapid combat taunts
+  { id: 'rival_fast_taunt_1', title: 'Rival - Fast Taunt 1', lines: [{ speaker: 'rival_quick', text: 'Blink and you miss your chance.' }], tags: ['rival','taunt','combat'] },
+  { id: 'rival_fast_taunt_2', title: 'Rival - Fast Taunt 2', lines: [{ speaker: 'rival_quick', text: 'My footwork is a rumor; you are the gossip.' }], tags: ['rival','taunt','combat'] },
+
+  // Rival regret and reconciliation hints
+  { id: 'rival_regret_whisper', title: 'Rival - Regret Whisper', mono: true, lines: [{ speaker: 'rival_lin', text: 'Once, I nearly begged for a teacher. I would not now.' }], tags: ['rival','regret'] },
+  { id: 'rival_offered_hand', title: 'Rival - Offered Hand', lines: [{ speaker: 'rival_lin', text: 'Win and you may ask for friendship. Lose and I will not pretend to care.' }], tags: ['rival','offer'] },
+
+  // Short flavour lines to increase variety
+  { id: 'rival_breath_count', title: 'Rival - Breath Count', lines: [{ speaker: 'rival_misc', text: 'Count your breaths; make each one intentional.' }], tags: ['rival','flavor'] },
+  { id: 'rival_iron_pride', title: 'Rival - Iron Pride', mono: true, lines: [{ speaker: 'rival_iron', text: 'Pride is the only armor some can afford; it chips easily.' }], tags: ['rival','pride'] }
+);
+
+// Bulk additional rival entries (35 prioritized extras)
+RIVAL_DIALOGUES.push(
+  { id: 'rival_extra_01', title: 'Rival - Extra 01', lines: [{ speaker: 'rival_extra', text: 'You practice like a man apologizing to the air.' }], tags: ['rival','taunt'] },
+  { id: 'rival_extra_02', title: 'Rival - Extra 02', mono: true, lines: [{ speaker: 'rival_extra', text: 'There is a neatness to your mistakes; predictable as seasons.' }], tags: ['rival','mood'] },
+  { id: 'rival_extra_03', title: 'Rival - Extra 03', lines: [{ speaker: 'rival_extra', text: 'Meet me at noon and I will show you how much you have to learn.' }], tags: ['rival','challenge'] },
+  { id: 'rival_extra_04', title: 'Rival - Extra 04', lines: [{ speaker: 'rival_extra', text: 'A sharp eye is a dangerous thing in soft hands.' }], tags: ['rival','advice'] },
+  { id: 'rival_extra_05', title: 'Rival - Extra 05', mono: true, lines: [{ speaker: 'rival_extra', text: 'I remember your first misstep. Do you?' }], tags: ['rival','taunt'] },
+  { id: 'rival_extra_06', title: 'Rival - Extra 06', lines: [{ speaker: 'rival_extra', text: 'Your rhythm is off; tune it or be broken by the music.' }], tags: ['rival','advice'] },
+  { id: 'rival_extra_07', title: 'Rival - Extra 07', lines: [{ speaker: 'rival_extra', text: 'I will take the credit and leave you the lesson.' }], tags: ['rival','dismissive'] },
+  { id: 'rival_extra_08', title: 'Rival - Extra 08', mono: true, lines: [{ speaker: 'rival_extra', text: 'There are moments when fury is a tool, and moments when it is a flaw.' }], tags: ['rival','reflect'] },
+  { id: 'rival_extra_09', title: 'Rival - Extra 09', lines: [{ speaker: 'rival_extra', text: 'Push hard enough and the world will split where you expect it to.' }], tags: ['rival','taunt'] },
+  { id: 'rival_extra_10', title: 'Rival - Extra 10', lines: [{ speaker: 'rival_extra', text: 'You leap like faith; sometimes faith lands you on your face.' }], tags: ['rival','mock'] },
+  { id: 'rival_extra_11', title: 'Rival - Extra 11', mono: true, lines: [{ speaker: 'rival_extra', text: 'A quiet life would have been kinder, but you did not choose it.' }], tags: ['rival','sad'] },
+  { id: 'rival_extra_12', title: 'Rival - Extra 12', lines: [{ speaker: 'rival_extra', text: 'I give you credit where it fits — small and well-earned.' }], tags: ['rival','backhanded'] },
+  { id: 'rival_extra_13', title: 'Rival - Extra 13', lines: [{ speaker: 'rival_extra', text: 'You hold onto grief like a charm. Let it go and swing freer.' }], tags: ['rival','advice'] },
+  { id: 'rival_extra_14', title: 'Rival - Extra 14', mono: true, lines: [{ speaker: 'rival_extra', text: 'My patience is a sharp thing; do not test its edge needlessly.' }], tags: ['rival','threat'] },
+  { id: 'rival_extra_15', title: 'Rival - Extra 15', lines: [{ speaker: 'rival_extra', text: 'We trade blows like poems; yours is short and obvious.' }], tags: ['rival','poetic'] },
+  { id: 'rival_extra_16', title: 'Rival - Extra 16', lines: [{ speaker: 'rival_extra', text: 'I will teach you one skill today — humiliation with dignity.' }], tags: ['rival','taunt'] },
+  { id: 'rival_extra_17', title: 'Rival - Extra 17', mono: true, lines: [{ speaker: 'rival_extra', text: 'Some promises are steel; others rust. You choose which to keep.' }], tags: ['rival','reflect'] },
+  { id: 'rival_extra_18', title: 'Rival - Extra 18', lines: [{ speaker: 'rival_extra', text: 'The line between brave and foolish is a blade’s breadth; mind your feet.' }], tags: ['rival','advice'] },
+  { id: 'rival_extra_19', title: 'Rival - Extra 19', lines: [{ speaker: 'rival_extra', text: 'I remember faces by the wounds they pretend are ornaments.' }], tags: ['rival','grim'] },
+  { id: 'rival_extra_20', title: 'Rival - Extra 20', mono: true, lines: [{ speaker: 'rival_extra', text: 'You fight for a future; I fight to keep mine from being taken.' }], tags: ['rival','motivated'] },
+  { id: 'rival_extra_21', title: 'Rival - Extra 21', lines: [{ speaker: 'rival_extra', text: 'Don’t hurry to be great; hurry to be true to your training.' }], tags: ['rival','advice'] },
+  { id: 'rival_extra_22', title: 'Rival - Extra 22', mono: true, lines: [{ speaker: 'rival_extra', text: 'When I was small, I swore to never be looked at with pity. I kept that promise.' }], tags: ['rival','backstory'] },
+  { id: 'rival_extra_23', title: 'Rival - Extra 23', lines: [{ speaker: 'rival_extra', text: 'Your anger is predictable; learn to surprise yourself.' }], tags: ['rival','taunt'] },
+  { id: 'rival_extra_24', title: 'Rival - Extra 24', lines: [{ speaker: 'rival_extra', text: 'You strike for the applause. I strike for the quiet that follows.' }], tags: ['rival','poetic'] },
+  { id: 'rival_extra_25', title: 'Rival - Extra 25', mono: true, lines: [{ speaker: 'rival_extra', text: 'There are debts you must pay to yourself before others demand them.' }], tags: ['rival','reflect'] },
+  { id: 'rival_extra_26', title: 'Rival - Extra 26', lines: [{ speaker: 'rival_extra', text: 'A blade is honest. People lie for practice.' }], tags: ['rival','taunt'] },
+  { id: 'rival_extra_27', title: 'Rival - Extra 27', lines: [{ speaker: 'rival_extra', text: 'I will watch you grow or break — either will be instructive.' }], tags: ['rival','observer'] },
+  { id: 'rival_extra_28', title: 'Rival - Extra 28', mono: true, lines: [{ speaker: 'rival_extra', text: 'The pain of training is temporary; the cost of failing endures.' }], tags: ['rival','grim'] },
+  { id: 'rival_extra_29', title: 'Rival - Extra 29', lines: [{ speaker: 'rival_extra', text: 'You wear confidence like borrowed robes. They never fit.' }], tags: ['rival','mock'] },
+  { id: 'rival_extra_30', title: 'Rival - Extra 30', mono: true, lines: [{ speaker: 'rival_extra', text: 'I will carve a lesson into your day and leave with a smile.' }], tags: ['rival','taunt'] },
+  { id: 'rival_extra_31', title: 'Rival - Extra 31', lines: [{ speaker: 'rival_extra', text: 'Promise me nothing but the truth of the next strike.' }], tags: ['rival','challenge'] },
+  { id: 'rival_extra_32', title: 'Rival - Extra 32', lines: [{ speaker: 'rival_extra', text: 'We are the same, you and I — only my choices are sharper.' }], tags: ['rival','reflect'] },
+  { id: 'rival_extra_33', title: 'Rival - Extra 33', mono: true, lines: [{ speaker: 'rival_extra', text: 'At the end, what will you tell your mirror? That you tried or that you hid?' }], tags: ['rival','reflect'] },
+  { id: 'rival_extra_34', title: 'Rival - Extra 34', lines: [{ speaker: 'rival_extra', text: 'When you panic, your feet betray your hands. Remember that.' }], tags: ['rival','advice'] },
+  { id: 'rival_extra_35', title: 'Rival - Extra 35', mono: true, lines: [{ speaker: 'rival_extra', text: 'If we survive today, tell the younger you that you learned something true.' }], tags: ['rival','afterfight'] }
+);
+
+// Tone-focused rival additions (~15)
+RIVAL_DIALOGUES.push(
+  { id: 'rival_tone_stoic_01', title: 'Rival - Stoic 01', mono: true, lines: [{ speaker: 'rival_stoic', text: 'I do not celebrate victory. I catalog it.' }], tags: ['rival','stoic'] },
+  { id: 'rival_tone_remorse_01', title: 'Rival - Remorse 01', mono: true, lines: [{ speaker: 'rival_remorse', text: 'There are nights I still wake up cold from the mistakes of my youth.' }], tags: ['rival','remorse'] },
+  { id: 'rival_tone_comic_01', title: 'Rival - Comic 01', lines: [{ speaker: 'rival_comic', text: 'If clumsiness were an art, you’d be the master of ceremonies.' }], tags: ['rival','comic'] },
+  { id: 'rival_tone_prophetic_01', title: 'Rival - Prophetic 01', lines: [{ speaker: 'rival_prophet', text: 'Soon the willow will fall where the brave stand; remember who stood before you.' }], tags: ['rival','prophetic'] },
+  { id: 'rival_tone_camaraderie_01', title: 'Rival - Camaraderie 01', lines: [{ speaker: 'rival_buddy', text: 'Even rivals share scars. That is the strange kindness of the road.' }], tags: ['rival','camaraderie'] },
+  { id: 'rival_tone_tragic_01', title: 'Rival - Tragic 01', mono: true, lines: [{ speaker: 'rival_tragic', text: 'Our rivalry is carved from two lonely beginnings converging into one broken end.' }], tags: ['rival','tragic'] },
+  { id: 'rival_tone_mentor_01', title: 'Rival - Mentor 01', lines: [{ speaker: 'rival_mentor', text: 'I will show you the technique and then take the lesson back — it will be yours to keep.' }], tags: ['rival','mentor'] },
+  { id: 'rival_tone_stoic_02', title: 'Rival - Stoic 02', lines: [{ speaker: 'rival_stoic', text: 'Emotion is a distraction; focus is a weapon.' }], tags: ['rival','stoic'] },
+  { id: 'rival_tone_remorse_02', title: 'Rival - Remorse 02', lines: [{ speaker: 'rival_remorse', text: 'I apologize to those I once loved by becoming the strongest I can be.' }], tags: ['rival','remorse'] },
+  { id: 'rival_tone_comic_02', title: 'Rival - Comic 02', lines: [{ speaker: 'rival_comic', text: 'They say practice makes perfect; I say practice makes you tired and perfect is overrated.' }], tags: ['rival','comic'] },
+  { id: 'rival_tone_prophetic_02', title: 'Rival - Prophetic 02', mono: true, lines: [{ speaker: 'rival_prophet', text: 'When the two moons align you will know my debt is settled.' }], tags: ['rival','prophetic'] },
+  { id: 'rival_tone_camaraderie_02', title: 'Rival - Camaraderie 02', mono: true, lines: [{ speaker: 'rival_buddy', text: 'When this is over, we will laugh about the parts where one of us almost died.' }], tags: ['rival','camaraderie'] },
+  { id: 'rival_tone_tragic_02', title: 'Rival - Tragic 02', lines: [{ speaker: 'rival_tragic', text: 'This feud is a chain; each link forged by someone who wanted company at the bottom.' }], tags: ['rival','tragic'] },
+  { id: 'rival_tone_mentor_02', title: 'Rival - Mentor 02', lines: [{ speaker: 'rival_mentor', text: 'Teach hard and expect less praise. The strongest teachers are often the quietest.' }], tags: ['rival','mentor'] }
+);
+export default RIVAL_DIALOGUES;

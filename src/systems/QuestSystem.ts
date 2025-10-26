@@ -1,4 +1,5 @@
 import { GameState } from '@/types';
+import { getRealmKeyFromPlayer } from '../utils/realmHelpers';
 
 // NOTE: These type definitions are for demonstration. Ideally, they would live in a dedicated types file like `src/types/quest.ts`.
 
@@ -9,7 +10,15 @@ export type ObjectiveType =
   | 'HAVE_STAT'
   | 'COLLECT_ITEM'
   | 'SKILL_LEVEL'
-  | 'DEFEAT_RIVAL';
+  | 'DEFEAT_RIVAL'
+  // Additional story/legacy objective tokens used in storyData
+  | 'COMPLETE_TASKS'
+  | 'GATHER_RESOURCES'
+  | 'WIN_DUEL'
+  | 'GAIN_ALLIES'
+  | 'DEFEAT_ENEMY'
+  | 'COMPLETE_MISSION'
+  | 'EXPLORE';
 
 // Define which player stats can be checked. This improves type safety.
 export type PlayerStat = 'cultivationPower' | 'insight' | 'karma' | 'age';
@@ -35,11 +44,10 @@ export interface Quest {
  * Checks if a single quest objective is met by the current player state.
  */
 function isObjectiveMet(objective: QuestObjective, player: GameState['player']): boolean {
-  switch (objective.type) {
+    switch (objective.type) {
     case 'REACH_REALM': {
       // Assumes objective.value is the string name of the realm.
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const { getRealmKeyFromPlayer } = require('../utils/realmHelpers');
+      // Use ES import for browser-safe code (see top-level import in file)
       return getRealmKeyFromPlayer(player as any) === objective.value;
     }
 

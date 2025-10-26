@@ -1,6 +1,7 @@
 import { CULTIVATION_REALMS, getRealmBreakthroughDifficulty, getMinorStageCount } from './src/data/cultivationRealms';
 import { ALL_BLOODLINES } from './src/data/bloodlines_fixed';
 import { ALL_PHYSIQUES } from './src/data/physiques';
+import { ALL_MANUALS } from './src/data/manuals';
 
 export interface CultivationSession {
   duration: number; // in minutes
@@ -48,7 +49,7 @@ export interface Tribulation {
 }
 
 export interface CultivationModifier {
-  type: 'talent' | 'bloodline' | 'physique' | 'manual' | 'environment' | 'state';
+  type: 'talent' | 'bloodline' | 'physique' | 'manual' | 'environment' | 'state' | 'background' | 'passive';
   name: string;
   multiplier: number;
   description: string;
@@ -459,9 +460,87 @@ export function getApplicableModifiers(
       }
   }
 
-  // TODO: Add manual modifiers when those systems are integrated
+  // Manual modifiers (unscaled: use base manual effects)
+  if (manual) {
+    try {
+      const manualData = ALL_MANUALS.find(m => m.id === manual);
+      if (manualData) {
+        const effects: any = manualData.effects || {};
+        // Normalize possible keys: cultivationSpeed or cultivation_speed
+        const raw = effects.cultivationSpeed ?? effects.cultivation_speed;
+        if (raw != null) {
+          let multiplier = 0;
+          if (typeof raw === 'number') {
+            multiplier = raw;
+          } else if (typeof raw === 'object' && typeof (raw as any).base === 'number') {
+            multiplier = (raw as any).base;
+          }
+          if (multiplier && multiplier > 0) {
+            modifiers.push({
+              type: 'manual',
+              name: manualData.name,
+              multiplier,
+              description: manualData.description
+            });
+          }
+        }
+      }
+    } catch (e) {
+      // ignore manual lookup failures
+    }
+  }
 
   return modifiers;
+}
+
+// Derive cultivation-related modifiers from player's background and passives when available.
+// This is intentionally tolerant: if fields are missing, returns an empty list.
+export function getBackgroundPassiveModifiersFromPlayer(player: any): CultivationModifier[] {
+  const out: CultivationModifier[] = [];
+  try {
+    if (!player) return out;
+
+    // Background: look for normalized keys on effects or stats
+    const bg = player.background as any;
+    if (bg && typeof bg === 'object') {
+      const effects = (bg.effects || {}) as any;
+      // Prefer explicit effects.cultivationSpeed/cultivation_speed if present
+      let raw = effects.cultivationSpeed ?? effects.cultivation_speed;
+      if (raw == null && effects.stats && typeof effects.stats === 'object') {
+        raw = effects.stats.cultivationSpeed ?? effects.stats.cultivation_speed;
+      }
+      let multiplier = 0;
+      if (typeof raw === 'number') multiplier = raw;
+      else if (raw && typeof raw === 'object' && typeof raw.base === 'number') multiplier = raw.base as number;
+      if (multiplier && multiplier > 0) {
+        out.push({
+          type: 'background',
+          name: bg.name || 'Background',
+          multiplier,
+          description: 'Background effect on cultivation'
+        });
+      }
+    }
+
+    // Passive-derived: if player.stats carries an accumulated cultivationSpeed value, honor it.
+    // Some systems aggregate passives/equipment into stats; we accept both camel and snake case.
+    const stats = player.stats || {};
+    let ps = (stats.cultivationSpeed ?? stats.cultivation_speed) as any;
+    let pMult = 0;
+    if (typeof ps === 'number') pMult = ps;
+    else if (ps && typeof ps === 'object' && typeof ps.base === 'number') pMult = ps.base as number;
+    if (pMult && pMult > 0) {
+      out.push({
+        type: 'passive',
+        name: 'Passive effects',
+        multiplier: pMult,
+        description: 'Accumulated passives/equipment effect on cultivation'
+      });
+    }
+  } catch (_e) {
+    // ignore
+  }
+  return out;
 }
 
 // Export default object for easy importing
@@ -473,6 +552,7 @@ export default {
   getTribulationForLevel,
   calculateDaoComprehensionProgress,
   getApplicableModifiers,
+  getBackgroundPassiveModifiersFromPlayer,
   BASE_CULTIVATION_RATES,
   TALENT_CULTIVATION_MULTIPLIERS,
   ENVIRONMENT_MODIFIERS,
@@ -481,3 +561,12 @@ export default {
   TRIBULATIONS,
   DAO_TYPES
 };
+
+// Compatibility aliases for legacy imports used across the codebase
+export const calculateBreakthroughChanceSoftHeavy = calculateBreakthroughChance;
+export const resolveBreakthroughSoftHeavy = generateBreakthroughAttempt;
+export const calculateCultivationSpeedSoft = calculateCultivationSpeed;
+export function qiDeviationRisk(..._args: any[]): number {
+  // Legacy shim: return a conservative low risk by default
+  return 0.05;
+}

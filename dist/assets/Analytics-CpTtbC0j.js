@@ -1,0 +1,1 @@
+var e=Object.defineProperty,t=(t,s,n)=>((t,s,n)=>s in t?e(t,s,{enumerable:!0,configurable:!0,writable:!0,value:n}):t[s]=n)(t,"symbol"!=typeof s?s+"":s,n);const s=new class{constructor(){t(this,"events",[])}record(e,t){this.events.push({eventName:e,payload:t,ts:Date.now()})}getEvents(){return[...this.events]}clear(){this.events=[]}};export{s as default};

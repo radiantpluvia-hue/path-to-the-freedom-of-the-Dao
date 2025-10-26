@@ -1,12 +1,18 @@
 import React, { useEffect } from 'react';
 import { useGameStore } from '@/store/useGameStore';
+import { logger } from '../../utils/logger';
 
 // Dedicated tutorial screen with concise sections
 export const TutorialPage: React.FC = () => {
   const { setUIProperty } = useGameStore();
 
   useEffect(() => {
-  try { localStorage.setItem('xg_tutorial_seen', '1'); } catch (e) { /* ignore storage errors */ console.debug('TutorialPage: localStorage.setItem failed', e); }
+    try {
+      localStorage.setItem('xg_tutorial_seen', '1');
+    } catch (e) {
+      /* ignore storage errors */
+      logger.debug('TutorialPage: localStorage.setItem failed', e);
+    }
   }, []);
 
   const backToGame = () => setUIProperty('currentScreen', 'game');

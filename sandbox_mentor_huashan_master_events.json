@@ -1,0 +1,776 @@
+[
+  {
+    "id": "mentor_huashan_master.quest01",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Steep Ridge Lesson",
+    "description": "The master gestures to a sheer ridge and asks you to find your footing. It's a test of balance and focus.",
+    "choices": [
+      {
+        "id": "accept",
+        "text": "Accept the lesson and climb the ridge.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 8
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest01.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "decline",
+        "text": "Politely decline and step back.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest01.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest02",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Willow Stance",
+    "description": "You are shown a soft, yielding stance that bends without breaking. The master watches for stubbornness.",
+    "choices": [
+      {
+        "id": "practice",
+        "text": "Practice the willow stance.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 6
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest02.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "ignore",
+        "text": "Ignore the lesson.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest02.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest03",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Hidden Edge Footwork",
+    "description": "A footwork drill on narrow paths sharpens your awareness. The master times your steps.",
+    "choices": [
+      {
+        "id": "try",
+        "text": "Attempt the drill carefully.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 7
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest03.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "decline",
+        "text": "Step away from the risky edge.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest03.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest04",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Mirror of Blades",
+    "description": "The master sets two blades in parallel and asks you to move between them in rhythm.",
+    "choices": [
+      {
+        "id": "perform",
+        "text": "Move with the blades.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 9
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest04.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "watch",
+        "text": "Watch and learn without moving.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest04.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest05",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Dawn Duel Exercise",
+    "description": "At first light the master invites you to a sparring drill meant to temper your reflexes.",
+    "choices": [
+      {
+        "id": "spar",
+        "text": "Take part in the sparring.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 10
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest05.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "sit_out",
+        "text": "Sit out and observe.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest05.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_huashan_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_huashan_master",
+    "id": "mentor_huashan_master.quest05",
+    "title": "Edge Control",
+    "description": "The Swordmaster demonstrates subtle edge angles that make a cut decisive. He asks you to practice a simple parry and return.",
+    "choices": [
+      {
+        "id": "practice",
+        "label": "Practice the parry",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_huashan_master",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "huashan_blade_note_05"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_huashan_master.quest05.completed"
+              ]
+            }
+          }
+        ],
+        "text": "practice"
+      },
+      {
+        "id": "watch",
+        "label": "Watch closely",
+        "effects": [
+          {
+            "add_event_log": "You watch the Swordmaster's motion and see how small shifts change outcome."
+          }
+        ],
+        "text": "watch"
+      }
+    ],
+    "requiresWorldFlag": "mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest06",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Lantern Balance",
+    "description": "Balancing a lit lantern while moving tests calm hands; the master times your steadiness.",
+    "choices": [
+      {
+        "id": "try",
+        "text": "Attempt the balance.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 5
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest06.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "decline",
+        "text": "Decline and return the lantern.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest06.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_huashan_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_huashan_master",
+    "id": "mentor_huashan_master.quest06",
+    "title": "Timing",
+    "description": "He times a strike and asks you to meet it; timing here is the blade's true companion.",
+    "choices": [
+      {
+        "id": "meet",
+        "label": "Meet the strike",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_huashan_master",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "huashan_blade_note_06"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_huashan_master.quest06.completed"
+              ]
+            }
+          }
+        ],
+        "text": "meet"
+      },
+      {
+        "id": "hesitate",
+        "label": "Hesitate and observe",
+        "effects": [
+          {
+            "add_event_log": "You hesitate and the Swordmaster nods; timing must come from within."
+          }
+        ],
+        "text": "hesitate"
+      }
+    ],
+    "requiresWorldFlag": "mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest07",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Bamboo Ring Drill",
+    "description": "A flowing drill with bamboo rings teaches timing and coordination.",
+    "choices": [
+      {
+        "id": "engage",
+        "text": "Engage in the drill.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 6
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest07.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "observe",
+        "text": "Observe others perform.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest07.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_huashan_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_huashan_master",
+    "id": "mentor_huashan_master.quest07",
+    "title": "Counterstrike",
+    "description": "An exercise in reading the opponent's intent; the Swordmaster guides a simple counter that punishes overreach.",
+    "choices": [
+      {
+        "id": "attempt",
+        "label": "Attempt the counter",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_huashan_master",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "huashan_blade_note_07"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_huashan_master.quest07.completed"
+              ]
+            }
+          }
+        ],
+        "text": "attempt"
+      },
+      {
+        "id": "decline",
+        "label": "Decline for now",
+        "effects": [
+          {
+            "add_event_log": "You decline, promising to return after more practice."
+          }
+        ],
+        "text": "decline"
+      }
+    ],
+    "requiresWorldFlag": "mentor_huashan_master.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_huashan_master",
+    "id": "mentor_huashan_master.quest08",
+    "title": "Instant Finish",
+    "description": "A short drill that emphasizes ending a fight cleanly; the Swordmaster's lesson is brief and exact.",
+    "choices": [
+      {
+        "id": "finish",
+        "label": "Practice the finish",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_huashan_master",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "huashan_blade_note_08"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_huashan_master.quest08.completed"
+              ]
+            }
+          }
+        ],
+        "text": "finish"
+      },
+      {
+        "id": "hold_back",
+        "label": "Hold back for safety",
+        "effects": [
+          {
+            "add_event_log": "You hold back, noting the Swordmaster's calm approval."
+          }
+        ],
+        "text": "hold_back"
+      }
+    ],
+    "requiresWorldFlag": "mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest08",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Swallow Step Timing",
+    "description": "A lesson on timing: move like a swallow and land light as a feather.",
+    "choices": [
+      {
+        "id": "practice",
+        "text": "Practice the swallow step.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 7
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest08.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "rest",
+        "text": "Rest and watch the demonstration.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest08.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest09",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Peak Breathing",
+    "description": "High on the peak the air is thin; the master guides a breathing exercise to ground you.",
+    "choices": [
+      {
+        "id": "breathe",
+        "text": "Follow the breathing instructions.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 5
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest09.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "skip",
+        "text": "Skip the breathing exercise.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest09.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest10",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Last Shadow Turn",
+    "description": "A closing exercise where you must mirror a shadow's last motion perfectly.",
+    "choices": [
+      {
+        "id": "mirror",
+        "text": "Mirror the motion.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 8
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest10.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "bow_out",
+        "text": "Bow out gracefully.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest10.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest11",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Wind Slice Skill",
+    "description": "The master demonstrates a quick slicing motion that catches the wind; you practice the form.",
+    "choices": [
+      {
+        "id": "attempt",
+        "text": "Attempt the wind slice.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 9
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest11.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "watch",
+        "text": "Watch the master perform.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest11.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest12",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Stone Return Block",
+    "description": "A defensive drill taught to return an incoming strike into the ground; the master corrects your posture.",
+    "choices": [
+      {
+        "id": "practice",
+        "text": "Practice the block.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 7
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest12.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "decline",
+        "text": "Decline and take notes.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest12.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest13",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Moonlit Step and Pause",
+    "description": "Under the moon the master teaches a step-and-pause technique to find openings.",
+    "choices": [
+      {
+        "id": "train",
+        "text": "Train the step-and-pause.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 6
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest13.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "observe",
+        "text": "Observe and copy later.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest13.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_huashan_master.disciple"
+  },
+  {
+    "id": "mentor_huashan_master.quest14",
+    "type": "mentor_encounter",
+    "mentor_id": "mentor_huashan_master",
+    "title": "Blessing of the Peak",
+    "description": "The master offers a quiet blessing and a final corrective to your form; a closing of lessons.",
+    "choices": [
+      {
+        "id": "accept",
+        "text": "Accept the blessing graciously.",
+        "effects": [
+          {
+            "type": "grant_trust",
+            "mentor": "mentor_huashan_master",
+            "amount": 12
+          },
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest14.completed"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "bow",
+        "text": "Bow and thank the master.",
+        "effects": [
+          {
+            "type": "world_mutation",
+            "mut": {
+              "set": [
+                "mentor_huashan_master.quest14.completed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "requiresWorldFlag": "mentor_huashan_master.disciple"
+  }
+]

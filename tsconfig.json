@@ -22,7 +22,8 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Path mapping */
-    "baseUrl": ".",
+    //"baseUrl": ".",
+    //"ignoreDeprecations": "6.0",
     "paths": {
       "@/*": ["./src/*"]
     }
@@ -45,6 +46,7 @@
     "tests",
     "test",
     "src/demo/**",
+    "src/**/*.stories.*",
     "StorySystem.ts"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]

@@ -1,0 +1,51 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.InterpersonalTab = InterpersonalTab;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("react");
+const SmallChip_1 = __importDefault(require("@/components/ui/SmallChip"));
+const relationships_1 = require("@/store/relationships");
+const useGameStore_1 = require("../store/useGameStore");
+const Card_1 = require("./core/Card");
+function Section({ title, children }) {
+    return ((0, jsx_runtime_1.jsxs)("div", { style: { border: '1px solid rgba(212,175,55,0.15)', borderRadius: 8, padding: 12 }, children: [(0, jsx_runtime_1.jsx)("div", { style: { marginBottom: 8, color: 'var(--primary)', fontWeight: 600 }, children: title }), children] }));
+}
+function RelationshipCard({ id, name, category, affinity, notes, onRemove, onUpdate }) {
+    const [editing, setEditing] = (0, react_1.useState)(false);
+    const [local, setLocal] = (0, react_1.useState)({ name, category, affinity, notes: notes || '' });
+    const save = () => {
+        onUpdate(id, local);
+        setEditing(false);
+    };
+    return ((0, jsx_runtime_1.jsxs)("div", { style: { display: 'grid', gridTemplateColumns: '1fr auto', gap: 8, padding: 8, borderBottom: '1px dashed rgba(212,175,55,0.1)' }, children: [(0, jsx_runtime_1.jsx)("div", { children: !editing ? ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', alignItems: 'center', gap: 8 }, children: [(0, jsx_runtime_1.jsx)("strong", { style: { color: 'var(--primary)' }, children: name }), (0, jsx_runtime_1.jsxs)("span", { style: { fontSize: 12, color: 'var(--muted)' }, children: ["(", category, ")"] }), (0, jsx_runtime_1.jsx)("span", { style: { marginLeft: 'auto', color: affinity >= 0 ? 'var(--success)' : 'var(--danger)' }, children: affinity })] }), notes && (0, jsx_runtime_1.jsx)("div", { style: { fontSize: 12, color: 'var(--muted)', marginTop: 4 }, children: notes })] })) : ((0, jsx_runtime_1.jsxs)("div", { style: { display: 'grid', gap: 6 }, children: [(0, jsx_runtime_1.jsx)("input", { style: { padding: 6, borderRadius: 6, border: '1px solid rgba(212,175,55,0.25)', background: 'transparent', color: 'var(--text)' }, value: local.name, onChange: e => setLocal(v => ({ ...v, name: e.target.value })), placeholder: "Name" }), (0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', gap: 8 }, children: [(0, jsx_runtime_1.jsx)("select", { value: local.category, onChange: e => setLocal(v => ({ ...v, category: e.target.value })), style: { padding: 6, borderRadius: 6, border: '1px solid rgba(212,175,55,0.25)', background: 'transparent', color: 'var(--text)' }, children: ['Friend', 'Lover', 'Mentor', 'Rival'].map(c => ((0, jsx_runtime_1.jsx)("option", { value: c, children: c }, c))) }), (0, jsx_runtime_1.jsx)("input", { type: "number", value: local.affinity, onChange: e => setLocal(v => ({ ...v, affinity: Number(e.target.value) })), min: -100, max: 100, style: { width: 100, padding: 6, borderRadius: 6, border: '1px solid rgba(212,175,55,0.25)', background: 'transparent', color: 'var(--text)' } })] }), (0, jsx_runtime_1.jsx)("textarea", { rows: 2, value: local.notes, onChange: e => setLocal(v => ({ ...v, notes: e.target.value })), style: { padding: 6, borderRadius: 6, border: '1px solid rgba(212,175,55,0.25)', background: 'transparent', color: 'var(--text)' }, placeholder: "Notes" })] })) }), (0, jsx_runtime_1.jsx)("div", { style: { display: 'flex', gap: 6, alignItems: 'start' }, children: !editing ? ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("button", { onClick: () => setEditing(true), style: { padding: 0 }, children: (0, jsx_runtime_1.jsx)(SmallChip_1.default, { children: "Edit" }) }), (0, jsx_runtime_1.jsx)("button", { onClick: () => onRemove(id), style: { padding: 0 }, children: (0, jsx_runtime_1.jsx)(SmallChip_1.default, { style: { color: 'var(--danger)' }, children: "Remove" }) })] })) : ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)("button", { onClick: save, style: { padding: 0 }, children: (0, jsx_runtime_1.jsx)(SmallChip_1.default, { style: { color: 'var(--success)' }, children: "Save" }) }), (0, jsx_runtime_1.jsx)("button", { onClick: () => setEditing(false), style: { padding: 0 }, children: (0, jsx_runtime_1.jsx)(SmallChip_1.default, { children: "Cancel" }) })] })) })] }));
+}
+function InterpersonalTab() {
+    const { relationships, addRelationship: add, removeRelationship: remove, updateRelationship: update, searchRelationships: search, getRelationshipsByCategory: getByCategory, includeRival, setIncludeRival } = (0, relationships_1.useRelationshipsStore)();
+    const { player } = (0, useGameStore_1.useGameStore)();
+    const [filterQuery, setFilter] = (0, react_1.useState)('');
+    const [selectedCategory, setCategory] = (0, react_1.useState)('All');
+    const [newName, setNewName] = (0, react_1.useState)('');
+    const [newCategory, setNewCategory] = (0, react_1.useState)('Friend');
+    const [newNotes, setNewNotes] = (0, react_1.useState)('');
+    const [newAffinity, setNewAffinity] = (0, react_1.useState)(0);
+    const filtered = (0, react_1.useMemo)(() => {
+        const list = filterQuery ? search(filterQuery) : (selectedCategory === 'All' ? relationships : getByCategory(selectedCategory));
+        // group by category for display
+        const groups = { Friend: [], Lover: [], Mentor: [], Rival: [] };
+        list.forEach(e => { var _a; (groups[_a = e.category] || (groups[_a] = [])).push(e); });
+        return groups;
+    }, [filterQuery, search, getByCategory, selectedCategory, relationships]);
+    const submitNew = () => {
+        if (!newName.trim())
+            return;
+        add({ name: newName.trim(), category: newCategory, description: '', notes: newNotes.trim(), affinity: newAffinity });
+        setNewName('');
+        setNewNotes('');
+        setNewAffinity(0);
+        setNewCategory('Friend');
+    };
+    return ((0, jsx_runtime_1.jsxs)("div", { style: { display: 'grid', gap: 12 }, children: [(0, jsx_runtime_1.jsx)(Section, { title: "Add Relationship", children: (0, jsx_runtime_1.jsxs)("div", { style: { display: 'grid', gridTemplateColumns: '1fr 140px 120px 1fr auto', gap: 8 }, children: [(0, jsx_runtime_1.jsx)("input", { value: newName, onChange: e => setNewName(e.target.value), placeholder: "Name", style: { padding: 8, borderRadius: 6, border: '1px solid rgba(212,175,55,0.25)', background: 'transparent', color: 'var(--text)' } }), (0, jsx_runtime_1.jsx)("select", { value: newCategory, onChange: e => setNewCategory(e.target.value), style: { padding: 8, borderRadius: 6, border: '1px solid rgba(212,175,55,0.25)', background: 'transparent', color: 'var(--text)' }, children: ['Friend', 'Lover', 'Mentor', 'Rival'].map(c => ((0, jsx_runtime_1.jsx)("option", { value: c, children: c }, c))) }), (0, jsx_runtime_1.jsx)("input", { type: "number", min: -100, max: 100, value: newAffinity, onChange: e => setNewAffinity(Number(e.target.value)), style: { padding: 8, borderRadius: 6, border: '1px solid rgba(212,175,55,0.25)', background: 'transparent', color: 'var(--text)' } }), (0, jsx_runtime_1.jsx)("input", { value: newNotes, onChange: e => setNewNotes(e.target.value), placeholder: "Notes (optional)", style: { padding: 8, borderRadius: 6, border: '1px solid rgba(212,175,55,0.25)', background: 'transparent', color: 'var(--text)' } }), (0, jsx_runtime_1.jsx)("button", { onClick: submitNew, style: { padding: 0 }, children: (0, jsx_runtime_1.jsx)(SmallChip_1.default, { children: "Add" }) })] }) }), (0, jsx_runtime_1.jsx)(Section, { title: "Filter & Settings", children: (0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', gap: 12, alignItems: 'center' }, children: [(0, jsx_runtime_1.jsx)("input", { value: filterQuery, onChange: e => setFilter(e.target.value), placeholder: "Search by name or notes", style: { flex: 1, padding: 8, borderRadius: 6, border: '1px solid rgba(212,175,55,0.25)', background: 'transparent', color: 'var(--text)' } }), (0, jsx_runtime_1.jsx)("select", { value: selectedCategory, onChange: e => setCategory(e.target.value), style: { padding: 8, borderRadius: 6, border: '1px solid rgba(212,175,55,0.25)', background: 'transparent', color: 'var(--text)' }, children: ['All', 'Friend', 'Lover', 'Mentor', 'Rival'].map(c => ((0, jsx_runtime_1.jsx)("option", { value: c, children: c }, c))) }), (0, jsx_runtime_1.jsxs)("label", { style: { display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--muted)' }, children: [(0, jsx_runtime_1.jsx)("input", { type: "checkbox", checked: includeRival, onChange: e => setIncludeRival(e.target.checked) }), "Include rival in list"] })] }) }), ['Friend', 'Lover', 'Mentor', 'Rival'].map(cat => ((0, jsx_runtime_1.jsx)(Section, { title: `${cat}s`, children: filtered[cat].length === 0 ? ((0, jsx_runtime_1.jsx)("div", { style: { color: 'var(--muted)', fontSize: 13 }, children: "No entries" })) : (filtered[cat].map(e => ((0, jsx_runtime_1.jsx)(RelationshipCard, { id: e.id, name: e.name, category: e.category, affinity: e.affinity, notes: e.notes, onRemove: remove, onUpdate: update }, e.id)))) }, cat))), (0, jsx_runtime_1.jsx)(Card_1.Card, { title: "Inventory", children: (0, jsx_runtime_1.jsx)("div", { style: { maxHeight: '260px', overflowY: 'auto' }, children: player.inventory.length === 0 ? ((0, jsx_runtime_1.jsx)("p", { style: { color: 'var(--muted)', textAlign: 'center', padding: '20px' }, children: "Empty" })) : (player.inventory.map((item, index) => ((0, jsx_runtime_1.jsxs)("div", { style: { padding: '8px', borderBottom: '1px solid rgba(212, 175, 55, 0.2)' }, children: [(0, jsx_runtime_1.jsxs)("div", { style: { display: 'flex', justifyContent: 'space-between' }, children: [(0, jsx_runtime_1.jsx)("strong", { style: { color: 'var(--primary)' }, children: item.name }), item.quantity && item.quantity > 1 && (0, jsx_runtime_1.jsxs)("span", { style: { color: 'var(--accent)' }, children: ["x", item.quantity] })] }), (0, jsx_runtime_1.jsx)("p", { style: { color: 'var(--muted)', fontSize: '0.8rem', margin: '4px 0 0' }, children: item.description })] }, index)))) }) })] }));
+}

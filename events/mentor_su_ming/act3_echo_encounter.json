@@ -1,0 +1,27 @@
+{
+  "id": "mentor_su_ming_act3_echo",
+  "stage": "act3",
+  "title": "Echo of the Reversal Saint",
+  "trigger": "ActIII_FirstMeditation_EchoFound",
+  "type": "mentor_encounter",
+  "mentor_id": "mentor_su_ming",
+  "description": "You find a flicker of a remnant soul, a chilling echo that speaks in paradox.",
+  "choices": [
+    {
+      "id": "listen",
+      "text": "Listen to the echo's paradoxes.",
+      "effects": [
+        { "type": "grant_trust", "mentor": "mentor_su_ming", "amount": 15 },
+        { "type": "grant_item", "item": "reverse_pulse_fragment", "amount": 1, "chance": 0.4 }
+      ]
+    },
+    {
+      "id": "challenge",
+      "text": "Refuse and attempt to dispel the echo.",
+      "effects": [
+        { "type": "contest", "difficulty": "moderate", "on_fail": [{ "type": "lose_emotion", "amount": 5 }] }
+      ]
+    }
+  ],
+  "notes": "This is a lightweight encounter; game event executor should map grant_trust/grant_item to existing systems. The 'reverse_pulse_fragment' is a trigger for the codex unlock."
+}

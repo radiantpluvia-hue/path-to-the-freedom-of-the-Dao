@@ -4,7 +4,35 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlaytestScaling = void 0;
 class PlaytestScalingHelper {
     constructor() {
-        this.enabled = true;
+        // By default enable playtest scaling in normal dev runs, but disable it while
+        // running automated tests (Jest) so unit tests observe unscaled, deterministic
+        // numerical consequences. Tests can still opt-in by calling setEnabled(true).
+        this.enabled = (() => {
+            try {
+                // Allow global overrides (used by tests) or explicit env var to force behavior.
+                // Priority: globalThis.__PLAYTEST_SCALING__ -> process.env.PLAYTEST_SCALING -> test detection
+                try {
+                    const g = globalThis.__PLAYTEST_SCALING__;
+                    if (g !== undefined)
+                        return String(g) === 'true' || g === true;
+                }
+                catch (e) {
+                    // ignore
+                }
+                if (typeof process !== 'undefined' && process.env) {
+                    const env = process.env;
+                    if (env.PLAYTEST_SCALING !== undefined)
+                        return String(env.PLAYTEST_SCALING) === 'true';
+                    // Default disable in Jest environment for determinism
+                    if (env.JEST_WORKER_ID || env.NODE_ENV === 'test')
+                        return false;
+                }
+            }
+            catch (e) {
+                // ignore
+            }
+            return true;
+        })();
         // Per-source minimal scale factors (50%)
         this.FACTORS = {
             event: 0.5,

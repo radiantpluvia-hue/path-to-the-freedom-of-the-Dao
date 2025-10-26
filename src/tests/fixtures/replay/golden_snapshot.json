@@ -1,0 +1,27 @@
+{
+  "world": {
+    "territories": {
+      "t1": {
+        "id": "t1",
+        "nodeType": "town",
+        "ownerFactionId": "f_a",
+        "contestedSince": null,
+        "influence": {
+          "f_a": 80,
+          "f_b": 40
+        },
+        "garrison": { "troops": 25, "quality": 1 },
+        "buildings": {},
+        "rarity": "common",
+        "neighbors": []
+      }
+    },
+    "factions": {
+      "f_a": { "id": "f_a", "name": "Alpha", "relationToPlayer": "neutral", "contribution": 0, "techTree": {}, "treasury": { "gold": 50 } },
+      "f_b": { "id": "f_b", "name": "Beta", "relationToPlayer": "neutral", "contribution": 0, "techTree": {}, "treasury": { "gold": 100 } }
+    },
+    "domains": [],
+    "realmShards": []
+  },
+  "player": { "yuan": 20, "reputation": { "world": 50 }, "cultivation": {} }
+}

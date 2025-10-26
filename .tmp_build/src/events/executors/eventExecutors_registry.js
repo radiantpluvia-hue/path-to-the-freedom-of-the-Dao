@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.executorIds = void 0;
 exports.getExecutor = getExecutor;
+exports.getExecutorAsync = getExecutorAsync;
 const eventExecutors_act1_1 = require("./eventExecutors_act1");
 const eventExecutors_act2_1 = require("./eventExecutors_act2");
 const eventExecutors_act3_1 = require("./eventExecutors_act3");
@@ -47,3 +48,10 @@ function getExecutor(id) {
 }
 exports.executorIds = Object.keys(merged);
 exports.default = merged;
+// Async loader compatible with dynamic import consumers.
+async function getExecutorAsync(id) {
+    // In this simple implementation the registry is already available synchronously,
+    // so just return the sync result. Keeping async signature for consumers that
+    // await dynamic imports.
+    return getExecutor(id);
+}

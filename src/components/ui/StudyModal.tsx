@@ -1,5 +1,6 @@
 import React from 'react';
 import { useGameStore } from '../../store/useGameStore';
+import TierBadge from './TierBadge';
 
 interface Props {
   open: boolean;
@@ -37,12 +38,12 @@ export default function StudyModal({ open, sutra, onClose }: Props) {
         <h3 className="xui-title">Study: {sutra.name}</h3>
         <div className="xui-muted">{sutra.description}</div>
         <div className="modal-body">
-          <div className="xui-muted">Tier: {sutra.tier} &nbsp; • &nbsp; AP: {sutra.cost?.ap || 0} • QI: {sutra.cost?.qi || 0}</div>
+          <div className="xui-muted">Tier: <TierBadge tier={sutra.tier} small={true} /> &nbsp; • &nbsp; AP: {sutra.cost?.ap || 0} • QI: {sutra.cost?.qi || 0}</div>
           <div className="xui-note">Study Cost: <strong>{costYuan}</strong> yuan and <strong>{costQi}</strong> QI</div>
         </div>
         <div className="modal-actions">
-          <button className="xbtn" onClick={onClose}>Cancel</button>
-          <button className="xbtn" onClick={confirmStudy} disabled={!canAfford} data-testid="confirm-study">{canAfford ? 'Confirm Study' : 'Insufficient Resources'}</button>
+          <button type="button" className="xbtn" onClick={onClose}>Cancel</button>
+          <button type="button" className="xbtn" onClick={confirmStudy} disabled={!canAfford} data-testid="confirm-study">{canAfford ? 'Confirm Study' : 'Insufficient Resources'}</button>
         </div>
       </div>
     </div>

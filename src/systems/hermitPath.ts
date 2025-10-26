@@ -115,7 +115,7 @@ export class HermitPath {
   }
 
   // Quick helper to perform a study action with diminishing returns to XP and rare find chance
-  performStudy(gameState: GameState, intensity: number = 1) {
+  performStudy(gameState: GameState, intensity = 1) {
     const baseExp = Math.max(1, Math.floor(10 * intensity));
     // Apply diminishing returns if many studies in a row
     const decay = Math.pow(HERMIt_CONFIG.rareSourceDiminishFactor, Math.min(10, Math.floor(this.state.ticksSinceSeclusionStart / 4)));

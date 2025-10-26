@@ -1,0 +1,8 @@
+{
+  "seed": 123456,
+  "actions": [
+    { "type": "influence", "tid": "t1", "fid": "f_a", "inc": 50 },
+    { "type": "influence", "tid": "t1", "fid": "f_b", "inc": 10 },
+    { "type": "captureAttempt", "preview": null }
+  ]
+}

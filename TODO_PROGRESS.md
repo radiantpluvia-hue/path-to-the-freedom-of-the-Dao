@@ -1,12 +1,12 @@
 # TODO Progress Tracking
 
 ## Priority 1: Critical Fixes (In Progress)
-- [ ] Fix TypeScript Errors in useGameStore.ts
-  - [ ] Fix `state.player.realm` to `state.player.realmId` (lines 462, 483, 1104, 1105, 1107)
-  - [ ] Change `'encounter'` type to allowed type `'chance'` (line 863)
-  - [ ] Fix realm arithmetic in evolutionUtils.ts (state.player.realm - 1 should be state.player.realmId - 1)
+- [ ] Fix TypeScript Errors in `useGameStore.ts` and related utilities (see `TODO_FIX_TYPE_ERRORS.md`)
+  - [ ] Sweep `player.realm` -> `player.realmId` usages conservatively and add defensive helpers where necessary
+  - [ ] Replace invalid literal types (e.g. `'encounter'`) after confirming intent
+  - [ ] Fix realm arithmetic in `evolutionUtils.ts` if it relies on the legacy `realm` value
 
-## Priority 2: Rival System Integration
+- ## Priority 2: Rival System Integration
 - [ ] Game Store Integration Fixes
   - [ ] Fix rival relationship management in useGameStore.ts
   - [ ] Ensure proper synchronization between RivalSystem and game store
@@ -32,8 +32,10 @@
 - [ ] Update UI components to display teaching progression
 
 ## Implementation Timeline
-- **Phase 1 (Critical Fixes)**: 1 day
+- **Phase 1 (Critical Fixes)**: 1 day (conservative sweep + tests)
 - **Phase 2 (Rival Integration)**: 2-3 days
 - **Phase 3 (Mentor Teaching)**: 2 days
 
 **Total Estimated Time: 5-6 days**
+
+Notes: The build-blocking issue related to `import.meta` in `src/main.tsx` was resolved during the previous session (replaced with a runtime/global check) and the Node/CJS build was regenerated successfully. The project's Jest test suite is currently green.

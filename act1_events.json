@@ -78,7 +78,7 @@
       "Celestial": {
         "description": "Heavenly energy descends upon you, awakening your celestial cultivation path.",
         "choices": [
-          {"id": "embrace", "text": "Accept divine mandate"},
+          {"id": "embrace", "text": "Accept celestial mandate"},
           {"id": "hesitate", "text": "Seek heavenly guidance"}
         ]
       },
@@ -90,9 +90,9 @@
         ]
       },
       "Void": {
-        "description": "Void energy coalesces within you, awakening your connection to nothingness.",
+        "description": "Emptiness coalesces within you, awakening your connection to nothingness.",
         "choices": [
-          {"id": "embrace", "text": "Merge with the void"},
+          {"id": "embrace", "text": "Merge with the emptiness"},
           {"id": "hesitate", "text": "Study the emptiness"}
         ]
       },

@@ -44,3 +44,11 @@ export function getExecutor(id: string): EventExecutor {
 export const executorIds = Object.keys(merged);
 
 export default merged;
+
+// Async loader compatible with dynamic import consumers.
+export async function getExecutorAsync(id: string): Promise<EventExecutor> {
+  // In this simple implementation the registry is already available synchronously,
+  // so just return the sync result. Keeping async signature for consumers that
+  // await dynamic imports.
+  return getExecutor(id);
+}

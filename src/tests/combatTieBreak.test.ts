@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-non-null-assertion: "off" */
 import { CombatSystem } from '../systems/CombatSystem';
 import { computeOffensiveProwess } from '../systems/combatConfig';
 

@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-non-null-assertion: "off" */
 import { CombatSystem, CombatParticipant } from '@/systems/CombatSystem';
 
 test('CombatSystem basic smoke', () => {

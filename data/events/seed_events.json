@@ -1,0 +1,123 @@
+[
+  {
+    "id": "seed_spirit_migration",
+    "title": "Spirit Grove Migration",
+    "conditions": { "qiDensityMin": 40 },
+    "description": "A congregation of spirit beasts moves through a nearby grove.",
+    "choices": [
+      { "id": "observe", "text": "Observe silently", "effects": [{ "type": "lore", "ref": "echo_101" }] },
+      { "id": "assist", "text": "Aid a wounded beast", "effects": [{ "type": "karma", "delta": 1 }, { "type": "spawn", "what": "spirit_ally" }] }
+    ],
+    "nextEvents": ["seed_spirit_followup"]
+  },
+  {
+    "id": "seed_spirit_followup",
+    "title": "Spirit Ally Bonded",
+    "description": "The spirit you aided bonds with you briefly.",
+    "choices": [
+      { "id": "bond", "text": "Accept the bond", "effects": [{ "type": "companion_add", "id": "spirit_ally" }] },
+      { "id": "release", "text": "Release it back", "effects": [{ "type": "karma", "delta": 0 }] }
+    ],
+    "nextEvents": []
+  },
+  {
+    "id": "seed_hidden_manual",
+    "title": "Hidden Manual in the Library",
+    "description": "You discover a forgotten manual tucked between tomes.",
+    "choices": [
+      { "id": "study", "text": "Study it", "effects": [{ "type": "manual_gain", "id": "m_seed_01" }] },
+      { "id": "sell", "text": "Sell to a collector", "effects": [{ "type": "yuan", "amount": 10 }] }
+    ],
+    "nextEvents": []
+  },
+  {
+    "id": "seed_merchant_bargain",
+    "title": "Mysterious Merchant",
+    "description": "A robed merchant offers curious wares.",
+    "choices": [
+      { "id": "inspect", "text": "Inspect the wares", "effects": [{ "type": "item_preview" }] },
+      { "id": "haggle", "text": "Haggle for price", "effects": [{ "type": "chance_item_discount", "chance": 0.5 }] }
+    ],
+    "nextEvents": []
+  },
+  {
+    "id": "seed_sect_politics",
+    "title": "Sect Politics Rumor",
+    "description": "A rumor spreads about promotions in a local sect.",
+    "choices": [
+      { "id": "inquire", "text": "Ask around", "effects": [{ "type": "rumor_spawn", "topic": "sect_promo" }] },
+      { "id": "ignore", "text": "Ignore the gossip", "effects": [{ "type": "patience", "delta": 1 }] }
+    ],
+    "nextEvents": ["seed_sect_followup"]
+  },
+  {
+    "id": "seed_sect_followup",
+    "title": "Sect Elder's Notice",
+    "description": "An elder's actions follow the rumor—opportunity or danger.",
+    "choices": [
+      { "id": "ally", "text": "Offer support", "effects": [{ "type": "favor_gain", "target": "sect_a", "amount": 1 }] },
+      { "id": "remain", "text": "Stay neutral", "effects": [{ "type": "reputation", "delta": 0 }] }
+    ],
+    "nextEvents": []
+  },
+  {
+    "id": "seed_training_opportunity",
+    "title": "Wandering Master Offers Training",
+    "description": "A master offers a brief but intense practice session.",
+    "choices": [
+      { "id": "accept", "text": "Train under the master", "effects": [{ "type": "xp", "amount": 20 }, { "type": "fatigue", "amount": 5 }] },
+      { "id": "decline", "text": "Decline politely", "effects": [{ "type": "rest", "amount": 1 }] }
+    ],
+    "nextEvents": []
+  },
+  {
+    "id": "seed_artifact_glint",
+    "title": "Glint of an Artifact",
+    "description": "Something buried in the dirt glints like metal.",
+    "choices": [
+      { "id": "dig", "text": "Dig it up", "effects": [{ "type": "item_gain", "id": "it_seed_03" }] },
+      { "id": "leave", "text": "Leave it be", "effects": [{ "type": "karma", "delta": 0 }] }
+    ],
+    "nextEvents": []
+  },
+  {
+    "id": "seed_rival_encounter",
+    "title": "A Rival Crosses Paths",
+    "description": "A familiar rival appears and tests you.",
+    "choices": [
+      { "id": "duel", "text": "Accept the duel", "effects": [{ "type": "combatEncounter", "difficulty": "medium" }] },
+      { "id": "avoid", "text": "Avoid conflict", "effects": [{ "type": "patience", "delta": 1 }] }
+    ],
+    "nextEvents": []
+  },
+  {
+    "id": "seed_ancient_echo",
+    "title": "Ancient Echo in the Cave",
+    "description": "The cave whispers with fragments of the past.",
+    "choices": [
+      { "id": "listen", "text": "Listen closely", "effects": [{ "type": "lore", "ref": "echo_202" }] },
+      { "id": "record", "text": "Record the echoes", "effects": [{ "type": "lore_collect", "ref": "echo_202" }] }
+    ],
+    "nextEvents": []
+  },
+  {
+    "id": "seed_astral_glimpse",
+    "title": "Astral Glimpse During Meditation",
+    "description": "A rare vision during deep meditation hints at hidden technique.",
+    "choices": [
+      { "id": "inscribe", "text": "Inscribe the vision", "effects": [{ "type": "manual_gain", "id": "m_seed_03" }] },
+      { "id": "forget", "text": "Let it fade", "effects": [{ "type": "insight", "amount": 1 }] }
+    ],
+    "nextEvents": []
+  },
+  {
+    "id": "seed_market_finding",
+    "title": "Market Finding",
+    "description": "A cheap tool with curious properties is sold in the market.",
+    "choices": [
+      { "id": "buy", "text": "Buy it", "effects": [{ "type": "item_gain", "id": "it_seed_01" }, { "type": "yuan", "amount": -5 }] },
+      { "id": "pass", "text": "Pass on it", "effects": [{ "type": "patience", "delta": 1 }] }
+    ],
+    "nextEvents": []
+  }
+]

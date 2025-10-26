@@ -124,7 +124,7 @@ class MentorTeachingsLoader {
         if (rawDifficulty) {
             return rawDifficulty;
         }
-        const difficulties = ['easy', 'medium', 'hard', 'extreme', 'legendary', 'mythical', 'transcendent'];
+        const difficulties = ['easy', 'medium', 'hard', 'extreme', "D", 'mythical', "B"];
         return difficulties[Math.min(teachingNumber - 1, difficulties.length - 1)];
     }
     calculateTimeLimit(difficulty, teachingNumber) {

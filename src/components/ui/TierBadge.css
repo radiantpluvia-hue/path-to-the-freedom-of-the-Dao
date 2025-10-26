@@ -1,0 +1,16 @@
+.tier-badge{font-weight:700;color:var(--text-on-accent);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.04)}
+.tier-H{background:#8b8b8b}
+.tier-G{background:#9a8f6a}
+.tier-F{background:#bdbdbd}
+.tier-E{background:#6fb3ff}
+.tier-D{background:#7fc97f}
+.tier-C{background:#444444}
+.tier-B{background:#ffb84d}
+.tier-A{background:#ffd54f}
+.tier-S{background:#ff8a65}
+.tier-SS{background:#e040fb}
+.tier-SSS{background:#d500f9}
+.tier-X{background:#00e5ff}
+.tier-Z{background:#ff1744}
+.tier-H-minus{opacity:0.9}
+.tier-H-plus{box-shadow:0 0 6px rgba(0,0,0,0.25)}

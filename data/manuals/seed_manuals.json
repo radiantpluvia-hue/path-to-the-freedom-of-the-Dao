@@ -1,0 +1,8 @@
+[
+  { "id": "m_seed_01", "title": "Manual of Quiet Breathing", "skill": "qiControl", "insightRequired": 10, "rarity": "common", "description": "Teaches steady breathing patterns to refine qi." },
+  { "id": "m_seed_02", "title": "Treatise on Body Tempering", "skill": "bodyTempering", "insightRequired": 20, "rarity": "uncommon", "description": "Methods to harden and condition the body." },
+  { "id": "m_seed_03", "title": "Notes on Astral Glimpse", "skill": "daoInsight", "insightRequired": 40, "rarity": "rare", "description": "Fragments of visions that hint at dao comprehension." },
+  { "id": "m_seed_04", "title": "Guide to Spirit Bonding", "skill": "spiritTaming", "insightRequired": 30, "rarity": "rare", "description": "Techniques to befriend minor spirit beasts." },
+  { "id": "m_seed_05", "title": "Haggler's Primer", "skill": "socialSkills", "insightRequired": 5, "rarity": "common", "description": "Tips to bargain effectively in markets." },
+  { "id": "m_seed_06", "title": "Stance of Flow", "skill": "combatSkills", "insightRequired": 25, "rarity": "uncommon", "description": "A flexible stance useful in breakthrough challenges." }
+]

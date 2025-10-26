@@ -43,17 +43,19 @@
     },
     {
         "id": "mentor_su_ming",
-        "displayName": "Master of the Southern Crucible",
-        "act": 4,
-        "dao": "Dao of Sacrifice & Blood/Time Flow",
-        "philosophy": "Tragic sacrifice, teaches pain → transcendence, time/blood essence conversions.",
-        "teachingStyle": "Meaningful sacrifice, temporal manipulation, essence refinement",
+        "displayName": "Su Ming — The Reversal Saint",
+        "act": 3,
+        "dao": "Dao of Reversal",
+        "philosophy": "To return is to advance. He studies the river of time and how to swim against it.",
+        "teachingStyle": "Paradoxical guidance — tests that force reflection and reversal of past choices.",
         "portrait": "su_ming",
+        "codex_unlock": "mentor_su_ming",
         "teachingProgression": {
             "tiers": [
                 { "level": 1, "unlocks": ["sect_generic_0"] }
             ]
-        }
+        },
+        "notes": "Reimagined as the Reversal Saint: appears as a remnant echo. Triggered via Act III echo encounters or the Reverse Pulse Sutra fragment read in Act II. See events/mentor_su_ming/ for encounter data."
     },
     {
         "id": "mentor_fu_yao",

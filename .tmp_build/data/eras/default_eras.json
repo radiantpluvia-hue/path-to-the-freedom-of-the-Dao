@@ -1,0 +1,245 @@
+[
+    {
+        "id": "era_primordial",
+        "name": "Primordial Era",
+        "index": 0,
+        "description": "Pangu, Nuwa, Fuxi, Flame Phoenix, Ancient Dragon, Kunpeng, Heaven Sealing Turtle, the man called Tao, and the thunder qilin were born. They shaped the multiverse while primordial devourers rose to consume reality.",
+        "seedHint": "birth of first deities; devourers",
+        "modifiers": {
+            "qiDensity": 800000,
+            "demonicQi": 300000,
+            "holyQi": 400000,
+            "sectCorruptionRate": 1000,
+            "eventBias": { "dark": 0.45, "neutral": 0.35, "light": 0.20 },
+            "tribulationSeverity": 0.7,
+            "artifactDensity": 3000
+        },
+        "startingFactions": [
+            { "id": "primordial_deities", "type": "divine", "influence": 95 },
+            { "id": "devourer_horde", "type": "chaos", "influence": 60 }
+        ],
+        "uniqueEvents": ["devourer_rise", "pangu_forge"],
+        "availableMentors": ["pangu", "nuwa", "fuxi"]
+    },
+    {
+        "id": "era_void",
+        "name": "Void Era",
+        "index": 1,
+        "description": "Ten trillion years after the Primordial Era. Pangu shatters the multiverse, life springs forth, and Tai Yung emerges to establish order, laws, time, space, and the heavenly dao.",
+        "seedHint": "Tai Yung & founding of cosmic law",
+        "modifiers": {
+            "qiDensity": 600000,
+            "demonicQi": 100000,
+            "holyQi": 600000,
+            "sectCorruptionRate": 400,
+            "eventBias": { "dark": 0.15, "neutral": 0.45, "light": 0.40 },
+            "tribulationSeverity": 0.4,
+            "artifactDensity": 1500
+        },
+        "startingFactions": [
+            { "id": "tai_yung_order", "type": "righteous", "influence": 90 },
+            { "id": "lawkeepers", "type": "neutral", "influence": 45 }
+        ],
+        "uniqueEvents": ["tai_yung_lawgrafting", "time_weave"],
+        "availableMentors": ["tai_yung"]
+    },
+    {
+        "id": "era_battle",
+        "name": "Era of Battle",
+        "index": 2,
+        "description": "Fifteen trillion years later: the Buddha ancestor, Demonic ancestor, first Heavenly Emperor, Spirit King, first Asura and first Devil Emperor arise. Great wars rage as factions vie for dominance.",
+        "seedHint": "wars for supremacy",
+        "modifiers": {
+            "qiDensity": 700000,
+            "demonicQi": 450000,
+            "holyQi": 300000,
+            "sectCorruptionRate": 7000,
+            "eventBias": { "dark": 0.55, "neutral": 0.25, "light": 0.20 },
+            "tribulationSeverity": 0.8,
+            "artifactDensity": 2500
+        },
+        "startingFactions": [
+            { "id": "heavenly_empire", "type": "righteous", "influence": 80 },
+            { "id": "demonic_legions", "type": "demon", "influence": 85 },
+            { "id": "spirit_kingdoms", "type": "neutral", "influence": 50 }
+        ],
+        "uniqueEvents": ["battle_for_skythrone", "asura_onslaught"],
+        "availableMentors": ["heavenly_emperor", "demonic_ancestor"]
+    },
+    {
+        "id": "era_founding",
+        "name": "Founding Era",
+        "index": 3,
+        "description": "Five trillion years later: peace settles over Shíxiàng mén. The Sword Immortal, Primordial Being, Lord of Chaos and the Great Monarch are born and shape sects and schools.",
+        "seedHint": "sect founding & cultural growth",
+        "modifiers": {
+            "qiDensity": 500000,
+            "demonicQi": 150000,
+            "holyQi": 450000,
+            "sectCorruptionRate": 2000,
+            "eventBias": { "dark": 0.20, "neutral": 0.50, "light": 0.30 },
+            "tribulationSeverity": 0.3,
+            "artifactDensity": 2000
+        },
+        "startingFactions": [
+            { "id": "shixiang_men_early", "type": "neutral", "influence": 70 },
+            { "id": "sword_clans", "type": "righteous", "influence": 65 }
+        ],
+        "uniqueEvents": ["sword_immortal_trial", "great_monarch_summon"],
+        "availableMentors": ["sword_immortal", "great_monarch"]
+    },
+    {
+        "id": "era_desolate",
+        "name": "Desolate Era",
+        "index": 4,
+        "description": "Five trillion years later: the downfall of Shíxiàng mén. Many great figures perish; Sun Wukong rises and stamps his name into history — the world becomes desolate.",
+        "seedHint": "massive losses, Sun Wukong dominance",
+        "modifiers": {
+            "qiDensity": 350000,
+            "demonicQi": 400000,
+            "holyQi": 100000,
+            "sectCorruptionRate": 10000,
+            "eventBias": { "dark": 0.65, "neutral": 0.25, "light": 0.10 },
+            "tribulationSeverity": 0.95,
+            "artifactDensity": 1000
+        },
+        "startingFactions": [
+            { "id": "sun_wukong_order", "type": "wild", "influence": 95 },
+            { "id": "remnant_sects", "type": "neutral", "influence": 20 }
+        ],
+        "uniqueEvents": ["sun_wukong_sweep", "age_of_desolation"],
+        "availableMentors": ["sun_wukong"]
+    },
+    {
+        "id": "era_rise_cultivation",
+        "name": "Rise of Cultivation",
+        "index": 5,
+        "description": "Ten trillion years later: cultivators focus on ascension to be remembered. The Heavenly Dao restarts once; massive casualties follow but competition drives extreme breakthroughs.",
+        "seedHint": "restart of heavenly dao; intense competition",
+        "modifiers": {
+            "qiDensity": 850000,
+            "demonicQi": 200000,
+            "holyQi": 450000,
+            "sectCorruptionRate": 4000,
+            "eventBias": { "dark": 0.30, "neutral": 0.40, "light": 0.30 },
+            "tribulationSeverity": 0.9,
+            "artifactDensity": 1800
+        },
+        "startingFactions": [
+            { "id": "ascendant_guilds", "type": "righteous", "influence": 70 },
+            { "id": "renegade_colleges", "type": "neutral", "influence": 60 }
+        ],
+        "uniqueEvents": ["heaven_reset", "mass_ascension"],
+        "availableMentors": ["ascendant_master"]
+    },
+    {
+        "id": "era_innovation",
+        "name": "Innovation Era",
+        "index": 6,
+        "description": "Ten trillion years later: new cultivation techniques, formations, alchemy and Dao-creation. Yingzi (the Millennium Doctor) defines thousands of techniques and saves millions.",
+        "seedHint": "lots of tech & method innovation",
+        "modifiers": {
+            "qiDensity": 550000,
+            "demonicQi": 100000,
+            "holyQi": 550000,
+            "sectCorruptionRate": 1600,
+            "eventBias": { "dark": 0.10, "neutral": 0.60, "light": 0.30 },
+            "tribulationSeverity": 0.36,
+            "artifactDensity": 3500
+        },
+        "startingFactions": [
+            { "id": "innovation_schools", "type": "neutral", "influence": 75 },
+            { "id": "medical_collegium", "type": "righteous", "influence": 60 }
+        ],
+        "uniqueEvents": ["yingzi_inventions", "mass_healing"],
+        "availableMentors": ["yingzi"]
+    },
+    {
+        "id": "era_legendary",
+        "name": "Legendary Era",
+        "index": 7,
+        "description": "Three trillion years later: Heaven, Earth and Chaos briefly align. Priceless artifacts are found and vast wars reignite. Great beasts' descendants cause havoc; major mentors rise.",
+        "seedHint": "artifact rush & beast descendants",
+        "modifiers": {
+            "qiDensity": 650000,
+            "demonicQi": 300000,
+            "holyQi": 400000,
+            "sectCorruptionRate": 6000,
+            "eventBias": { "dark": 0.40, "neutral": 0.30, "light": 0.30 },
+            "tribulationSeverity": 0.66,
+            "artifactDensity": 5000
+        },
+        "startingFactions": [
+            { "id": "great_martial_alliance", "type": "righteous", "influence": 80 },
+            { "id": "tao_school", "type": "neutral", "influence": 70 }
+        ],
+        "uniqueEvents": ["artifact_rush", "beast_descendant_raid"],
+        "availableMentors": ["fang_yuan", "divine_emperor"]
+    },
+    {
+        "id": "era_endless",
+        "name": "Endless Era",
+        "index": 8,
+        "description": "Twenty trillion years later: resource scarcity forces new cultivation approaches. A generation of geniuses — spear gods, sword emperors and great deans — carve their legacies.",
+        "seedHint": "resource scarcity; genius bloom",
+        "modifiers": {
+            "qiDensity": 400000,
+            "demonicQi": 200000,
+            "holyQi": 200000,
+            "sectCorruptionRate": 3600,
+            "eventBias": { "dark": 0.25, "neutral": 0.50, "light": 0.25 },
+            "tribulationSeverity": 0.56,
+            "artifactDensity": 1200
+        },
+        "startingFactions": [
+            { "id": "endless_guilds", "type": "neutral", "influence": 60 },
+            { "id": "eternal_dao_academy", "type": "righteous", "influence": 55 }
+        ],
+        "uniqueEvents": ["genius_emergence", "resource_fracture"],
+        "availableMentors": ["mr_dean", "spear_god"]
+    },
+    {
+        "id": "era_worst",
+        "name": "Worst Era",
+        "index": 9,
+        "description": "Fifty trillion years later: a depleted world. Few geniuses remain; artifacts and relics are primary resources — survival and salvage dominate cultivation.",
+        "seedHint": "depleted resources; relic salvage",
+        "modifiers": {
+            "qiDensity": 200000,
+            "demonicQi": 150000,
+            "holyQi": 100000,
+            "sectCorruptionRate": 8000,
+            "eventBias": { "dark": 0.55, "neutral": 0.35, "light": 0.10 },
+            "tribulationSeverity": 0.95,
+            "artifactDensity": 500
+        },
+        "startingFactions": [
+            { "id": "scrap_clans", "type": "neutral", "influence": 40 },
+            { "id": "relic_hunters", "type": "chaos", "influence": 70 }
+        ],
+        "uniqueEvents": ["relic_salvage", "resource_raids"],
+        "availableMentors": ["yuan_lin", "immoral_sovereign"]
+    },
+    {
+        "id": "era_secondrestart",
+        "name": "Second Restart Era",
+        "index": 10,
+        "description": "Twenty trillion years later: the second Heavenly Dao restart. Pangu and other first beings introduce descendants and shake the cosmic pot again — new permutations of gods and monsters appear.",
+        "seedHint": "second restart & descendents",
+        "modifiers": {
+            "qiDensity": 750000,
+            "demonicQi": 300000,
+            "holyQi": 550000,
+            "sectCorruptionRate": 2400,
+            "eventBias": { "dark": 0.30, "neutral": 0.45, "light": 0.25 },
+            "tribulationSeverity": 0.44,
+            "artifactDensity": 2200
+        },
+        "startingFactions": [
+            { "id": "new_pangu_lineage", "type": "divine", "influence": 85 },
+            { "id": "descendant_clades", "type": "neutral", "influence": 60 }
+        ],
+        "uniqueEvents": ["pangu_descendant_arrival", "heavenly_reweave"],
+        "availableMentors": ["pangu_descendant"]
+    }
+]

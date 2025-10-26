@@ -1,12 +1,15 @@
 // Adjust imports to match actual exported members
 import { GameState, CombatInstance, CombatResult, RivalEncounter } from '../types';
-import { RivalSystem } from './RivalSystem';
-import { CombatSystem } from './CombatSystem';
+import type { RivalSystem } from './RivalSystem';
+import type { CombatSystem } from './CombatSystem';
 import { computeCombatPower } from './combatConfig';
-import { MentorTeachingSystem } from './MentorTeachingSystem';
-import { SectFactionSystem as SectSystem } from './SectSystem';
-import { MarketSystem } from './MarketSystem';
+import type { MentorTeachingSystem } from './MentorTeachingSystem';
+import type { SectFactionSystem as SectSystem } from './SectSystem';
+import type { MarketSystem } from './MarketSystem';
 import { checkQuestCompletion } from './QuestSystem';
+// domainSystem is not required at module runtime here; keep code minimal to avoid
+// pulling unnecessary runtime modules into the client bundle.
+import { getRng } from '../utils/rng';
 
 // Adjust class to use correct method names and handle missing methods gracefully
 export class GameEngine {
@@ -153,7 +156,10 @@ export class GameEngine {
       const result = this.mentorSystem.attemptTeaching(teachingId, gameState);
 
       if (result.result.success) {
-        gameState.systems.teachingProgress[teachingId] = result.updatedProgress!;
+        const upd = result.updatedProgress;
+        if (typeof upd !== 'undefined') {
+          gameState.systems.teachingProgress[teachingId] = upd;
+        }
         this.applyTeachingRewards(result.result, gameState);
         gameState.player.mentorAffinity[mentorId] =
           (gameState.player.mentorAffinity[mentorId] || 0) + 5;
@@ -188,11 +194,12 @@ export class GameEngine {
   }
 
   public completeSectMission(missionId: string, gameState: GameState): void {
-    if (typeof this.sectSystem.getCurrentSect === 'function' &&
-        typeof this.sectSystem.adjustSectReputation === 'function') {
-      const currentSect = this.sectSystem.getCurrentSect();
-      if (currentSect) {
-        this.sectSystem.adjustSectReputation(currentSect, 10);
+    // SectFactionSystem exposes getPlayerSect() and adjustSectReputation()
+    if (typeof (this.sectSystem as any).getPlayerSect === 'function' &&
+        typeof (this.sectSystem as any).adjustSectReputation === 'function') {
+      const currentSect = (this.sectSystem as any).getPlayerSect();
+      if (typeof currentSect === 'string' && currentSect) {
+        (this.sectSystem as any).adjustSectReputation(currentSect, 10);
       }
     }
 
@@ -240,18 +247,21 @@ export class GameEngine {
   }
 
   private updateRivalRelationshipsForSectChange(sectId: string, _gameState: GameState): void {
-    if (typeof this.sectSystem.getSectRivals === 'function' &&
-        typeof this.sectSystem.getSectAllies === 'function') {
-      const rivalIds = this.sectSystem.getSectRivals(sectId);
-      const allyIds = this.sectSystem.getSectAllies(sectId);
+    // SectFactionSystem doesn't expose typed helpers for rivals/allies in the current build,
+    // so use a permissive access pattern to avoid compile errors while preserving behavior.
+    const getSectRivals = (this.sectSystem as any).getSectRivals;
+    const getSectAllies = (this.sectSystem as any).getSectAllies;
+    if (typeof getSectRivals === 'function' && typeof getSectAllies === 'function') {
+      const rivalIds: string[] = getSectRivals(sectId) || [];
+      const allyIds: string[] = getSectAllies(sectId) || [];
 
-      rivalIds.forEach(rivalId => {
+      rivalIds.forEach((rivalId: string) => {
         if (typeof this.rivalSystem.updateRivalRelationship === 'function') {
           this.rivalSystem.updateRivalRelationship(rivalId, -20);
         }
       });
 
-      allyIds.forEach(allyId => {
+      allyIds.forEach((allyId: string) => {
         if (typeof this.rivalSystem.updateRivalRelationship === 'function') {
           this.rivalSystem.updateRivalRelationship(allyId, 10);
         }
@@ -269,20 +279,21 @@ export class GameEngine {
   }
 
   private updateFactionReputations(result: CombatResult, _gameState: GameState): void {
-    if (typeof this.sectSystem.getFactionEnemies === 'function' &&
-        typeof this.sectSystem.adjustFactionStanding === 'function') {
-      const factions = this.sectSystem.getFactionEnemies(result.participants[0]);
+    const getFactionEnemies = (this.sectSystem as any).getFactionEnemies;
+    const adjustFactionStanding = (this.sectSystem as any).adjustFactionStanding;
+    if (typeof getFactionEnemies === 'function' && typeof adjustFactionStanding === 'function') {
+      const factions: string[] = getFactionEnemies(result.participants[0]) || [];
       const reputationChange = result.winner === 'player' ? 5 : -5;
 
-      factions.forEach(factionId => {
-        this.sectSystem.adjustFactionStanding(factionId, reputationChange);
+      factions.forEach((factionId: string) => {
+        adjustFactionStanding(factionId, reputationChange);
       });
     }
   }
 
   private applyCombatRewards(result: CombatResult, gameState: GameState): void {
     if (result.rewards.experience) {
-      gameState.player.level += Math.floor(result.rewards.experience / 100);
+      gameState.player.level = (gameState.player.level ?? 0) + Math.floor(result.rewards.experience / 100);
     }
 
     if (result.rewards.items) {
@@ -294,13 +305,13 @@ export class GameEngine {
     if (result.bonusRewards) {
       Object.entries(result.bonusRewards).forEach(([key, value]) => {
         if (key === 'insight') {
-          gameState.player.insight += value as number;
+    gameState.player.insight = (gameState.player.insight ?? 0) + (value as number);
         } else if (key === 'combatPower') {
               // If the entity prefers using a computed combatPower, respect that; otherwise, add as-is.
               if (gameState.player && (gameState.player as any)._preferEntityCombatPower) {
-                gameState.player.combatPower = computeCombatPower(gameState.player);
+                gameState.player.combatPower = computeCombatPower(gameState.player) ?? (gameState.player.combatPower ?? 0);
               } else {
-                gameState.player.combatPower += value as number;
+                gameState.player.combatPower = (gameState.player.combatPower ?? 0) + (value as number);
               }
             }
       });
@@ -315,7 +326,7 @@ export class GameEngine {
   private applyQuestRewards(questId: string, gameState: GameState): void {
     // Apply rewards for completed quest
     // This is a placeholder - in a real implementation, you'd look up quest rewards
-    gameState.player.level += 1;
+  gameState.player.level = (gameState.player.level ?? 0) + 1;
     // Note: experience property may not exist on PlayerState, so we'll skip it for now
   }
 
@@ -339,14 +350,80 @@ export class GameEngine {
     this.checkForNewEvents(gameState);
   }
 
-  private checkForNewEvents(gameState: GameState): void {
+  private async checkForNewEvents(gameState: GameState): Promise<void> {
+  const rngFn = getRng(gameState);
+  const rng = typeof rngFn === 'function' ? rngFn : getRng(gameState);
     Object.values(gameState.systems.rivals).forEach(rival => {
-      if (Math.random() < 0.1) {
+      if (rng() < 0.1) {
         this.handleRivalEncounter(rival.id, gameState);
       }
     });
 
-    if (gameState.player.sect && Math.random() < 0.05) {
+    // Hidden encounter checks (rare, high-tier)
+    try {
+      const hiddenEncountersMod = await import('../data/hiddenEncounters').catch(() => null);
+      const HIDDEN_ENCOUNTERS = hiddenEncountersMod ? (hiddenEncountersMod as any).HIDDEN_ENCOUNTERS || (hiddenEncountersMod as any).default || [] : [];
+      const realmHelpersMod = await import('../utils/realmHelpers').catch(() => null);
+      const getRealmIdFromPlayer = realmHelpersMod ? (realmHelpersMod as any).getRealmIdFromPlayer || (() => -1) : (() => -1);
+      const playerRealmId = getRealmIdFromPlayer(gameState.player as any);
+      const requiredRealmId = 23;
+      if (playerRealmId >= requiredRealmId) {
+        gameState.world = gameState.world || {};
+        gameState.world.flags = gameState.world.flags || {};
+        const lastKidGod = gameState.world.flags.lastKidGodSpawn || 0;
+        const kidGodCooldownDays = 365;
+        if (!(gameState.world.day && (gameState.world.day - lastKidGod) < kidGodCooldownDays)) {
+          for (const enc of HIDDEN_ENCOUNTERS) {
+            try {
+              if (typeof enc.spawnCondition === 'function' && !enc.spawnCondition(gameState)) continue;
+              const chance = typeof enc.chance === 'number' ? enc.chance : 0.01;
+              if (rng() < chance) {
+                try {
+                  const hiddenRivalsMod = await import('../data/hiddenRivals').catch(() => null);
+                  const HIDDEN_RIVALS = hiddenRivalsMod ? (hiddenRivalsMod as any).HIDDEN_RIVALS || (hiddenRivalsMod as any).default || [] : [];
+                  if (Array.isArray(HIDDEN_RIVALS)) {
+                    for (const rivalTemplate of HIDDEN_RIVALS) {
+                      try {
+                        if (typeof (this.rivalSystem as any).getRival !== 'function') continue;
+                        if (!(this.rivalSystem as any).getRival(rivalTemplate.id)) {
+                          if (typeof (this.rivalSystem as any).addRival === 'function') {
+                            (this.rivalSystem as any).addRival(JSON.parse(JSON.stringify(rivalTemplate)));
+                          }
+                        }
+                      } catch (e) {
+                        // ignore individual rival injection failures
+                      }
+                    }
+                  }
+                } catch (e) {
+                  // ignore injection failure
+                }
+
+                const encounter = enc.createEncounter(gameState);
+                gameState.systems.rivalEncounters.push(encounter);
+                try {
+                  if (gameState.world && typeof gameState.world.day === 'number') {
+                    gameState.world.flags.lastKidGodSpawn = gameState.world.day;
+                  } else {
+                    gameState.world.flags.lastKidGodSpawn = Date.now();
+                  }
+                } catch (e) { void e; }
+                try {
+                  const analyticsMod = await import('../systems/Analytics').catch(() => null);
+                  if (analyticsMod && analyticsMod.default && typeof analyticsMod.default.record === 'function') analyticsMod.default.record('hiddenEncounterSpawned', { id: enc.id });
+                } catch (e) { /* ignore */ }
+              }
+            } catch (e) {
+              // ignore per-encounter failures
+            }
+          }
+        }
+      }
+    } catch (e) {
+      // non-fatal
+    }
+
+    if (gameState.player.sect && rngFn() < 0.05) {
       this.generateSectMission(gameState);
     }
   }

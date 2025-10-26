@@ -1,4 +1,5 @@
 import { MAJOR_SECTS } from './SectSystem';
+import { normalizeId } from '../utils/legacyIdAliases';
 import type { Skill } from '../components/minigames/skills';
 
 // Generate per-sect personalized technique manuals (lightweight Skill objects)
@@ -13,7 +14,7 @@ export const PHILOSOPHY_MAP: Record<string, string> = {
   'blood_moon_sect': 'Power through sacrifice and forbidden truth',
   'eternal_dao_academy': 'Comprehend the Dao to reshape reality',
   'dragon_emperor_palace': 'Honor bloodline and imperial might',
-  'void_emperor_sect': 'Walk the void between worlds',
+  'emptiness_emperor_sect': 'Walk the emptiness between worlds',
   'mount_hua_sect': 'Balance swordcraft with inner clarity',
   'buddha_sect': 'Compassion breeds true power',
   'starlight_sect': 'Harmony with celestial cycles',
@@ -46,7 +47,8 @@ function generateForSect(sect: any): Skill[] {
     // Create some deterministic passive IDs to associate with manuals (these are lightweight references
     // to passive effects which can be implemented elsewhere). Naming pattern: `${sect.id}_passive_${idx}`
     const passiveId = `${sect.id}_passive_${idx}`;
-  const philosophy = PHILOSOPHY_MAP[sect.id] || sect.description || '';
+  const normId = normalizeId(sect.id) || sect.id;
+  const philosophy = PHILOSOPHY_MAP[normId] || PHILOSOPHY_MAP[sect.id] || sect.description || '';
   const description = `A sect manual from ${sect.name}: the ${base} sequence ${idx} is taught to disciples to embody the school's flavor and rhythm. Philosophy: ${philosophy}.`;
     const unlock = {
       sectId: sect.id,
@@ -81,7 +83,8 @@ function generateForSect(sect: any): Skill[] {
 // Build map for all major sects
 for (const sect of MAJOR_SECTS) {
   const list = generateForSect(sect);
-  SECT_TECHNIQUE_MAP[sect.id] = list;
+  const norm = normalizeId(sect.id) || sect.id;
+  SECT_TECHNIQUE_MAP[norm] = list;
   // Attach ids back to sect benefits (avoid duplicates)
   const existing = Array.isArray(sect.benefits?.techniques) ? [...sect.benefits.techniques] : [];
   const newIds = list.map(s => s.id);

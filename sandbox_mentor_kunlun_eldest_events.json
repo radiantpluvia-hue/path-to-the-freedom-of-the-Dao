@@ -1,0 +1,704 @@
+[
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest01",
+    "title": "Mountain Breath",
+    "description": "The Eldest asks you to breathe deeply and feel the mountain's rhythm — a primer in grounding.",
+    "choices": [
+      {
+        "id": "breathe",
+        "label": "Breathe with attention",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "kunlun.breath_note_01"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest01.completed"
+              ]
+            }
+          }
+        ],
+        "text": "breathe"
+      },
+      {
+        "id": "shrug",
+        "label": "Shrug it off",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest01.completed"
+              ]
+            }
+          }
+        ],
+        "text": "shrug"
+      }
+    ],
+    "requiresWorldFlag": "mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest02",
+    "title": "Stone Posture",
+    "description": "Hold a rooted posture while the Eldest adjusts your stance — strength through stillness.",
+    "choices": [
+      {
+        "id": "hold",
+        "label": "Hold the posture steadily",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "kunlun.posture_note_02"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest02.completed"
+              ]
+            }
+          }
+        ],
+        "text": "hold"
+      },
+      {
+        "id": "break",
+        "label": "Release early",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest02.completed"
+              ]
+            }
+          }
+        ],
+        "text": "break"
+      }
+    ],
+    "requiresWorldFlag": "mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest03",
+    "title": "Rock Lineage",
+    "description": "The Eldest tells a short lineage tale and asks you to reflect on what steadiness means in practice.",
+    "choices": [
+      {
+        "id": "reflect",
+        "label": "Reflect on the tale",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 3
+            }
+          },
+          {
+            "lore_collect": "kunlun.lineage_note_03"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest03.completed"
+              ]
+            }
+          }
+        ],
+        "text": "reflect"
+      },
+      {
+        "id": "dismiss",
+        "label": "Dismiss and move on",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest03.completed"
+              ]
+            }
+          }
+        ],
+        "text": "dismiss"
+      }
+    ],
+    "requiresWorldFlag": "mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest04",
+    "title": "Tremor: Listen",
+    "description": "Stand barefoot and sense faint tremors; the Eldest trains you to read subtle shifts.",
+    "choices": [
+      {
+        "id": "listen",
+        "label": "Listen and report the shifts",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "kunlun.tremor_note_04"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest04.completed"
+              ]
+            }
+          }
+        ],
+        "text": "listen"
+      },
+      {
+        "id": "fail",
+        "label": "Admit you couldn't feel anything",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest04.completed"
+              ]
+            }
+          }
+        ],
+        "text": "fail"
+      }
+    ],
+    "requiresWorldFlag": "mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest05",
+    "title": "Earth Sense",
+    "description": "The Eldest teaches a grounding drill to feel the mountain beneath your feet — a lesson in stability and patience.",
+    "choices": [
+      {
+        "id": "ground",
+        "label": "Practice the grounding drill",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "kunlun_formation_note_05"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest05.completed"
+              ]
+            }
+          }
+        ],
+        "text": "ground"
+      },
+      {
+        "id": "observe",
+        "label": "Observe the Eldest",
+        "effects": [
+          {
+            "add_event_log": "You watch the Eldest and sense the slow patience of the mountain."
+          }
+        ],
+        "text": "observe"
+      }
+    ],
+    "requiresWorldFlag": "mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest06",
+    "title": "Formation Basics",
+    "description": "He sketches a simple formation on the ground and explains how bodies and qi interlock to make a mountain move.",
+    "choices": [
+      {
+        "id": "step_in",
+        "label": "Step into the formation",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "kunlun_formation_note_06"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest06.completed"
+              ]
+            }
+          }
+        ],
+        "text": "step_in"
+      },
+      {
+        "id": "watch",
+        "label": "Watch and learn",
+        "effects": [
+          {
+            "add_event_log": "You watch the lines of the formation and feel a new sense of placement."
+          }
+        ],
+        "text": "watch"
+      }
+    ],
+    "requiresWorldFlag": "mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest07",
+    "title": "Element Tuning",
+    "description": "The Eldest shows how to tune yourself to a patch of earth and listen for its subtle shifts — a primer on elemental attunement.",
+    "choices": [
+      {
+        "id": "attune",
+        "label": "Attempt to attune",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "kunlun_formation_note_07"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest07.completed"
+              ]
+            }
+          }
+        ],
+        "text": "attune"
+      },
+      {
+        "id": "step_back",
+        "label": "Step back and listen",
+        "effects": [
+          {
+            "add_event_log": "You step back and let the mountain's silence teach you."
+          }
+        ],
+        "text": "step_back"
+      }
+    ],
+    "requiresWorldFlag": "mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest08",
+    "title": "Terrain Mastery",
+    "description": "A short field test across rocky slopes challenges your footing; the Eldest coaches you through adjusting to each step.",
+    "choices": [
+      {
+        "id": "attempt",
+        "label": "Try the test",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "kunlun_formation_note_08"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest08.completed"
+              ]
+            }
+          }
+        ],
+        "text": "attempt"
+      },
+      {
+        "id": "delay",
+        "label": "Delay the test",
+        "effects": [
+          {
+            "add_event_log": "You delay the test, promising to return when you are steadier."
+          }
+        ],
+        "text": "delay"
+      }
+    ],
+    "requiresWorldFlag": "mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest09",
+    "title": "Gate Formation",
+    "description": "Form a small rock gate with fellow disciples to test coordination under the Eldest's watch.",
+    "choices": [
+      {
+        "id": "build",
+        "label": "Coordinate and build the gate",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "kunlun.formation_note_09"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest09.completed"
+              ]
+            }
+          }
+        ],
+        "text": "build"
+      },
+      {
+        "id": "me_first",
+        "label": "Prioritize your own placement",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest09.completed"
+              ]
+            }
+          }
+        ],
+        "text": "me_first"
+      }
+    ],
+    "requiresWorldFlag": "mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest10",
+    "title": "Ridge Endurance",
+    "description": "A short endurance trial along a ridge tests steady breath and footwork.",
+    "choices": [
+      {
+        "id": "endure",
+        "label": "Push through steadily",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 5
+            }
+          },
+          {
+            "lore_collect": "kunlun.endurance_note_10"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest10.completed"
+              ]
+            }
+          }
+        ],
+        "text": "endure"
+      },
+      {
+        "id": "stop",
+        "label": "Stop and rest when needed",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest10.completed"
+              ]
+            }
+          }
+        ],
+        "text": "stop"
+      }
+    ],
+    "requiresWorldFlag": "mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest11",
+    "title": "Pillar Shift",
+    "description": "Move a small pillar precisely to align a formation; the Eldest watches for deliberate movement.",
+    "choices": [
+      {
+        "id": "align",
+        "label": "Align the pillar deliberately",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "kunlun.pillar_note_11"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest11.completed"
+              ]
+            }
+          }
+        ],
+        "text": "align"
+      },
+      {
+        "id": "slap",
+        "label": "Force it into place",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest11.completed"
+              ]
+            }
+          }
+        ],
+        "text": "slap"
+      }
+    ],
+    "requiresWorldFlag": "mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest12",
+    "title": "Vale Listen",
+    "description": "Sit at the valley's edge and listen for the echo of the land; the Eldest tests your awareness.",
+    "choices": [
+      {
+        "id": "listen",
+        "label": "Sit quietly and listen",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 3
+            }
+          },
+          {
+            "lore_collect": "kunlun.vale_note_12"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest12.completed"
+              ]
+            }
+          }
+        ],
+        "text": "listen"
+      },
+      {
+        "id": "talk",
+        "label": "Talk and disturb the echo",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest12.completed"
+              ]
+            }
+          }
+        ],
+        "text": "talk"
+      }
+    ],
+    "requiresWorldFlag": "mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest13",
+    "title": "Summit Footing",
+    "description": "A short climb to a summit requires careful footwork; the Eldest values steady feet.",
+    "choices": [
+      {
+        "id": "careful",
+        "label": "Move with steady footing",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 4
+            }
+          },
+          {
+            "lore_collect": "kunlun.summit_note_13"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest13.completed"
+              ]
+            }
+          }
+        ],
+        "text": "careful"
+      },
+      {
+        "id": "dash",
+        "label": "Dash and risk slipping",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 0
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest13.completed"
+              ]
+            }
+          }
+        ],
+        "text": "dash"
+      }
+    ],
+    "requiresWorldFlag": "mentor_kunlun_eldest.disciple"
+  },
+  {
+    "type": "mentor_encounter",
+    "mentorId": "mentor_kunlun_eldest",
+    "id": "mentor_kunlun_eldest.quest14",
+    "title": "Last Stone Bow",
+    "description": "Before you leave, the Eldest asks for a respectful bow at the last standing stone — a sign of humility.",
+    "choices": [
+      {
+        "id": "bow",
+        "label": "Bow respectfully",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 6
+            }
+          },
+          {
+            "lore_collect": "kunlun.parting_note_14"
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest14.completed"
+              ]
+            }
+          }
+        ],
+        "text": "bow"
+      },
+      {
+        "id": "nod",
+        "label": "Nod and move on",
+        "effects": [
+          {
+            "grant_trust": {
+              "mentorId": "mentor_kunlun_eldest",
+              "amount": 1
+            }
+          },
+          {
+            "world_mutation": {
+              "set": [
+                "mentor_kunlun_eldest.quest14.completed"
+              ]
+            }
+          }
+        ],
+        "text": "nod"
+      }
+    ],
+    "requiresWorldFlag": "mentor_kunlun_eldest.disciple"
+  }
+]

@@ -44,6 +44,12 @@ class SeclusionPath {
     }
     // Perform one seclusion tick. Returns an object with effects to apply to the main game state.
     tick(gameState) {
+        if (SeclusionPath.instrumentationEnabled) {
+            try {
+                console.debug('[Seclusion] tick start', { state: this.state, player: { name: gameState.player?.name, skills: gameState.player?.skills } });
+            }
+            catch (e) { /* ignore */ }
+        }
         const effects = { qiGain: 0, cpGain: 0, foundItems: [], events: [] };
         // If not secluded, nothing seclusion-specific happens
         if (this.state.mode !== 'secluded')
@@ -84,6 +90,12 @@ class SeclusionPath {
             // consume some comprehension
             this.state.accumulatedComprehension = Math.floor(this.state.accumulatedComprehension * 0.4);
         }
+        if (SeclusionPath.instrumentationEnabled) {
+            try {
+                console.debug('[Seclusion] tick end', { state: this.state, effects });
+            }
+            catch (e) { /* ignore */ }
+        }
         return effects;
     }
     // Quick helper to perform a study action with diminishing returns to XP and rare find chance
@@ -99,6 +111,8 @@ class SeclusionPath {
     }
 }
 exports.SeclusionPath = SeclusionPath;
+// optional runtime instrumentation flag (can be toggled in tests)
+SeclusionPath.instrumentationEnabled = false;
 // Backwards compatibility: export aliases with old names
 exports.DEFAULT_HERMIT_STATE = exports.DEFAULT_SECLUSION_STATE;
 exports.HERMIt_CONFIG = exports.SECLUSION_CONFIG;

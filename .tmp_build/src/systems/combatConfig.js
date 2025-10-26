@@ -33,12 +33,21 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WEATHER_MULTIPLIERS = exports.TERRAIN_MULTIPLIERS = exports.STAT_SCALING = exports.getRarityMultiplier = exports.applyFinalStatScaling = exports.scaleManualEffects = exports.getRealmMultiplier = void 0;
+exports.WEATHER_MULTIPLIERS = exports.TERRAIN_MULTIPLIERS = exports.STAT_SCALING = exports.getRarityMultiplier = exports.applyFinalStatScaling = exports.scaleManualEffects = exports.getRealmMultiplier = exports.adjustDamageForRealmGap = exports.defaultCombatant = exports.applyCombatBuffs = exports.resolveRound = exports.calculateDamage = void 0;
 exports.computeCombatPower = computeCombatPower;
 exports.computeOffensiveProwess = computeOffensiveProwess;
 // Central combat scaling wrapper — Phase-1 conservative wrapper around existing scalingSystem
 const scaling = __importStar(require("../data/scalingSystem"));
 const playtestScaling_1 = require("../utils/playtestScaling");
+// Re-export some combat core helpers for backwards compatibility with legacy import sites
+const combatCore_1 = require("../components/minigames/combatCore");
+Object.defineProperty(exports, "calculateDamage", { enumerable: true, get: function () { return combatCore_1.calculateDamage; } });
+Object.defineProperty(exports, "resolveRound", { enumerable: true, get: function () { return combatCore_1.resolveRound; } });
+Object.defineProperty(exports, "applyCombatBuffs", { enumerable: true, get: function () { return combatCore_1.applyCombatBuffs; } });
+Object.defineProperty(exports, "defaultCombatant", { enumerable: true, get: function () { return combatCore_1.defaultCombatant; } });
+// re-export adjustDamageForRealmGap from cultivationUtils for backwards compatibility
+var cultivationUtils_1 = require("./cultivationUtils");
+Object.defineProperty(exports, "adjustDamageForRealmGap", { enumerable: true, get: function () { return cultivationUtils_1.adjustDamageForRealmGap; } });
 exports.getRealmMultiplier = scaling.getRealmMultiplier;
 exports.scaleManualEffects = scaling.scaleManualEffects;
 exports.applyFinalStatScaling = scaling.applyFinalStatScaling;

@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-imports -- temporary: importing core systems for UI integration */
 import React, { useState, useEffect } from 'react';
 import { EnhancedQuest, QuestReward } from '@/systems/EnhancedQuestSystem';
+import SmallChip from '@/components/ui/SmallChip';
 
 interface QuestCompletionNotificationProps {
   quest: EnhancedQuest | null;
@@ -74,7 +75,7 @@ export const QuestCompletionNotification: React.FC<QuestCompletionNotificationPr
         position: 'relative',
         overflow: 'hidden'
       }}>
-        {/* Animated background effect */}
+  {/* Animated background effect */}
         <div style={{
           position: 'absolute',
           top: 0,
@@ -88,6 +89,7 @@ export const QuestCompletionNotification: React.FC<QuestCompletionNotificationPr
 
         {/* Close button */}
         <button
+          type="button"
           onClick={() => {
             setIsAnimating(false);
             setTimeout(() => {
@@ -111,11 +113,25 @@ export const QuestCompletionNotification: React.FC<QuestCompletionNotificationPr
           onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text)'}
           onMouseLeave={(e) => e.currentTarget.style.color = 'var(--muted)'}
         >
-          ×
+          <SmallChip style={{ padding: 2, fontSize: '16px', lineHeight: 1 }}>
+            ×
+          </SmallChip>
         </button>
 
-        {/* Header */}
-        <div style={{ marginBottom: '16px' }}>
+        <SmallChip
+          style={{
+            position: 'absolute',
+            top: '12px',
+            left: '12px',
+            borderRadius: 12,
+            fontSize: '0.75rem',
+            fontWeight: 'bold',
+            textTransform: 'uppercase'
+          }}
+          // color/appearance already conveyed elsewhere; keep style minimal here
+        >
+          {quest.type}
+        </SmallChip>
           <div style={{ 
             display: 'flex', 
             alignItems: 'center', 
@@ -140,7 +156,7 @@ export const QuestCompletionNotification: React.FC<QuestCompletionNotificationPr
           }}>
             {quest.title}
           </h4>
-        </div>
+        
 
         {/* Experience Reward */}
         {quest.experience > 0 && (
@@ -183,9 +199,9 @@ export const QuestCompletionNotification: React.FC<QuestCompletionNotificationPr
             </h4>
             <div style={{ display: 'grid', gap: '8px' }}>
               {quest.rewards.map((reward, index) => (
-                <div key={index} style={{
-                  background: 'rgba(16, 185, 129, 0.1)',
-                  border: '1px solid rgba(16, 185, 129, 0.3)',
+                <div key={index} role="listitem" aria-label={`Reward: ${formatReward(reward)}`} style={{
+                  background: 'rgba(16, 185, 129, 0.06)',
+                  border: '1px solid rgba(16, 185, 129, 0.18)',
                   borderRadius: '6px',
                   padding: '8px 12px',
                   display: 'flex',
@@ -200,49 +216,16 @@ export const QuestCompletionNotification: React.FC<QuestCompletionNotificationPr
                      reward.type === 'reputation' ? '⭐' :
                      reward.type === 'unlock' ? '🔓' : '🎁'}
                   </span>
-                  <span style={{ 
-                    color: '#10b981', 
-                    fontWeight: 'bold',
-                    flex: 1
-                  }}>
+                  <SmallChip variant="success" title={formatReward(reward)} style={{ flex: 1, borderRadius: 6, fontSize: '0.95rem' }}>
                     {formatReward(reward)}
-                  </span>
+                  </SmallChip>
                 </div>
               ))}
             </div>
           </div>
         )}
 
-        {/* Quest Type Badge */}
-        <div style={{
-          position: 'absolute',
-          top: '12px',
-          left: '12px',
-          background: quest.type === 'main' ? 'rgba(239, 68, 68, 0.2)' :
-                     quest.type === 'side' ? 'rgba(59, 130, 246, 0.2)' :
-                     quest.type === 'daily' ? 'rgba(245, 158, 11, 0.2)' :
-                     quest.type === 'achievement' ? 'rgba(139, 92, 246, 0.2)' :
-                     'rgba(107, 114, 128, 0.2)',
-          color: quest.type === 'main' ? '#ef4444' :
-                 quest.type === 'side' ? '#3b82f6' :
-                 quest.type === 'daily' ? '#f59e0b' :
-                 quest.type === 'achievement' ? '#8b5cf6' :
-                 '#6b7280',
-          padding: '4px 8px',
-          borderRadius: '12px',
-          fontSize: '0.75rem',
-          fontWeight: 'bold',
-          textTransform: 'uppercase',
-          border: `1px solid ${
-            quest.type === 'main' ? 'rgba(239, 68, 68, 0.3)' :
-            quest.type === 'side' ? 'rgba(59, 130, 246, 0.3)' :
-            quest.type === 'daily' ? 'rgba(245, 158, 11, 0.3)' :
-            quest.type === 'achievement' ? 'rgba(139, 92, 246, 0.3)' :
-            'rgba(107, 114, 128, 0.3)'
-          }`
-        }}>
-          {quest.type}
-        </div>
+        
       </div>
 
       <style>{`

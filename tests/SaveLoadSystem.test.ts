@@ -31,7 +31,7 @@ describe('SaveLoadSystem', () => {
 
   test('should save and load game state correctly', () => {
     // Create a test game state
-    const testGameState: GameState = {
+    const testGameState: any = {
       player: {
         name: 'Test Player',
         gender: 'Male',
@@ -39,6 +39,7 @@ describe('SaveLoadSystem', () => {
         background: null,
         age: 18,
         realm: 'mortal',
+  realmId: 1,
         minorStage: 1,
         level: 1,
         baseStats: { hp: 100, qi: 100, atk: 10, def: 10, speed: 10 },
@@ -88,6 +89,9 @@ describe('SaveLoadSystem', () => {
         lastRivalEncounters: {},
         factionBattles: [],
         factionReputations: {}
+        ,
+        cooldowns: { training: {} },
+        trainingQueue: null
       },
       world: {
         year: 1,
@@ -135,7 +139,7 @@ describe('SaveLoadSystem', () => {
 
   test('should delete save correctly', () => {
     // Create and save a test game
-    const testGameState: GameState = {
+    const testGameState: any = {
       player: {
         name: 'Test Player',
         gender: 'Male',
@@ -143,6 +147,7 @@ describe('SaveLoadSystem', () => {
         background: null,
         age: 18,
         realm: 'mortal',
+  realmId: 1,
         minorStage: 1,
         level: 1,
         baseStats: { hp: 100, qi: 100, atk: 10, def: 10, speed: 10 },
@@ -179,6 +184,9 @@ describe('SaveLoadSystem', () => {
         lastRivalEncounters: {},
         factionBattles: [],
         factionReputations: {}
+        ,
+        cooldowns: { training: {} },
+        trainingQueue: null
       },
       world: {
         year: 1,

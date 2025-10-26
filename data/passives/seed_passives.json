@@ -1,0 +1,8 @@
+[
+  { "id": "p_seed_01", "name": "Patient Cultivator", "description": "Gain 1% extra xp when meditating for long sessions.", "tags": ["cultivation","xp"], "rarity": "common" },
+  { "id": "p_seed_02", "name": "Keen Senses", "description": "Small chance to reveal hidden event choices during exploration.", "tags": ["exploration"], "rarity": "uncommon" },
+  { "id": "p_seed_03", "name": "Resilient Heart", "description": "Reduced penalty on failed breakthroughs.", "tags": ["breakthrough"], "rarity": "uncommon" },
+  { "id": "p_seed_04", "name": "Rumor-Minder", "description": "Slightly lower chance to be influenced by false rumors.", "tags": ["social","rumor"], "rarity": "rare" },
+  { "id": "p_seed_05", "name": "Spirit Whisper", "description": "Increased chance for Spirit encounters during astral wandering.", "tags": ["astral","spirit"], "rarity": "rare" },
+  { "id": "p_seed_06", "name": "Trade Savant", "description": "Better prices when buying/selling in markets.", "tags": ["economy"], "rarity": "common" }
+]

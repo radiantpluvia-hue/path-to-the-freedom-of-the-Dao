@@ -7,6 +7,7 @@ exports.resolveFactionBattleEnhanced = resolveFactionBattleEnhanced;
 exports.canEncounterRivalEnhanced = canEncounterRivalEnhanced;
 exports.batchUpdateRivalRelationships = batchUpdateRivalRelationships;
 exports.validateRivalSystemIntegrity = validateRivalSystemIntegrity;
+const logger_1 = require("../utils/logger");
 /**
  * Enhanced rival relationship adjustment with improved synchronization
  */
@@ -22,7 +23,7 @@ function adjustRivalRelationshipEnhanced(rivalSystem, gameState, rivalId, change
         // Clamp change to reasonable bounds to prevent extreme adjustments
         const clampedChange = Math.max(-50, Math.min(50, change));
         if (clampedChange !== change) {
-            console.warn(`Relationship change clamped from ${change} to ${clampedChange} for rival ${rivalId}`);
+            logger_1.logger.warn(`Relationship change clamped from ${change} to ${clampedChange} for rival ${rivalId}`);
         }
         // Check if rival exists before attempting update
         const existingRival = rivalSystem.getRival(rivalId);
@@ -36,32 +37,32 @@ function adjustRivalRelationshipEnhanced(rivalSystem, gameState, rivalId, change
             rivalSystem.updateRivalRelationship(rivalId, clampedChange, currentDay);
         }
         catch (error) {
-            console.error(`Failed to update rival relationship in RivalSystem for ${rivalId}:`, error);
+            logger_1.logger.error(`Failed to update rival relationship in RivalSystem for ${rivalId}:`, error);
             return { success: false, newRelationship: originalRelationship, error: 'Failed to update RivalSystem' };
         }
         // Verify the update was successful and get the updated rival
         const updatedRival = rivalSystem.getRival(rivalId);
         if (!updatedRival) {
-            console.error(`Rival ${rivalId} disappeared after update attempt`);
+            logger_1.logger.error(`Rival ${rivalId} disappeared after update attempt`);
             return { success: false, newRelationship: originalRelationship, error: 'Rival disappeared after update' };
         }
         const syncedRelationship = updatedRival.relationship;
         // Validate relationship bounds (RivalSystem should handle this, but double-check)
         const clampedRelationship = Math.max(-100, Math.min(100, syncedRelationship));
         if (clampedRelationship !== syncedRelationship) {
-            console.warn(`Relationship for ${rivalId} was clamped from ${syncedRelationship} to ${clampedRelationship}`);
+            logger_1.logger.warn(`Relationship for ${rivalId} was clamped from ${syncedRelationship} to ${clampedRelationship}`);
             // Update RivalSystem with clamped value if needed
             try {
                 rivalSystem.updateRivalRelationship(rivalId, clampedRelationship - syncedRelationship, currentDay);
             }
             catch (error) {
-                console.error(`Failed to apply relationship clamping for ${rivalId}:`, error);
+                logger_1.logger.error(`Failed to apply relationship clamping for ${rivalId}:`, error);
                 // Attempt rollback
                 try {
                     rivalSystem.updateRivalRelationship(rivalId, originalRelationship - syncedRelationship, currentDay);
                 }
                 catch (rollbackError) {
-                    console.error(`Failed to rollback relationship for ${rivalId}:`, rollbackError);
+                    logger_1.logger.error(`Failed to rollback relationship for ${rivalId}:`, rollbackError);
                 }
                 return { success: false, newRelationship: originalRelationship, error: 'Failed to apply relationship clamping' };
             }
@@ -73,7 +74,7 @@ function adjustRivalRelationshipEnhanced(rivalSystem, gameState, rivalId, change
         };
     }
     catch (error) {
-        console.error(`Error adjusting rival relationship for ${rivalId}:`, error);
+        logger_1.logger.error(`Error adjusting rival relationship for ${rivalId}:`, error);
         return { success: false, newRelationship: 0, error: `Unexpected error: ${error}` };
     }
 }
@@ -142,7 +143,7 @@ function resolveFactionBattleEnhanced(rivalSystem, sectFactionSystem, battleId, 
         return { success: true, effects, error: undefined };
     }
     catch (error) {
-        console.error(`Error resolving faction battle ${battleId}:`, error);
+        logger_1.logger.error(`Error resolving faction battle ${battleId}:`, error);
         return { success: false, effects: [], error: `Unexpected error: ${error}` };
     }
 }
