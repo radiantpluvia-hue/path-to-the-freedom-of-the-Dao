@@ -11,7 +11,7 @@ export const EQUIPMENT_FULL_META = [
     ],
     "basePower": 100,
     "tier": "F",
-    "description": "A long spear inscribed with archival runes. Designed for precise thrusts that cut through spirit-touched defenses."
+    "description": "A long spear inscribed with archival runes; reputed to pierce ethereal defenses and favored by relic-wardens."
   },
   {
     "id": "heavenly_urn",
@@ -20,9 +20,9 @@ export const EQUIPMENT_FULL_META = [
     "tags": [
       "providence_up"
     ],
-    "basePower": 10,
+    "basePower": 0,
     "tier": "F",
-    "description": "A small urn said to collect stray providence. It grants modest luck and aids providence-based effects."
+    "description": "A small ceremonial urn used in providence rites. Its true power is ritual and not reflected in raw basePower."
   },
   {
     "id": "silk_robe",
@@ -34,7 +34,7 @@ export const EQUIPMENT_FULL_META = [
     ],
     "basePower": 10,
     "tier": "F",
-    "description": "A lightweight silk robe that soothes the wearer, improving mental resilience and elemental resistance."
+    "description": "A lightweight robe woven from tranquil silk; soothes the wearer and grants modest resistance to spirit shock."
   },
   {
     "id": "shadow_cloak",
@@ -46,7 +46,7 @@ export const EQUIPMENT_FULL_META = [
     ],
     "basePower": 15,
     "tier": "F",
-    "description": "A cloak woven from shadow-silk; it aids stealth and quick movement, blurring the wearer at the edges."
+    "description": "A cloak favored by scouts and thieves; it blends into shadows and eases quick movement."
   },
   {
     "id": "mender_ring",
@@ -58,7 +58,7 @@ export const EQUIPMENT_FULL_META = [
     ],
     "basePower": 8,
     "tier": "F",
-    "description": "A simple ring imbued with slow regenerative energy, helping minor wounds knit over time."
+    "description": "A simple ring that subtly accelerates natural recovery and stabilizes minor wounds."
   },
   {
     "id": "forge_hammer",
@@ -70,7 +70,7 @@ export const EQUIPMENT_FULL_META = [
     ],
     "basePower": 40,
     "tier": "F",
-    "description": "A sturdy hammer used by smiths; its strikes fracture alloys and channel tempering qi into crafted goods."
+    "description": "A heavy hammer used by smiths to temper and shape relic components; it carries a minor crafting aura."
   },
   {
     "id": "beast_whistle",
@@ -79,9 +79,9 @@ export const EQUIPMENT_FULL_META = [
     "tags": [
       "summon"
     ],
-    "basePower": 5,
+    "basePower": 0,
     "tier": "F",
-    "description": "A carved whistle that calls small beasts. It can summon temporary aid from nearby fauna."
+    "description": "A carved whistle etched with beast-call runes; used to attract or calm lesser beasts for short periods."
   },
   {
     "id": "sky_goggles",
@@ -92,7 +92,7 @@ export const EQUIPMENT_FULL_META = [
     ],
     "basePower": 5,
     "tier": "F",
-    "description": "Goggles that enhance distant and aerial vision, letting the wearer read currents and spot flying threats."
+    "description": "Goggles fitted with layered lenses that enhance distant vision and reveal faint auras in the sky."
   },
   {
     "id": "equip_E_001",
