@@ -1,9 +1,13 @@
 {
   "name": "xianxia-cultivation-game",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "test": "jest",
+    "merge:equipment": "node scripts/merge_equipment.js",
+    "validate:equipment": "node scripts/validate_equipment.js",
+    "qa:smoke": "node scripts/qa_smoke.js",
+    "audit:equipment": "node scripts/equipment_audit.js",
     "dev": "vite",
     "lint": "node ./scripts/run-eslint.js",
     "build": "vite build",

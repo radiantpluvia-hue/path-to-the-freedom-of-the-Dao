@@ -26,6 +26,10 @@ All notable changes to this project will be documented in this file.
 ### Changed
 ### Tests
 ### Added
+- Wired `src/data/eras_dossiers.json` into `src/data/codexEntries.ts` so each era appears as a codex entry (id: `<eraId>_dossier`).
+- Added `src/data/example_items.ts` with sample items annotated with `eraId` (includes `rusted_blade`).
+- Inventory tooltips updated: `src/components/game/InventoryPanel.tsx` will display an item's era provenance when `eraId` is present.
+- Added `src/utils/eraQuestGenerator.ts` — small generator to produce quest templates from an era hook.
 ### Added
 - Initial trainings data: `data/trainings.json` with new training definitions (Dao Contemplation, Insight Meditation, Heart Demon Confrontation, Alchemy Practice, Array Training, Beast Taming, Smithing Forging, Dao Heart Tempering, Karmic Cleansing, Heavenly Resonance).
 ### Changed
@@ -54,6 +58,32 @@ The following commits from this repository (local) are included in the scope of 
 ### Notes
 
 - UX: Confirmation modal Proceed now forces consolidation attempt to run (prevents modal re-check loop).
+
+### Added (2025-10-28)
+- Equipment data improvements and tooling:
+	- Added `src/data/equipment_generated_extra.ts` containing additional generated equipment items (multiple tiers).
+	- Added `scripts/validate_equipment.js` — a lightweight validator to ensure each equipment entry includes required fields (`id`, `name`, `slot`, `tier`, `basePower`, `description`).
+	- Added/updated `scripts/merge_equipment.js` to merge `src/data/equipment*.ts` into `src/data/equipment_full.ts` and normalize missing metadata; the script now emits:
+		- `EQUIPMENT_FULL_META` — full metadata array of equipment objects
+		- `EQUIPMENT_FULL` (default export) — an array of equipment id strings for legacy compatibility
+	- Regenerated `src/data/equipment_full.ts` from existing data sources and added safe defaults for missing fields where appropriate.
+
+### Tests (2025-10-28)
+- Ran full Jest suite after equipment merge and tooling updates; all tests passed.
+
+## [1.1.0] - 2025-10-28
+### Added
+- Equipment data tooling and canonical merge output (`src/data/equipment_full.ts`) with metadata and id list exports.
+- `scripts/merge_equipment.js`, `scripts/validate_equipment.js`, `scripts/equipment_audit.js` and `scripts/qa_smoke.js` added to support generation, validation and auditing of equipment datasets.
+### Changed
+- Regenerated equipment dataset to include user-provided extra items and normalized missing fields with safe defaults.
+
+### Tests
+- Full Jest test suite run and verified passing on local environment.
+
+---
+
+
 
 ### UI
 - Made Cultivation Methods and Game Management cards compact to reduce visual footprint.
