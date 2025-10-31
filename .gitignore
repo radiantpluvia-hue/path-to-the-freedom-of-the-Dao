@@ -1,3 +1,8 @@
 node_modules
 *.bak
 .bak_archive/
+.tmp_build
+dist/story
+public/story
+*.bak
+.bak_archive/
