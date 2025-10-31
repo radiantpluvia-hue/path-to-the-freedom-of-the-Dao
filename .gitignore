@@ -6,3 +6,4 @@ dist/story
 public/story
 *.bak
 .bak_archive/
+.bak_archive/
